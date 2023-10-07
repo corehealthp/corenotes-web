@@ -84,6 +84,7 @@ export const individualInitState: IndividualStateType = {
 		},
 	},
 	services: [],
+	servicesWithTemplate:['medication-administration', 'goal-tracking', 'daily-living-activity', 'behavior-management', 'chore'],
 	medications: {
 		list: [],
 		currentPage: 1,

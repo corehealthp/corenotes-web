@@ -11,7 +11,7 @@ import {
   setDropDownFormData,
 } from "src/components/FormComponents/DropDownField/types";
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
-import { useIndividualState } from "src/features/Individual/state";
+import { useSetIndividualState } from "src/features/Individual/state";
 import MultiSelectDropDownField from "src/components/FormComponents/DropDownField/MultiSelectDropDownField";
 import { MultiSelectDropDownFormData } from "src/components/FormComponents/DropDownField/MultiSelectDropDownField/types";
 import { emailValid } from "src/utils/emailValidation";
@@ -23,7 +23,7 @@ export default function IndividualPersonalInformationForm({
 }: {
 	userState: any;
 }) {
-	const [individualState, setIndividualState] = useIndividualState();
+	const setIndividualState = useSetIndividualState();
 
 
 	const [firstnameModel, setFirstnameModel] = useState<formFieldType>({

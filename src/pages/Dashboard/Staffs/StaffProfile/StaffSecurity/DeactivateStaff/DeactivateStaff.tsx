@@ -173,7 +173,6 @@ export default function DeactivateStaff() {
             >
                 <PasswordInputField
                     placeholder={userPassword.placeholder}
-                    value={userPassword.value!}
                     error={userPassword.error}
                     onInput={(value: string) => setInput(value, userPassword, setUserPassword)} 
                 />

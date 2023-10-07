@@ -12,6 +12,7 @@ export interface ServicesListItemType {
     id:string,
     serviceId:string,
     title:string,
+    refName:string;
     assignedIndividualsCount:number,
     createdAt:string,
     category:string,

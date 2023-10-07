@@ -166,7 +166,6 @@ export default function Login() {
           <div className={styles.input_fields_wrapper}>
             <InputField
               placeholder={usernameModel.placeholder}
-              value={usernameModel.value}
               error={usernameModel.error}
               prefixIcon={usernameModel.prefixIcon}
               onInput={(value: string) =>
@@ -176,7 +175,6 @@ export default function Login() {
 
             <PasswordInputField
               placeholder={passwordModel.placeholder}
-              value={passwordModel.value}
               error={passwordModel.error}
               onInput={(value: string) =>
                 setInput(value, passwordModel, setPasswordModel)

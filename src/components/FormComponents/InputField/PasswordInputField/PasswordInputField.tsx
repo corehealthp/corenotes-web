@@ -1,5 +1,5 @@
 import { FaEye } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputField from "../InputField";
 import {ReactComponent as IconLock} from "src/assets/icons/icon-lock.svg"
 import {ReactComponent as IconEyeSlash} from "src/assets/icons/icon-eye-slash.svg"
@@ -7,7 +7,6 @@ import { formFieldType } from "../../FormWrapper/types";
 
 interface passwordInputFieldType {
     label?:string,
-    value:string,
     showPrefixIcon?:boolean,
     error:string,
     placeholder?:string,
@@ -16,7 +15,6 @@ interface passwordInputFieldType {
 
 export default function PasswordInputField({
     label,
-    value,
     showPrefixIcon,
     error, 
     placeholder,
@@ -25,7 +23,7 @@ export default function PasswordInputField({
                 
     const [passwordModel, setPasswordModel] = useState<formFieldType>({
         type: "password",
-        value: value,
+        value: "",
         label: label,
         placeholder: placeholder ?? "Password",
         error: error,
@@ -41,20 +39,10 @@ export default function PasswordInputField({
         setPasswordModel({...passwordModel});
     }
 
-    useEffect(()=> {
-        setPasswordModel((state)=> {
-            return {
-                ...state,
-                value: value
-            }
-        })
-    }, [value])
-
     return (
         <InputField 
             type={passwordModel.type}
             label={passwordModel.label}
-            value={passwordModel.value}
             placeholder={passwordModel.placeholder}
             error={error}
             prefixIcon={passwordModel.prefixIcon}

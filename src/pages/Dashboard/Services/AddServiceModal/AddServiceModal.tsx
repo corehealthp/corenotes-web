@@ -8,14 +8,16 @@ import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton"
 import FadedBackgroundButton from "src/components/Buttons/FadedBackgroundButton"
 import { useServicesState } from "src/features/service/state"
 import { newServiceData, postService } from "src/features/service/action"
-import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal"
 import { DropDownFormData, setDropDownFormData } from "src/components/FormComponents/DropDownField/types"
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield"
 import MultiSelectDropDownField from "src/components/FormComponents/DropDownField/MultiSelectDropDownField"
 import { MultiSelectDropDownFormData } from "src/components/FormComponents/DropDownField/MultiSelectDropDownField/types"
 import { useCompartmentStateValue } from "src/features/compartment/state"
+import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state"
 
 export default function AddCompartmentModal({ close }:{close:()=> void}) {
+
+    const [globalEventFeedback, setGlobalEventFeedback] = useGlobalEventFeedbackState();
 
     const [servicesState, setServicesState] = useServicesState();
 
@@ -139,9 +141,13 @@ export default function AddCompartmentModal({ close }:{close:()=> void}) {
                 message: ""
             }))
 
+            const newEventFeedback = {
+                status:"",
+                message: ""
+            }
+
             postService(payload)
             .then((response)=> {
-                console.log(response)
                 setServicesState(state => ({
                     ...state,
                     status: 'SUCCESS', 
@@ -151,14 +157,23 @@ export default function AddCompartmentModal({ close }:{close:()=> void}) {
                     currentListPage: response.data.currentPage,
                     totalListPages: response.data.totalPages,
                 }))
+
+                newEventFeedback.status = "SUCCESS";
+                newEventFeedback.message = "New Service successfully created";
             })
             .catch((error)=> {
                 setServicesState(state => ({
                     ...state,
-                    status: 'SUCCESS',
-                    error: true,
-                    message: error.message || "There was an error creating compartment"
+                    status: 'IDLE',
+                    error: true
                 }))
+
+                newEventFeedback.status = "ERROR";
+                newEventFeedback.message = error.message ?? "There was a server creating new service";
+            })
+            .finally(()=> {
+                addEventFeedbackItem(newEventFeedback, [ ...globalEventFeedback ], setGlobalEventFeedback);
+                close();
             })
         }
     }
@@ -166,13 +181,6 @@ export default function AddCompartmentModal({ close }:{close:()=> void}) {
     return (
         <ModalContainer close={()=> close()}>
             <div className={styles.container}>
-                
-                <FormStateModal 
-                    status={servicesState.status} 
-                    error={servicesState.error}
-                    message={servicesState.message}
-                    reset={()=> setServicesState((state)=> ({ ...state, status: 'IDLE' }))}
-                />
 
                 <div className={styles.heading}>
                     <div className={styles.title}>Services</div>

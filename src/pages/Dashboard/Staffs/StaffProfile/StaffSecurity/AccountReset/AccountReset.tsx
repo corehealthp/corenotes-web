@@ -130,14 +130,12 @@ export default function AccountReset() {
             >
                 <PasswordInputField 
                     placeholder={newStaffPassword.placeholder}
-                    value={newStaffPassword.value!}
                     error={newStaffPassword.error}
                     onInput={(value: string) => setInput(value, newStaffPassword, setNewStaffPassword)} 
                 />
 
                 <PasswordInputField 
                     placeholder={confirmNewStaffPassword.placeholder}
-                    value={confirmNewStaffPassword.value!} 
                     error={confirmNewStaffPassword.error}
                     onInput={(value:string)=> setInput(value, confirmNewStaffPassword, setConfirmNewStaffPassword)}
                 />

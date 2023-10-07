@@ -19,8 +19,11 @@ import { getAllProvidedServiceAction } from "src/features/service/action";
 import RowContainer from "src/components/Layout/RowContainer";
 import formatTime from "src/utils/formatTime";
 import SizedBox from "src/components/SizedBox";
+import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
 
 export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()=> void }) {
+
+    const [globalEventFeedback, setGlobalEventFeedback] = useGlobalEventFeedbackState();
 
     const { individualId } = useParams();
 
@@ -131,52 +134,52 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
         model.selected = true;
         model.selectedOptionIndex = optionIndex;
 
-        if(model.name === 'requested-service') {
-            if(model.value?.label.toLowerCase().split(' ').join('-') === 'medication-administration') {
-                serviceFrequencyModel.selected = true;
-                setServiceFrequencyModel({...serviceFrequencyModel})
+        // if(model.name === 'requested-service') {
+        //     if(model.value?.label.toLowerCase().split(' ').join('-') === 'medication-administration') {
+        //         serviceFrequencyModel.selected = true;
+        //         setServiceFrequencyModel({...serviceFrequencyModel})
 
-                serviceFrequencyAttrModel.validated = true;
-                setServiceFrequencyAttrModel({...serviceFrequencyAttrModel})
+        //         serviceFrequencyAttrModel.validated = true;
+        //         setServiceFrequencyAttrModel({...serviceFrequencyAttrModel})
 
-                serviceTimeModel.validated = true;
-                setServiceTimeModel({...serviceTimeModel})
+        //         serviceTimeModel.validated = true;
+        //         setServiceTimeModel({...serviceTimeModel})
 
-                serviceStartDateModel.validated = true;
-                setServiceStartDateModel({...serviceStartDateModel})
+        //         serviceStartDateModel.validated = true;
+        //         setServiceStartDateModel({...serviceStartDateModel})
 
-            } else {
-                serviceFrequencyModel.selected = false;
-                setServiceFrequencyModel({...serviceFrequencyModel})
+        //     } else {
+        //         serviceFrequencyModel.selected = false;
+        //         setServiceFrequencyModel({...serviceFrequencyModel})
 
-                serviceFrequencyAttrModel.validated = false;
-                setServiceFrequencyAttrModel({...serviceFrequencyAttrModel})
+        //         serviceFrequencyAttrModel.validated = false;
+        //         setServiceFrequencyAttrModel({...serviceFrequencyAttrModel})
 
-                serviceTimeModel.validated = false;
-                setServiceTimeModel({...serviceTimeModel})
+        //         serviceTimeModel.validated = false;
+        //         setServiceTimeModel({...serviceTimeModel})
 
-                serviceStartDateModel.validated = false;
-                setServiceStartDateModel({...serviceStartDateModel})
-            }
-        }
+        //         serviceStartDateModel.validated = false;
+        //         setServiceStartDateModel({...serviceStartDateModel})
+        //     }
+        // }
 
-        if(model.name === 'service-freq') {
-            if(model.value.value === 'every-x-days') {
-                serviceFrequencyAttrModel.readonly = false;
-                serviceFrequencyAttrModel.suffixIcon = <div className={styles.prefix_label} children={"days"} />
-            }
-            if(model.value.value === 'every-x-weeks') {
-                serviceFrequencyAttrModel.readonly = false;
-                serviceFrequencyAttrModel.suffixIcon = <div className={styles.prefix_label} children={"weeks"} />
-            }
-            if(!['every-x-weeks', 'every-x-days'].includes(model.value.value!)) {
-                serviceFrequencyAttrModel.readonly = true;
-                serviceFrequencyAttrModel.suffixIcon = undefined
-                serviceFrequencyAttrModel.error = "";
-            }
+        // if(model.name === 'service-freq') {
+        //     if(model.value.value === 'every-x-days') {
+        //         serviceFrequencyAttrModel.readonly = false;
+        //         serviceFrequencyAttrModel.suffixIcon = <div className={styles.prefix_label} children={"days"} />
+        //     }
+        //     if(model.value.value === 'every-x-weeks') {
+        //         serviceFrequencyAttrModel.readonly = false;
+        //         serviceFrequencyAttrModel.suffixIcon = <div className={styles.prefix_label} children={"weeks"} />
+        //     }
+        //     if(!['every-x-weeks', 'every-x-days'].includes(model.value.value!)) {
+        //         serviceFrequencyAttrModel.readonly = true;
+        //         serviceFrequencyAttrModel.suffixIcon = undefined
+        //         serviceFrequencyAttrModel.error = "";
+        //     }
 
-            setServiceFrequencyAttrModel(serviceFrequencyAttrModel);
-        }
+        //     setServiceFrequencyAttrModel(serviceFrequencyAttrModel);
+        // }
 
         setModel({...model});
         validateForm();
@@ -209,7 +212,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                     options: data.services?.map(service => ({
                         id: service.id,
                         label: service.title,
-                        value: service.id
+                        value: service.refName
                     }))
                 }))
             })
@@ -247,7 +250,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                         options: compartmentState.compartment.services.map(service => ({
                             id: service.id,
                             label: service.title,
-                            value: service.id
+                            value: service.refName
                         }))
                     }))
                 })
@@ -266,25 +269,27 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
 
         if(!requestedServiceModel.selected) {
             setIsFormValidated(false)
+            // console.log(requestedServiceModel.value!.value!)
             return false;
         }
-
-        if(!serviceFrequencyModel.selected) {
-            setIsFormValidated(false)
-            return false;
-        }
-
-        if(['every-x-days', 'every-x-weeks', 'every-x-days'].includes(serviceFrequencyModel.value?.value ?? "")) {
-            if(!serviceFrequencyAttrModel.validated) {
+        if(individualState.servicesWithTemplate.includes(requestedServiceModel.value!.value!)) {
+            if(!serviceFrequencyModel.selected) {
                 setIsFormValidated(false)
                 return false;
             }
-        }
-
-        if(!serviceStartDateModel.validated) {
-            console.log('HERE')
-            setIsFormValidated(false)
-            return false;
+    
+            if(['every-x-days', 'every-x-weeks', 'every-x-days'].includes(serviceFrequencyModel.value?.value ?? "")) {
+                if(!serviceFrequencyAttrModel.validated) {
+                    setIsFormValidated(false)
+                    return false;
+                }
+            }
+    
+            if(!serviceStartDateModel.validated) {
+                console.log('HERE')
+                setIsFormValidated(false)
+                return false;
+            }
         }
 
         setIsFormValidated(true);
@@ -295,7 +300,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
         // if(validateForm()) {
 
             const payload:IAddServiceToIndividualPayload = {
-                serviceId: requestedServiceModel.value!.value!,
+                serviceId: requestedServiceModel.value!.id!,
                 schedule: null
             }
 
@@ -313,24 +318,36 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                 error: false,
             }))
 
+            const newEventFeedback = {
+                status:"",
+                message:""
+            };
+
             addServiceToIndividualAction(individualId!, payload)
             .then((response)=> {
                 setIndividualState(state => ({
                     ...state,
-                    status: "SUCCESS",
-                    message: "Service assigned to individual successfully",
+                    status: "IDLE",
                     error: false,
                     requestedServices: response.data.individualServices
                 }))
+
+                newEventFeedback.status = "SUCCESS";
+                newEventFeedback.message = "Service assigned to individual successfully"
             })
             .catch((error)=> {
-                console.log(error)
                 setIndividualState(state => ({
                     ...state,
                     status: "FAILED",
-                    message: error.message ?? "There was an error assigning service to individual",
                     error: true,
                 }))
+
+                newEventFeedback.status = "ERROR";
+                newEventFeedback.message = error.message ? `Error adding service to individual: ${error.message}` : "There was an error assigning service to individual"
+            })
+            .finally(()=> {
+                addEventFeedbackItem(newEventFeedback, [...globalEventFeedback], setGlobalEventFeedback);
+                closeModal();
             })
         // }
     }
@@ -387,9 +404,8 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                     />
 
                 {
-                   
-                    !['medication-administration', 'chore', 'daily-living-activities', 'behavior-management', 'goal-tracking']
-                    .includes(requestedServiceModel.value?.label.toLowerCase().split(' ').join('-') ?? "")
+                    requestedServiceModel.value &&
+                    !individualState.servicesWithTemplate.includes(requestedServiceModel.value?.label.toLowerCase().split(' ').join('-') ?? "")
                     ?   <div>
                             <RowContainer alignment={"top"}>
                                 <DropDownField

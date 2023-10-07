@@ -185,7 +185,6 @@ export default function StaffWorkInformationForm({ onModified }:{ onModified:(ne
 					
 					<PasswordInputField
 						placeholder={passwordModel.placeholder}
-						value={passwordModel.value!}
 						error={passwordModel.error}
 						showPrefixIcon={false}
 						onInput={(inputValue: string) => setInput(inputValue, passwordModel, setPasswordModel)}

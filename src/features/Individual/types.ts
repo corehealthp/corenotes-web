@@ -1,6 +1,7 @@
 import { initStateType } from "../types";
 
 export interface IndividualStateType extends initStateType {
+    servicesWithTemplate:string[];
     individuals:{
         list:IndividualListItemType[];
         currentListPage:number;
@@ -237,6 +238,7 @@ export interface IndividualServiceListItemType {
     id:string;
     serviceId:number;
     title:string;
+    refName:string;
     category:string;
     startDate:string;
     time:string;

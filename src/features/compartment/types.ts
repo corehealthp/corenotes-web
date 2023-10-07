@@ -45,4 +45,5 @@ export interface CompartmentDetails {
 export interface ICompartmentServices {
     id:string;
     title:string;
+    refName:string;
 }
