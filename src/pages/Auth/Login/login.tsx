@@ -117,8 +117,6 @@ export default function Login() {
 
       LoginAction(payload)
         .then(() => {
-          localStorage.setItem("sid.set", "true");
-
           setAuthState(() => {
             return {
               error: false,

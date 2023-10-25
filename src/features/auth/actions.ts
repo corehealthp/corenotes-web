@@ -7,7 +7,11 @@ export function LoginAction(payload: {
 }) {
   return new Promise<successResponseType>((resolve, reject) => {
     postFetch(`/auth/login`, payload)
-      .then((response: successResponseType) => resolve(response))
+      .then((response: successResponseType) => {
+        localStorage.setItem("sid.set", "true");
+        localStorage.setItem("sid", response.data.user.accessToken);
+        resolve(response)
+      })
       .catch((error) => reject(error));
   });
 }
