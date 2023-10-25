@@ -65,7 +65,7 @@ const fetch = (url:string, method:string, data?:bodyType)=> {
         url,
         method,
         headers,
-        baseURL: process.env.VITE_BASE_URL,
+        baseURL: "http://75.101.253.111/api/v1",
         data,
         // withCredentials: true
     });
