@@ -65,7 +65,7 @@ const fetch = (url:string, method:string, data?:bodyType)=> {
         url,
         method,
         headers,
-        baseURL: "https://75.101.253.111/api/v1",
+        baseURL: "https://api.corenotes.net/api/v1",
         data,
         // withCredentials: true
     });
