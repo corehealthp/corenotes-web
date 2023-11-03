@@ -29,11 +29,6 @@ export default function AddIndividualAssessmentModal({ closeModal }:{ closeModal
 
     const { individualId } = useParams();
 
-    const newEventFeedBack = {
-        status: "",
-        message: ""
-    }
-
     const setIndividualState = useSetIndividualState();
 
 	const [assessmentState, setAssessmentState] = useAssessmentState();
