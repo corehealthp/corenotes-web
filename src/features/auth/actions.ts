@@ -20,9 +20,17 @@ export function LogoutAction() {
   });
 }
 
-export function ResetPasswordAction(payload: { email: string }) {
+// export function ResetPasswordAction(payload: { email: string }) {
+//   return new Promise((resolve, reject) => {
+//     postFetch("/auth/forgot-password", payload)
+//       .then((data: any) => resolve(data))
+//       .catch((error) => reject(error));
+//   });
+// }
+
+export function SendOtpAction(payload: { email: string }) {
   return new Promise((resolve, reject) => {
-    postFetch("/auth/forgot-password", payload)
+    postFetch("/staffs/send-otp", payload)
       .then((data: any) => resolve(data))
       .catch((error) => reject(error));
   });

@@ -74,6 +74,8 @@ export function registerStaffAction(payload:any) {
     })
 }
 
+
+
 export interface fetchStaffDocumentsSuccessResponseType extends Omit<successResponseType, 'data'> {
     data: {
         currentPage:number,
