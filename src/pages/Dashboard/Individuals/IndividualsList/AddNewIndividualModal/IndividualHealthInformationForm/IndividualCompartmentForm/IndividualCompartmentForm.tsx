@@ -7,14 +7,11 @@ import DropDownField from "src/components/FormComponents/DropDownField/dropdownf
 import { useFetchCompartmentList } from "src/features/compartment/selector";
 import { useCompartmentState } from "src/features/compartment/state";
 import { getCompartmentDetails } from "src/features/compartment/action";
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function IndividualCompartmentForm({ removeLabel }: { removeLabel: boolean }) {
 
-	// const setIndividualState = useSetIndividualState(
 	const setIndividualState = useSetIndividualState();
-
-	const [globalEventFeedbackState, setGlobalEventFeedbackState] = useGlobalEventFeedbackState()
 
 	const [compartmentState, setCompartmentState] = useCompartmentState();
 
@@ -92,15 +89,7 @@ export default function IndividualCompartmentForm({ removeLabel }: { removeLabel
 						}))
 					}));
 				})
-				.catch(()=> {
-
-					const newGlobalEventFeedback = {
-						status: "ERROR",
-						message: ""
-					}
-
-					addEventFeedbackItem(newGlobalEventFeedback, [ ...globalEventFeedbackState ], setGlobalEventFeedbackState)
-				})
+				.catch((error)=> createGlobalFeedback("error", error.message))
 			}
 		}
 

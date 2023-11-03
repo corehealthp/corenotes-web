@@ -13,11 +13,9 @@ import DropDownField from "src/components/FormComponents/DropDownField/dropdownf
 import MultiSelectDropDownField from "src/components/FormComponents/DropDownField/MultiSelectDropDownField"
 import { MultiSelectDropDownFormData } from "src/components/FormComponents/DropDownField/MultiSelectDropDownField/types"
 import { useCompartmentStateValue } from "src/features/compartment/state"
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state"
+import { createGlobalFeedback } from "src/features/globalFeedback/atom"
 
 export default function AddCompartmentModal({ close }:{close:()=> void}) {
-
-    const [globalEventFeedback, setGlobalEventFeedback] = useGlobalEventFeedbackState();
 
     const [servicesState, setServicesState] = useServicesState();
 
@@ -141,16 +139,11 @@ export default function AddCompartmentModal({ close }:{close:()=> void}) {
                 message: ""
             }))
 
-            const newEventFeedback = {
-                status:"",
-                message: ""
-            }
-
             postService(payload)
             .then((response)=> {
                 setServicesState(state => ({
                     ...state,
-                    status: 'SUCCESS', 
+                    status: 'SUCCESS',
                     error: false,
                     message: "New Service successfully created",
                     servicesList: response.data.services,
@@ -158,21 +151,14 @@ export default function AddCompartmentModal({ close }:{close:()=> void}) {
                     totalListPages: response.data.totalPages,
                 }))
 
-                newEventFeedback.status = "SUCCESS";
-                newEventFeedback.message = "New Service successfully created";
+                createGlobalFeedback("success", response.message);
             })
-            .catch((error)=> {
+            .catch((error)=> createGlobalFeedback("error", error.message))
+            .finally(()=> {
                 setServicesState(state => ({
                     ...state,
-                    status: 'IDLE',
-                    error: true
+                    status: 'IDLE'
                 }))
-
-                newEventFeedback.status = "ERROR";
-                newEventFeedback.message = error.message ?? "There was a server creating new service";
-            })
-            .finally(()=> {
-                addEventFeedbackItem(newEventFeedback, [ ...globalEventFeedback ], setGlobalEventFeedback);
                 close();
             })
         }

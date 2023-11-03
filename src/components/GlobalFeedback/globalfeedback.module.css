@@ -1,0 +1,10 @@
+.feedback_list_container {
+    position: fixed;
+    z-index: 99999999999;
+    top: 2%;
+    right: 2%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

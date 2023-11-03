@@ -9,13 +9,11 @@ import IndividualHealthInformationForm from "./IndividualHealthInformationForm";
 import { individualInitState, useIndividualState } from "src/features/Individual/state";
 import { IndividualListResponseType, registerIndividualAction } from "src/features/Individual/action";
 import SizedBox from "src/components/SizedBox";
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function AddNewIndividualModal({ closeModal }: { closeModal: () => void }) {
 
 	const [individualState, setIndividualState] = useIndividualState();
-
-	const [globalEventFeedback, setGlobalEventFeedback] = useGlobalEventFeedbackState();
 
 	const [isFormValid, setIsFormValid] = useState(false);
 
@@ -70,47 +68,25 @@ export default function AddNewIndividualModal({ closeModal }: { closeModal: () =
 				message: "",
 			}));
 
-			let newEventFeedback = {
-				status:"",
-				message:""
-			}
-
 			registerIndividualAction(individualState.newIndividual)
 			.then((response: IndividualListResponseType) => {
-				setIndividualState((state) => {
-					return {
-						...state,
-						status: "SUCCESS",
-						message: "New individual added successfully",
-						individuals: response.data,
-						newIndividual: individualInitState.newIndividual,
-						error: false,
-					};
-				});
-
-				newEventFeedback = {
+				setIndividualState((state) => ({
+					...state,
 					status: "SUCCESS",
-					message: "Individual has been created successfully"
-				}
-				
+					message: "New individual added successfully",
+					individuals: response.data,
+					newIndividual: individualInitState.newIndividual,
+					error: false,
+				}));
 			})
-			.catch((error) => {
-				setIndividualState((state) => {
-					return {
-						...state,
-						status: "FAILED",
-						message: error.message ?? "There was an error creating new user",
-						error: true,
-					};
-				});
-
-				newEventFeedback = {
-					status: "ERROR",
-					message: error.message
-				}
-			})
+			.catch((error) => createGlobalFeedback("error", error.message))
 			.finally(()=> {
-				addEventFeedbackItem(newEventFeedback, [ ...globalEventFeedback ], setGlobalEventFeedback)
+				setIndividualState((state) => ({
+					...state,
+					status: "IDLE",
+					error: false,
+					message: "",
+				}));
 				closeModal();
 			})
 		}

@@ -16,6 +16,8 @@ import {
 } from "src/components/FormComponents/FormWrapper/types";
 import {LoginAction} from "src/features/auth/actions";
 import { useAuthState } from "src/features/auth/state";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
+import GlobalFeedback from "src/components/GlobalFeedback";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -108,41 +110,28 @@ export default function Login() {
         password: passwordModel.value ?? "",
       };
 
-      setAuthState((state) => {
-        return {
-          ...state,
-          status: "LOADING",
-        };
-      });
+      setAuthState((state) => ({
+        ...state,
+        status: "LOADING",
+      }));
 
       LoginAction(payload)
-        .then(() => {
-          setAuthState(() => {
-            return {
-              error: false,
-              message: "",
-              status: "SUCCESS",
-              isSignedIn: true,
-            };
-          });
-          navigate({ pathname: "/dashboard" });
-        })
-        .catch((error) => {
-          setAuthState((state) => {
-            return {
-              ...state,
-              error: true,
-              message: error.message,
-              status: "FAILED",
-            };
-          });
-        });
+      .then(() => {
+        setAuthState((state) => ({ ...state, isSignedIn: true }));
+        navigate({ pathname: "/dashboard" });
+      })
+      .catch((error) => {
+        createGlobalFeedback("error", error.message)
+      })
+      .finally(()=> setAuthState((state) => ({ ...state, status:"IDLE" })));
     }
   }
 
   return (
     <div className={styles.login_page}>
       <div className={styles.content_section}>
+        <GlobalFeedback />
+
         <ImageComponent
           src={logo}
           width={"100px"}

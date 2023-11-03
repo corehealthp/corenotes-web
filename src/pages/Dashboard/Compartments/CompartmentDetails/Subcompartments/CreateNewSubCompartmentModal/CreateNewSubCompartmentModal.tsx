@@ -8,13 +8,11 @@ import { formFieldType, setFormFieldType } from "src/components/FormComponents/F
 import InputField from "src/components/FormComponents/InputField";
 import { useParams } from "react-router-dom";
 import { postNewSubcompartment } from "src/features/compartment/action";
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function CreateNewSubCompartmentModal({ closeModal }:{ closeModal:()=> void }) {
 
     const params = useParams();
-
-    const [globalEventFeedback, setGLobalEventFeedback] = useGlobalEventFeedbackState();
 
     const [compartmentState, setCompartmentState] = useCompartmentState();
 
@@ -53,39 +51,21 @@ export default function CreateNewSubCompartmentModal({ closeModal }:{ closeModal
             ...state,
             status: "LOADING"
         }))
-
-        let newEventFeedback = {
-            status: "",
-            message: ""
-        }
         
         postNewSubcompartment(parseInt(params.compartmentId!) , payload)
         .then((response)=> {
             setCompartmentState((state)=> ({
                 ...state,
-                status: "IDLE",
                 compartment: response.data.compartment
             }))
-
-            newEventFeedback = {
-                status: "SUCCESS",
-                message: "New subcompartment created successfully"
-            }
+            createGlobalFeedback("success", response.message);
         })
-        .catch((error)=> {
+        .catch((error) => createGlobalFeedback("error", error.message))
+        .finally(()=> {  
             setCompartmentState((state)=> ({
                 ...state,
                 status: "IDLE"
             }))
-
-            newEventFeedback = {
-                status: "ERROR",
-                message: error?.message ?? "There was an error creating new subcompartment"
-            }
-        })
-        .finally(()=> {
-            addEventFeedbackItem(newEventFeedback, [ ...globalEventFeedback ], setGLobalEventFeedback);
-            closeModal();
         })
     }
     
