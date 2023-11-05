@@ -3,8 +3,6 @@ name: Corenotes-web-cicd
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
   #workflow_dispatch:
 
@@ -17,15 +15,8 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - name: run commands
-      #- uses: actions/checkout@v4
-      - run: npm i
-      - run: npm run build
-      #- run: npm run preview --port 3100
-
-      - name: rsync deployments
-        #uses: burnett01/rsync-deployments@5.1
-        uses: appleboy/scp-action@master
+      - name: Use a GitHub Action
+        uses: actions/checkout@v3
         with:
           switches: -avzr --delete
           path: ./*
@@ -33,3 +24,17 @@ jobs:
           remote_host: ${{ secrets.SSH_HOST }}
           remote_user: ${{ secrets.SSH_USER }}
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+          script: |
+            npm i
+            npm run build
+
+      # - name: rsync deployments
+      #   #uses: burnett01/rsync-deployments@5.1
+      #   uses: appleboy/scp-action@master
+      #   with:
+      #     switches: -avzr --delete
+      #     path: ./*
+      #     remote_path: /corenotes-web
+      #     remote_host: ${{ secrets.SSH_HOST }}
+      #     remote_user: ${{ secrets.SSH_USER }}
+      #     remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
