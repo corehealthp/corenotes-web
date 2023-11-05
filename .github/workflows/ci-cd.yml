@@ -1,4 +1,4 @@
-name: Corenotes-web-cd
+name: Corenotes-web-cicd
 
 on:
   push:
@@ -21,6 +21,7 @@ jobs:
 
       - run: npm i
       - run: npm run build
+      #- run: npm run preview --port 3100
 
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1
@@ -28,6 +29,6 @@ jobs:
           switches: -avzr --delete
           path: ./*
           remote_path: /corenotes-web
-          remote_host: ec2-34-197-199-182.compute-1.amazonaws.com
-          remote_user: ubuntu
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
