@@ -8,9 +8,10 @@ import FadedBackgroundButton from "src/components/Buttons/FadedBackgroundButton"
 import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
 import { useStaffState } from "src/features/staff/state";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
-import { fetchStaffListSuccessResponseType, registerStaffAction } from "src/features/staff/actions";
+import { registerStaffAction } from "src/features/staff/actions";
 import { INewStaffPersonalInformation, INewStaffWorkInformation, NewStaffType } from "src/features/staff/types";
 import ComponentLoader from "src/components/Loaders/ComponentLoader";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function AddNewStaffModal({ closeModal }: { closeModal: () => void }) {
 	
@@ -126,38 +127,26 @@ export default function AddNewStaffModal({ closeModal }: { closeModal: () => voi
 			...staffState.newStaff.personal,
 			...staffState.newStaff.work
 		}
-		console.log(payload)
-		setStaffState((state) => {
-			return {
-				...state,
-				status: "LOADING",
-				error: false,
-				message: "",
-			};
-		});
+
+		setStaffState((state) => ({
+			...state,
+			status: "LOADING"
+		}));
 			
 		registerStaffAction(payload)
-		.then(({ data }: fetchStaffListSuccessResponseType) => {
-			setStaffState((state) => {
-				return {
-					...state,
-					status: "SUCCESS",
-					error: false,
-					message: "Staff registered successfully",
-					list: data.staffs,
-				};
-			});
+		.then((data) => {
+			console.log(data)
+			createGlobalFeedback("success", data.message)
+
+			setStaffState((state) => ({
+				...state,
+				list: data.data.staffs,
+				currentPage: data.data.currentPage,
+				totalPages: data.data.totalPages
+			}));
 		})
-		.catch((error) => {
-			setStaffState((state) => {
-				return {
-					...state,
-					status: "FAILED",
-					error: true,
-					message: error.message,
-				};
-			});
-		});
+		.catch((error) => createGlobalFeedback("error", error.message))
+		.finally(()=> setStaffState((state) => ({ ...state, status: "IDLE" })))
 	}
 
 	function _closeModal() {

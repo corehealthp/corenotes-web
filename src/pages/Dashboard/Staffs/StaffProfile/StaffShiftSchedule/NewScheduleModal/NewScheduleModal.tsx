@@ -8,21 +8,13 @@ import { formFieldType, setFormFieldType } from "src/components/FormComponents/F
 import RowContainer from "src/components/Layout/RowContainer";
 import { convertDateTimeToUTC } from "src/utils/convertDateTimeToDateUTC";
 import { useStaffState } from "src/features/staff/state";
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
 import { addNewShiftScheduleAction } from "src/features/staff/actions";
 import { useParams } from "react-router-dom";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function NewScheduleModal({close}:{close:()=> void}) {
     
     const params = useParams();
-
-    const newGlobalEvent = {
-        status:"",
-        message:""
-    }
-
-
-    const [globalEventFeedbackState, setGlobalEventFeedbackState] = useGlobalEventFeedbackState();
 
     const [staffState, setStaffState] = useStaffState();
 
@@ -102,25 +94,9 @@ export default function NewScheduleModal({close}:{close:()=> void}) {
             }))
 
             addNewShiftScheduleAction(params.staffId!, payload)
-            .then(()=> {
-                setStaffState(state => ({
-                    ...state,
-                    status: "SUCCESS"
-                }));
-
-                newGlobalEvent.status = "SUCCESS"
-                newGlobalEvent.message = "New staff schedule set successfully"
-            })
-            .catch((error)=> {
-                setStaffState(state => ({
-                    ...state,
-                    status: "FAILED"
-                }));
-
-                newGlobalEvent.status = "ERROR"
-                newGlobalEvent.message = error.message || "There was an error adding new shift schedule, try again"
-            })
-            .finally(()=> addEventFeedbackItem(newGlobalEvent, [...globalEventFeedbackState], setGlobalEventFeedbackState))
+            .then((response)=> createGlobalFeedback("success", response.message))
+            .catch((error)=> createGlobalFeedback("error", error.message))
+            .finally(()=> setStaffState(state => ({ ...state, status: "IDLE" })))
 
         }
     }

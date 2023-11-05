@@ -10,13 +10,12 @@ import ServicesListDropDownField from "src/pages/Dashboard/Services/components/S
 import { useParams } from "react-router-dom";
 import { patchCompartmentServiceDetails } from "src/features/compartment/action";
 import ComponentLoader from "src/components/Loaders/ComponentLoader";
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";2
 
 export default function AddServiceToCompartmentModal({ closeModal }:{ closeModal:()=> void }) {
 
     const params = useParams();
 
-    const [globalEventFeedback, setGlobalEventFeedback] = useGlobalEventFeedbackState(); 
 
     const [compartmentState, setCompartmentState] = useCompartmentState();
 
@@ -72,11 +71,6 @@ export default function AddServiceToCompartmentModal({ closeModal }:{ closeModal
             message: ''
         }))
 
-        let newCompartmentFeedbackItem = {
-            status: "",
-            message: ""
-        }
-
         patchCompartmentServiceDetails(parseInt(params.compartmentId!), payload)
         .then((response)=> {
             setCompartmentState(state => ({
@@ -90,10 +84,7 @@ export default function AddServiceToCompartmentModal({ closeModal }:{ closeModal
                 }
             }))
 
-            newCompartmentFeedbackItem = {
-                status: "SUCCESS",
-                message: response.message
-            }
+            createGlobalFeedback("success", response.message);
         })
         .catch((error)=> {
             setCompartmentState(state => ({
@@ -103,15 +94,9 @@ export default function AddServiceToCompartmentModal({ closeModal }:{ closeModal
                 message: error.message
             }))
 
-            newCompartmentFeedbackItem = {
-                status: "ERROR",
-                message: error.message
-            }
+            createGlobalFeedback("error", error.message);
         })
-        .finally(()=> {
-            addEventFeedbackItem(newCompartmentFeedbackItem, [ ...globalEventFeedback ], setGlobalEventFeedback);
-            closeModal();
-        })
+        .finally(()=> closeModal())
     }
 
     return (

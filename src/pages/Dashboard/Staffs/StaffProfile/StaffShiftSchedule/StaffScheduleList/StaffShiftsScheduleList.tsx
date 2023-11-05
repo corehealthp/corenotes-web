@@ -1,14 +1,12 @@
 import styles from "./staffshiftsschedulelist.module.css";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
 import { useFetchStaffShiftsSelector } from "src/features/staff/selector";
 import { useStaffState } from "src/features/staff/state";
 import StaffShiftsScheduleTable from "./StaffScheduleTable";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function StaffShiftScheduleList () {
-
-    const [globalEventFeedback, setGlobalEventFeedbackState] = useGlobalEventFeedbackState();
 
     const params = useParams();
 
@@ -22,16 +20,9 @@ export default function StaffShiftScheduleList () {
             shifts: staffShiftsResponse.data
         }))
 
-        if(staffShiftsResponse.error) {
-            const newEventFeedback = {
-                status: "ERROR",
-                message: staffShiftsResponse.message
-            }
+        if(staffShiftsResponse.error) createGlobalFeedback("error", staffShiftsResponse.message)
 
-            addEventFeedbackItem(newEventFeedback, [...globalEventFeedback], setGlobalEventFeedbackState)
-        }
-
-    }, [globalEventFeedback, setGlobalEventFeedbackState, setStaffState, staffShiftsResponse])
+    }, [setStaffState, staffShiftsResponse])
     
     return (
         <div className={styles.list}>

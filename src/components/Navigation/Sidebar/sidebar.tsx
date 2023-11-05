@@ -6,12 +6,10 @@ import ImageComponent from "src/components/ImageComponent";
 import { useUserState } from "src/features/user/state";
 import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
 import { clockStaffInAction, clockStaffOutAction } from "src/features/staff/actions";
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
 import { useState } from "react";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function Sidebar({ navOptions, navigateTo }: sideBarNavOptionsType) {
-    
-    const [globalEventFeedback, setGlobalEventFeedbackState] = useGlobalEventFeedbackState();
 
     const [userState, setUserState] = useUserState();
     const [clockInState, setClockInState] = useState(userState);
@@ -65,7 +63,8 @@ export default function Sidebar({ navOptions, navigateTo }: sideBarNavOptionsTyp
                 status: "ERROR",
                 message: error.message ?? "There was an error clocking in"
             }
-            addEventFeedbackItem(newFeedback, [...globalEventFeedback], setGlobalEventFeedbackState);
+
+            createGlobalFeedback("error", newFeedback.message);
         })
     }
 
@@ -108,16 +107,14 @@ export default function Sidebar({ navOptions, navigateTo }: sideBarNavOptionsTyp
             })
         })
         .catch((error)=> {
-            setClockOutState(state => ({
-                ...state,
-                status:"IDLE"
-            }))
+            setClockOutState(state => ({ ...state, status:"IDLE" }))
 
             const newFeedback = {
                 status: "ERROR",
                 message: error.message ?? "There was an error clocking in"
             }
-            addEventFeedbackItem(newFeedback, [...globalEventFeedback], setGlobalEventFeedbackState);
+            
+            createGlobalFeedback("error", newFeedback.message);
         })
     }
 
