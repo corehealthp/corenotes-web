@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: run commands
-      - uses: actions/checkout@v4
+      #- uses: actions/checkout@v4
       - run: npm i
       - run: npm run build
       #- run: npm run preview --port 3100
