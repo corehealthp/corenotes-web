@@ -28,6 +28,7 @@ jobs:
           script: |
             npm i
             npm run build
+            npm run dev
 
       # - name: rsync deployments
       #   #uses: burnett01/rsync-deployments@5.1
