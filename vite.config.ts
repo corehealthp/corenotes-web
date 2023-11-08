@@ -11,14 +11,14 @@ export default ({mode})=> {
   return defineConfig({
     plugins: [react(), svgr()],
     server: {
-      port: 3200,
-      proxy: {
-        "/api": {
-          target: "http://localhost:3201",
-          changeOrigin: true,
-          secure: false,
-        },
-      },
+      port: 3100,
+      // proxy: {
+      //   "/api": {
+      //     target: "http://localhost:3201",
+      //     changeOrigin: true,
+      //     secure: false,
+      //   },
+      // },
     },
     resolve: {
       alias: {

@@ -22,18 +22,18 @@ function postFetch (url:string, body:any){
         fetch(url, "POST", body)
         .then((response)=> resolve(response.data))
         .catch((error)=> {
-            if(typeof(error.response.data) === 'object') {
+            if(typeof(error.response?.data) === 'object') {
                 reject({
                     statusCode: error.response.data.statusCode,
                     message: error.response.data.message?.toString(),
                 })
             }
-            if(typeof(error.response.data) === 'string') {
+            if(typeof(error.response?.data) === 'string') {
                 reject({
                     message: "Hmm.. this request is not recognized, make sure you are accessing a valid url"
                 })
             }
-            reject({message: error.response.message})
+            reject({message: error.response?.message})
         });
     });
 }
@@ -60,13 +60,16 @@ export const patchFetch = (url:string, body:any)=> {
 }
 
 const fetch = (url:string, method:string, data?:bodyType)=> {
+    const headers = { authorization:`sid=${localStorage.getItem('sid')}` }
     return axios({
         url,
         method,
         baseURL: process.env.REACT_APP_API_BASE_URL,
         // baseURL: process.env.VITE_BASE_URL,
+        headers,
+        // baseURL: "https://api.corenotes.net/api/v1",
         data,
-        withCredentials: true
+        // withCredentials: true
     });
 }
 
