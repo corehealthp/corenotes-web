@@ -20,9 +20,9 @@ export default ({mode})=> {
       //   },
       // },
       port: 3100,
-      //https: true,
+      https: true,
       hmr: {
-          host: "https://34.197.199.182",
+          host: "34.197.199.182",
           port: 3200,
           protocol: "wss",
       },
