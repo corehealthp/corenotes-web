@@ -47,27 +47,27 @@ export default function AddNewStaffModal({ closeModal }: { closeModal: () => voi
 	}
 
 	function validateForm(newStaffInfo:NewStaffType) {
-		if (!newStaffInfo.personal.firstname) {
-			return "Firstname field cannot be empty";
-		}
-		if (!newStaffInfo.personal.lastname) {
-			return "Lastname field cannot be empty";
-		}
-		if (!newStaffInfo.personal.dob) {
-			return "Date of birth field cannot be empty";
-		} 
-		if (!newStaffInfo.personal.gender) {
-			return "Gender field cannot be empty";
-		}
-		if (!newStaffInfo.personal.address) {
-			return "Address field cannot be empty"; 
-		}
-		if (!newStaffInfo.personal.city) {
-			return "City field cannot be empty";
-		}
-		if (!newStaffInfo.personal.state) {
-			return "State field cannot be empty";
-		}
+		// if (!newStaffInfo.personal.firstname) {
+		// 	return "Firstname field cannot be empty";
+		// }
+		// if (!newStaffInfo.personal.lastname) {
+		// 	return "Lastname field cannot be empty";
+		// }
+		// if (!newStaffInfo.personal.dob) {
+		// 	return "Date of birth field cannot be empty";
+		// } 
+		// if (!newStaffInfo.personal.gender) {
+		// 	return "Gender field cannot be empty";
+		// }
+		// if (!newStaffInfo.personal.address) {
+		// 	return "Address field cannot be empty"; 
+		// }
+		// if (!newStaffInfo.personal.city) {
+		// 	return "City field cannot be empty";
+		// }
+		// if (!newStaffInfo.personal.state) {
+		// 	return "State field cannot be empty";
+		// }
 		// if (!newStaffInfo.personal.zipCode) {
 		// 	return "Zip code field cannot be empty";
 		// }
