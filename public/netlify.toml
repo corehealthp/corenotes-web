@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/api/*"
-  to = "http://75.101.253.111/api/:splat"
+  to = "https://api.corenotes.net/api/:splat"
   status = 200
   force = true
   headers = {X-From = "Netlify"}
