@@ -1,7 +1,7 @@
 import styles from "./addstaffrolemodal.module.css";
 
 import { ReactComponent as IconCancelCircle } from "src/assets/icons/icon-cancel-circle.svg";
-import { staffInitState, useStaffState } from "src/features/staff/state";
+import { useStaffState } from "src/features/staff/state";
 import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
 import { useState } from "react";
 import {
@@ -10,7 +10,7 @@ import {
 } from "src/components/FormComponents/FormWrapper/types";
 import InputField from "src/components/FormComponents/InputField";
 import { addStaffRoleAction } from "src/features/staff/actions";
-import SelectRolePrivileges from "./SelectRolePrivileges";
+// import SelectRolePrivileges from "./SelectRolePrivileges";
 
 import ModalContainer from "src/components/Modal/ModalContainer";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
@@ -31,7 +31,7 @@ export default function AddStaffRoleModal({
     validated: false,
   });
 
-  const [selectedPrivileges, setSelectedPrivileges] = useState<any>({});
+  // const [selectedPrivileges, setSelectedPrivileges] = useState<any>({});
 
   function setInput(
     value: string,
@@ -58,7 +58,7 @@ export default function AddStaffRoleModal({
   function submitRole() {
     const payload = {
       title: roleTitle.value!,
-      privileges: selectedPrivileges,
+      privileges:{},
     };
 
     setStaffState((state) => ({
