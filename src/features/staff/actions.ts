@@ -188,8 +188,8 @@ export interface fetchStaffRolesSuccessResponseType extends Omit<successResponse
 }
 
 export interface IAddStaffRoleRequest {
-    title:string,
-    privileges:{unknown:any}
+    title:string;
+    privileges:object;
 }
 
 export function addStaffRoleAction(payload:IAddStaffRoleRequest) {

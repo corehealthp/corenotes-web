@@ -7,6 +7,7 @@ import { ReactComponent as iconOverview } from "src/assets/icons/icon-home.svg";
 import { ReactComponent as iconBriefcase } from "src/assets/icons/icon-briefcase.svg";
 import { ReactComponent as iconUsers } from "src/assets/icons/icon-users.svg";
 import { ReactComponent as iconFlag } from "src/assets/icons/icon-flag.svg";
+import { ReactComponent as iconAdminUser } from "src/assets/icons/icon-admin-user.svg";
 
 import { NavOptionsType } from "src/components/Navigation/types.ts";
 import ComponentLoader from "src/components/Loaders/ComponentLoader";
@@ -214,16 +215,16 @@ export default function Dashboard() {
 			active: isCurrentNav(["/dashboard/medications"]),
 			roles: ["HR", "DDP", "ADMINISTRATOR"],
 		},
-		// {
-		//     label: "Administration",
-		//     pageTitle: "Administration",
-		//     pageSubtitle: "",
-		//     path: "/dashboard/administration",
-		//     icon: iconAdminUser,
-		//     activeIcon: iconAdminUser,
-		//     active: isCurrentNav(['/dashboard/administration']),
-		//     roles: ['HR', 'DDP', 'ADMIN']
-		// },
+		{
+			label: "Administration",
+			pageTitle: "Administration",
+			pageSubtitle: "",
+			path: "/dashboard/administration",
+			icon: iconAdminUser,
+			activeIcon: iconAdminUser,
+			active: isCurrentNav(['/dashboard/administration']),
+			roles: ['HR', 'DDP', 'ADMINISTRATOR']
+		},
 		// {
 		//     label: "Settings",
 		//     pageTitle: "settings",
