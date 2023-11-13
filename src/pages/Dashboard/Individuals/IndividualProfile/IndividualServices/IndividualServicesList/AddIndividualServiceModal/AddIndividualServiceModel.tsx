@@ -19,11 +19,9 @@ import { getAllProvidedServiceAction } from "src/features/service/action";
 import RowContainer from "src/components/Layout/RowContainer";
 import formatTime from "src/utils/formatTime";
 import SizedBox from "src/components/SizedBox";
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()=> void }) {
-
-    const [globalEventFeedback, setGlobalEventFeedback] = useGlobalEventFeedbackState();
 
     const { individualId } = useParams();
 
@@ -318,35 +316,20 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                 error: false,
             }))
 
-            const newEventFeedback = {
-                status:"",
-                message:""
-            };
-
             addServiceToIndividualAction(individualId!, payload)
             .then((response)=> {
                 setIndividualState(state => ({
                     ...state,
-                    status: "IDLE",
-                    error: false,
                     requestedServices: response.data.individualServices
                 }))
-
-                newEventFeedback.status = "SUCCESS";
-                newEventFeedback.message = "Service assigned to individual successfully"
+                createGlobalFeedback("success", response.message);
             })
-            .catch((error)=> {
+            .catch((error)=> createGlobalFeedback("error", error.message))
+            .finally(()=> {
                 setIndividualState(state => ({
                     ...state,
-                    status: "FAILED",
-                    error: true,
+                    status: "IDLE",
                 }))
-
-                newEventFeedback.status = "ERROR";
-                newEventFeedback.message = error.message ? `Error adding service to individual: ${error.message}` : "There was an error assigning service to individual"
-            })
-            .finally(()=> {
-                addEventFeedbackItem(newEventFeedback, [...globalEventFeedback], setGlobalEventFeedback);
                 closeModal();
             })
         // }

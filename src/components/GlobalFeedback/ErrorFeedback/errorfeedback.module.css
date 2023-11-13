@@ -1,0 +1,26 @@
+.error_feedback {
+    background: var(--red-accent-100);
+    color: white;
+    width: 300px;
+    padding: 20px;
+    min-height: 30px;
+    border-radius: 5px;
+    box-shadow: var(--shadow-200);
+    
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+
+    font-weight: 400;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.icon_sad_face {
+    width: 25px;
+    text-align: center;
+}
+.message {
+    width: 90%;
+}

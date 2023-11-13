@@ -12,7 +12,7 @@ import DataLoadingError from "src/components/DataLoadingError";
 import SelectAssessmentCard from "./SelectAssessmentCard";
 import { addAssessmentToIndividualAction } from "src/features/Individual/action";
 import { useFetchAssessmentsToAssignListSelector } from "src/features/Individual/selector";
-import { addEventFeedbackItem, useGlobalEventFeedbackState } from "src/features/globalEventFeedback/state";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export interface IAssessmentToSelect {
     id:string;
@@ -29,14 +29,7 @@ export default function AddIndividualAssessmentModal({ closeModal }:{ closeModal
 
     const { individualId } = useParams();
 
-    const newEventFeedBack = {
-        status: "",
-        message: ""
-    }
-
     const setIndividualState = useSetIndividualState();
-
-    const [globalEventFeedback, setGlobalEventFeedback] = useGlobalEventFeedbackState();
 
 	const [assessmentState, setAssessmentState] = useAssessmentState();
 
@@ -108,39 +101,25 @@ export default function AddIndividualAssessmentModal({ closeModal }:{ closeModal
 
         addAssessmentToIndividualAction(individualId!, payload)
         .then((response)=> {
-            setAssessmentState(state => ({
-                ...state,
-                status: "IDLE",
-            }))
-
             setIndividualState(state => ({
                 ...state,
-                status: "SUCCESS",
-                error: false,
-                message: "Assessment added successfully",
                 assessments: {
                     ...state.assessments,
                     ...response.data.individualAssessments
                 }
             }))
 
-            newEventFeedBack.status = "SUCCESS";
-            newEventFeedBack.message = "Assessment assigned to individual successfully";
-
-            closeModal()
+            createGlobalFeedback("error", response.message ?? "Assessment added successfully");
         })
         .catch((error)=> {
+            createGlobalFeedback("error", error.message ?? "There was an error adding assessment to user")
+        })
+        .finally(()=> {
             setIndividualState(state => ({
                 ...state,
-                status: "FAILED",
-                error: false,
-                message: "There was an error adding assessment to user"
+                status: "IDLE",
             }))
-
-            newEventFeedBack.status = "ERROR";
-            newEventFeedBack.message = error.message ?? "There was an error assigning to individual successfully";
         })
-        .finally(()=> addEventFeedbackItem(newEventFeedBack, [...globalEventFeedback], setGlobalEventFeedback))
     }
 
     return (
