@@ -232,7 +232,7 @@ const DashboardRoutes:routerType[] = [
             {
                 path:'administration',
                 element: <AdministrationOutlet />,
-                allowedRoles:['HR', 'DDP'],
+                allowedRoles:['HR', 'DDP', "ADMINISTRATOR"],
                 children: [
                     {
                         path:'',

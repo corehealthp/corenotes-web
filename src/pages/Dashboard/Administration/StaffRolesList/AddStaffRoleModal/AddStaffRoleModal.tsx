@@ -13,6 +13,7 @@ import { addStaffRoleAction } from "src/features/staff/actions";
 import SelectRolePrivileges from "./SelectRolePrivileges";
 
 import ModalContainer from "src/components/Modal/ModalContainer";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function AddStaffRoleModal({
   closeModal,
@@ -68,28 +69,23 @@ export default function AddStaffRoleModal({
     }));
 
     addStaffRoleAction(payload)
-      .then((response) => {
-        setStaffState((state) => ({
-          ...state,
-          status: "SUCCESS",
-          error: false,
-          message: "Staff role created successfully",
-          roles: {
-            list: response.data.staffRoles,
-            currentPage: response.data.currentPage,
-            totalPages: response.data.totalPages,
-          },
-        }));
-      })
-      .catch(() => {
-        setStaffState((state) => ({
-          ...state,
-          status: "FAILED",
-          error: true,
-          message: "There was an error creating staff role",
-          roles: staffInitState.roles,
-        }));
-      });
+    .then((response) => {
+      console.log(response)
+      createGlobalFeedback("success", response.message);
+      setStaffState((state) => ({
+        ...state,
+        roles: {
+          list: response.data.staffRoles,
+          currentPage: response.data.currentPage,
+          totalPages: response.data.totalPages,
+        },
+      }));
+    })
+    .catch((error) => {
+      console.log(error)
+      createGlobalFeedback("error", error.message)
+    })
+    .finally(()=> setStaffState(state => ({ ...state, status:"IDLE" })))
   }
 
   return (
@@ -112,9 +108,9 @@ export default function AddStaffRoleModal({
             onInput={(value) => setInput(value, roleTitle, setRoleTitle)}
           />
 
-          <SelectRolePrivileges
+          {/* <SelectRolePrivileges
             submit={(privileges) => setSelectedPrivileges(privileges)}
-          />
+          /> */}
         </div>
 
         <div className={styles.buttons}>
