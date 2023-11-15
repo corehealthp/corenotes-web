@@ -64,10 +64,10 @@ const fetch = (url:string, method:string, data?:bodyType)=> {
     return axios({
         url,
         method,
-        baseURL: process.env.REACT_APP_API_BASE_URL,
+        // baseURL: process.env.REACT_APP_API_BASE_URL,
         // baseURL: process.env.VITE_BASE_URL,
         headers,
-        // baseURL: process.env.VITE_BASE_URL ?? "https://api.corenotes.net/api/v1",
+        baseURL:"https://api.corenotes.net/api/v1",
         data,
         // withCredentials: true
     });
