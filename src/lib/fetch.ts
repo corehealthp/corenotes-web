@@ -67,7 +67,7 @@ const fetch = (url:string, method:string, data?:bodyType)=> {
         // baseURL: process.env.REACT_APP_API_BASE_URL,
         // baseURL: process.env.VITE_BASE_URL,
         headers,
-        baseURL:"https://api.corenotes.net/api/v1",
+        baseURL: process.env.API_URL,
         data,
         // withCredentials: true
     });
