@@ -10,54 +10,48 @@ export default function MedicationsList() {
 
     const [medicationState, setMedicationState] = useMedicationState();
 
-		const medicationListResponse = useFetchMedicationsListSelector(
-			"",
-			medicationState.medications.currentPage
-		);
+	const medicationListResponse = useFetchMedicationsListSelector("", medicationState.medications.currentPage);
 
-		useEffect(() => {
-			setMedicationState((state) => ({
-				...state,
-				message: medicationListResponse.message,
-				error: medicationListResponse.error,
-				medications: medicationListResponse.medications,
-			}));
-		}, [medicationListResponse, setMedicationState]);
+	useEffect(() => {
+		setMedicationState((state) => ({
+			...state,
+			message: medicationListResponse.message,
+			error: medicationListResponse.error,
+			medications: medicationListResponse.medications,
+		}));
+	}, [medicationListResponse, setMedicationState]);
 
-		const [showCreateMedicationModal, setShowCreateMedicationModal] =
-			useState(false);
+	const [showCreateMedicationModal, setShowCreateMedicationModal] = useState(false);
 
-		function goToSelectedPageNumber(pageNumber: number) {
-			setMedicationState((state) => ({
-				...state,
-				medications: {
-					...state.medications,
-					currentPage: pageNumber,
-				},
-			}));
-		}
+	function goToSelectedPageNumber(pageNumber: number) {
+		setMedicationState((state) => ({
+			...state,
+			medications: {
+				...state.medications,
+				currentPage: pageNumber,
+			},
+		}));
+	}
 
-		return (
-			<div className={styles.medications_list_page}>
-				<MedicationListHeader
-					addMedication={() => setShowCreateMedicationModal(true)}
+	return (
+		<div className={styles.medications_list_page}>
+			<MedicationListHeader
+				addMedication={() => setShowCreateMedicationModal(true)}
+			/>
+
+			<MedicationsListTable
+				medications={medicationState.medications.list}
+				currentPage={medicationState.medications.currentPage}
+				totalPages={medicationState.medications.totalPages}
+				goToPage={(selectedPageNumber: number) => goToSelectedPageNumber(selectedPageNumber)}
+				errorMessage={"No medications to show"}
+			/>
+
+			{showCreateMedicationModal ? (
+				<CreateMedicationModal
+					closeModal={() => setShowCreateMedicationModal(false)}
 				/>
-
-				<MedicationsListTable
-					medications={medicationState.medications.list}
-					currentPage={medicationState.medications.currentPage}
-					totalPages={medicationState.medications.totalPages}
-					goToPage={(selectedPageNumber: number) =>
-						goToSelectedPageNumber(selectedPageNumber)
-					}
-					errorMessage={"No medications to show"}
-				/>
-
-				{showCreateMedicationModal ? (
-					<CreateMedicationModal
-						closeModal={() => setShowCreateMedicationModal(false)}
-					/>
-				) : null}
-			</div>
-		);
+			) : null}
+		</div>
+	);
 }

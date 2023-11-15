@@ -5,8 +5,6 @@ export default function Authorize({child, roles}:{child:JSX.Element, roles:strin
     
     const userState = useUserStateValue()
 
-    console.log("userState",userState.details.role.title)
-    console.log("role",roles)
     if(!roles?.includes(userState.details.role.title)) return <Page404 />;
     return child
 }
