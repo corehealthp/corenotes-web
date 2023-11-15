@@ -215,7 +215,7 @@ const DashboardRoutes:routerType[] = [
             {
                 path:'medications',
                 element: <MedicationsOutlet />,
-                allowedRoles:['HR', 'DDP', 'ADMIN'],
+                allowedRoles:['HR', 'DDP', 'ADMINISTRATOR'],
                 children: [
                     {
                         path:'',
