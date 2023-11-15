@@ -13,20 +13,13 @@ export default ({mode})=> {
     plugins: [react(), svgr()],
     server: {
       port: 3100,
-      // proxy: {
-      //   "/api": {
-      //     target: "http://localhost:3200",
-      //     changeOrigin: true,
-      //     secure: false,
-      //   },
-      // },
-      // port: 3100,
-      // https: true,
-      // hmr: {
-      //     host: "34.197.199.182",
-      //     port: 3200,
-      //     protocol: "wss",
-      // },
+      proxy: {
+        "/api": {
+          target: "http://localhost:3200",
+          changeOrigin: true,
+          secure: false,
+        },
+      },
     },
     resolve: {
       alias: {
