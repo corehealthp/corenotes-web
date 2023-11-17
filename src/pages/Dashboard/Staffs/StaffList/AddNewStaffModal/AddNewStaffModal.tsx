@@ -133,7 +133,7 @@ export default function AddNewStaffModal({
       ...staffState.newStaff.personal,
       ...staffState.newStaff.work,
     };
-
+ 
     setStaffState((state) => ({
       ...state,
       status: "LOADING",
@@ -150,7 +150,7 @@ export default function AddNewStaffModal({
           currentPage: data.data.currentPage,
           totalPages: data.data.totalPages,
         }));
-        _closeModal();
+        closeModal();
       })
 
       .catch((error) => createGlobalFeedback("error", error.message))
