@@ -14,6 +14,7 @@ import { DropDownFormData, setDropDownFormData } from "src/components/FormCompon
 import { useStaffState } from "src/features/staff/state";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
 import { uploadIndividualDocumentAction } from "src/features/Individual/action";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
 
@@ -167,7 +168,7 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
                 docTitle: docTitleModel.value,
                 docType: docTypeModel.value?.label,
                 docDate: docDateModel.value,
-                staffDocFile: docFileModel.file,
+                individualDocFile: docFileModel.file,
                 docFileName: docFileNameModel.value
             }
 
@@ -180,58 +181,21 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
 
             JSONToFormData(payload)
             .then((payloadFormData:FormData)=> {
-                console.log(params.individualId)
                 uploadIndividualDocumentAction(params.individualId!, payloadFormData)
                 .then((response)=> {
-                    setUploadStaffDocState(state => {
-                        return {
-                            ...state,
-                            status: 'SUCCESS',
-                            message:"Individual document saved successfully",
-                            error: false
-                        }
-                    })
-
-                    setStaffState(state => {
-                        return {
-                            ...state,
-                            documents: response.data
-                        }
-                    })
+                    setUploadStaffDocState(state => ({ ...state, status:"IDLE", documents: response.data }))
+                    createGlobalFeedback("success", "Individual document saved successfully")
                 })
-                .catch(()=> {
-                    setUploadStaffDocState(state => {
-                        return {
-                            ...state,
-                            status: 'FAILED',
-                            error: true,
-                            message:"There was an error uploading individual document"
-                        }
-                    })
-                })
+                .catch(()=> createGlobalFeedback("error", "There was an error uploading individual document"))
+                .finally(()=> setUploadStaffDocState(state => ({ ...state, status:"IDLE" })))
             })
-            .catch((error)=> {
-                setUploadStaffDocState(state => {
-                    return {
-                        ...state,
-                        status: 'FAILED'
-                    }
-                })
-                console.log(error)
-            })
+            .catch(()=> createGlobalFeedback("error", "There was an error parsing payload"))
         }
     }
 
     return (
         <ModalContainer close={()=> staffState.status === 'LOADING' ?null :closeModal()}>
             <div className={styles.upload_doc_container}>
-                <FormStateModal 
-                    status={staffState.status}
-                    error={uploadStaffDocState.error}
-                    message={uploadStaffDocState.message}
-                    reset={()=> setStaffState(state => ({ ...state, status:'IDLE' }))} 
-                />
-
                 <div className={styles.top_section}>
                     <div className={styles.heading}>Upload new document</div>
                     <IconCancelCircle 
