@@ -11,8 +11,7 @@ import JSONToFormData from "src/utils/JSONToFormData";
 import { useParams } from "react-router-dom";
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
 import { DropDownFormData, setDropDownFormData } from "src/components/FormComponents/DropDownField/types";
-import { useStaffState } from "src/features/staff/state";
-import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
+import { useStaffValue } from "src/features/staff/state";
 import { uploadIndividualDocumentAction } from "src/features/Individual/action";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
@@ -20,7 +19,7 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
 
     const params = useParams()
 
-    const [staffState, setStaffState] = useStaffState()
+    const staffState = useStaffValue()
     const [uploadStaffDocState, setUploadStaffDocState] = useState(staffState);
 
     const [isFormValid, setIsFormValid] = useState(false);
