@@ -24,7 +24,7 @@ export default function AddNewStaffModal({
 }) {
   const [staffState, setStaffState] = useStaffState();
 
-  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(true);
 
   function validatePersonalForm(newStaffInfo: INewStaffPersonalInformation) {
     const staffInfo: NewStaffType = {
