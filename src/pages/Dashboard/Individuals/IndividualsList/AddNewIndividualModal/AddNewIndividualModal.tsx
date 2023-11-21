@@ -78,6 +78,8 @@ export default function AddNewIndividualModal({ closeModal }: { closeModal: () =
 					newIndividual: individualInitState.newIndividual,
 					error: false,
 				}));
+				closeModal();
+
 			})
 			.catch((error) => createGlobalFeedback("error", error.message))
 			.finally(()=> {
