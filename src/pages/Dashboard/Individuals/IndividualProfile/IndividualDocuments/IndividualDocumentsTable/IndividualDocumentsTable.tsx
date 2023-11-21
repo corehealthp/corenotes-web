@@ -30,13 +30,13 @@ export default function IndividualDocumentsTable({
         'Document',
         'Delete Document'
     ]
-function DeleteDocument(){
+// function DeleteDocument(){
 
-}
+// }
     useEffect(()=> {
         setIsLoading(true)
 
-        sortByDate(staffState.documents.list)
+        sortByDate(documents)
         .then((result)=> {
             const newTransactions = formatTransactionsTable(result);
             setTableBody(newTransactions)
@@ -45,7 +45,7 @@ function DeleteDocument(){
         .catch((error)=> {
             console.log(error)
         })
-    }, [documents, staffState.documents.list])
+    }, [documents, staffState.documents])
 
     function formatTransactionsTable (documents:staffsDocumentsListType[]) {
         return documents.map((document, index:number)=> {
@@ -65,14 +65,16 @@ function DeleteDocument(){
                         fileLink={document.docFileLink}
                     />
                 </div>,
-                <div> <PrimaryTextButton
-                label={'Delete'}
-                width={'100px'}
-                isLoading={false}
-                backgroundColor={"var(--red-accent-100)"}
-                labelColor={"white"}
-                clickAction={DeleteDocument}
-                disabled={false}/>
+                <div> 
+                    <PrimaryTextButton
+                        label={'Delete'}
+                        width={'100px'}
+                        isLoading={false}
+                        backgroundColor={"var(--red-accent-100)"}
+                        labelColor={"white"}
+                        clickAction={()=> ({})}
+                        disabled={false}
+                    />
                 </div>
             ]
         });

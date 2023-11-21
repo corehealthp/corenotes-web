@@ -567,7 +567,7 @@ export function fetchIndividualDocumentsAction(individualId:string, pageNumber:n
                 data: {
                     currentPage:response.data.currentPage,
                     totalPages:response.data.totalPages,
-                    list: response.data.individualDocuments
+                    list: response.data.list
                 }
             })
         })
@@ -578,14 +578,16 @@ export function fetchIndividualDocumentsAction(individualId:string, pageNumber:n
 export function uploadIndividualDocumentAction(individualId:string, payload:FormData) {
     return new Promise<fetchIndividualDocumentsSuccessResponseType>((resolve, reject)=> {
         postFetch(`/individuals/${individualId}/documents`, payload)
-        .then((response:successResponseType)=> resolve({
-            ...response,
-            data: {
-                currentPage:response.data.currentPage,
-                totalPages:response.data.totalPages,
-                list: response.data.documents
-            }
-        }))
+        .then((response:successResponseType)=> {
+            resolve({
+                ...response,
+                data: {
+                    currentPage:response.data.currentPage,
+                    totalPages:response.data.totalPages,
+                    list: response.data.documents
+                }
+            })
+        })
         .catch((error)=> reject(error))
     })
 }
