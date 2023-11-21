@@ -20,25 +20,23 @@ export default function ProtectedRoute({children}:{children:JSX.Element}) {
     useEffect(()=> {
         fetchUserProfile()
         .then((data)=> {
-            setUserState(state => {
-                const user = data.data.user;
-                
-                return {
-                    ...state,
-                    details: {
-                        id: user.id,
-                        active: user.active,
-                        role: user.role,
-                        lastSeen: user.lastSeen,
-                        isClockedIn: user.isClockedIn,
-                        personal: {
-                            firstname: user.firstname,
-                            lastname: user.lastname,
-                            profileImage: user.profileImage,
-                        }
+            const user = data.data.user;
+
+            setUserState(state => ({
+                ...state,
+                details: {
+                    id: user.id,
+                    active: user.active,
+                    role: user.role,
+                    lastSeen: user.lastSeen,
+                    isClockedIn: user.isClockedIn,
+                    personal: {
+                        firstname: user.firstname,
+                        lastname: user.lastname,
+                        profileImage: user.profileImage,
                     }
                 }
-            })
+            }))
         })
         .catch((error)=> {
             console.log(error)
