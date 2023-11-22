@@ -87,7 +87,6 @@ export default function AddNewIndividualModal({
             newIndividual: individualInitState.newIndividual,
             error: false,
           }));
-          console.log("response", response);
           createGlobalFeedback("success", response.message);
         })
         .catch((error) => createGlobalFeedback("error", error.message))
