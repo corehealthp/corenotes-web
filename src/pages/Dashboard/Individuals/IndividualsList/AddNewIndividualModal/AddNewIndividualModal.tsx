@@ -6,147 +6,158 @@ import FadedBackgroundButton from "src/components/Buttons/FadedBackgroundButton"
 import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
 import IndividualPersonalInformationForm from "./IndividualPersonalInformationForm";
 import IndividualHealthInformationForm from "./IndividualHealthInformationForm";
-import { individualInitState, useIndividualState } from "src/features/Individual/state";
-import { IndividualListResponseType, registerIndividualAction } from "src/features/Individual/action";
+import {
+  individualInitState,
+  useIndividualState,
+} from "src/features/Individual/state";
+import {
+  IndividualListResponseType,
+  registerIndividualAction,
+} from "src/features/Individual/action";
 import SizedBox from "src/components/SizedBox";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
-export default function AddNewIndividualModal({ closeModal }: { closeModal: () => void }) {
+export default function AddNewIndividualModal({
+  closeModal,
+}: {
+  closeModal: () => void;
+}) {
+  const [individualState, setIndividualState] = useIndividualState();
 
-	const [individualState, setIndividualState] = useIndividualState();
+  const [isFormValid, setIsFormValid] = useState(false);
 
-	const [isFormValid, setIsFormValid] = useState(false);
+  useEffect(() => {
+    validateForm();
+  }, [individualState.newIndividual, validateForm]);
 
-	useEffect(() => {
-		validateForm();
-	}, [individualState.newIndividual, validateForm]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function validateForm() {
+    if (
+      !individualState.newIndividual.firstname ||
+      !individualState.newIndividual.lastname ||
+      !individualState.newIndividual.dob ||
+      !individualState.newIndividual.gender ||
+      !individualState.newIndividual.ssn ||
+      !individualState.newIndividual.contact.name ||
+      !individualState.newIndividual.contact.email ||
+      !individualState.newIndividual.contact.phoneNumber ||
+      !individualState.newIndividual.weight ||
+      !individualState.newIndividual.compartment ||
+      // !individualState.newIndividual.subCompartmentId ||
+      !individualState.newIndividual.medicaidNumber ||
+      !individualState.newIndividual.maritalStatus ||
+      !individualState.newIndividual.codeAlert.length ||
+      !individualState.newIndividual.requestedServices.length ||
+      !individualState.newIndividual.diet.length ||
+      !individualState.newIndividual.allergies.food.length ||
+      !individualState.newIndividual.allergies.med.length ||
+      !individualState.newIndividual.allergies.other.length
+    ) {
+      setIsFormValid(false);
+      return false;
+    } else {
+      setIsFormValid(true);
+      return true;
+    }
+  }
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	function validateForm() {
-		if (
-			!individualState.newIndividual.firstname ||
-			!individualState.newIndividual.lastname ||
-			!individualState.newIndividual.dob ||
-			!individualState.newIndividual.gender ||
-			!individualState.newIndividual.ssn ||
-			!individualState.newIndividual.contact.name ||
-			!individualState.newIndividual.contact.email ||
-			!individualState.newIndividual.contact.phoneNumber ||
-			!individualState.newIndividual.weight ||
-			!individualState.newIndividual.compartment ||
-			// !individualState.newIndividual.subCompartmentId ||
-			!individualState.newIndividual.medicaidNumber ||
-			!individualState.newIndividual.maritalStatus ||
-			!individualState.newIndividual.codeAlert.length ||
-			!individualState.newIndividual.requestedServices.length ||
-			!individualState.newIndividual.diet.length ||
-			!individualState.newIndividual.allergies.food.length ||
-			!individualState.newIndividual.allergies.med.length ||
-			!individualState.newIndividual.allergies.other.length
-		) {
-			setIsFormValid(false);
-			return false;
-		} else {
-			setIsFormValid(true);
-			return true;
-		}
-	}
+  function resetFormStateModel() {
+    setIndividualState((state) => ({
+      ...state,
+      status: "IDLE",
+    }));
+  }
 
-	function resetFormStateModel() {
-		setIndividualState((state) => ({
-			...state,
-			status: "IDLE",
-		}));
-	}
+  function registerIndividual() {
+    if (validateForm()) {
+      setIndividualState((state) => ({
+        ...state,
+        status: "LOADING",
+        error: false,
+        message: "",
+      }));
 
-	function registerIndividual() {
-		if (validateForm()) {
-			setIndividualState((state) => ({
-				...state,
-				status: "LOADING",
-				error: false,
-				message: "",
-			}));
+      registerIndividualAction(individualState.newIndividual)
+        .then((response: IndividualListResponseType) => {
+          setIndividualState((state) => ({
+            ...state,
+            status: "SUCCESS",
+            message: "New individual added successfully",
+            individuals: response.data,
+            newIndividual: individualInitState.newIndividual,
+            error: false,
+          }));
+          console.log("response", response);
+          createGlobalFeedback("success", response.message);
+        })
+        .catch((error) => createGlobalFeedback("error", error.message))
+        .finally(() => {
+          setIndividualState((state) => ({
+            ...state,
+            status: "IDLE",
+            error: false,
+            message: "",
+          }));
+          setTimeout(() => {
+            closeModal();
+          },800);
+        });
+    }
+  }
 
-			registerIndividualAction(individualState.newIndividual)
-			.then((response: IndividualListResponseType) => {
-				setIndividualState((state) => ({
-					...state,
-					status: "SUCCESS",
-					message: "New individual added successfully",
-					individuals: response.data,
-					newIndividual: individualInitState.newIndividual,
-					error: false,
-				}));
-				closeModal();
+  const userState = individualState.newIndividual!;
 
-			})
-			.catch((error) => createGlobalFeedback("error", error.message))
-			.finally(()=> {
-				setIndividualState((state) => ({
-					...state,
-					status: "IDLE",
-					error: false,
-					message: "",
-				}));
-				closeModal();
-			})
-		}
-	}
+  return (
+    <ModalContainer
+      close={
+        individualState.status !== "LOADING"
+          ? () => {
+              resetFormStateModel();
+              closeModal();
+            }
+          : () => ({})
+      }
+    >
+      <div className={styles.add_new_staff}>
+        <div className={styles.top_section}>
+          <div className={styles.heading}>Add new individual</div>
+          <IconCancel
+            className={styles.icon_cancel}
+            onClick={
+              individualState.status !== "LOADING"
+                ? () => {
+                    resetFormStateModel();
+                    closeModal();
+                  }
+                : () => ({})
+            }
+          />
+        </div>
 
-	const userState = individualState.newIndividual!;
+        <div className={styles.registration_form_section}>
+          <IndividualPersonalInformationForm userState={userState} />
+          <SizedBox height="20px" />
+          <IndividualHealthInformationForm />
+        </div>
 
-	return (
-		<ModalContainer
-			close={
-				individualState.status !== "LOADING"
-					? () => {
-							resetFormStateModel();
-							closeModal();
-						}
-					: () => ({})
-			}>
-			<div className={styles.add_new_staff}>
+        <div className={styles.action_buttons}>
+          <FadedBackgroundButton
+            label={"Cancel"}
+            backgroundColor={"var(--blue-accent-faded-100)"}
+            labelColor={"var(--blue-accent-100)"}
+            width="20%"
+            action={() => closeModal()}
+          />
 
-				<div className={styles.top_section}>
-					<div className={styles.heading}>Add new individual</div>
-					<IconCancel
-						className={styles.icon_cancel}
-						onClick={
-							individualState.status !== "LOADING"
-								? () => {
-										resetFormStateModel();
-										closeModal();
-									}
-								: () => ({})
-						}
-					/>
-				</div>
-
-				<div className={styles.registration_form_section}>
-					<IndividualPersonalInformationForm userState={userState} />
-					<SizedBox height="20px" />
-					<IndividualHealthInformationForm />
-				</div>
-
-				<div className={styles.action_buttons}>
-					<FadedBackgroundButton
-						label={"Cancel"}
-						backgroundColor={"var(--blue-accent-faded-100)"}
-						labelColor={"var(--blue-accent-100)"}
-						width="20%"
-						action={() => closeModal()}
-					/>
-
-					<PrimaryTextButton
-						disabled={!isFormValid}
-						isLoading={individualState.status === "LOADING"}
-						width={"20%"}
-						label={"Save"}
-						clickAction={() => registerIndividual()}
-					/>
-				</div>
-			</div>
-		</ModalContainer>
-	);
+          <PrimaryTextButton
+            disabled={!isFormValid}
+            isLoading={individualState.status === "LOADING"}
+            width={"20%"}
+            label={"Save"}
+            clickAction={() => registerIndividual()}
+          />
+        </div>
+      </div>
+    </ModalContainer>
+  );
 }
