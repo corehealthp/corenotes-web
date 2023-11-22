@@ -23,6 +23,7 @@
   width: 80%;
   margin: 10% auto 0;
   padding: 0 5%;
+  overflow-y: scroll;
 }
 .navigation_bar {
     margin-top: 5rem;
