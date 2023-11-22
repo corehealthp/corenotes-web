@@ -14,6 +14,7 @@ import DropDownField from "src/components/FormComponents/DropDownField/dropdownf
 import { DropDownFormData, setDropDownFormData } from "src/components/FormComponents/DropDownField/types";
 import { useStaffState } from "src/features/staff/state";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
 
@@ -190,6 +191,7 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
                             error: false
                         }
                     })
+                    createGlobalFeedback("success", response.message);
 
                     setStaffState(state => {
                         return {
@@ -217,6 +219,10 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
                     }
                 })
                 console.log(error)
+            }).finally(()=>{
+                setTimeout(() => {
+                    closeModal();
+                  },2000);
             })
         }
     }
