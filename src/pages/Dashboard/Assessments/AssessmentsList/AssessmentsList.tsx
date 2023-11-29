@@ -2,22 +2,26 @@ import GoBackButton from "src/components/Buttons/GoBackButton";
 import styles from "./assessmentslist.module.css"
 import { useAssessmentState } from "src/features/assessment/state";
 import { useFetchAssessmentsListSelector } from "src/features/assessment/selector";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AddNewNoBackgroundIconButton from "src/components/Buttons/AddNewNoBackgroundIconButton";
 import { useNavigate } from "react-router-dom";
 import AssessmentCard from "../AssessmentCard/AssessmentCard";
 import DataLoadingError from "src/components/DataLoadingError";
 import GridList from "src/components/GridList/GridList";
+import UploadAssessmentModal from "../UploadAssessmentModal";
 
 export default function AssessmentsList() {
 
     const navigate = useNavigate();
+
+    const [showUploadAssessmentModal, setShowUploadAssessmentModal] = useState(false);
 
     const [assessmentState, setAssessmentState] = useAssessmentState();
     
     const fetchAssessmentsListResponse = useFetchAssessmentsListSelector(assessmentState.assessments.currentPage);
 
     useEffect(()=> {
+        console.log(fetchAssessmentsListResponse)
         setAssessmentState(state => ({
             ...state,
             error: fetchAssessmentsListResponse.error,
@@ -34,10 +38,18 @@ export default function AssessmentsList() {
             <div className={styles.header}>
                 <div className={styles.title}>All Assessments</div>
 
-                <AddNewNoBackgroundIconButton 
-                    label="Create assessment"
-                    action={()=> navigate({pathname: 'create'})} 
-                />
+                <div>
+                    <AddNewNoBackgroundIconButton 
+                        label="Upload assessment"
+                        action={()=> setShowUploadAssessmentModal(true)} 
+                    />
+
+                    <AddNewNoBackgroundIconButton 
+                        label="Create assessment"
+                        action={()=> navigate({pathname: 'create'})} 
+                    />
+                </div>
+
             </div>
 
             <div className={styles.assessments_list}>
@@ -59,6 +71,14 @@ export default function AssessmentsList() {
                     }
                 </GridList>
             </div>
+
+            {
+                showUploadAssessmentModal
+                ?   <UploadAssessmentModal 
+                        closeModal={()=> setShowUploadAssessmentModal(false)}
+                    />
+                :   null
+            }
         </div>
     );
 }

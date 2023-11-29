@@ -28,7 +28,11 @@ export default function AssessmentCard({
             <div className={styles.questions_count}>{questionsCount} questions</div>
 
             <div className={styles.assigned_to}>{ assessmentType }</div>
-            <div className={styles.status}>{status}</div>
+            {
+                status
+                ?   <div className={styles.status}>{status}</div>
+                :   null
+            }
         </Link>
     )
 }
