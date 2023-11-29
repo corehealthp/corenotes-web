@@ -1,0 +1,54 @@
+.add_new_staff {
+    padding-bottom: 5%;
+    position: relative;
+  }
+  .top_section {
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    border-bottom: 1px solid var(--grey-accent-400);
+    height: 80px;
+    color: var(--black-accent-100);
+  }
+  .heading {
+    font-weight: 600;
+    font-size: 22px;
+  }
+  .icon_cancel {
+    margin-left: auto;
+  }
+
+  .body {
+    padding: 5%;
+  }
+  
+  .action_buttons {
+    border-top: 1px solid var(--grey-accent-400);
+    background: white;
+    margin-block: 5%;
+    bottom: 0;
+    padding: 20px 5% 0;
+    gap: 1rem;
+  
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  @media screen and (max-width: 414px) {
+    .add_new_staff {
+      padding-bottom: 0;
+      width: 100%;
+    }
+  
+    .registration_form_section {
+      width: 100%;
+    }
+  
+    .action_buttons {
+      border-top: 1px solid var(--grey-accent-400);
+      background: white;
+      bottom: 0;
+    }
+  }
+  

@@ -149,4 +149,19 @@ export function createAssessmentQuestionCategoryAction(payload:{questionCategory
     })
 }
 
-
+export function uploadAssessmentCSVAction(payload:FormData) {
+    return new Promise<AssessmentListResponseType>((resolve, reject)=> {
+        postFetch(`/assessments/upload-with-csv`, payload)
+        .then((response)=> {
+            resolve({
+                ...response,
+                data: {
+                    list: response.data.assessments,
+                    currentPage: response.data.currentPage,
+                    totalPages: response.data.totalPages
+                }
+            })
+        })
+        .catch((error)=> reject(error))
+    })
+}

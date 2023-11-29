@@ -11,16 +11,16 @@ import JSONToFormData from "src/utils/JSONToFormData";
 import { useParams } from "react-router-dom";
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
 import { DropDownFormData, setDropDownFormData } from "src/components/FormComponents/DropDownField/types";
-import { useStaffValue } from "src/features/staff/state";
 import { uploadIndividualDocumentAction } from "src/features/Individual/action";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
+import { useIndividualState } from "src/features/Individual/state";
 
 export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
 
     const params = useParams()
 
-    const staffState = useStaffValue()
-    const [uploadStaffDocState, setUploadStaffDocState] = useState(staffState);
+    const [individualState, setIndividualState] = useIndividualState()
+    const [uploadStaffDocState, setUploadStaffDocState] = useState(individualState);
 
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -182,24 +182,29 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
             .then((payloadFormData:FormData)=> {
                 uploadIndividualDocumentAction(params.individualId!, payloadFormData)
                 .then((response)=> {
-                    setUploadStaffDocState(state => ({ ...state, status:"IDLE", documents: response.data }))
+                    setUploadStaffDocState(state => ({ ...state, status:"IDLE" }))
+                    setIndividualState(state => ({ ...state, documents: response.data }));
+
                     createGlobalFeedback("success", "Individual document saved successfully")
                 })
                 .catch(()=> createGlobalFeedback("error", "There was an error uploading individual document"))
-                .finally(()=> setUploadStaffDocState(state => ({ ...state, status:"IDLE" })))
+                .finally(()=> {
+                    setUploadStaffDocState(state => ({ ...state, status:"IDLE" }))
+                    closeModal()
+                })
             })
             .catch(()=> createGlobalFeedback("error", "There was an error parsing payload"))
         }
     }
 
     return (
-        <ModalContainer close={()=> staffState.status === 'LOADING' ?null :closeModal()}>
+        <ModalContainer close={()=> individualState.status === 'LOADING' ?null :closeModal()}>
             <div className={styles.upload_doc_container}>
                 <div className={styles.top_section}>
                     <div className={styles.heading}>Upload new document</div>
                     <IconCancelCircle 
                         className={styles.icon_cancel}
-                        onClick={()=> staffState.status === 'LOADING' ?()=>({}) :closeModal() }
+                        onClick={()=> individualState.status === 'LOADING' ?()=>({}) :closeModal() }
                     />
                 </div>
 
@@ -244,7 +249,7 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
                         backgroundColor={"var(--blue-accent-faded-100)"}
                         labelColor={"var(--blue-accent-100)"}
                         width="20%" 
-                        action={()=> staffState.status === 'LOADING' ?null :closeModal()}
+                        action={()=> individualState.status === 'LOADING' ?null :closeModal()}
                     />
 
                     <PrimaryTextButton
