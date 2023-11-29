@@ -8,49 +8,52 @@ import { useFetchIndividualDocumentsSelector } from "src/features/Individual/sel
 import IndividualDocumentsTable from "./IndividualDocumentsTable";
 
 export default function IndividualDocuments() {
+  const params = useParams();
 
-    const params = useParams();
+  const [individualState, setIndividualState] = useIndividualState();
 
-    const [individualState, setIndividualState] = useIndividualState();
+  const individualDocumentsRespose = useFetchIndividualDocumentsSelector(
+    params.individualId!,
+    individualState.documents.currentPage
+  );
 
-    const individualDocumentsRespose = useFetchIndividualDocumentsSelector(params.individualId!, individualState.documents.currentPage)
+  useEffect(() => {
+    setIndividualState((state) => {
+      return {
+        ...state,
+        status: "IDLE",
+        error: individualDocumentsRespose.error,
+        documents: individualDocumentsRespose.data,
+      };
+    });
+  }, [setIndividualState, individualDocumentsRespose]);
 
-    useEffect(()=> {
-        setIndividualState(state => {
-            return {
-                ...state,
-                status:'IDLE',
-                error: individualDocumentsRespose.error,
-                documents: individualDocumentsRespose.data
-            }
-        })
+  const [isUploadDocModalVisible, setIsUploadDocModalVisible] = useState(false);
 
-    }, [setIndividualState, individualDocumentsRespose])
+  return (
+    <div className={styles.staff_documents}>
+      <IndividualProfileHeader
+        actionType="upload-doc"
+        clickAction={() => setIsUploadDocModalVisible(true)}
+      />
 
-    const [isUploadDocModalVisible, setIsUploadDocModalVisible] = useState(false)
+      <IndividualDocumentsTable
+        documents={individualState.documents.list}
+        currentPage={individualState.documents.currentPage}
+        totalPages={individualState.documents.totalPages}
+        errorMessage={
+          individualState.error ? individualState.message : "No documents found"
+        }
+        goToPage={(pageNumber: number) => console.log(pageNumber)}
+        
+      />
 
-    return (
-        <div className={styles.staff_documents}>
-            <IndividualProfileHeader 
-                actionType='upload-doc'
-                clickAction={()=> setIsUploadDocModalVisible(true)}
-            />
-
-            <IndividualDocumentsTable
-                documents={individualState.documents.list}
-                currentPage={individualState.documents.currentPage}
-                totalPages={individualState.documents.totalPages}
-                errorMessage={individualState.error ?individualState.message :"No documents found"} 
-                goToPage={(pageNumber:number)=> console.log(pageNumber)}
-            />
-
-            {
-                isUploadDocModalVisible
-                ?   <UploadDocModal 
-                        closeModal={()=> setIsUploadDocModalVisible(false)} 
-                    />
-                :   null
-            }
-        </div>
-    );
+      {isUploadDocModalVisible ? (
+        <UploadDocModal
+          closeModal={() => setIsUploadDocModalVisible(false)}
+          
+        />
+      ) : null}
+    </div>
+  );
 }

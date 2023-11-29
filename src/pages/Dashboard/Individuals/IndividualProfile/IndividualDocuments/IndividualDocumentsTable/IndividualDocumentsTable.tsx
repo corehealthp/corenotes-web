@@ -35,7 +35,6 @@ export default function IndividualDocumentsTable({
 // }
     useEffect(()=> {
         setIsLoading(true)
-
         sortByDate(documents)
         .then((result)=> {
             const newTransactions = formatTransactionsTable(result);

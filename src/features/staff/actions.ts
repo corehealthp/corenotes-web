@@ -1,4 +1,4 @@
-import { getFetch, patchFetch, postFetch } from "src/lib/fetch"
+import { getFetch, patchFetch, postFetch, putFetch } from "src/lib/fetch"
 import { successResponseType } from "src/lib/types"
 import { IActivity, IStaffDocument, IStaffRole, IStaffRoleDetails, IStaffShift, IStaffUser } from "./types"
 
@@ -340,6 +340,35 @@ export function clockStaffOutAction(payload:IClockStaffOutActionPayload) {
             resolve({
                 ...response,
                 data: { staff: response.data.staff }
+            })
+        })
+        .catch((error)=> reject(error))
+    })
+}
+
+export function deactivateStaffProfileAction(staffId:string) {
+    return new Promise<fetchStaffSuccessResponseType>((resolve, reject)=> {
+        putFetch(`/staffs/profile/deactivate/${staffId}`,'')
+        .then((response:successResponseType)=> {
+            resolve({
+                ...response, 
+                data: { 
+                    staff: response.data.staff
+                }
+            })
+        })
+        .catch((error)=> reject(error))
+    })
+}
+export function activateStaffProfileAction(staffId:string) {
+    return new Promise<fetchStaffSuccessResponseType>((resolve, reject)=> {
+        putFetch(`/staffs/profile/activate/${staffId}`,'')
+        .then((response:successResponseType)=> {
+            resolve({
+                ...response, 
+                data: { 
+                    staff: response.data.staff
+                }
             })
         })
         .catch((error)=> reject(error))
