@@ -28,7 +28,7 @@ export default function UploadAssessmentModal({closeModal}:{closeModal:()=> void
         if (uploadAssessmentCSVState.status !== "LOADING") closeModal();
     }
 
-    function saveFile(file:File, name:string) {
+    function saveFile(file:File) {
         if(file) {
             setDocFileModel(state => {
                 return {
@@ -77,7 +77,7 @@ export default function UploadAssessmentModal({closeModal}:{closeModal:()=> void
                         <DocumentUploader
                             id={"assessment-csv"}
                             fileType={".csv"}
-                            saveDoc={({uploadedFile, fileName})=> saveFile(uploadedFile, fileName)}
+                            saveDoc={({uploadedFile})=> saveFile(uploadedFile)}
                         />
                     </div>
 
