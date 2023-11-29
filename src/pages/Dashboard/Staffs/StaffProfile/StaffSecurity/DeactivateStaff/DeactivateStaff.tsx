@@ -8,11 +8,11 @@ import PasswordInputField from "src/components/FormComponents/InputField/Passwor
 import FadedBackgroundButton from "src/components/Buttons/FadedBackgroundButton";
 import { useParams } from "react-router-dom";
 import {
-  activateStaffPasswordAction,
+  // activateStaffPasswordAction,
   activateStaffProfileAction,
-  deactivateStaffPasswordAction,
+  // deactivateStaffPasswordAction,
   deactivateStaffProfileAction,
-  fetchStaffSuccessResponseType,
+  // fetchStaffSuccessResponseType,
 } from "src/features/staff/actions";
 import { useStaffState } from "src/features/staff/state";
 import FormWrapper from "src/components/FormComponents/FormWrapper";
@@ -31,8 +31,7 @@ export default function DeactivateStaff() {
     setIsStaffActive(staffState?.details?.active)
   }, [isStaffActive])
   
-  console.log("isStaffActive",isStaffActive)
-  console.log("isStaffActive",staffState?.details?.active)
+  
   const [userPassword, setUserPassword] = useState<formFieldType>({
     type: "password",
     label: "Enter password",
