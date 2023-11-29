@@ -59,6 +59,29 @@ export const patchFetch = (url:string, body:any)=> {
     });
 }
 
+export const putFetch = (url: string, body: any) => {
+    return new Promise<successResponseType>((resolve, reject) => {
+        fetch(url, 'PUT', body)
+        .then((response) => resolve(response.data))
+        .catch((error) => {
+          if (typeof error === 'object' && error.response && typeof error.response.data === 'object') {
+            reject({
+              statusCode: error.response.data.statusCode,
+              message: error.response.data.message?.toString(),
+            });
+          } else if (typeof error.response.data === 'string') {
+            reject({
+              message: "Hmm.. this request is not recognized, make sure you are accessing a valid URL",
+            });
+          } else {
+            reject({ message: error.message });
+          }
+        });
+    });
+  };
+  
+
+
 const fetch = (url:string, method:string, data?:bodyType)=> {
     const headers = { authorization:`sid=${localStorage.getItem('sid')}` }
     return axios({

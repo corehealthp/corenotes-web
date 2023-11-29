@@ -579,12 +579,13 @@ export function uploadIndividualDocumentAction(individualId:string, payload:Form
     return new Promise<fetchIndividualDocumentsSuccessResponseType>((resolve, reject)=> {
         postFetch(`/individuals/${individualId}/documents`, payload)
         .then((response:successResponseType)=> {
+            console.log(response)
             resolve({
                 ...response,
                 data: {
                     currentPage:response.data.currentPage,
                     totalPages:response.data.totalPages,
-                    list: response.data.documents
+                    list: response.data.list
                 }
             })
         })

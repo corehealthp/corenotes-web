@@ -28,7 +28,7 @@ export default function CreateAssessment() {
 
     const individualListResponse = useFetchIndividualListSelector(individualState.individuals.currentListPage);
 
-    const assessmentCategories = useFetchAssessmentCategories();   
+    const assessmentCategories = useFetchAssessmentCategories();
 
     const categoryModel:DropDownFormData = {
         name:'question-category',
@@ -265,12 +265,12 @@ export default function CreateAssessment() {
 
     return (
         <div className={styles.create_assessment}>
-
+            
             <GoBackButton path={"/dashboard/individuals/assessments"} />
             
             <div className={styles.heading}>
                 <div className={styles.section_title}>Create assessment</div>
-            
+                
                 <PrimaryTextButton
                     disabled={!isFormValid}
                     isLoading={assessmentState.status === 'LOADING'}
