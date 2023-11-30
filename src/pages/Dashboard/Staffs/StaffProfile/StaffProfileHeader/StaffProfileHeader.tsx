@@ -7,7 +7,6 @@ import capitalize from "src/utils/capitalize";
 import formatDate from "src/utils/formatDate";
 import formatTime from "src/utils/formatTime";
 import AddNewNoBackgroundIconButton from "src/components/Buttons/AddNewNoBackgroundIconButton";
-import { useUserStateValue } from "src/features/user/state";
 import { useStaffValue } from "src/features/staff/state";
 
 export default function StaffProfileHeader({
