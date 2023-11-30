@@ -8,6 +8,7 @@ import formatDate from "src/utils/formatDate";
 import formatTime from "src/utils/formatTime";
 import AddNewNoBackgroundIconButton from "src/components/Buttons/AddNewNoBackgroundIconButton";
 import { useUserStateValue } from "src/features/user/state";
+import { useStaffValue } from "src/features/staff/state";
 
 export default function StaffProfileHeader({
     actionType, 
@@ -20,7 +21,7 @@ export default function StaffProfileHeader({
     editProfileAction?: ()=> void;
     clickAction?: (action?:string)=> void;
 }) {
-	const staffState = useUserStateValue();
+	const staffState = useStaffValue();
 
 	return (
 		<div className={styles.section_identity}>
