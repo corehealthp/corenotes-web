@@ -6,6 +6,7 @@ export interface IndividualStateType extends initStateType {
         list:IndividualListItemType[];
         currentListPage:number;
         totalListPages:number;
+        total:number;
     },
     newIndividual:NewIndividualType;
     profile: IndividualProfileType;

@@ -24,14 +24,13 @@ export default function IndividualsListTable({
 
   const [tableBody, setTableBody] = useState<JSX.Element[][] | object[][]>([]);
   const tableHead = [
-    "",
-    "Name",
-    "Age",
-    "Gender",
-    "Compartment",
-    "Medicaid number",
-    "",
-  ];
+    <div className={styles.user_name_cell_head}>Name</div>,
+    <div className={styles.age_cell_head}>Age</div>,
+    <div className={styles.gender_cell_head}>Gender</div>,
+    <div className={styles.compartment_cell_head}>Compartment</div>,
+    <div className={styles.medicaid_number_cell_head}>Medicaid number</div>,
+    <div className={styles.table_action_cell_head}></div>,
+  ]
 
   useEffect(() => {
     setIsLoading(true);
@@ -53,30 +52,25 @@ export default function IndividualsListTable({
                 {
                     rowKey: individual.id,
                     actionEvent: 'action_button_click',
-                    actionButtonPosition: 7
+                    actionButtonPosition: 6
                 },
-                <div className={styles.user_image}>
-                    <UserImage 
-                        imageUrl={individual.profileImage} 
-                        fullname={individual?.firstname}
-                        size="50px"
-                    />
+                <div className={styles.user_name_cell}>
+                  <UserImage 
+                      imageUrl={individual.profileImage} 
+                      fullname={individual?.firstname} 
+                      size="50px"
+                  />
+                  <div className={styles.fullname}>{individual.firstname + ", " + individual.lastname}</div>
                 </div>,
-                <div className={styles.fullname}>
-                    <div className={styles.first_name}>{individual.firstname + ","}</div> 
-                    <div className={styles.last_name}>{individual.lastname}</div> 
-                </div>,
-                <div className={styles.age}>
+                <div className={styles.age_cell}>
                     <span>{individual.age}</span>
                     <span>yrs</span>
                 </div>,
-                <div className={styles.gender}>{individual.gender}</div>,
-                <div className={styles.compartment}>{individual.compartment}</div>,
-                <div className={styles.compartment}>{individual.medicaidNumber}</div>,
-                <div className={styles.button}>
-                    <IndividualViewProfileButton 
-                        individualId={individual.individualId} 
-                    />
+                <div className={styles.gender_cell}>{individual.gender}</div>,
+                <div className={styles.compartment_cell}>{individual.compartment}</div>,
+                <div className={styles.medicaid_number_cell}>{individual.medicaidNumber}</div>,
+                <div className={styles.table_action_cell}>
+                    <IndividualViewProfileButton individualId={individual.individualId} />
                 </div>
             ]
         });

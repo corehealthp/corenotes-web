@@ -1,44 +1,49 @@
+:root {
+  --table-body-row-height: 80px;
+}
 table {
   width: 100%;
-  background: white;
-  margin-top: 1%;
-  box-shadow: var(--shadow-table-300);
-  border-radius: 16px;
+  box-shadow: 0;
+  border: 0;
   border-collapse: collapse;
+  overflow: hidden;
+  color: var(--grey-accent-a-800);
 }
 
-/* TABLE HEAD */
 thead {
-  height: 80px;
+  height: var(--table-body-row-height);
 }
 thead th {
-  text-align: center;
-  color: var(--blue-accent-200);
-  font-weight: 600;
+  text-align: start;
+  color: var(--grey-accent-900);
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
 }
 
-/* TABLE BODY */
-tbody tr {
-  height: 80px;
+tr {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  height: var(--table-body-row-height);
+  display: flex;
 }
 tbody td {
-  border-top: 1px solid var(--table-row-line-color);
-}
-th,
-td {
-  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  padding-left: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .table_pagination {
   --page-numbers-width: calc(100% - calc(20px * 2));
   margin: 5% 5% 5% auto;
   height: 30px;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: 50px;
   display: flex;
   gap: 0.2rem;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 .table_pagination::-moz-selection {
   background: none;
@@ -52,7 +57,7 @@ td {
   height: 100%;
   padding: 0 5px;
   border-radius: 5px;
-  color: var(--grey-accent-500);
+  color: var(--grey-accent-700);
   cursor: pointer;
 }
 .page_button.inactive {
@@ -88,19 +93,9 @@ td {
   text-align: center;
   margin-top: 50px;
 }
-
-.table_wrapper {
-  /* border: 1px solid blue; */
-}
-
-.table_head {
-  /* border: 1px solid greenyellow; */
-  /* text-align: center; */
-  /* display: none; */
-}
-/* .mobile_pagination {
+.mobile_pagination {
   display: none;
-} */
+}
 
 @media screen and (max-width: 414px) {
   table {

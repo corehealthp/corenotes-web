@@ -25,7 +25,13 @@ export default function StaffListTable({
   const [isLoading, setIsLoading] = useState(false);
 
   const [tableBody, setTableBody] = useState<JSX.Element[][] | object[][]>([]);
-  const tableHead = ["", "Name", "Role", "Cell phone", "Last seen", ""];
+  const tableHead = [
+    <div className={styles.user_name_cell_head}>Name</div>,
+    <div className={styles.staff_role_cell_head}>Role</div>,
+    <div className={styles.cellphone_cell_head}>Cell phone</div>,
+    <div className={styles.lastseen_cell_head}>Last seen</div>,
+    <div className={styles.table_action_cell_head}></div>,
+  ];
 
   useEffect(() => {
     setIsLoading(true);
@@ -49,18 +55,18 @@ export default function StaffListTable({
                     actionEvent: 'action_button_click',
                     actionButtonPosition: 6
                 },
-                <div className={styles.user_image}>
-                    <UserImage 
-                        imageUrl={staff.profileImage} 
-                        fullname={staff?.fullname} 
-                        size="50px"
-                    />
+                <div className={styles.user_name_cell}>
+                  <UserImage 
+                      imageUrl={staff.profileImage} 
+                      fullname={staff?.fullname} 
+                      size="50px"
+                  />
+                  <div className={styles.fullname}>{staff.fullname}</div>
                 </div>,
-                <div className={styles.fullname}>{staff.fullname}</div>,
-                <div>{staff.role}</div>,
-                <div>{staff.phoneNumber}</div>,
-                <div className={styles.compartment}>{formatDate(staff.lastSeen)} - {formatTime(staff.lastSeen)}</div>,
-                <div className={styles.button}>
+                <div className={styles.staff_role_cell}>{staff.role}</div>,
+                <div className={styles.cellphone_cell}>{staff.phoneNumber}</div>,
+                <div className={styles.lastseen_cell}>{formatDate(staff.lastSeen)} - {formatTime(staff.lastSeen)}</div>,
+                <div className={styles.table_action_cell}>
                     <StaffViewProfileButton id={ staff.staffId.toString() } />
                 </div>
             ]
