@@ -47,7 +47,13 @@ export default function IndividualsList() {
 				individuals={individualState.individuals.list}
 				currentPage={individualState.individuals.currentListPage}
 				totalPages={individualState.individuals.totalListPages}
-				goToPage={(pageNumber: number) => console.log(pageNumber)}
+				goToPage={(pageNumber) => setIndividualState(state => ({
+					...state, 
+					individuals: {
+						...state.individuals,
+						currentListPage: pageNumber
+					}
+				}))}
 				errorMessage={individualState.message}
 			/>
 

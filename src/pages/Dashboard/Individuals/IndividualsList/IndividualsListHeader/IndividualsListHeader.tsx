@@ -12,7 +12,7 @@ export default function IndividualsListHeader({
     return (
         <div className={styles.staff_list_header}>
             <div className={styles.heading}>
-                { individualState.individuals.list.length } individual{individualState.individuals.list.length > 1 ?"s" :""} total
+                { individualState.individuals.total } individual{individualState.individuals.list.length > 1 ?"s" :""} total
             </div>
 
             <div className={styles.actions}>

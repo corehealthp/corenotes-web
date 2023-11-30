@@ -7,7 +7,8 @@ export interface IndividualListResponseType extends Omit<successResponseType, 'd
     data: { 
         list:IndividualListItemType[],
         currentListPage:number
-        totalListPages:number
+        totalListPages:number;
+        total:number;
     }
 }
 
@@ -26,7 +27,8 @@ export function registerIndividualAction(payload:any) {
                 data: {
                     list: response.data.individuals,
                     currentListPage: response.data.currentListPage,
-                    totalListPages: response.data.totalListPages
+                    totalListPages: response.data.totalListPages,
+                    total: response.data.total
                 }
             })
         })
@@ -43,7 +45,8 @@ export function fetchIndividualListAction(pageNumber:number) {
                 data: { 
                     currentListPage: response.data.currentListPage,
                     totalListPages: response.data.totalListPages,
-                    list: response.data.individuals
+                    list: response.data.individuals,
+                    total: response.data.total
                 }
             })
         })

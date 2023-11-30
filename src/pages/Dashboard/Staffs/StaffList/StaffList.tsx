@@ -23,7 +23,8 @@ export default function StaffList() {
           message: staffsListResponse.message,
           list: staffsListResponse.staffs.staffs,
           currentPage: staffsListResponse.staffs.currentPage,
-          currentActivitiesPage: staffsListResponse.staffs.totalPages,
+          totalPages: staffsListResponse.staffs.totalPages,
+          totalStaffs: staffsListResponse.staffs.total
         };
       });
     } else {
@@ -46,9 +47,9 @@ export default function StaffList() {
 
       <StaffListTable
         staffs={formatStaffList(staffState.list)}
-        currentPage={0}
-        totalPages={0}
-        goToPage={(pageNumber: number) => console.log(pageNumber)}
+        currentPage={staffState.currentPage}
+        totalPages={staffState.totalPages}
+        goToPage={(pageNumber) => setStaffState(state => ({...state, currentPage: pageNumber}))}
         errorMessage={staffState.message}
       />
 

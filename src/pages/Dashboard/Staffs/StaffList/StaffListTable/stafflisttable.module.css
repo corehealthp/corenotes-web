@@ -1,49 +1,47 @@
-.user_image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 10px;
-}
-.button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.staff_list_table_options {
+  border-bottom: 1px solid var(--grey-accent-500);
+  padding: 10px 0;
+  margin: 20px 0;
 }
 
-tbody td {
-  color: var(--black-accent-200);
-  font-weight: 400;
-  padding: 0;
-  /* height: 50px;
-  width: 50px; */
-  text-align: center;
+.user_name_cell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
-
 .fullname {
-  color: var(--black-accent-100);
+  text-transform: capitalize;
+  font-size: 0.9rem;
   font-weight: 600;
 }
-.compartment {
-  text-transform: capitalize;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  text-align: center;
-  margin: 0 auto;
-  /* padding: 0 10px; */
+.user_name_cell,
+.user_name_cell_head {
+  width: 300px;
 }
 
-.phoneNumber {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  text-align: center;
-  margin: 0 auto;
+.staff_role_cell {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.staff_role_cell,
+.staff_role_cell_head {
+  width: 150px;
 }
 
-.role {
-  width: 100%;
-  text-align: center;
+.cellphone_cell, 
+.cellphone_cell_head {
+  width: 120px;
+}
+
+.lastseen_cell,
+.lastseen_cell_head {
+  width: 160px;
+}
+
+
+.table_action_cell,
+.table_action_cell_head {
+  width: 80px;
 }
 
 @media screen and (max-width: 414px) {

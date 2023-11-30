@@ -111,7 +111,8 @@ export const staffInitState:staffStateType = {
 		list: [],
 		currentPage: 1,
 		totalPages: 1
-	}
+	},
+	totalStaffs: 0
 };
 
 export const staffAtom = atom({

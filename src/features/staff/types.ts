@@ -230,6 +230,7 @@ export interface INewStaffWorkInformation {
 export interface staffStateType extends initStateType {
     currentPage:number,
     totalPages:number,
+    totalStaffs:number;
     list:staffListType[],
     details: IStaffDetails,
     currentActivitiesPage?: number,

@@ -17,21 +17,25 @@ export interface fetchStaffListSuccessResponseType extends Omit<successResponseT
     data: {
         currentPage:number,
         totalPages:number,
-        staffs: staffListType[]
+        staffs: staffListType[],
+        total:number;
     }
 }
 
 export function fetchStaffListAction(payload:{pageNumber:number}) {
     return new Promise<fetchStaffListSuccessResponseType>((resolve, reject)=> {
         getFetch(`/staffs/${payload.pageNumber}`)
-        .then((response:successResponseType)=> resolve({
-            ...response, 
-            data: { 
-                currentPage: response.data.currentPage,
-                totalPages: response.data.currentPage,
-                staffs: response.data.staffs
-            }
-        }))
+        .then((response:successResponseType)=> {
+            resolve({
+                ...response, 
+                data: { 
+                    currentPage: response.data.currentPage,
+                    totalPages: response.data.totalPages,
+                    staffs: response.data.staffs,
+                    total: response.data.total
+                }
+            })
+        })
         .catch((error)=> {
             reject(error)
         })

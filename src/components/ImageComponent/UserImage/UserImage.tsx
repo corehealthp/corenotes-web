@@ -8,7 +8,7 @@ export default function UserImage({
     return (
         <div className={styles.container}>
             {
-                imageUrl
+                !imageUrl
                 ?   <ImageComponent
                         src={imageUrl}
                         width={size}
