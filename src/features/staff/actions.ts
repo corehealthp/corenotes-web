@@ -71,6 +71,7 @@ export function registerStaffAction(payload:any) {
             data: { 
                 currentPage: response.data.currentPage,
                 totalPages: response.data.currentPage,
+                total: response.data.currentPage,
                 staffs: response.data.staffs
             }
         }))
