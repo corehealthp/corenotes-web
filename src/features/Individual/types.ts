@@ -132,7 +132,8 @@ export interface NewIndividualType {
     religion: string,
     ssn: string,
     weight: string,
-    medicaidNumber: number,
+    insurance: string,
+    insurance_no: string,
     codeAlert: Array<string>,
     profileImage?:Blob|MediaSource,
     contact: {

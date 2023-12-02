@@ -511,8 +511,6 @@ export default function CreateMedicationModal({
   }
 
   function submitMedicationModel() {
-   
-
     if (validateForm()) {
       const payload: INewMedication = {
         name: medNameModel.value!,
@@ -539,23 +537,16 @@ export default function CreateMedicationModal({
           createGlobalFeedback("success", response.message);
         })
         .catch((error) => {
-          setMedicationState((state) => ({
-            ...state,
-            status: "FAILED",
-            message: error.message,
-            error: true,
-          }));
+          createGlobalFeedback("error", error.message)
         })
         .finally(() => {
           setMedicationState((state) => ({
             ...state,
-            status: "LOADING",
+            status: "IDLE",
             error: false,
             message: "",
           }));
-          setTimeout(() => {
-            closeModal();
-          }, 800);
+          
         });
 
       resetMedicationState();
@@ -570,6 +561,12 @@ export default function CreateMedicationModal({
       error: false,
     }));
   }
+
+  const includeStrings = ["ADMINISTRATOR", "DSP", "LPN", "RN"];
+  const filteredArray = medProvidersModel.options.filter((s) =>
+    includeStrings.includes(s)
+  );
+
   return (
     <ModalContainer>
       <div className={styles.create_medication_modal}>
@@ -640,7 +637,7 @@ export default function CreateMedicationModal({
             <MultiSelectDropDownField
               label={""}
               placeholder={medProvidersModel.placeholder}
-              options={medProvidersModel.options}
+              options={filteredArray}
               error={medProvidersModel.error}
               onSelect={(selection: string[]) =>
                 selectMultipleOptions(
