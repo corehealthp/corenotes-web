@@ -17,7 +17,7 @@ export default function MedicationServiceIndividualsModal({
 }) {
     
     return (
-        <ModalContainer close={closeModal}>
+        <ModalContainer>
             <div className={styles.medication_services_individuals_modal}>
                 <div className={styles.header}>
                     <div className={styles.titiel}>Individuals taking this medication </div>

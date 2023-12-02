@@ -70,7 +70,7 @@ export default function CreateNewSubCompartmentModal({ closeModal }:{ closeModal
     }
     
     return (
-        <ModalContainer close={()=> closeModal()}>
+        <ModalContainer>
             <div className={styles.create_new_subcompartment_modal}>
                 <div className={styles.header}>
                     <div className={styles.title}>Create new subcompartment</div>

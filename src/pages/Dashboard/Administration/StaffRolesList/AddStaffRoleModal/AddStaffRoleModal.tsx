@@ -89,7 +89,7 @@ export default function AddStaffRoleModal({
   }
 
   return (
-    <ModalContainer close={() => closeModal()}>
+    <ModalContainer>
       <div className={styles.add_staff_role_modal}>
         <div className={styles.header}>
           <div className={styles.titiel}>Add assessment category</div>

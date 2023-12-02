@@ -231,7 +231,7 @@ export default function AddNewChoreModal({ closeModal }:{ closeModal:()=> void }
     }
     
     return (
-        <ModalContainer close={closeModal}>
+        <ModalContainer>
             <div className={styles.add_new_goal_modal}>
                 <div className={styles.header}>
                     <div className={styles.title}>Set New Chore</div>

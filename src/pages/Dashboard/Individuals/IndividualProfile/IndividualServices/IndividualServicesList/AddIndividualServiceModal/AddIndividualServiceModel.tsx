@@ -345,7 +345,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
     }
 
     return (
-        <ModalContainer close={()=> closeModal()}>
+        <ModalContainer>
             <div className={styles.add_individual_service_modal}>
                 <FormStateModal 
                     status={individualState.status} 

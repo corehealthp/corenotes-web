@@ -117,7 +117,7 @@ export default function AddCompartmentModal({ close }: { close: () => void }) {
   }
 
   return (
-    <ModalContainer close={() => close()}>
+    <ModalContainer>
       <div className={styles.container}>
         <FormStateModal
           status={compartmentState.status}

@@ -63,7 +63,7 @@ export default function UploadAssessmentModal({closeModal}:{closeModal:()=> void
         })
     }
     
-    return  <ModalContainer close={_closeModal}>
+    return  <ModalContainer>
                 <div>
                     <div className={styles.top_section}>
                         <div className={styles.heading}>Upload Assessment File</div>

@@ -162,7 +162,7 @@ export default function AddNewStaffModal({
   }
 
   return (
-    <ModalContainer close={() => _closeModal()}>
+    <ModalContainer>
       <div>
         <FormStateModal
           status={staffState.status}

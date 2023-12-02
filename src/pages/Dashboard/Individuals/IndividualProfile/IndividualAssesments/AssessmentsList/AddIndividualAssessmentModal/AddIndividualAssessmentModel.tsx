@@ -123,7 +123,7 @@ export default function AddIndividualAssessmentModal({ closeModal }:{ closeModal
     }
 
     return (
-        <ModalContainer close={()=> closeModal()}>
+        <ModalContainer>
             <div className={styles.add_individual_service_modal}>
 
                 <div className={styles.header}>

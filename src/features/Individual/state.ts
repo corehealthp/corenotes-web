@@ -9,7 +9,7 @@ export const individualInitState: IndividualStateType = {
 		list: [],
 		currentListPage: 1,
 		totalListPages: 1,
-		total:1,
+		total: 0
 	},
 	newIndividual: {
 		firstname: "",
