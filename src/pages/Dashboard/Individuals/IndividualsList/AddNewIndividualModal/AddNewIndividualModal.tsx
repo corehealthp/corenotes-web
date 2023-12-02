@@ -44,7 +44,8 @@ export default function AddNewIndividualModal({
       !individualState.newIndividual.weight ||
       !individualState.newIndividual.compartment ||
       // !individualState.newIndividual.subCompartmentId ||
-      !individualState.newIndividual.medicaidNumber ||
+      !individualState.newIndividual.insurance ||
+      !individualState.newIndividual.insurance_no ||
       !individualState.newIndividual.maritalStatus ||
       !individualState.newIndividual.codeAlert.length ||
       !individualState.newIndividual.requestedServices.length ||
