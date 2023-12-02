@@ -28,7 +28,7 @@ export function registerIndividualAction(payload:any) {
                     list: response.data.individuals,
                     currentListPage: response.data.currentListPage,
                     totalListPages: response.data.totalListPages,
-                    total: response.data.total
+                    total: response.data.total 
                 }
             })
         })

@@ -18,7 +18,7 @@ export interface fetchStaffListSuccessResponseType extends Omit<successResponseT
         currentPage:number,
         totalPages:number,
         staffs: staffListType[],
-        total:number;
+        total:number
     }
 }
 
