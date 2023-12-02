@@ -374,7 +374,7 @@ export default function SelectMedicationModal({ individualId, individualMedicati
     }
 
     return (
-        <ModalContainer close={closeModal} >
+        <ModalContainer>
             <div className={styles.select_medication_modal}>
 
                 <FormStateModal 

@@ -287,7 +287,7 @@ export default function IndividualMedicationReviewModal({
     }
 
     return (
-        <ModalContainer close={closeModal}>
+        <ModalContainer>
                 <div className={styles.individual_medication_review}>
 
                     <FormStateModal 

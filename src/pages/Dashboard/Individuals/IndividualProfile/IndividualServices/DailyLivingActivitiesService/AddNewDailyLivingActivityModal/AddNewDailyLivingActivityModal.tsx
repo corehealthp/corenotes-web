@@ -237,7 +237,7 @@ export default function AddNewActivityModal({ closeModal }:{ closeModal:()=> voi
     }
     
     return (
-        <ModalContainer close={closeModal}>
+        <ModalContainer>
             <div className={styles.add_new_activity_modal}>
                 <div className={styles.header}>
                     <div className={styles.heading}>Set New Activity</div>

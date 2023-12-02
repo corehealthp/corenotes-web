@@ -254,7 +254,7 @@ export default function AddNewBehaviorModal({ closeModal }:{ closeModal:()=> voi
     }
     
     return (
-        <ModalContainer close={closeModal}>
+        <ModalContainer>
             <div className={styles.add_new_goal_modal}>
                 <div className={styles.header}>
                     <div className={styles.title}>Set New Behavior</div>

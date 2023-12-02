@@ -53,7 +53,7 @@ export default function AddPRNMedicationModal({closeModal}:{closeModal:()=> void
 
     return (
         !showSelectMedicationModal
-        ?   <ModalContainer close={()=> closeModal()}>
+        ?   <ModalContainer>
                 <div className={styles.add_prn_med_modal}>
                     <div className={styles.header}>
                         <div className={styles.titiel}>Add PRN medication </div>

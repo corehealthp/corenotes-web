@@ -571,7 +571,7 @@ export default function CreateMedicationModal({
     }));
   }
   return (
-    <ModalContainer close={closeModal}>
+    <ModalContainer>
       <div className={styles.create_medication_modal}>
         <FormStateModal
           status={medicationState.status}

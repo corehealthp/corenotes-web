@@ -96,7 +96,7 @@ export default function AddMedicationToServiceModal({
     
     
     return (
-        <ModalContainer close={()=> closeModal()}>
+        <ModalContainer>
             <div className={styles.add_medication_to_service}>
 
                 <FormStateModal 

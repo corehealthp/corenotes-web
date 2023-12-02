@@ -100,7 +100,7 @@ export default function AddServiceToCompartmentModal({ closeModal }:{ closeModal
     }
 
     return (
-        <ModalContainer close={()=> closeModal()}>
+        <ModalContainer>
             <div className={styles.add_service_to_compartment_model}>
 
                 <div className={styles.header}>
