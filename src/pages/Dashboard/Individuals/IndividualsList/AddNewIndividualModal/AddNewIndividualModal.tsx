@@ -107,16 +107,7 @@ export default function AddNewIndividualModal({
   const userState = individualState.newIndividual!;
 
   return (
-    <ModalContainer
-      close={
-        individualState.status !== "LOADING"
-          ? () => {
-              resetFormStateModel();
-              closeModal();
-            }
-          : () => ({})
-      }
-    >
+    <ModalContainer>
       <div className={styles.add_new_staff}>
         <div className={styles.top_section}>
           <div className={styles.heading}>Add new individual</div>

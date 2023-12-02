@@ -88,7 +88,7 @@ export default function AddAssessmentCategoryModal({closeModal}:{closeModal:()=>
     }
 
     return(
-        <ModalContainer close={()=> assessmentState.status === 'LOADING' ?()=>({}) :closeModal() }>
+        <ModalContainer>
             <div className={styles.add_question_category_modal}>
                 <div className={styles.header}>
                     <div className={styles.titiel}>Add assessment category</div>

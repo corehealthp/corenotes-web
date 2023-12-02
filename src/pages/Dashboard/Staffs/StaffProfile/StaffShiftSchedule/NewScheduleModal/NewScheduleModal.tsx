@@ -102,7 +102,7 @@ export default function NewScheduleModal({close}:{close:()=> void}) {
     }
 
     return (
-        <ModalContainer close={close}>
+        <ModalContainer>
             <div className={styles.new_schedule_modal}>
             
             <div className={styles.header}>

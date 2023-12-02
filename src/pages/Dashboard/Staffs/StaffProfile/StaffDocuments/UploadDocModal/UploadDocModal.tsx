@@ -228,7 +228,7 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
     }
 
     return (
-        <ModalContainer close={()=> staffState.status === 'LOADING' ?null :closeModal()}>
+        <ModalContainer>
             <div className={styles.upload_doc_container}>
                 <FormStateModal 
                     status={staffState.status}

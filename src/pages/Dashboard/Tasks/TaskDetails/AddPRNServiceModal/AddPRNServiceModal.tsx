@@ -193,7 +193,7 @@ export default function AddPRNServiceModal({closeModal}:{closeModal:()=> void}) 
     }
 
     return (
-        <ModalContainer close={()=> closeModal()}>
+        <ModalContainer>
             <div className={styles.add_prn_med_modal}>
                 <FormStateModal 
                     status={individualState.status}

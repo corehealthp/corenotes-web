@@ -94,7 +94,7 @@ export default function EditStaffProfileModal({ closeModal }:{ closeModal: () =>
   }
 
   return (
-    <ModalContainer close={() => closeModal()}>
+    <ModalContainer>
       <div>
         <div>
           {assessmentState.error ? (

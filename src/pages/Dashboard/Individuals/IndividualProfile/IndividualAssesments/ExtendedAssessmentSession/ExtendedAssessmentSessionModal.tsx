@@ -172,7 +172,7 @@ export default function ExtendedAssessmentSessionModal({
 	}
 
 	return (
-		<ModalContainer close={close}>
+		<ModalContainer>
 			<div className={styles.assessment_session_modal}>
 				<div className={styles.header}>
 					<div className={styles.heading}>

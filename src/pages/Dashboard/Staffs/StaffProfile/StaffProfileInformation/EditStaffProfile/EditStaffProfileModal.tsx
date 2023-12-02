@@ -110,7 +110,7 @@ export default function EditStaffProfileModal({ staffState, closeModal }:{
 	}
 
 	return (
-		<ModalContainer close={() => closeModal()}>
+		<ModalContainer>
 			<div className={styles.edit_staff_profile}>
 				<FormStateModal
 					status={staffState.status}

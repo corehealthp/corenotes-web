@@ -198,7 +198,7 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
     }
 
     return (
-        <ModalContainer close={()=> individualState.status === 'LOADING' ?null :closeModal()}>
+        <ModalContainer>
             <div className={styles.upload_doc_container}>
                 <div className={styles.top_section}>
                     <div className={styles.heading}>Upload new document</div>
