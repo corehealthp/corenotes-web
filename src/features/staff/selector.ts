@@ -33,7 +33,8 @@ const fetchStaffsListSelector = selectorFamily({
                 staffs: {
                     staffs: staffInitState.list,
                     currentPage: staffInitState.currentPage,
-                    totalPages: staffInitState.totalPages
+                    totalPages: staffInitState.totalPages,
+                    total: staffInitState.totalPages
                 }
 
             } satisfies IFetchStaffList
