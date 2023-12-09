@@ -18,21 +18,16 @@ export default function IndividualServicesList() {
     const individualServicesResponse = useFetchIndividualServicesList(individualId!)
 
     useEffect(()=> {
-        setIndividualState(state => ({
-            ...state,
-            message: individualServicesResponse.message,
-            error: individualServicesResponse.error,
-            services: individualServicesResponse.individualServices
-        }))
-
-        return ()=> {
+        if(!individualState.services.length) {
             setIndividualState(state => ({
                 ...state,
-                services: []
+                message: individualServicesResponse.message,
+                error: individualServicesResponse.error,
+                services: [...individualServicesResponse.individualServices]
             }))
         }
 
-    }, [individualServicesResponse, setIndividualState])
+    }, [individualServicesResponse, individualState.services.length, setIndividualState])
 
     const [showAddServiceModal, setShowAddServiceModal] = useState(false);
 
@@ -40,7 +35,7 @@ export default function IndividualServicesList() {
         <div className={styles.individual_services_list}>
             <div className={styles.options}>
                 <AddNewNoBackgroundIconButton 
-                    label={"Add Service"}
+                    label={"Assign Service"}
                     action={()=> setShowAddServiceModal(true)}
                 />
             </div>

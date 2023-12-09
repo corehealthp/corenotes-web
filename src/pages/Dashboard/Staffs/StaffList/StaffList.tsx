@@ -8,6 +8,7 @@ import AddNewStaffModal from "./AddNewStaffModal";
 import formatStaffList from "src/features/staff/utils/formatStaffsList";
 
 export default function StaffList() {
+
   const [staffState, setStaffState] = useStaffState();
   const staffsListResponse = useFetchStaffListSelector(staffState.currentPage);
 
@@ -15,29 +16,31 @@ export default function StaffList() {
 
   useEffect(() => {
     if (!staffsListResponse.error) {
-      setStaffState((state) => {
-        return {
-          ...state,
-          status: "SUCCESS",
-          error: false,
-          message: staffsListResponse.message,
-          list: staffsListResponse.staffs.staffs,
-          currentPage: staffsListResponse.staffs.currentPage,
-          totalPages: staffsListResponse.staffs.totalPages,
-          totalStaffs: staffsListResponse.staffs.total
-        };
-      });
+      if(!staffState.list.length) {
+        setStaffState((state) => {
+          return {
+            ...state,
+            status: "SUCCESS",
+            error: false,
+            message: staffsListResponse.message,
+            list: staffsListResponse.staffs.staffs,
+            currentPage: staffsListResponse.staffs.currentPage,
+            totalPages: staffsListResponse.staffs.totalPages,
+            totalStaffs: staffsListResponse.staffs.total
+          };
+        });
+      }
     } else {
       setStaffState((state) => {
         return {
           ...state,
           status: "FAILED",
           error: true,
-          message: staffsListResponse.message,
+          message: staffsListResponse.message ?? "There was an error fetching staff list, please contact support",
         };
       });
     }
-  }, [staffsListResponse, setStaffState]);
+  }, [staffsListResponse, setStaffState, staffState.list.length]);
 
   return (
     <div className={styles.staff_list}>

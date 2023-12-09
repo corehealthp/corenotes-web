@@ -17,14 +17,16 @@ export default function IndividualsList() {
 		useState(false);
 
 	useEffect(() => {
-		setIndividualState((state) => {
-			return {
-				...state,
-				error: individualListResponse.error,
-				message: individualListResponse.message,
-				individuals: individualListResponse.individuals,
-			};
-		});
+		if(!individualState.individuals.list.length) {
+			setIndividualState((state) => {
+				return {
+					...state,
+					error: individualListResponse.error,
+					message: individualListResponse.message,
+					individuals: individualListResponse.individuals,
+				};
+			});
+		}
 
 		return () => {
 			setIndividualState((state) => {
@@ -35,7 +37,7 @@ export default function IndividualsList() {
 				};
 			});
 		};
-	}, [individualListResponse, setIndividualState]);
+	}, [individualListResponse, individualState.individuals.list.length, setIndividualState]);
 
 	return (
 		<div className={styles.staff_list}>

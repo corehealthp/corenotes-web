@@ -23,13 +23,15 @@ export default function AssessmentsList() {
 
 	useEffect(() => {
 		if (!assessmentsResponse.error) {
-			setIndividualState((state) => ({
-				...state,
-				assessments: {
-					...state.assessments,
-					...assessmentsResponse.individualAssessments,
-				},
-			}));
+			if(!individualState.assessments.list.length) {
+				setIndividualState((state) => ({
+					...state,
+					assessments: {
+						...state.assessments,
+						...assessmentsResponse.individualAssessments,
+					},
+				}));
+			}
 		}
 
 		return () => {
@@ -41,7 +43,7 @@ export default function AssessmentsList() {
 				};
 			});
 		};
-	}, [assessmentsResponse, setIndividualState]);
+	}, [assessmentsResponse, individualState.assessments.list.length, setIndividualState]);
 
 	const [isAssessmentModalVisible, setIsAssessmentModalVisible] = useState(false);
 	const [assessmentSessionId, setAssessmentSessionId] = useState("");

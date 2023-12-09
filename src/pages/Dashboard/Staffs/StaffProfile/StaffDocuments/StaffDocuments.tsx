@@ -16,16 +16,18 @@ export default function StaffDocuments() {
     const staffDocumentsRespose = useFetchStaffDocumentsSelector(params.staffId!, staffState.documents.currentPage)
 
     useEffect(()=> {
-        setStaffState(state => {
-            return {
-                ...state,
-                status:'IDLE',
-                error: staffDocumentsRespose.error,
-                documents: staffDocumentsRespose.data
-            }
-        })
+        if(!staffState.documents.list.length) {
+            setStaffState(state => {
+                return {
+                    ...state,
+                    status:'IDLE',
+                    error: staffDocumentsRespose.error,
+                    documents: staffDocumentsRespose.data
+                }
+            })
+        }
 
-    }, [setStaffState, staffDocumentsRespose.data, staffDocumentsRespose.error])
+    }, [setStaffState, staffDocumentsRespose.data, staffDocumentsRespose.error, staffState.documents.list.length])
 
     const [isUploadDocModalVisible, setIsUploadDocModalVisible] = useState(false)
 

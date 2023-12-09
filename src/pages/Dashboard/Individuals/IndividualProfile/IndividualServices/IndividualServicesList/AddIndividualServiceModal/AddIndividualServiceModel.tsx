@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { DropDownFormData, setDropDownFormData } from "src/components/FormComponents/DropDownField/types";
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
 import { compartmentInitState, useCompartmentState } from "src/features/compartment/state";
-import { getCompartmentDetails } from "src/features/compartment/action";
+import { getCompartmentDetails, getCompartmentServices } from "src/features/compartment/action";
 import { IAddServiceToIndividualPayload, addServiceToIndividualAction } from "src/features/Individual/action";
 import { useParams } from "react-router-dom";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
@@ -20,6 +20,7 @@ import RowContainer from "src/components/Layout/RowContainer";
 import formatTime from "src/utils/formatTime";
 import SizedBox from "src/components/SizedBox";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
+import ComponentLoader from "src/components/Loaders/ComponentLoader";
 
 export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()=> void }) {
 
@@ -188,11 +189,15 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
         totalPages: 1,
     })
 
+    const [isServicesLoading, setIsServicesLoading] = useState(false);
+
     useEffect(()=> {
         if(serviceTypeModel.value?.value?.toLowerCase() === 'provided-service') {
+            setIsServicesLoading(true)
+            
             getAllProvidedServiceAction(servicesPages.currentPage)
             .then(({data})=> {
-                console.log(data)
+
                 setServicesPages({
                     currentPage: data.currentPage,
                     totalPages: data.totalPages
@@ -222,6 +227,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                     message: "There was an error fetching provided services list"
                 }))
             })
+            .finally(()=> setIsServicesLoading(false))
         }
 
         if(serviceTypeModel.value?.value?.toLowerCase() === 'requested-service') {
@@ -243,14 +249,23 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                     }))
                 })
                 .finally(()=> {
-                    setRequestedServiceModel(state => ({
-                        ...state,
-                        options: compartmentState.compartment.services.map(service => ({
-                            id: service.id,
-                            label: service.title,
-                            value: service.refName
+                    setIsServicesLoading(true);
+
+                    getCompartmentServices(individualState.newIndividual.compartmentId)
+                    .then((compartmentServices)=> {
+                        setRequestedServiceModel(state => ({
+                            ...state,
+                            options: compartmentServices.data.compartmentServices.map(service => ({
+                                id: service.id,
+                                label: service.title,
+                                value: service.refName
+                            }))
                         }))
-                    }))
+                    })
+                    .catch(()=> {
+                        setRequestedServiceModel(state => ({ ...state, error:"There was an error fetching compartment services" }))
+                    })
+                    .finally(()=> setIsServicesLoading(false))
                 })
             }
         }
@@ -320,8 +335,9 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
             .then((response)=> {
                 setIndividualState(state => ({
                     ...state,
-                    requestedServices: response.data.individualServices
+                    services: response.data.individualServices
                 }))
+
                 createGlobalFeedback("success", response.message);
             })
             .catch((error)=> createGlobalFeedback("error", error.message))
@@ -375,16 +391,21 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                         ?   <IndividualCompartmentForm removeLabel={true} />
                         :   null
                     }
-
-                    <DropDownField 
-                        label={requestedServiceModel.label}
-                        placeholder={requestedServiceModel.placeholder}
-                        options={requestedServiceModel.options}
-                        selected={requestedServiceModel.selected}
-                        selectedOptionIndex={requestedServiceModel.selectedOptionIndex}
-                        error={requestedServiceModel.error}
-                        onSelect={(optionIndex:number)=> selectOption(optionIndex, requestedServiceModel, setRequestedServiceModel)}
-                    />
+                    
+                    <RowContainer alignment="center">
+                        <DropDownField 
+                            label={requestedServiceModel.label}
+                            placeholder={requestedServiceModel.placeholder}
+                            options={requestedServiceModel.options}
+                            selected={requestedServiceModel.selected}
+                            selectedOptionIndex={requestedServiceModel.selectedOptionIndex}
+                            error={requestedServiceModel.error}
+                            onSelect={(optionIndex:number)=> selectOption(optionIndex, requestedServiceModel, setRequestedServiceModel)}
+                        />
+                        {
+                            isServicesLoading ? <ComponentLoader size="30px" innerSize="30px" /> : <></>
+                        }
+                    </RowContainer>
 
                 {
                     requestedServiceModel.value &&
