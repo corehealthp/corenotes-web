@@ -18,15 +18,17 @@ export default function IndividualDocuments() {
   );
 
   useEffect(() => {
-    setIndividualState((state) => {
-      return {
-        ...state,
-        status: "IDLE",
-        error: individualDocumentsRespose.error,
-        documents: individualDocumentsRespose.data,
-      };
-    });
-  }, [setIndividualState, individualDocumentsRespose]);
+    if(!individualState.documents.list.length) {
+      setIndividualState((state) => {
+        return {
+          ...state,
+          status: "IDLE",
+          error: individualDocumentsRespose.error,
+          documents: individualDocumentsRespose.data,
+        };
+      });
+    }
+  }, [setIndividualState, individualDocumentsRespose, individualState.documents.list.length]);
 
   const [isUploadDocModalVisible, setIsUploadDocModalVisible] = useState(false);
 
