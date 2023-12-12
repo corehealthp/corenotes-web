@@ -156,42 +156,7 @@ export default function IndividualPersonalInformationForm({
     validated: false,
   });
 
-  const [insuranceModel, setInsuranceModel] = useState<DropDownFormData>({
-    // type: "number",
-    label: "Insurance",
-    placeholder: "Insurance",
-    options: [
-      {
-        id: "1",
-        label: "Medicaid",
-        value: "medicaid",
-      },
-      {
-        id: "2",
-        label: "Medicare",
-        value: "medicare",
-      },
-      {
-        id: "3",
-        label: "Other",
-        value: "other",
-      },
-    ],
-    error: "",
-    selected: false,
-    selectedOptionIndex: 0,
-    name: "insurance",
-  });
-
-  const [medicareModel, setMedicareModel] = useState<formFieldType>({
-    type: "text",
-    label: "",
-    placeholder: "",
-    optional: true,
-    value: "",
-    error: "",
-    validated: false,
-  });
+ 
   const [medicareNumberModel, setMedicareNumberModel] = useState<formFieldType>(
     {
       type: "text",
@@ -204,15 +169,7 @@ export default function IndividualPersonalInformationForm({
     }
   );
 
-  const [medicaidModel, setMedicaidModel] = useState<formFieldType>({
-    type: "text",
-    label: "",
-    placeholder: "",
-    optional: true,
-    value: "",
-    error: "",
-    validated: false,
-  });
+ 
   const [medicaidNumberModel, setMedicaidNumberModel] = useState<formFieldType>(
     {
       type: "text",
@@ -229,16 +186,6 @@ export default function IndividualPersonalInformationForm({
 
 
 
-
-const [othersModel, setOthersModel] = useState<formFieldType>({
-  type: "text",
-  label: "",
-  placeholder: "",
-  optional: true,
-  value: "",
-  error: "",
-  validated: false,
-});
 const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
   {
     type: "text",
@@ -351,11 +298,9 @@ const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
           religion: religionModel.value,
           ssn: ssnModel.value,
           weight: weightModel.value.toString(),
-          
           medicare_no: medicareNumberModel.value,
           medicaid_no: medicaidNumberModel.value,
-          other_insurance_no: othersNumberModel.value,
-
+          insuranceNo: othersNumberModel.value,
           codeAlert: codeAlertsModel.value,
           contact: {
             name: contactFullnameModel.value,
