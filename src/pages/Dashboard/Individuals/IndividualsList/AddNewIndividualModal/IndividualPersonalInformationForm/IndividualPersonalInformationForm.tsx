@@ -12,7 +12,7 @@ import {
 } from "src/components/FormComponents/DropDownField/types";
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
 import {
-//   individualInitState,
+  //   individualInitState,
   useSetIndividualState,
 } from "src/features/Individual/state";
 import MultiSelectDropDownField from "src/components/FormComponents/DropDownField/MultiSelectDropDownField";
@@ -183,8 +183,17 @@ export default function IndividualPersonalInformationForm({
     name: "insurance",
   });
 
-  const [insuranceNumberModel, setInsuranceNumberModel] =
-    useState<formFieldType>({
+  const [medicareModel, setMedicareModel] = useState<formFieldType>({
+    type: "text",
+    label: "",
+    placeholder: "",
+    optional: true,
+    value: "",
+    error: "",
+    validated: false,
+  });
+  const [medicareNumberModel, setMedicareNumberModel] = useState<formFieldType>(
+    {
       type: "text",
       label: "",
       placeholder: "",
@@ -192,7 +201,55 @@ export default function IndividualPersonalInformationForm({
       value: "",
       error: "",
       validated: false,
-    });
+    }
+  );
+
+  const [medicaidModel, setMedicaidModel] = useState<formFieldType>({
+    type: "text",
+    label: "",
+    placeholder: "",
+    optional: true,
+    value: "",
+    error: "",
+    validated: false,
+  });
+  const [medicaidNumberModel, setMedicaidNumberModel] = useState<formFieldType>(
+    {
+      type: "text",
+      label: "",
+      placeholder: "",
+      optional: true,
+      value: "",
+      error: "",
+      validated: false,
+    }
+  );
+
+  
+
+
+
+
+const [othersModel, setOthersModel] = useState<formFieldType>({
+  type: "text",
+  label: "",
+  placeholder: "",
+  optional: true,
+  value: "",
+  error: "",
+  validated: false,
+});
+const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
+  {
+    type: "text",
+    label: "",
+    placeholder: "",
+    optional: true,
+    value: "",
+    error: "",
+    validated: false,
+  }
+);
 
   const [contactFullnameModel, setContactFullnameModel] =
     useState<formFieldType>({
@@ -294,8 +351,11 @@ export default function IndividualPersonalInformationForm({
           religion: religionModel.value,
           ssn: ssnModel.value,
           weight: weightModel.value.toString(),
-          insurance: insuranceModel.value?.value ?? "",
-          insurance_no: insuranceNumberModel.value,
+          
+          medicare_no: medicareNumberModel.value,
+          medicaid_no: medicaidNumberModel.value,
+          other_insurance_no: othersNumberModel.value,
+
           codeAlert: codeAlertsModel.value,
           contact: {
             name: contactFullnameModel.value,
@@ -346,7 +406,6 @@ export default function IndividualPersonalInformationForm({
             }
           />
         </div>
-
         <div className={styles.row}>
           <InputField
             type={nicknameModel.type}
@@ -379,7 +438,6 @@ export default function IndividualPersonalInformationForm({
             }
           />
         </div>
-
         <div className={styles.row}>
           <DropDownField
             placeholder={maritalStatusModel.placeholder}
@@ -416,35 +474,7 @@ export default function IndividualPersonalInformationForm({
             }
           />
         </div>
-
         <div className={styles.row}>
-          <DropDownField
-            placeholder={insuranceModel.placeholder}
-            options={insuranceModel.options}
-            error={insuranceModel.error}
-            selected={insuranceModel.selected}
-            selectedOptionIndex={insuranceModel.selectedOptionIndex}
-            onSelect={(optionIndex: number) =>
-              selectOption(optionIndex, insuranceModel, setInsuranceModel)
-            }
-          />
-
-          {insuranceModel.value?.label && (
-            <InputField
-              type={insuranceNumberModel.type}
-              placeholder={`${insuranceModel.value?.label} No`}
-              value={insuranceNumberModel.value}
-              error={insuranceNumberModel.error}
-              onInput={(inputValue: string) =>
-                setInput(
-                  inputValue,
-                  insuranceNumberModel,
-                  setInsuranceNumberModel
-                )
-              }
-            />
-          )}
-
           <MultiSelectDropDownField
             placeholder={codeAlertsModel.placeholder}
             options={codeAlertsModel.options}
@@ -469,7 +499,84 @@ export default function IndividualPersonalInformationForm({
             }
           />
         </div>
+        <div
+          style={{
+            margin: "10px 0px",
+            display: "flex",
+            gap: "12px",
+            alignItems: "center",
+          }}
+        >
+          <div className={styles.number_circle}>2</div>
+          <div className={styles.text}>Insurance</div>
+        </div>
+        <div className={styles.row}>
+          {/* <InputField
+            type={medicareModel.type}
+            placeholder="Medicare"
+            value={medicareModel.value}
+            error={medicareModel.error}
+            // onInput={(inputValue: string) =>
+            //   setInput(inputValue, medicareModel, setMedicareModel)
+            // }
+          /> */}
 
+          <InputField
+            type={medicareNumberModel.type}
+            placeholder="Medicare ID Number"
+            value={medicareNumberModel.value}
+            error={medicareNumberModel.error}
+            onInput={(inputValue: string) =>
+              setInput(inputValue, medicareNumberModel, setMedicareNumberModel)
+            }
+          />
+
+          {/* <InputField
+            type={medicaidModel.type}
+            placeholder="Medicaid"
+            value={medicaidModel.value}
+            error={medicareModel.error}
+            // onInput={(inputValue: string) =>
+            //   setInput(inputValue, medicaidModel, setMedicaidModel)
+            // }
+          /> */}
+
+          <InputField
+            type={medicareNumberModel.type}
+            placeholder="Medicaid Number"
+            value={medicaidNumberModel.value}
+            error={medicaidNumberModel.error}
+            onInput={(inputValue: string) =>
+              setInput(inputValue, medicaidNumberModel, setMedicaidNumberModel)
+            }
+          />
+        </div>
+
+        <div className={styles.row}>
+          {/* <InputField
+            type={othersModel.type}
+            placeholder="Others"
+            value={othersModel.value}
+            error={othersModel.error}
+            // onInput={(inputValue: string) =>
+            //   setInput(inputValue, othersModel, setOthersModel)
+            // }
+          /> */}
+
+          <InputField
+            type={othersNumberModel.type}
+            placeholder="Others ID Number"
+            value={othersNumberModel.value}
+            error={othersNumberModel.error}
+            onInput={(inputValue: string) =>
+              setInput(inputValue, othersNumberModel, setOthersNumberModel)
+            }
+          />
+
+         
+        </div>
+
+        <br/>
         <div className={styles.row_header}>
           Contact information (a guardian or relative)
         </div>
