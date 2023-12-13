@@ -8,13 +8,13 @@ import { INewStaffPersonalInformation } from "src/features/staff/types";
 import { emailValid } from "src/utils/emailValidation";
 import { phoneNumberValid } from "src/utils/phoneNumberValidation";
 
-export default function StaffPersonalInformationForm({ onModified }:{ onModified:(newStaffDetails:INewStaffPersonalInformation)=> void }) {
+export default function StaffPersonalInformationForm({userState, onModified }:{userState?:any, onModified?:(newStaffDetails:INewStaffPersonalInformation)=> void }) {
 
 	const [firstnameModel, setFirstnameModel] = useState<formFieldType>({
 		type: "text",
 		label: "First name",
 		placeholder: "First name",
-		value: "",
+		value: userState.firstname,
 		error: "",
 		validated: false,
 	});
@@ -23,7 +23,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "text",
 		label: "Last name",
 		placeholder: "Last name",
-		value: "",
+		value: userState.lastname,
 		error: "",
 		validated: false,
 	});
@@ -32,7 +32,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "text",
 		label: "Nick name",
 		placeholder: "Nick name",
-		value: "",
+		value: userState.nickname,
 		error: "",
 		validated: false,
 	});
@@ -41,7 +41,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "date",
 		label: "Date of birth",
 		placeholder: "Date of birth",
-		value: "",
+		value: userState.dob,
 		error: "",
 		validated: false,
 	});
@@ -50,7 +50,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "text",
 		label: "Gender",
 		placeholder: "Gender",
-		value: "",
+		value: userState.gender,
 		error: "",
 		validated: false,
 	});
@@ -59,7 +59,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "text",
 		label: "Home address",
 		placeholder: "Home address",
-		value: "",
+		value: userState.address,
 		error: "",
 		validated: false,
 	});
@@ -68,7 +68,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "text",
 		label: "City",
 		placeholder: "City",
-		value: "",
+		value: userState.city,
 		error: "",
 		validated: false,
 	});
@@ -77,7 +77,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "text",
 		label: "State",
 		placeholder: "State",
-		value: "",
+		value: userState.state,
 		error: "",
 		validated: false,
 	});
@@ -86,7 +86,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "text",
 		label: "Zip code",
 		placeholder: "Zip code",
-		value: "",
+		value: userState.zipCode,
 		error: "",
 		validated: false,
 	});
@@ -95,7 +95,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "phone",
 		label: "Work phone",
 		placeholder: "Work phone",
-		value: "",
+		value: userState.phoneNumber.work,
 		error: "",
 		validated: false,
 	});
@@ -105,7 +105,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		name: "cell-phone",
 		label: "Cell phone",
 		placeholder: "Cell phone",
-		value: "",
+		value: userState.phoneNumber.cell,
 		error: "",
 		validated: false,
 	});
@@ -114,7 +114,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "email",
 		label: "Email Address",
 		placeholder: "Email Address",
-		value: "",
+		value: userState.phoneNumber.email,
 		error: "",
 		validated: false,
 	});
@@ -123,7 +123,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "text",
 		label: "Contact name",
 		placeholder: "Contact name",
-		value: "",
+		value: userState.emergencyContact.name,
 		error: "",
 		validated: false,
 	});
@@ -132,7 +132,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "text",
 		label: "Relationship with contact",
 		placeholder: "Relationship with contact",
-		value: "",
+		value: userState.emergencyContact.relationship,
 		error: "",
 		validated: false,
 	});
@@ -141,7 +141,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 		type: "phone",
 		label: "Contact cell phone",
 		placeholder: "Contact cell phone",
-		value: "",
+		value: userState.emergencyContact.phoneNumber,
 		error: "",
 		validated: false,
 	});
@@ -208,6 +208,7 @@ export default function StaffPersonalInformationForm({ onModified }:{ onModified
 			email: emailAddressModel.value,
 		}
 
+		//@ts-ignore
 		onModified(staffPersonalInfo);
 	}
 

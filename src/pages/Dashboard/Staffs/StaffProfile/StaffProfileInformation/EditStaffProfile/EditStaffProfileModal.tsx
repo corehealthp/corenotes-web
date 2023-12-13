@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
 import { staffStateType } from "src/features/staff/types";
+import StaffPersonalInformationForm from "../../../StaffList/AddNewStaffModal/StaffPersonalInformationForm";
+import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
 
 export default function EditStaffProfileModal({ staffState, closeModal }:{ 
 	staffState:staffStateType;
@@ -109,6 +111,9 @@ export default function EditStaffProfileModal({ staffState, closeModal }:{
 		}));
 	}
 
+	const userState = staffState.details;
+
+	// console.log("staffState",staffState)
 	return (
 		<ModalContainer>
 			<div className={styles.edit_staff_profile}>
@@ -128,11 +133,11 @@ export default function EditStaffProfileModal({ staffState, closeModal }:{
 						}
 					/>
 				</div>
-{/* 
+
 				<div className={styles.registration_form_section}>
 					<StaffPersonalInformationForm userState={userState} />
-					<StaffWorkInformationForm userState={userState} />
-				</div> */}
+					{/* <StaffWorkInformationForm userState={userState} /> */}
+				</div>
 
 				<div className={styles.body}>
 					<DropDownField
