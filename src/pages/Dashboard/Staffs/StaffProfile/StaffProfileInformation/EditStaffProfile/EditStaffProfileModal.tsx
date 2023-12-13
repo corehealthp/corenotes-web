@@ -12,7 +12,7 @@ import FormStateModal from "src/components/FormComponents/FormStateModal/FormSta
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
 import { staffStateType } from "src/features/staff/types";
 import StaffPersonalInformationForm from "../../../StaffList/AddNewStaffModal/StaffPersonalInformationForm";
-import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
+// import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
 
 export default function EditStaffProfileModal({ staffState, closeModal }:{ 
 	staffState:staffStateType;
