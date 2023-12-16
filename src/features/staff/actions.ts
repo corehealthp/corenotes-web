@@ -1,4 +1,4 @@
-import { getFetch, patchFetch, postFetch, putFetch } from "src/lib/fetch"
+import { deleteFetch, getFetch, patchFetch, postFetch, putFetch } from "src/lib/fetch"
 import { successResponseType } from "src/lib/types"
 import { IActivity, IStaffDocument, IStaffRole, IStaffRoleDetails, IStaffShift, IStaffUser } from "./types"
 
@@ -262,6 +262,24 @@ export function updateStaffProfileAction(payload:{ staffId:string, providerRole:
                     staff: response.data.staff,
                 }
             })
+        })
+        .catch((error)=> reject(error))
+    })
+}
+
+
+
+export function deleteStaffDocumentAction( staffId:string, documentId:string) {
+    return new Promise<fetchStaffSuccessResponseType>((resolve, reject)=> {
+        deleteFetch(`/staffs/${staffId}/documents`)
+        .then((response)=> {
+            // resolve({
+            //     ...response,
+            //     data: { 
+            //         staff: response.data.staff,
+            //     }
+            // })
+            console.log(response,"KLKL")
         })
         .catch((error)=> reject(error))
     })

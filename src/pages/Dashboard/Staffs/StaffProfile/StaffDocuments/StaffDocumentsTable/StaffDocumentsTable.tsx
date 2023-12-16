@@ -7,6 +7,7 @@ import DownloadStaffDocButton from "./DownloadStaffDocButton/DownloadStaffDocBut
 import sortByDate from "src/utils/sortByDate";
 import { useStaffValue } from "src/features/staff/state";
 import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton/PrimaryTextButton";
+import { deleteStaffDocumentAction } from "src/features/staff/actions";
 
 export default function StaffDocumentsTable({
     currentPage,
@@ -19,6 +20,7 @@ export default function StaffDocumentsTable({
 
     const staffState = useStaffValue();
 
+    console.log(staffState.details._id)
     const [isLoading, setIsLoading] = useState(false);
 
     const [tableBody, setTableBody] = useState<JSX.Element[][]|object[][]>([]);
@@ -47,6 +49,43 @@ export default function StaffDocumentsTable({
         })
     }, [documents, staffState.documents.list])
 
+
+    function deleteStaffDocument(staffId:string, documentId:string) {
+		// const payload = {
+		// 	staffId,
+		// 	documentId
+		// };
+		
+
+		// setStaffState((state) => ({
+		// 	...state,
+		// 	status: "LOADING",
+		// }));
+
+		deleteStaffDocumentAction(staffId,documentId)
+			.then((response) => {
+				// setStaffState((state) => ({
+				// 	...state,
+				// 	status: "SUCCESS",
+				// 	// details: response.data.staff,
+				// 	message: response.message,
+				// 	error: false,
+				// }));
+                console.log("response",response)
+			})
+			.catch((error) => {
+				// setStaffState((state) => ({
+				// 	...state,
+				// 	status: "FAILED",
+				// 	details: staffInitState.details,
+				// 	message: error.message,
+				// 	error: false,
+				// }));
+                console.log("error",error)
+                
+			});
+	}
+
     function formatTransactionsTable (documents:staffsDocumentsListType[]) {
         return documents.map((document, index:number)=> {
             return  [
@@ -71,7 +110,7 @@ export default function StaffDocumentsTable({
                 isLoading={false}
                 backgroundColor={"var(--red-accent-100)"}
                 labelColor={"white"}
-                clickAction={()=> ({})}
+                clickAction={()=> deleteStaffDocument(staffState.details._id,document.id)}
                 disabled={false}
             /></div>
                 

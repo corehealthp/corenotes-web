@@ -11,8 +11,9 @@ import { useFetchStaffRoleSelector } from "src/features/staff/selector";
 import { INewStaffWorkInformation } from "src/features/staff/types";
 import ComponentLoader from "src/components/Loaders/ComponentLoader";
 
-export default function StaffWorkInformationForm({ onModified }:{ onModified:(newStaffDetails:INewStaffWorkInformation)=> void }) {
+export default function StaffWorkInformationForm({ userState,onModified }:{ userState?:any,onModified?:(newStaffDetails:INewStaffWorkInformation)=> void }) {
 	
+	console.log(userState)
 	const [staffState, setStaffState] = useStaffState();
 
 	const staffRolesResponse = useFetchStaffRoleSelector(staffState.roles.currentPage);
@@ -132,6 +133,7 @@ export default function StaffWorkInformationForm({ onModified }:{ onModified:(ne
 			password: passwordModel.value,
 		}
 
+		//@ts-ignore
 		onModified(staffWorkInfo);
 	}
 
