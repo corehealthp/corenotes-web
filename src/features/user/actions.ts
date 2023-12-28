@@ -8,7 +8,6 @@ export interface fetchUserSuccessResponseType
     user: IUser;
   };
 }
-
 export function fetchUserProfile(userId: string) {
   return new Promise<fetchUserSuccessResponseType>((resolve, reject) => {
     getFetch(`/user/profile/${userId}`)
