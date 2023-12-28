@@ -17,11 +17,13 @@ export default function ProtectedRoute({children}:{children:JSX.Element}) {
 
     const [isLoading, setIsLoading] = useState(true);
 
+    const userId:string = localStorage.getItem('user_id') ||  ""
+
     useEffect(()=> {
-        fetchUserProfile()
+        fetchUserProfile(userId)
         .then((data)=> {
             const user = data.data.user;
-
+            console.log(data,"user")
             setUserState(state => ({
                 ...state,
                 details: {

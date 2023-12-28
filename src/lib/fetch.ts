@@ -81,6 +81,17 @@ export const putFetch = (url: string, body: any) => {
   };
   
 
+  export const deleteFetch = (url: string, params?: bodyType) => {
+    return new Promise<successResponseType>((resolve, reject) => {
+        fetch(url, "DELETE", params)
+        .then((response) => resolve(response.data))
+        .catch((error) => {
+            reject(error);
+        });
+    });
+};
+
+
 
 const fetch = (url:string, method:string, data?:bodyType)=> {
     const headers = { authorization:`sid=${localStorage.getItem('sid')}` }

@@ -10,6 +10,7 @@ export function LoginAction(payload: {
       .then((response: successResponseType) => {
         localStorage.setItem("sid.set", "true");
         localStorage.setItem("sid", response.data?.user?.accessToken);
+        localStorage.setItem("user_id", response.data?.user?._id);
         resolve(response)
       })
       .catch((error) => reject(error));

@@ -144,6 +144,7 @@ export interface IStaffDocument {
 
 export interface IStaffDetails {
 	id: string;
+    _id:string;
 	// ACCOUNT INFO
 	role: {
 		title: string;

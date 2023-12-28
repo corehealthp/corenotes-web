@@ -15,6 +15,8 @@ export default function Sidebar({ navOptions, navigateTo }: sideBarNavOptionsTyp
     const [clockInState, setClockInState] = useState(userState);
     const [clockOutState, setClockOutState] = useState(userState);
 
+
+    console.log(userState,"userState")
     function clockUserIn() {
         const payload = {
             startAt: new Date().toISOString()
@@ -146,8 +148,9 @@ export default function Sidebar({ navOptions, navigateTo }: sideBarNavOptionsTyp
 
                     {
                         navOptions.map((navOption, index)=> 
-                            navOption.roles?.includes(userState.details.role.title)
-                            ?   <Link 
+                            // navOption.roles?.includes(userState.details.role.title)
+                            // ?   
+                            <Link 
                                     key={index}
                                     to={navOption.path}
                                     className={`${styles.navigation_item} ${(navOption.active) ?styles.active :null}`}
@@ -156,7 +159,7 @@ export default function Sidebar({ navOptions, navigateTo }: sideBarNavOptionsTyp
                                         {(navOption.active) ? <navOption.icon className={styles.nav_icon} /> :<navOption.activeIcon className={styles.nav_icon} />}
                                         <div className={styles.nav_label}> <span>{ navOption.label }</span> </div>
                                 </Link>
-                            :   null
+                            // :   null
                         )
                     }
                 </div> 

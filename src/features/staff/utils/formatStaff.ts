@@ -3,6 +3,7 @@ import { IStaffDetails, IStaffUser } from "../types"
 export default function formatStaff(staff:IStaffUser):IStaffDetails {
     return {
         ...staff,
+        _id:staff.id,
         id: staff.id ?? "",
         active: staff.active,
         role: staff.role,

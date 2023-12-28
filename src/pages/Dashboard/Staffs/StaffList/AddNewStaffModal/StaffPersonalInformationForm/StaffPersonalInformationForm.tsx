@@ -8,13 +8,13 @@ import { INewStaffPersonalInformation } from "src/features/staff/types";
 import { emailValid } from "src/utils/emailValidation";
 import { phoneNumberValid } from "src/utils/phoneNumberValidation";
 
-export default function StaffPersonalInformationForm({userState, onModified }:{userState?:any, onModified?:(newStaffDetails:INewStaffPersonalInformation)=> void }) {
+export default function StaffPersonalInformationForm({userState, onModified }:{userState?:any, onModified:(newStaffDetails:INewStaffPersonalInformation)=> void }) {
 
 	const [firstnameModel, setFirstnameModel] = useState<formFieldType>({
 		type: "text",
 		label: "First name",
 		placeholder: "First name",
-		value: userState.firstname,
+		value: userState?.firstname,
 		error: "",
 		validated: false,
 	});
@@ -23,7 +23,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "Last name",
 		placeholder: "Last name",
-		value: userState.lastname,
+		value: userState?.lastname,
 		error: "",
 		validated: false,
 	});
@@ -32,7 +32,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "Nick name",
 		placeholder: "Nick name",
-		value: userState.nickname,
+		value: userState?.nickname,
 		error: "",
 		validated: false,
 	});
@@ -41,7 +41,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "date",
 		label: "Date of birth",
 		placeholder: "Date of birth",
-		value: userState.dob,
+		value: userState?.dob,
 		error: "",
 		validated: false,
 	});
@@ -50,7 +50,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "Gender",
 		placeholder: "Gender",
-		value: userState.gender,
+		value: userState?.gender,
 		error: "",
 		validated: false,
 	});
@@ -59,7 +59,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "Home address",
 		placeholder: "Home address",
-		value: userState.address,
+		value: userState?.address,
 		error: "",
 		validated: false,
 	});
@@ -68,7 +68,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "City",
 		placeholder: "City",
-		value: userState.city,
+		value: userState?.city,
 		error: "",
 		validated: false,
 	});
@@ -77,7 +77,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "State",
 		placeholder: "State",
-		value: userState.state,
+		value: userState?.state,
 		error: "",
 		validated: false,
 	});
@@ -86,7 +86,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "Zip code",
 		placeholder: "Zip code",
-		value: userState.zipCode,
+		value: userState?.zipCode,
 		error: "",
 		validated: false,
 	});
@@ -95,7 +95,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "phone",
 		label: "Work phone",
 		placeholder: "Work phone",
-		value: userState.phoneNumber.work,
+		value: userState?.phoneNumber.work,
 		error: "",
 		validated: false,
 	});
@@ -105,7 +105,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		name: "cell-phone",
 		label: "Cell phone",
 		placeholder: "Cell phone",
-		value: userState.phoneNumber.cell,
+		value: userState?.phoneNumber.cell,
 		error: "",
 		validated: false,
 	});
@@ -114,7 +114,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "email",
 		label: "Email Address",
 		placeholder: "Email Address",
-		value: userState.phoneNumber.email,
+		value: userState?.phoneNumber.email,
 		error: "",
 		validated: false,
 	});
@@ -123,7 +123,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "Contact name",
 		placeholder: "Contact name",
-		value: userState.emergencyContact.name,
+		value: userState?.emergencyContact.name,
 		error: "",
 		validated: false,
 	});
@@ -132,7 +132,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "Relationship with contact",
 		placeholder: "Relationship with contact",
-		value: userState.emergencyContact.relationship,
+		value: userState?.emergencyContact.relationship,
 		error: "",
 		validated: false,
 	});
@@ -141,7 +141,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "phone",
 		label: "Contact cell phone",
 		placeholder: "Contact cell phone",
-		value: userState.emergencyContact.phoneNumber,
+		value: userState?.emergencyContact.phoneNumber,
 		error: "",
 		validated: false,
 	});
@@ -208,7 +208,6 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 			email: emailAddressModel.value,
 		}
 
-		//@ts-ignore
 		onModified(staffPersonalInfo);
 	}
 
