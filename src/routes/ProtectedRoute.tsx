@@ -23,7 +23,6 @@ export default function ProtectedRoute({children}:{children:JSX.Element}) {
         fetchUserProfile(userId)
         .then((data)=> {
             const user = data.data.user;
-            console.log(data,"user")
             setUserState(state => ({
                 ...state,
                 details: {
