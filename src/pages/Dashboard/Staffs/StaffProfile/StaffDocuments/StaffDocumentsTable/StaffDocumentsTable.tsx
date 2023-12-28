@@ -20,7 +20,7 @@ export default function StaffDocumentsTable({
 
     const staffState = useStaffValue();
 
-    console.log(staffState.details._id)
+    
     const [isLoading, setIsLoading] = useState(false);
 
     const [tableBody, setTableBody] = useState<JSX.Element[][]|object[][]>([]);
