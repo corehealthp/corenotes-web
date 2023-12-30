@@ -271,14 +271,14 @@ export function updateStaffProfileAction(payload:{ staffId:string, providerRole:
 
 export function deleteStaffDocumentAction( staffId:string, documentId:string) {
     return new Promise<fetchStaffSuccessResponseType>((resolve, reject)=> {
-        deleteFetch(`/staffs/${staffId}/documents`)
+        deleteFetch(`/staffs/${staffId}/documents${documentId}`)
         .then((response)=> {
-            // resolve({
-            //     ...response,
-            //     data: { 
-            //         staff: response.data.staff,
-            //     }
-            // })
+            resolve({
+                ...response,
+                data: { 
+                    staff: response.data.staff,
+                }
+            })
             console.log(response,"KLKL")
         })
         .catch((error)=> reject(error))

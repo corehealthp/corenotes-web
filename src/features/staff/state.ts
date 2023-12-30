@@ -10,6 +10,7 @@ export const staffInitState:staffStateType = {
 	totalPages: 1,
 	details: {
 		// ACCOUNT INFO
+		_id: "",
 		id: "",
 		active: true,
 		lastSeen: "",

@@ -10,9 +10,11 @@ import { updateStaffProfileAction } from "src/features/staff/actions";
 import { useParams } from "react-router-dom";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
-import { INewStaffPersonalInformation, INewStaffWorkInformation, NewStaffType, staffStateType } from "src/features/staff/types";
+import { INewStaffPersonalInformation, 
+	// INewStaffWorkInformation, 
+	NewStaffType, staffStateType } from "src/features/staff/types";
 import StaffPersonalInformationForm from "../../../StaffList/AddNewStaffModal/StaffPersonalInformationForm";
-import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
+// import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
 // import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
 
 export default function EditStaffProfileModal({ staffState, closeModal }:{ 
@@ -33,18 +35,17 @@ export default function EditStaffProfileModal({ staffState, closeModal }:{
 	  }
 
 
-	  function validateWorkForm(newStaffInfo: INewStaffWorkInformation) {
-		const staffInfo: NewStaffType = {
-		  ...staffState.newStaff,
-		  work: newStaffInfo,
-		};
+	//   function validateWorkForm(newStaffInfo: INewStaffWorkInformation) {
+	// 	const staffInfo: NewStaffType = {
+	// 	  ...staffState.newStaff,
+	// 	  work: newStaffInfo,
+	// 	};
 	
-		enableButton(staffInfo);
-	  }
+	// 	enableButton(staffInfo);
+	//   }
 
 	  function enableButton(newStaffInfo: NewStaffType) {
 		const message: string = validateForm(newStaffInfo);
-		console.log("hhh",message )
 
 		setStaffState((state) => ({
 		  ...state,
@@ -54,6 +55,7 @@ export default function EditStaffProfileModal({ staffState, closeModal }:{
 	  }
 
 	  function validateForm(newStaffInfo: NewStaffType) {
+		console.log(newStaffInfo)
 		// if (!newStaffInfo.personal.firstname) {
 		// 	return "Firstname field cannot be empty";
 		// }
