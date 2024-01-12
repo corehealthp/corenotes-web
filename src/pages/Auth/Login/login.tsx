@@ -18,11 +18,16 @@ import {LoginAction} from "src/features/auth/actions";
 import { useAuthState } from "src/features/auth/state";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 import GlobalFeedback from "src/components/GlobalFeedback";
+import ClockInOutModal from "../ClockinOutModal/ClockInOutModal";
 
 export default function Login() {
-  const navigate = useNavigate();
+  const [showClockInModal, setShowClockInModal] = useState(false)
 
   const [authState, setAuthState] = useAuthState();
+  const [modalTitle, setModalTitle] = useState("");
+  const [loginTime, setLoginTime] = useState(new Date());
+  const navigate = useNavigate()
+
 
   const [usernameModel, setUsernameModel] = useState<formFieldType>({
     type: "text",
@@ -60,6 +65,14 @@ export default function Login() {
     setInputModel({ ...inputModel });
 
     isFormStateValid();
+  }
+
+  function showModal(role: string) {
+    if(role !== 'administrator'){
+      setShowClockInModal(true)
+    }else {
+      navigate({pathname: "/dashboard"})
+    }
   }
 
   function validateModel(updatedInputModel: formFieldType) {
@@ -117,8 +130,18 @@ export default function Login() {
 
       LoginAction(payload)
       .then(() => {
-        setAuthState((state) => ({ ...state, isSignedIn: true }));
-        navigate({ pathname: "/dashboard" });
+        setAuthState((state) => {
+          return{
+
+          ...state, isSignedIn: true 
+          }
+        });
+        const getUserDetailsJSON = localStorage.getItem('user_data') as string;
+        const getUserDetails = JSON.parse(getUserDetailsJSON )
+        setModalTitle(`${getUserDetails.firstname} ${getUserDetails.lastname}`)
+        setLoginTime(new Date());
+        showModal(getUserDetails.role)
+        // navigate({ pathname: "/dashboard" });
       })
       .catch((error) => {
         createGlobalFeedback("error", error.message)
@@ -128,63 +151,71 @@ export default function Login() {
   }
 
   return (
-    <div className={styles.login_page}>
-      <div className={styles.content_section}>
-        <GlobalFeedback />
+    <>
+      <div className={styles.login_page}>
+        <div className={styles.content_section}>
+          <GlobalFeedback />
 
-        <ImageComponent
-          src={logo}
-          width={"100px"}
-          extraStyles={styles.logo_image}
-        />
-
-        <SizedBox height="50px" />
-
-        <FormWrapper
-          extraStyles={styles.form_wrapper}
-          state={authState}
-          resetState={() => resetFormState()}
-        >
-          <FormHeading
-            heading="Login"
-            subheading="If you already have an account registered in the system."
-            align="center"
+          <ImageComponent
+            src={logo}
+            width={"100px"}
+            extraStyles={styles.logo_image}
           />
-          <div className={styles.input_fields_wrapper}>
-            <InputField
-              placeholder={usernameModel.placeholder}
-              error={usernameModel.error}
-              prefixIcon={usernameModel.prefixIcon}
-              onInput={(value: string) =>
-                setInput(value, usernameModel, setUsernameModel)
-              }
-            />
-
-            <PasswordInputField
-              placeholder={passwordModel.placeholder}
-              error={passwordModel.error}
-              onInput={(value: string) =>
-                setInput(value, passwordModel, setPasswordModel)
-              }
-              showPrefixIcon={true}
-            />
-          </div>
-          <div className={styles.forgot_prompt}>
-            <Link to={"/forgot-username"}>Forgot username</Link>
-            <Link to={"/forgot-password"}>
-              Forgot password
-            </Link>
-          </div>
 
           <SizedBox height="50px" />
-          <PrimaryTextButton
-            label={"Login"}
-            isLoading={authState.status === "LOADING"}
-            disabled={!formStateModel.validated}
-            clickAction={() => loginInTrigger()}
-          />
-        </FormWrapper>
+
+          <FormWrapper
+            extraStyles={styles.form_wrapper}
+            state={authState}
+            resetState={() => resetFormState()}
+          >
+            <FormHeading
+              heading="Login"
+              subheading="If you already have an account registered in the system."
+              align="center"
+            />
+            <div className={styles.input_fields_wrapper}>
+              <InputField
+                placeholder={usernameModel.placeholder}
+                error={usernameModel.error}
+                prefixIcon={usernameModel.prefixIcon}
+                onInput={(value: string) =>
+                  setInput(value, usernameModel, setUsernameModel)
+                }
+              />
+
+              <PasswordInputField
+                placeholder={passwordModel.placeholder}
+                error={passwordModel.error}
+                onInput={(value: string) =>
+                  setInput(value, passwordModel, setPasswordModel)
+                }
+                showPrefixIcon={true}
+              />
+            </div>
+            <div className={styles.forgot_prompt}>
+              <Link to={"/forgot-username"}>Forgot username</Link>
+              <Link to={"/forgot-password"}>
+                Forgot password
+              </Link>
+            </div>
+
+            <SizedBox height="50px" />
+            <PrimaryTextButton
+              label={"Login"}
+              isLoading={authState.status === "LOADING"}
+              disabled={!formStateModel.validated}
+              clickAction={() => loginInTrigger()}
+            />
+          </FormWrapper>
+        </div>
       </div>
-    </div>
+
+      {
+          showClockInModal
+          ?   <ClockInOutModal title={modalTitle} logTime={loginTime} label="Clock In" />
+          :   null
+      }
+    </>
   );
 }

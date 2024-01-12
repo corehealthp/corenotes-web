@@ -6,11 +6,19 @@ export function LoginAction(payload: {
   password: string;
 }) {
   return new Promise<successResponseType>((resolve, reject) => {
+   
     postFetch(`/auth/login`, payload)
       .then((response: successResponseType) => {
+        const user_data = {
+          firstname: response.data?.user?.firstname,
+          lastname: response.data?.user?.lastname,
+          role: response.data?.user?.title,
+        };
+        // console.log(user_data, "user")
         localStorage.setItem("sid.set", "true");
         localStorage.setItem("sid", response.data?.user?.accessToken);
         localStorage.setItem("user_id", response.data?.user?._id);
+        localStorage.setItem("user_data", JSON.stringify(user_data));
         resolve(response)
       })
       .catch((error) => reject(error));

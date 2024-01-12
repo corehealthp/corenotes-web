@@ -8,25 +8,43 @@ import { useState } from "react";
 
 import { authInitState, useAuthState} from "src/features/auth/state";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
-import { useNavigate } from "react-router-dom";
 import { LogoutAction } from "src/features/auth/actions";
+import ClockInOutModal from "src/pages/Auth/ClockinOutModal/ClockInOutModal";
+import { useNavigate } from "react-router-dom";
 
 export default function UserProfileCard({ extraStyles }: { extraStyles: string }) {
-    const navigate = useNavigate();
   const [userState, setUserState] = useUserState();
   const [authState, setAuthState] = useAuthState();
   const [showLogoutDropdown, setShowLogoutDropdown] = useState(false);
-
+  const [showClockOutModal, setShowClockOutModal] = useState(false)
+  const [modalTitle, setModalTitle] = useState("");
+  const [logoutTime, setLogoutTime] = useState(new Date());
+  const navigate = useNavigate();
+  
   const toggleLogoutDropdown = () => {
     setShowLogoutDropdown(!showLogoutDropdown);
   };
+
+  function showModal(role: string) {
+    if(role !== 'administrator'){
+      setShowClockOutModal(true)
+    }else {
+      navigate({pathname: "/"})
+    }
+  }
   function LogOut() {
     LogoutAction()
     .then(() => {
       localStorage.removeItem('sid.set')
       setUserState(userInitState);
       setAuthState(authInitState)
-      navigate({pathname: "/"})
+      const getUserDetailsJSON = localStorage.getItem('user_data') as string;
+      const getUserDetails = JSON.parse(getUserDetailsJSON )
+
+      showModal(getUserDetails.role)
+      setModalTitle(`${getUserDetails.firstname} ${getUserDetails.lastname}`)
+      setLogoutTime(new Date())
+      // navigate({pathname: "/"})
     })
     .catch((error: { message: string;}) => {
       setAuthState((state)=> {
@@ -60,11 +78,11 @@ export default function UserProfileCard({ extraStyles }: { extraStyles: string }
         </div>
       </div>
       <FormStateModal 
-                    status={authState.status} 
-                    error={authState.error} 
-                    message={authState.message}
-                    reset={()=> (setAuthState(authInitState))}
-                />
+        status={authState.status} 
+        error={authState.error} 
+        message={authState.message}
+        reset={()=> (setAuthState(authInitState))}
+      />
       <IconAngleDown className={styles.arrow} />
 
       {showLogoutDropdown && (
@@ -72,6 +90,12 @@ export default function UserProfileCard({ extraStyles }: { extraStyles: string }
           <p onClick={LogOut}>Log Out</p>
         </div>
       )}
+
+      {
+        showClockOutModal
+        ?   <ClockInOutModal title={modalTitle} logTime={logoutTime} label="Clock Out" />
+        :   null
+      }
     </div>
   );
 }

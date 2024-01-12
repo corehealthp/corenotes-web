@@ -1,5 +1,6 @@
 import CircularRingLoader from "src/components/Loaders/CircularRingLoader";
 import styles from "./textbutton.module.css"
+import { CSSProperties } from "react";
 
 interface textButtonType {
     type?:"button"|"submit"|"reset",
@@ -13,7 +14,8 @@ interface textButtonType {
     loaderColor?:string,
     disabled?:boolean,
     extraStyles?:string,
-    onClick:()=> void
+    onClick:()=> void,
+    customStyles?: CSSProperties;
 }
 
 export default function TextButton({
@@ -28,20 +30,22 @@ export default function TextButton({
     loaderColor, 
     disabled,
     extraStyles,
-    onClick
+    onClick,
+    customStyles
 }:textButtonType) {
-
+    const dynamicStyle = {
+        width: width ?? "100%", 
+        fontSize: fontSize, 
+        height:height ?? "50px",
+        backgroundColor: backgroundColor,
+        color: labelColor,        
+        ...customStyles
+    }
     return(
         <button
             type={type ?? "button"}
             className={`${styles.button} ${extraStyles}`}
-            style={{ 
-                width: width ?? "100%", 
-                fontSize: fontSize, 
-                height:height ?? "50px",
-                backgroundColor: backgroundColor,
-                color: labelColor
-            }}
+            style={dynamicStyle}
             onClick={()=> (isLoading) ?null :onClick?.() }
             disabled={disabled}
         >

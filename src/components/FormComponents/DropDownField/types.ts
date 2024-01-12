@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export interface DropDownProps {
     label?:string,
     placeholder?:string,
@@ -19,6 +21,7 @@ export interface DropDownProps {
     bottomOffset?:string,
     validated?:boolean;
     showLoading?:boolean;
+    customStyles?: CSSProperties;
 }
 
 export interface DropDownOption {

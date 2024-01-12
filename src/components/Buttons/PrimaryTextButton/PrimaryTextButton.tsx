@@ -1,5 +1,6 @@
 import styles from "./primarytextbutton.module.css";
 import TextButton from "../TextButton";
+import { CSSProperties } from "react";
 
 interface PrimaryTextButtonType {
     width?:string,
@@ -11,7 +12,8 @@ interface PrimaryTextButtonType {
     backgroundColor?: string;
     labelColor?:string;
     disabled?:boolean,
-    clickAction: ()=> void
+    clickAction: ()=> void;
+    customStyles?: CSSProperties;
 }
 
 export default function PrimaryTextButton({ 
@@ -22,7 +24,8 @@ export default function PrimaryTextButton({
     label,
     isLoading,
     disabled,
-    clickAction
+    clickAction,
+    customStyles,
 }:PrimaryTextButtonType) {
     return (
         <TextButton
@@ -35,6 +38,7 @@ export default function PrimaryTextButton({
             onClick={clickAction} 
             backgroundColor={backgroundColor} 
             labelColor={labelColor}
+            customStyles={customStyles}
         />
     );
 }
