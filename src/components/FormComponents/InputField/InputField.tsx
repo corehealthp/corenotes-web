@@ -21,7 +21,7 @@ interface inputFieldType {
     onEnterKeyPressed?: (value:string)=> void
 }
 
-export default function InputField({
+export default function selecInputField({
     inputWidth,
     inputContainer,
     type,

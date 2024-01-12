@@ -22,8 +22,14 @@ export default function DropDownField({
     width,
     height,
     bottomOffset,
-    showLoading
+    showLoading,
+    customStyles
 }: DropDownProps) {
+
+    const dynamicStyle = {
+        width: width || '100%', // Use the provided width or default to '100%'
+        ...customStyles, // Apply custom styles
+      };
 
     useEffect(()=> {
         setFilteredOptions(options)
@@ -55,7 +61,7 @@ export default function DropDownField({
     }
 
     return (
-        <div style={{width}} className={`${extraStyle} ${styles.container}`} ref={domNode}>
+        <div style={dynamicStyle} className={`${extraStyle} ${styles.container}`} ref={domNode}>
             <FormLabel text={label ?? ""} />
             <div 
                 style={{ height, marginBottom: isOpen ?relative ?bottomOffset :undefined :undefined }} 

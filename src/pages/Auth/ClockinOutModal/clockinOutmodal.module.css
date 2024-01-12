@@ -1,0 +1,80 @@
+.clockin_modal {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  .header,
+  .buttons {
+    display: flex;
+    align-items: center;
+    padding: 2% 5%;
+    height: 60px;
+  }
+  .header {
+    flex-direction: column;
+  }
+
+  .header .title {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .header .subTitle {
+    margin-bottom: 0.5rem;
+    color: gray;
+  }
+/* 
+  .header .shiftTime {
+    margin-bottom: 0.5rem;
+  } */
+  .heading {
+    font-size: 1.1rem;
+  }
+  
+  .body {
+    --vertical-padding: 10%;
+    padding: var(--vertical-padding);
+    margin: 0 auto;
+    background: red;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .buttons {
+    justify-content: center;
+    gap: 1rem;
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+  }
+  
+  @media screen and (max-width: 414px) {
+    .clockin_modal {
+      margin-top: var(--mobile-dashboard-navbar-header-height);
+    }
+  }
+  
+  .earlierText {
+    color: red;
+    text-align: center;
+  }
+
+  /* .clockin_textarea{
+
+  } */
+
+  .modal_image{
+    width: 5%;
+    height: 50%;
+    margin-top: 1.5rem;
+  }
+
+  .modal_text_area{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
