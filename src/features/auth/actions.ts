@@ -14,7 +14,7 @@ export function LoginAction(payload: {
           lastname: response.data?.user?.lastname,
           role: response.data?.user?.title,
         };
-        console.log(user_data, "user")
+        // console.log(user_data, "user")
         localStorage.setItem("sid.set", "true");
         localStorage.setItem("sid", response.data?.user?.accessToken);
         localStorage.setItem("user_id", response.data?.user?._id);
