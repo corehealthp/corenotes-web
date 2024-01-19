@@ -1,9 +1,11 @@
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { staffStateType } from "./types";
+import { ReactNode } from "react";
 
 export const staffInitState:staffStateType = {
 	status: "IDLE",
 	error: false,
+	clockIn: false,
 	message: "",
 	list: [],
 	currentPage: 1,
@@ -14,6 +16,9 @@ export const staffInitState:staffStateType = {
 		id: "",
 		active: true,
 		lastSeen: "",
+		isClockedIn: false,
+
+
 		// PERSONAL INFORMATION
 		personal: {
 			firstname: "",
@@ -54,6 +59,21 @@ export const staffInitState:staffStateType = {
 				staff_document_upload: false,
 			},
 		},
+		lastname: "",
+		firstname: "",
+		profileImage: "",
+		email: undefined,
+		emergencyContact: undefined,
+		phoneNumber: undefined,
+		gender: undefined,
+		address: undefined,
+		dob: undefined,
+		initials: undefined,
+		hiredAt: undefined,
+		jobSchedule: undefined,
+		employeeId: undefined,
+		username: undefined,
+		providerRole: undefined
 	},
 	documents: {
 		list: [],
@@ -113,7 +133,14 @@ export const staffInitState:staffStateType = {
 		currentPage: 1,
 		totalPages: 1
 	},
-	totalStaffs: 0
+	totalStaffs: 0,
+	profileImage: "",
+	firstname: "",
+	
+	lastname: function (lastname: any): ReactNode {
+		throw new Error("Function not implemented.");
+		console.log(lastname)
+	}
 };
 
 export const staffAtom = atom({

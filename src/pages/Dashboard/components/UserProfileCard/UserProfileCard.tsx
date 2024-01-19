@@ -9,7 +9,7 @@ import { useState } from "react";
 import { authInitState, useAuthState} from "src/features/auth/state";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
 import { LogoutAction } from "src/features/auth/actions";
-import ClockInOutModal from "src/pages/Auth/ClockinOutModal/ClockInOutModal";
+// import ClockInOutModal from "src/pages/Auth/ClockinOutModal/ClockInOutModal";
 import { useNavigate } from "react-router-dom";
 
 export default function UserProfileCard({ extraStyles }: { extraStyles: string }) {
@@ -24,7 +24,7 @@ export default function UserProfileCard({ extraStyles }: { extraStyles: string }
   const toggleLogoutDropdown = () => {
     setShowLogoutDropdown(!showLogoutDropdown);
   };
-
+console.log(showClockOutModal,modalTitle,logoutTime)
   function showModal(role: string) {
     if(role !== 'administrator'){
       setShowClockOutModal(true)
@@ -91,11 +91,11 @@ export default function UserProfileCard({ extraStyles }: { extraStyles: string }
         </div>
       )}
 
-      {
+      {/* {
         showClockOutModal
         ?   <ClockInOutModal title={modalTitle} logTime={logoutTime} label="Clock Out" />
         :   null
-      }
+      } */}
     </div>
   );
 }

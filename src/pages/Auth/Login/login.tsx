@@ -7,27 +7,28 @@ import SizedBox from "src/components/SizedBox";
 import InputField from "src/components/FormComponents/InputField";
 import { ReactComponent as IconUser } from "src/assets/icons/icon-user.svg";
 import PasswordInputField from "src/components/FormComponents/InputField/PasswordInputField/PasswordInputField";
-import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
+// import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   formFieldType,
   setFormFieldType,
 } from "src/components/FormComponents/FormWrapper/types";
-import {LoginAction} from "src/features/auth/actions";
+import { LoginAction } from "src/features/auth/actions";
 import { useAuthState } from "src/features/auth/state";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 import GlobalFeedback from "src/components/GlobalFeedback";
-import ClockInOutModal from "../ClockinOutModal/ClockInOutModal";
+// import ClockInOutModal from "../ClockinOutModal/ClockInOutModal";
 
 export default function Login() {
-  const [showClockInModal, setShowClockInModal] = useState(false)
+  // const [showClockInModal, setShowClockInModal] = useState(false);
 
   const [authState, setAuthState] = useAuthState();
   const [modalTitle, setModalTitle] = useState("");
   const [loginTime, setLoginTime] = useState(new Date());
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
+  console.log(modalTitle)
+  console.log(loginTime)
 
   const [usernameModel, setUsernameModel] = useState<formFieldType>({
     type: "text",
@@ -68,10 +69,10 @@ export default function Login() {
   }
 
   function showModal(role: string) {
-    if(role !== 'administrator'){
-      setShowClockInModal(true)
-    }else {
-      navigate({pathname: "/dashboard"})
+    if (role !== "administrator") {
+      // setShowClockInModal(true);
+    } else {
+      navigate({ pathname: "/dashboard" });
     }
   }
 
@@ -129,24 +130,28 @@ export default function Login() {
       }));
 
       LoginAction(payload)
-      .then(() => {
-        setAuthState((state) => {
-          return{
-
-          ...state, isSignedIn: true 
-          }
-        });
-        const getUserDetailsJSON = localStorage.getItem('user_data') as string;
-        const getUserDetails = JSON.parse(getUserDetailsJSON )
-        setModalTitle(`${getUserDetails.firstname} ${getUserDetails.lastname}`)
-        setLoginTime(new Date());
-        showModal(getUserDetails.role)
-        // navigate({ pathname: "/dashboard" });
-      })
-      .catch((error) => {
-        createGlobalFeedback("error", error.message)
-      })
-      .finally(()=> setAuthState((state) => ({ ...state, status:"IDLE" })));
+        .then(() => {
+          setAuthState((state) => {
+            return {
+              ...state,
+              isSignedIn: true,
+            };
+          });
+          const getUserDetailsJSON = localStorage.getItem(
+            "user_data"
+          ) as string;
+          const getUserDetails = JSON.parse(getUserDetailsJSON);
+          setModalTitle(
+            `${getUserDetails.firstname} ${getUserDetails.lastname}`
+          );
+          setLoginTime(new Date());
+          showModal(getUserDetails.role);
+          navigate({ pathname: "/dashboard" });
+        })
+        .catch((error) => {
+          createGlobalFeedback("error", error.message);
+        })
+        .finally(() => setAuthState((state) => ({ ...state, status: "IDLE" })));
     }
   }
 
@@ -195,27 +200,27 @@ export default function Login() {
             </div>
             <div className={styles.forgot_prompt}>
               <Link to={"/forgot-username"}>Forgot username</Link>
-              <Link to={"/forgot-password"}>
-                Forgot password
-              </Link>
+              <Link to={"/forgot-password"}>Forgot password</Link>
             </div>
 
             <SizedBox height="50px" />
-            <PrimaryTextButton
+            <div
+              className="bg-green-700 p-3 w-full flex items-center justify-center"
+              onClick={() => loginInTrigger()}
+            >
+              <p className="text-white">Login</p>
+            </div>
+            {/* <PrimaryTextButton
               label={"Login"}
               isLoading={authState.status === "LOADING"}
               disabled={!formStateModel.validated}
               clickAction={() => loginInTrigger()}
-            />
+            /> */}
           </FormWrapper>
         </div>
       </div>
 
-      {
-          showClockInModal
-          ?   <ClockInOutModal title={modalTitle} logTime={loginTime} label="Clock In" />
-          :   null
-      }
+      
     </>
   );
 }
