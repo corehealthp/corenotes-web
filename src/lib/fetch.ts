@@ -98,8 +98,6 @@ const fetch = (url:string, method:string, data?:bodyType)=> {
     return axios({
         url,
         method,
-        // baseURL: process.env.REACT_APP_API_BASE_URL,
-        // baseURL: process.env.VITE_BASE_URL,
         headers,
         baseURL: process.env.API_URL ?? process.env.VITE_BASE_URL,
         data,

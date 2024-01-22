@@ -1,169 +1,131 @@
 import logo from "src/assets/images/logo-with-name.png";
 import { Link } from "react-router-dom";
 import styles from "./sidebar.module.css";
-import {sideBarNavOptionsType} from "./types";
+import { sideBarNavOptionsType } from "./types";
 import ImageComponent from "src/components/ImageComponent";
-import { useUserState } from "src/features/user/state";
-import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
-import { clockStaffInAction, clockStaffOutAction } from "src/features/staff/actions";
+import {  useUserStateValue } from "src/features/user/state";
+
 import { useState } from "react";
-import { createGlobalFeedback } from "src/features/globalFeedback/atom";
+// import { createGlobalFeedback } from "src/features/globalFeedback/atom";
+// import { useStaffState } from "src/features/staff/state";
+import ClockInModal from "src/components/ClockInModal/ClockInModal";
+import UserClockInModal from "src/components/ClockInModal/UserClockInModal";
+import {  useStaffValue } from "src/features/staff/state";
+// import { useFetchStaffSelector } from "src/features/staff/selector";
 
-export default function Sidebar({ navOptions, navigateTo }: sideBarNavOptionsType) {
+export default function Sidebar({
+  navOptions,
+  navigateTo,
+}: sideBarNavOptionsType) {
+  let staffState=useStaffValue()
+  let userState=useUserStateValue()
 
-    const [userState, setUserState] = useUserState();
-    const [clockInState, setClockInState] = useState(userState);
-    const [clockOutState, setClockOutState] = useState(userState);
+  let [isClockInOpen, setIsClockInOpen] = useState(false);
+  let [isUserClockInOpen, setIsUserClockInOpen] = useState(false);
+
+  const staffNav = navOptions?.filter((navOption) => {
+    return navOption?.label === "tasks";
+  });
+
+  function clockUserIn() {
+    setIsClockInOpen(true);
+  }
+
+  function clockUserOut() {
+    setIsClockInOpen(true);
+  }
 
 
-    console.log(userState,"userState")
-    function clockUserIn() {
-        const payload = {
-            startAt: new Date().toISOString()
-        }
 
-        setClockInState(state => ({
-            ...state,
-            status:"LOADING"
-        }))
-        
-        clockStaffInAction(payload)
-        .then((response)=> {
-            setUserState(state => {                                                                                         
-                const user = response.data.staff;
+  return (
+    <div className={styles.sidebar}>
+      <ClockInModal
+        isClockInOpen={isClockInOpen}
+        setIsClockInOpen={setIsClockInOpen}
+        isUserClockInOpen={isUserClockInOpen}
+        setIsUserClockInOpen={setIsUserClockInOpen}
+      />
+      <UserClockInModal
+        isUserClockInOpen={isUserClockInOpen}
+        setIsUserClockInOpen={setIsUserClockInOpen}
+      />
+      <ImageComponent
+        src={logo}
+        width={"100px"}
+        extraStyles={styles.logo_image}
+      />
 
-                return {
-                    ...state,
-                    status: "FAILED",
-                    details: {
-                        id: user?.id,
-                        active: user.active,
-                        role: user.role,
-                        lastSeen: user.lastSeen,
-                        isClockedIn: user.isClockedIn,
-                        personal: {
-                            firstname: user.firstname,
-                            lastname: user.lastname,
-                            profileImage: user.profileImage,
-                        }
-                    }
-                }
-            })
+      <div className={userState.details.role.title === "ADMINISTRATOR" ? styles.navigation_section:styles.staff_navigation_section}>
+        <div className={styles.navigation_bar}>
+          {userState.details.role.title !== "ADMINISTRATOR" ? (
+            staffState.details.isClockedIn ? (
+              <button
+                onClick={() => clockUserOut()}
+                className="text-white bg-red-700 p-2  rounded-md fonr-semibold"
+              >
+                Clock Out
+              </button>
+            ) : (
+              <button
+                onClick={() => clockUserIn()}
+                className="text-white bg-green-700 p-2  rounded-md fonr-semibold"
+              >
+                Clock In
+              </button>
+            )
+          ) : null}
 
-            setClockInState(state => ({
-                ...state,
-                status:"IDLE"
-            }))
-        })
-        .catch((error)=> {
-            setClockInState(state => ({
-                ...state,
-                status:"IDLE"
-            }))
-
-            const newFeedback = {
-                status: "ERROR",
-                message: error.message ?? "There was an error clocking in"
-            }
-
-            createGlobalFeedback("error", newFeedback.message);
-        })
-    }
-
-    function clockUserOut() {
-        const payload = {
-            endAt: new Date().toISOString()
-        }
-
-        setClockOutState(state => ({
-            ...state,
-            status:"LOADING"
-        }))
-        
-        clockStaffOutAction(payload)
-        .then((response)=> {
-            setClockOutState(state => ({
-                ...state,
-                status:"LOADING"
-            }))
-
-            setUserState(state => {                                                                                         
-                const user = response.data.staff;
-
-                return {
-                    ...state,
-                    status: "FAILED",
-                    details: {
-                        id: user?.id,
-                        active: user.active,
-                        role: user.role,
-                        lastSeen: user.lastSeen,
-                        isClockedIn: user.isClockedIn,
-                        personal: {
-                            firstname: user.firstname,
-                            lastname: user.lastname,
-                            profileImage: user.profileImage,
-                        }
-                    }
-                }
-            })
-        })
-        .catch((error)=> {
-            setClockOutState(state => ({ ...state, status:"IDLE" }))
-
-            const newFeedback = {
-                status: "ERROR",
-                message: error.message ?? "There was an error clocking in"
-            }
-            
-            createGlobalFeedback("error", newFeedback.message);
-        })
-    }
-
-    return (
-        <div className={styles.sidebar}>
-            <ImageComponent
-                src={logo}
-                width={"100px"}
-                extraStyles={styles.logo_image}
-            />
-
-            <div className={styles.navigation_section}>
-                <div className={styles.navigation_bar}>
-                    {
-                        userState.details.role.title !== "ADMINISTRATOR"
-                        ?   userState.details.isClockedIn
-                            ?   <PrimaryTextButton
-                                    label={"Clock Out"}
-                                    isLoading={clockOutState.status === "LOADING"}
-                                    clickAction={()=> clockUserOut()}
-                                />
-                            :   <PrimaryTextButton
-                                    label={"Clock In"} 
-                                    isLoading={clockInState.status === "LOADING"}
-                                    clickAction={()=> clockUserIn()}
-                                />
-                        :   null
-                    }
-
-                    {
-                        navOptions.map((navOption, index)=> 
-                            // navOption.roles?.includes(userState.details.role.title)
-                            // ?   
-                            <Link 
-                                    key={index}
-                                    to={navOption.path}
-                                    className={`${styles.navigation_item} ${(navOption.active) ?styles.active :null}`}
-                                    onClick={()=> navigateTo(index)}
-                                >
-                                        {(navOption.active) ? <navOption.icon className={styles.nav_icon} /> :<navOption.activeIcon className={styles.nav_icon} />}
-                                        <div className={styles.nav_label}> <span>{ navOption.label }</span> </div>
-                                </Link>
-                            // :   null
-                        )
-                    }
-                </div> 
-            </div>
+          {userState.details.role.title === "ADMINISTRATOR"
+            ? navOptions.map(
+                (navOption, index) => (
+                  // ?
+                  <Link
+                    key={index}
+                    to={navOption.path}
+                    className={`${styles.navigation_item} ${
+                      navOption.active ? styles.active : null
+                    }`}
+                    onClick={() => navigateTo(index)}
+                  >
+                    {navOption.active ? (
+                      <navOption.icon className={styles.nav_icon} />
+                    ) : (
+                      <navOption.activeIcon className={styles.nav_icon} />
+                    )}
+                    <div className={styles.nav_label}>
+                      {" "}
+                      <span>{navOption.label}</span>{" "}
+                    </div>
+                  </Link>
+                )
+                // :
+              )
+            : staffNav?.map(
+                (navOption, index) => (
+                  // ?
+                  <Link
+                    key={index}
+                    to={navOption.path}
+                    className={`${styles.navigation_item} ${
+                      navOption.active ? styles.active : null
+                    }`}
+                    onClick={() => navigateTo(index)}
+                  >
+                    {navOption.active ? (
+                      <navOption.icon className={styles.nav_icon} />
+                    ) : (
+                      <navOption.activeIcon className={styles.nav_icon} />
+                    )}
+                    <div className={styles.nav_label}>
+                      {" "}
+                      <span>{navOption.label}</span>{" "}
+                    </div>
+                  </Link>
+                )
+                // :   staffNav
+              )}
         </div>
-    );
+      </div>
+    </div>
+  );
 }
