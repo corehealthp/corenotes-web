@@ -195,11 +195,14 @@ export default function AddNewStaffModal({
             action={() => closeModal()}
           />
 
+
+
           <PrimaryTextButton
             isLoading={staffState.status === "LOADING"}
             disabled={!isButtonEnabled}
             width={"20%"}
             label={"Save"}
+            backgroundColor="green"
             clickAction={() => {
               registerStaff();
             }}

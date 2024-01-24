@@ -43,7 +43,10 @@ export const columns: TableProps<any>["columns"] = [
   {
     title: "Profile",
     dataIndex: "_id",
-    key: "profile",
-    render: (text) => <StaffViewProfileButton id={text} />,
+    key: "_id",
+    render: (text, _record) => (
+      <StaffViewProfileButton id={text} />
+    )
+    
   },
 ];
