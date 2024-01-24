@@ -26,7 +26,8 @@ export default function StaffList() {
         }));
       }
     });
-  }, [ setStaffState]);
+  }, [staffState?.list?.length, setStaffState]);
+  
   return (
     <div className={styles.staff_list}>
       <StaffListHeader

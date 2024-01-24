@@ -24,7 +24,7 @@ export default function Sidebar({
   let [isUserClockInOpen, setIsUserClockInOpen] = useState(false);
 
   const staffNav = navOptions?.filter((navOption) => {
-    return navOption?.label === "tasks";
+    return navOption?.label === "tasks" || navOption?.label === "staffs";
   });
 
   function clockUserIn() {
@@ -61,14 +61,14 @@ export default function Sidebar({
             staffState.details.isClockedIn ? (
               <button
                 onClick={() => clockUserOut()}
-                className="text-white bg-red-700 p-2  rounded-md fonr-semibold"
+                className="text-white bg-red-700 p-2  rounded-md font-semibold"
               >
                 Clock Out
               </button>
             ) : (
               <button
                 onClick={() => clockUserIn()}
-                className="text-white bg-green-700 p-2  rounded-md fonr-semibold"
+                className="text-white bg-green-700 p-2  rounded-md font-semibold"
               >
                 Clock In
               </button>
@@ -118,7 +118,7 @@ export default function Sidebar({
                     )}
                     <div className={styles.nav_label}>
                       {" "}
-                      <span>{navOption.label}</span>{" "}
+                      <span>{navOption.label==='staffs'?"Staff Profile":navOption.label}</span>{" "}
                     </div>
                   </Link>
                 )
