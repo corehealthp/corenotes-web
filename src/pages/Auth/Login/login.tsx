@@ -199,7 +199,6 @@ export default function Login() {
               />
             </div>
             <div className={styles.forgot_prompt}>
-              <Link to={"/forgot-username"}>Forgot username</Link>
               <Link to={"/forgot-password"}>Forgot password</Link>
             </div>
 

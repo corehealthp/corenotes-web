@@ -43,19 +43,15 @@ export function LogoutAction() {
 
 export function SendOtpAction(payload: { email: string }) {
   return new Promise((resolve, reject) => {
-    postFetch("/staffs/send-otp", payload)
+    postFetch("/staffs/forgot-password", payload)
       .then((data: any) => resolve(data))
       .catch((error) => reject(error));
   });
 }
 
-export function SetNewPasswordAction(payload: {
-  recoveryEmail: string;
-  code: string;
-  newPassword: string;
-}) {
+export function SetNewPasswordAction(payload: any) {
   return new Promise((resolve, reject) => {
-    postFetch("/auth/set-new-password", payload)
+    postFetch("/staffs/password-reset", payload)
       .then((data: any) => resolve(data))
       .catch((error) => reject(error));
   });

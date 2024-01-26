@@ -6,56 +6,61 @@ import capitalize from "src/utils/capitalize";
 import { useUserState, userInitState } from "src/features/user/state";
 import { useState } from "react";
 
-import { authInitState, useAuthState} from "src/features/auth/state";
+import { authInitState, useAuthState } from "src/features/auth/state";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
 import { LogoutAction } from "src/features/auth/actions";
 // import ClockInOutModal from "src/pages/Auth/ClockinOutModal/ClockInOutModal";
 import { useNavigate } from "react-router-dom";
 
-export default function UserProfileCard({ extraStyles }: { extraStyles: string }) {
+export default function UserProfileCard({
+  extraStyles,
+}: {
+  extraStyles: string;
+}) {
   const [userState, setUserState] = useUserState();
   const [authState, setAuthState] = useAuthState();
   const [showLogoutDropdown, setShowLogoutDropdown] = useState(false);
-  const [showClockOutModal, setShowClockOutModal] = useState(false)
+  const [showClockOutModal, setShowClockOutModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [logoutTime, setLogoutTime] = useState(new Date());
   const navigate = useNavigate();
-  
+
   const toggleLogoutDropdown = () => {
     setShowLogoutDropdown(!showLogoutDropdown);
   };
-console.log(showClockOutModal,modalTitle,logoutTime)
+  console.log(showClockOutModal, modalTitle, logoutTime);
   function showModal(role: string) {
-    if(role !== 'administrator'){
-      setShowClockOutModal(true)
-    }else {
-      navigate({pathname: "/"})
+    if (role !== "administrator") {
+      setShowClockOutModal(true);
+    } else {
+      navigate({ pathname: "/" });
     }
   }
   function LogOut() {
+    navigate("/");
     LogoutAction()
-    .then(() => {
-      localStorage.removeItem('sid.set')
-      setUserState(userInitState);
-      setAuthState(authInitState)
-      const getUserDetailsJSON = localStorage.getItem('user_data') as string;
-      const getUserDetails = JSON.parse(getUserDetailsJSON )
+      .then(() => {
+        localStorage.removeItem("sid.set");
+        setUserState(userInitState);
+        setAuthState(authInitState);
+        const getUserDetailsJSON = localStorage.getItem("user_data") as string;
+        const getUserDetails = JSON.parse(getUserDetailsJSON);
 
-      showModal(getUserDetails.role)
-      setModalTitle(`${getUserDetails.firstname} ${getUserDetails.lastname}`)
-      setLogoutTime(new Date())
-      // navigate({pathname: "/"})
-    })
-    .catch((error: { message: string;}) => {
-      setAuthState((state)=> {
-        return {
-          ...state,
-          error: true,
-          message: error.message,
-          status:'FAILED'
-        }
+        showModal(getUserDetails.role);
+        setModalTitle(`${getUserDetails.firstname} ${getUserDetails.lastname}`);
+        setLogoutTime(new Date());
+        // navigate({pathname: "/"})
       })
-    });
+      .catch((error: { message: string }) => {
+        setAuthState((state) => {
+          return {
+            ...state,
+            error: true,
+            message: error.message,
+            status: "FAILED",
+          };
+        });
+      });
   }
 
   return (
@@ -77,11 +82,11 @@ console.log(showClockOutModal,modalTitle,logoutTime)
           {capitalize(userState.details.role.title)}
         </div>
       </div>
-      <FormStateModal 
-        status={authState.status} 
-        error={authState.error} 
+      <FormStateModal
+        status={authState.status}
+        error={authState.error}
         message={authState.message}
-        reset={()=> (setAuthState(authInitState))}
+        reset={() => setAuthState(authInitState)}
       />
       <IconAngleDown className={styles.arrow} />
 
@@ -99,4 +104,3 @@ console.log(showClockOutModal,modalTitle,logoutTime)
     </div>
   );
 }
-

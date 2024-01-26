@@ -10,7 +10,7 @@ import { emailValid } from "../../../utils/emailValidation";
 import {  SendOtpAction } from "../../../features/auth/actions";
 import PasswordResetSuccess from "./components/PasswordResetSuccess";
 import { formFieldType } from "src/components/FormComponents/FormWrapper/types";
-import { ReactComponent as IconPlusCircle } from "src/assets/icons/icon-plus-circle.svg";
+// import { ReactComponent as IconPlusCircle } from "src/assets/icons/icon-plus-circle.svg";
 
 export default function ForgotPassword() {
   const [authState, setAuthState] = useAuthState();
@@ -98,7 +98,7 @@ export default function ForgotPassword() {
           <div className={styles.form_title}>
             <div className={styles.title}>Forgot Password?</div>
             <div className={styles.sub_title}>
-              Enter your account credentials and we’d send you a reset link.
+              Enter your account Email Address and we’d send you a reset link.
             </div>
           </div>
 
@@ -109,7 +109,8 @@ export default function ForgotPassword() {
             <InputField
               type={RecoverEmailModel.type!}
               // label={RecoverEmailModel.label}
-              prefixIcon={<IconPlusCircle />}
+              // prefixIcon={<IconPlusCircle />}
+              placeholder="Enter Email Address"
               error={RecoverEmailModel.error}
               onInput={(inputVal: string) =>
                 setInput(inputVal, RecoverEmailModel, setRecoverEmailModel)
