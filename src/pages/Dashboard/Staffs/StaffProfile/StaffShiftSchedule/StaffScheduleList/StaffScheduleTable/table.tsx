@@ -35,17 +35,26 @@ export const columns: TableProps<any>["columns"] = [
     // dataIndex: "to",
     key: "duration",
     render: (_text, record) => {
-      // const durationInHours = moment(record.updatedAt, "HH:mm").diff(moment(record.createdAt), 'hours', true);
       const startTime = moment(record.createdAt);
       const endTime = moment(record.updatedAt);
-
-      const durationInHours = endTime.diff(startTime, "hours", true);
-      return (
-        <span className="text-xs font-semibold">
-          {durationInHours.toFixed(2)} hrs
-        </span>
-      );
-    },
+      const durationInMinutes = endTime.diff(startTime, "minutes");
+  
+      if (durationInMinutes < 60) {
+          return (
+              <span className="text-xs font-semibold">
+                  {durationInMinutes} mins
+              </span>
+          );
+      } else {
+          const hours = Math.floor(durationInMinutes / 60);
+          const minutes = durationInMinutes % 60;
+          return (
+              <span className="text-xs font-semibold">
+                  {hours} hr {minutes} mins
+              </span>
+          );
+      }
+  }
   },
   {
     title: "Clock In At",
@@ -59,8 +68,8 @@ export const columns: TableProps<any>["columns"] = [
   },
   {
     title: "Clock Out At",
-    dataIndex: "updatedAt",
-    key: "updatedAt",
+    dataIndex: "EndAt",
+    key: "EndAt",
     render: (text) => (
       <span className="text-xs font-semibold">
         {moment(text).format("lll")}

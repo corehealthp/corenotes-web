@@ -1,7 +1,7 @@
 import Login from "src/pages/Auth/Login";
 import ForgotPassword from "src/pages/Auth/ForgotPassword/forgotpassword";
 import { routerType } from "src/routes/types";
-import ForgotUserName from "src/pages/Auth/ForgotUserName/forgotUserName";
+import ResetPassword from "src/pages/Auth/ResetPassword/resetPassword";
 
 const AuthRoutes: routerType[] = [
   {
@@ -15,9 +15,9 @@ const AuthRoutes: routerType[] = [
     element: <ForgotPassword />,
   },
   {
-    path: "/forgot-username",
-    title: "forgot-username",
-    element: <ForgotUserName />,
+    path: "/reset-password/:token",
+    title: "reset-password/:token",
+    element: <ResetPassword />,
   },
 
 ];

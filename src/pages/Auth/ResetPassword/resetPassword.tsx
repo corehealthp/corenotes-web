@@ -1,25 +1,36 @@
-import styles from '../ForgotPassword/forgotpassword.module.css'
+import styles from "../ForgotPassword/forgotpassword.module.css";
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import TextButton from "../../../components/Buttons/TextButton/textbutton";
 import InputField from "../../../components/FormComponents/InputField/InputField";
 import FormErrorModal from "../../../components/FormError/FormErrorModal";
 import { useAuthState } from "../../../features/auth/authAtom";
-import { formFieldType } from 'src/components/FormComponents/FormWrapper/types';
-import PasswordResetSuccess from '../ForgotPassword/components/PasswordResetSuccess';
+import { formFieldType } from "src/components/FormComponents/FormWrapper/types";
+import PasswordResetSuccess from "../ForgotPassword/components/PasswordResetSuccess";
+import { SetNewPasswordAction } from "src/features/auth/actions";
 
-
-export default function ForgotUserName() {
+export default function ResetPassword() {
   const [authState, setAuthState] = useAuthState();
+  const {token}=useParams()
+ const navigate=useNavigate()
 
-  const [RecoverUserNameModel, setRecoverUserNameModel] = useState<formFieldType>({
-    type: "text",
-    label: "Username",
-    value: "",
-    error: "",
-    validated: false,
-  });
+  const [RecoverPasswordModel, setRecoverPasswordModel] =
+    useState<formFieldType>({
+      type: "password",
+      label: "New Password",
+      value: "",
+      error: "",
+      validated: false,
+    });
+  // const [confirmPasswordModel, setConfirmPasswordModel] =
+  //   useState<formFieldType>({
+  //     type: "password",
+  //     label: "Confirm Password",
+  //     value: "",
+  //     error: "",
+  //     validated: false,
+  //   });
 
   const setInput = (inputVal: string, model: any, setModel: any) => {
     model.value = inputVal;
@@ -33,7 +44,7 @@ export default function ForgotUserName() {
       updatedModel.validated = false;
       return false;
     }
-    if ((updatedModel.value) === '') {
+    if (updatedModel.value === "") {
       updatedModel.error = "Please enter a username";
       updatedModel.validated = false;
       return false;
@@ -47,11 +58,12 @@ export default function ForgotUserName() {
   const [isResetSent, setIsResetSent] = useState(false);
 
   const RecoverPassword = () => {
-    if (!validateModel(RecoverUserNameModel)) return false;
+    if (!validateModel(RecoverPasswordModel)) return false;
 
-    // const payload = {
-    //   username: RecoverUserNameModel.value,
-    // };
+    const payload = {
+      resetToken:token,
+      newPassword: RecoverPasswordModel.value,
+    };
 
     setAuthState((state) => {
       return {
@@ -62,30 +74,31 @@ export default function ForgotUserName() {
       };
     });
 
-    // ResetPasswordAction(payload)
-    //   .then((data) => {
-    //     setAuthState((state) => {
-    //       return {
-    //         ...state,
-    //         status: "SUCCESS",
-    //         error: false,
-    //         message: "",
-    //       };
-    //     });
-    //     setIsResetSent(true);
-    //   })
-    //   .catch((error) => {
-    //     setAuthState((state) => {
-    //       return {
-    //         ...state,
-    //         status: "FAILED",
-    //         error: true,
-    //         message: error.message,
-    //       };
-    //     });
+    SetNewPasswordAction(payload)
+      .then((data) => {
+        console.log(data)
+        setAuthState((state) => {
+          return {
+            ...state,
+            status: "SUCCESS",
+            error: false,
+            message: "",
+          };
+        });
+        navigate("/")
+      })
+      .catch((error) => {
+        setAuthState((state) => {
+          return {
+            ...state,
+            status: "FAILED",
+            error: true,
+            message: error.message,
+          };
+        });
+        navigate("/")
 
-    //     setIsResetSent(false);
-    //   });
+      });
   };
   return (
     <div className={styles.container}>
@@ -105,18 +118,35 @@ export default function ForgotUserName() {
             onSubmit={(e) => e.preventDefault()}
           >
             <InputField
-              type={RecoverUserNameModel.type}
-              label={RecoverUserNameModel.label}
-              error={RecoverUserNameModel.error}
+              type={RecoverPasswordModel.type}
+              label={RecoverPasswordModel.label}
+              error={RecoverPasswordModel.error}
               onInput={(inputVal: string) =>
-                setInput(inputVal, RecoverUserNameModel, setRecoverUserNameModel)
+                setInput(
+                  inputVal,
+                  RecoverPasswordModel,
+                  setRecoverPasswordModel
+                )
               }
             />
+<br/>
+            {/* <InputField
+              type={confirmPasswordModel.type}
+              label={confirmPasswordModel.label}
+              error={confirmPasswordModel.error}
+              onInput={(inputVal: string) =>
+                setInput(
+                  inputVal,
+                  confirmPasswordModel,
+                  setConfirmPasswordModel
+                )
+              }
+            /> */}
 
             <div className={styles.submit_btn_wrapper}>
               <TextButton
                 label="Reset Password"
-                disabled={!RecoverUserNameModel.validated}
+                disabled={!RecoverPasswordModel.validated}
                 isLoading={authState.status === "LOADING"}
                 onClick={() => RecoverPassword()}
               />
@@ -125,7 +155,7 @@ export default function ForgotUserName() {
         </div>
       ) : (
         <PasswordResetSuccess
-          email={RecoverUserNameModel.value}
+          email={RecoverPasswordModel.value}
           editEmail={() => setIsResetSent(false)}
           resendLink={() => RecoverPassword()}
         />
@@ -140,5 +170,3 @@ export default function ForgotUserName() {
     </div>
   );
 }
-
-
