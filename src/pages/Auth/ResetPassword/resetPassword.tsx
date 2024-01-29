@@ -107,9 +107,9 @@ export default function ResetPassword() {
       {!isResetSent ? (
         <div className={styles.recover_email_form_container}>
           <div className={styles.form_title}>
-            <div className={styles.title}>Forgot UserName?</div>
+            <div className={styles.title}>Reset Password</div>
             <div className={styles.sub_title}>
-              No worries, we'll send reset instructions
+              Enter your new password below
             </div>
           </div>
 

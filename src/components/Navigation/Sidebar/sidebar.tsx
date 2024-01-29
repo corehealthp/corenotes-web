@@ -24,7 +24,7 @@ export default function Sidebar({
   let [isUserClockInOpen, setIsUserClockInOpen] = useState(false);
 
   const staffNav = navOptions?.filter((navOption) => {
-    return navOption?.label === "tasks" || navOption?.label === "staffs";
+    return navOption?.label === "tasks";
   });
 
   function clockUserIn() {
@@ -118,7 +118,7 @@ export default function Sidebar({
                     )}
                     <div className={styles.nav_label}>
                       {" "}
-                      <span>{navOption.label==='staffs'?"Staff Profile":navOption.label}</span>{" "}
+                      <span>{navOption.label}</span>{" "}
                     </div>
                   </Link>
                 )
