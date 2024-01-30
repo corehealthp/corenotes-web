@@ -68,6 +68,7 @@ export default function UserClockInModal({
           "clockInData",
           JSON.stringify(response?.clockinData)
         );
+        closeModal()
         setLoading(false);
       })
       .catch((error) => {
@@ -94,6 +95,7 @@ export default function UserClockInModal({
           details: response?.staffData,
       }))
         localStorage.removeItem("clockInData");
+        closeModal()
       })
       .catch((error) => {
         console.log(error);
@@ -186,7 +188,7 @@ export default function UserClockInModal({
                         )}
                       </div>
 
-                      <p>
+                      <p onClick={()=>closeModal()}>
                         <IoMdClose />
                       </p>
                     </div>
