@@ -88,8 +88,8 @@ export default function EditStaffProfileModal({
 			...state,
 			status: "LOADING",
 		}));
-
-		updateStaffProfileAction(payload)
+//@ts-ignore
+		updateStaffProfileAction(params.staffId!,payload)
 			.then((response) => {
 				setIndividualState((state) => ({
 					...state,
