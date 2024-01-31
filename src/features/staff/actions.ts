@@ -320,12 +320,9 @@ export function fetchStaffRoleDetailsAction(roleId: string) {
   );
 }
 
-export function updateStaffProfileAction(payload: {
-  staffId: string;
-  providerRole: string;
-}) {
+export function updateStaffProfileAction(staffId:string, payload:string) {
   return new Promise<fetchStaffSuccessResponseType>((resolve, reject) => {
-    patchFetch("/staffs/update", payload)
+    patchFetch(`/staffs/profile/${staffId}`, payload)
       .then((response) => {
         resolve({
           ...response,
