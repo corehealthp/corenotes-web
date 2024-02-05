@@ -319,7 +319,7 @@ export function fetchStaffRoleDetailsAction(roleId: string) {
     }
   );
 }
-
+//comment
 export function updateStaffProfileAction(staffId:string, payload:string) {
   return new Promise<fetchStaffSuccessResponseType>((resolve, reject) => {
     patchFetch(`/staffs/profile/${staffId}`, payload)
