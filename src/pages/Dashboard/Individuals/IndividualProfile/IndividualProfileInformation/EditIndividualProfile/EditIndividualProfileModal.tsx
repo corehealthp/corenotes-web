@@ -161,6 +161,8 @@ export default function EditStaffProfileModal({
 						disabled={!providerRoleModel.selected}
 						width={"20%"}
 						label="Submit"
+                        backgroundColor="green"
+
 						clickAction={() => submitStaffProfile()}
 					/>
 				</div>

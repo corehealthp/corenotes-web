@@ -130,6 +130,8 @@ export default function AddMedicationToServiceModal({
                         disabled={!isFormValidated}
                         width={"20%"}
                         label="Submit"
+                        backgroundColor="green"
+
                         clickAction={()=> submitAddMedicationToService()}
                     />
                 </div>

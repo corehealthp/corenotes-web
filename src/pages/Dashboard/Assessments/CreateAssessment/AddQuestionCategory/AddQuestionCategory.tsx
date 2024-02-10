@@ -111,6 +111,8 @@ export default function AddQuestionCategoryModal({closeModal}:{closeModal:()=> v
                         disabled={!questionCategoryNameModel.validated}
                         width={"20%"}
                         label="Save"
+                        backgroundColor="green"
+
                         clickAction={()=> saveCategory()}
                     />
                 </div>

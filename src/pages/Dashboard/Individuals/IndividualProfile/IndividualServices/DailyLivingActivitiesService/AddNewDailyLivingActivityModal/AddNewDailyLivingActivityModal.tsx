@@ -323,6 +323,8 @@ export default function AddNewActivityModal({ closeModal }:{ closeModal:()=> voi
                         disabled={!isFormValid}
                         width={"20%"}
                         label="Submit"
+                        backgroundColor="green"
+
                         clickAction={()=> submitActivityService()}
                     />
                 </div>

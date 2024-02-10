@@ -441,9 +441,9 @@ export function clockStaffOutAction(payload: IClockStaffOutActionPayload) {
   });
 }
 
-export function deactivateStaffProfileAction(staffId: string) {
+export function deactivateStaffProfileAction(staffId: string, payload:any) {
   return new Promise<fetchStaffSuccessResponseType>((resolve, reject) => {
-    putFetch(`/staffs/profile/deactivate/${staffId}`, "")
+    putFetch(`/staffs/${staffId}/deactivate`, payload)
       .then((response: successResponseType) => {
         resolve({
           ...response,
@@ -455,9 +455,9 @@ export function deactivateStaffProfileAction(staffId: string) {
       .catch((error) => reject(error));
   });
 }
-export function activateStaffProfileAction(staffId: string) {
+export function activateStaffProfileAction(staffId: string,payload:any) {
   return new Promise<fetchStaffSuccessResponseType>((resolve, reject) => {
-    putFetch(`/staffs/profile/activate/${staffId}`, "")
+    putFetch(`/staffs/${staffId}/activate`, payload)
       .then((response: successResponseType) => {
         resolve({
           ...response,

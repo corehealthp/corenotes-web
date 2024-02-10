@@ -355,6 +355,8 @@ export default function AddNewGoalModal({ closeModal }:{ closeModal:()=> void })
                         disabled={!isFormValid}
                         width={"20%"}
                         label="Submit"
+                        backgroundColor="green"
+
                         clickAction={()=> submitGoalService()}
                     />
                 </div>

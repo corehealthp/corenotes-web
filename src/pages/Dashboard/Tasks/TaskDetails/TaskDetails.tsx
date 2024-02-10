@@ -403,6 +403,7 @@ export default function TaskDetails() {
                                                 label={"Administered"}
                                                 clickAction={taskState.taskDetails.medication?.category === "controlled" ?administerMed :administerOtherMed }
                                                 isLoading={taskState.status === 'LOADING'}
+                                                backgroundColor="green"
                                                 disabled={!isFormValid && !isOtherFormValid}
                                             />
                                         </div>

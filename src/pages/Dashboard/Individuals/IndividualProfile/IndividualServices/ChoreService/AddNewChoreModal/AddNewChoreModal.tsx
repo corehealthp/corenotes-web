@@ -311,6 +311,8 @@ export default function AddNewChoreModal({ closeModal }:{ closeModal:()=> void }
                         disabled={!isFormValid}
                         width={"20%"}
                         label="Submit"
+                        backgroundColor="green"
+
                         clickAction={()=> submitChoreService()}
                     />
                 </div>

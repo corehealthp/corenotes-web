@@ -175,6 +175,8 @@ export default function AssessmentSessionModal({ assessmentSessionId, closeModal
                         disabled={!isAssessmentComplete}
                         width={"20%"}
                         label="Submit"
+                        backgroundColor="green"
+
                         clickAction={()=> completeAssessmentSession()}
                     />
                 </div>

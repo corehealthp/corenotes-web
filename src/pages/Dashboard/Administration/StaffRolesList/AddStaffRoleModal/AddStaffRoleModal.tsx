@@ -119,6 +119,7 @@ export default function AddStaffRoleModal({
             disabled={!roleTitle.validated}
             width={"20%"}
             label="Submit"
+            backgroundColor="green"
             clickAction={() => submitRole()}
           />
         </div>

@@ -218,6 +218,8 @@ export default function AddCompartmentModal({ close }:{close:()=> void}) {
                         label="Create service"
                         clickAction={()=> submitService()}
                         disabled={!isFormValidated}
+                        backgroundColor="green"
+
                         isLoading={servicesState.status === 'LOADING'}
                     />
                 </div>

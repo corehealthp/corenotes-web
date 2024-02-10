@@ -79,6 +79,8 @@ export default function AddPRNMedicationModal({closeModal}:{closeModal:()=> void
                             width={"20%"}
                             label="Submit"
                             clickAction={()=> nextStep()}
+                            backgroundColor="green"
+
                         />
                     </div>
                 </div>

@@ -111,6 +111,8 @@ export default function AddAssessmentCategoryModal({closeModal}:{closeModal:()=>
                         disabled={!assessmentCategoryNameModel.validated}
                         width={"20%"}
                         label="Save"
+                        backgroundColor="green"
+
                         clickAction={()=> saveCategory()}
                     />
                 </div>

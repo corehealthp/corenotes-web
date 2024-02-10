@@ -256,6 +256,8 @@ export default function AddPRNServiceModal({closeModal}:{closeModal:()=> void}) 
                         label="Submit"
                         clickAction={()=> submit()}
                         disabled={!isFormValidated}
+                        
+backgroundColor="green"
                     />
                 </div>
             </div>
