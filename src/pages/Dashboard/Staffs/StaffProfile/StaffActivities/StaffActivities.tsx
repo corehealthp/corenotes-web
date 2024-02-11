@@ -125,6 +125,8 @@ export default function StaffActivities() {
                     disabled={false}
                     width="200px"
                     clickAction={() => ({})}
+                    backgroundColor="green"
+
                 />
                 <SizedBox height="50px" />
                 

@@ -70,6 +70,11 @@ export default function StaffWorkInformationForm({ userState,onModified }:{ user
 				id: "1",
 				label: "Fulltime",
 				value: "fulltime"
+			},
+			{
+				id: "1",
+				label: "Part time",
+				value: "parttime"
 			}
 		],
 		selected: false,
@@ -147,6 +152,7 @@ export default function StaffWorkInformationForm({ userState,onModified }:{ user
 			<div className={styles.form_content}>
 				<div className={styles.row}>
 					<DropDownField
+					
 						placeholder={scheduleTypeModel.placeholder}
 						value={scheduleTypeModel.value}
 						error={scheduleTypeModel.error}

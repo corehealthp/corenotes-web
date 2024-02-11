@@ -141,6 +141,8 @@ export default function NewScheduleModal({close}:{close:()=> void}) {
                         disabled={!isFormValidated}
                         width={"20%"}
                         label="Submit"
+                        backgroundColor="green"
+
                         clickAction={() => setScheduleForm()}
                     />
                 </div>

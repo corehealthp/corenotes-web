@@ -171,6 +171,8 @@ export default function StaffReports() {
                         isLoading={printReportStaffState.status === 'LOADING'}
                         width="25%"
                         label="Print report"
+                        backgroundColor="green"
+
                         clickAction={()=> createReport()}
                     />
                 </div>

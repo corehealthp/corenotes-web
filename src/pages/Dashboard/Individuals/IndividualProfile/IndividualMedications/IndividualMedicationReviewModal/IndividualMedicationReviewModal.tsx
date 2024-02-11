@@ -469,6 +469,8 @@ export default function IndividualMedicationReviewModal({
                             isLoading={individualState.status === 'LOADING'}
                             width={"max-content"}
                             label={"Complete review"}
+                        backgroundColor="green"
+
                             clickAction={()=> performReview()}
                         />
                     </div>

@@ -126,6 +126,9 @@ export default function DeactivateStaff() {
   // }
 
   function deactivateStaff() {
+         const payload = {
+          password: userPassword.value!
+      }
     setActivateStaffState((state) => {
       return {
         ...state,
@@ -135,7 +138,7 @@ export default function DeactivateStaff() {
       };
     });
 
-    deactivateStaffProfileAction(params.staffId!)
+    deactivateStaffProfileAction(params.staffId!,payload)
       .then((response) => {
         setActivateStaffState((state) => {
           return {
@@ -168,6 +171,9 @@ export default function DeactivateStaff() {
       });
   }
   function activateStaff() {
+    const payload = {
+              password: userPassword.value!
+          }
     setActivateStaffState((state) => {
       return {
         ...state,
@@ -177,7 +183,7 @@ export default function DeactivateStaff() {
       };
     });
 
-    activateStaffProfileAction(params.staffId!)
+    activateStaffProfileAction(params.staffId!,payload)
       .then((response) => {
         setActivateStaffState((state) => {
           return {
@@ -303,6 +309,8 @@ export default function DeactivateStaff() {
           <PrimaryTextButton
             label="Activate staff"
             disabled={!isFormValid}
+            backgroundColor="green"
+            
             isLoading={activateStaffState.status === "LOADING"}
             clickAction={() => activateStaff()}
           />

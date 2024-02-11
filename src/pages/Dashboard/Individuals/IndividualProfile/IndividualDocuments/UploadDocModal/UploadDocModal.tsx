@@ -257,6 +257,8 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
                         disabled={!isFormValid}
                         width={"20%"}
                         label={"Save"}
+                        backgroundColor="green"
+
                         clickAction={()=> {uploadDocument()}}
                     />
                 </div>

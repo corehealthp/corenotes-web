@@ -695,6 +695,8 @@ export default function CreateMedicationModal({
             isLoading={medicationState.status === "LOADING"}
             disabled={!isFormValidated}
             width={"20%"}
+            backgroundColor="green"
+
             label="Submit"
             clickAction={() => submitMedicationModel()}
           />

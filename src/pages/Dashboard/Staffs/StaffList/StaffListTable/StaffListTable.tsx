@@ -11,9 +11,9 @@ export default function StaffListTable({ staffs }: any) {
   return (
     <div className={styles.staff_list_table}>
       
-        <div>
-          <Table columns={columns} dataSource={staffs} />
-        </div>
+        {/* <div> */}
+          <Table columns={columns} dataSource={staffs}  />
+        {/* </div> */}
       
     </div>
   );
