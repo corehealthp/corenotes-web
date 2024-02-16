@@ -10,6 +10,7 @@ import { phoneNumberValid } from "src/utils/phoneNumberValidation";
 
 export default function StaffPersonalInformationForm({userState, onModified }:{userState?:any, onModified:(newStaffDetails:INewStaffPersonalInformation)=> void }) {
 
+	console.log("userState",userState)
 	const [firstnameModel, setFirstnameModel] = useState<formFieldType>({
 		type: "text",
 		label: "First name",
@@ -95,7 +96,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "phone",
 		label: "Work phone",
 		placeholder: "Work phone",
-		value: userState?.phoneNumber.work,
+		value: userState?.phoneNumber?.work,
 		error: "",
 		validated: false,
 	});
@@ -105,7 +106,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		name: "cell-phone",
 		label: "Cell phone",
 		placeholder: "Cell phone",
-		value: userState?.phoneNumber.cell,
+		value: userState?.phoneNumber?.cell,
 		error: "",
 		validated: false,
 	});
@@ -114,7 +115,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "email",
 		label: "Email Address",
 		placeholder: "Email Address",
-		value: userState?.phoneNumber.email,
+		value: userState?.email,
 		error: "",
 		validated: false,
 	});
@@ -123,7 +124,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "Contact name",
 		placeholder: "Contact name",
-		value: userState?.emergencyContact.name,
+		value: userState?.emergencyContact?.name,
 		error: "",
 		validated: false,
 	});
@@ -132,7 +133,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "text",
 		label: "Relationship with contact",
 		placeholder: "Relationship with contact",
-		value: userState?.emergencyContact.relationship,
+		value: userState?.emergencyContact?.relationship,
 		error: "",
 		validated: false,
 	});
@@ -141,7 +142,7 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 		type: "phone",
 		label: "Contact cell phone",
 		placeholder: "Contact cell phone",
-		value: userState?.emergencyContact.phoneNumber,
+		value: userState?.emergencyContact?.phoneNumber,
 		error: "",
 		validated: false,
 	});
@@ -259,6 +260,8 @@ export default function StaffPersonalInformationForm({userState, onModified }:{u
 						type={genderModel.type}
 						placeholder={genderModel.placeholder}
 						error={genderModel.error}
+						value={genderModel.value}
+
 						onInput={(inputValue: string) => setInput(inputValue, genderModel, setGenderModel)}
 					/>
 				</div>

@@ -28,7 +28,7 @@ export const columns: TableProps<any>["columns"] = [
     align: "left",
 
     render: (text, _record) => (
-      <span className="text-xs font-semibold">{text.work}</span>
+      <span className="text-xs font-semibold">{text?.work}</span>
     ),
   },
   {
