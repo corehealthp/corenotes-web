@@ -18,6 +18,7 @@ import { useStaffState } from "src/features/staff/state";
 import FormWrapper from "src/components/FormComponents/FormWrapper";
 import formatStaff from "src/features/staff/utils/formatStaff";
 import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function DeactivateStaff() {
   const params = useParams();
@@ -147,7 +148,11 @@ export default function DeactivateStaff() {
             status: "SUCCESS",
             message: response.message,
           };
-        });
+          
+        })
+        createGlobalFeedback("success", response.message);
+        
+        
         setStaffState((state) => {
           return {
             ...state,
@@ -192,7 +197,10 @@ export default function DeactivateStaff() {
             status: "SUCCESS",
             message: response.message,
           };
-        });
+        }
+        
+        )
+        createGlobalFeedback("success", response.message);
         setStaffState((state) => {
           return {
             ...state,

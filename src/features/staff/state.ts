@@ -136,11 +136,27 @@ export const staffInitState:staffStateType = {
 	totalStaffs: 0,
 	profileImage: "",
 	firstname: "",
-	
+
 	lastname: function (lastname: any): ReactNode {
 		throw new Error("Function not implemented.");
-		console.log(lastname)
-	}
+		console.log(lastname);
+	},
+	phoneNumber: undefined,
+	emergencyContact: undefined,
+	providerRole: undefined,
+	email: undefined,
+	nickname: undefined,
+	initials: undefined,
+	dob: undefined,
+	gender: undefined,
+	address: undefined,
+	city: undefined,
+	state: undefined,
+	zipCode: undefined,
+	title: undefined,
+	hiredAt: undefined,
+	employeeId: undefined,
+	jobSchedule: undefined
 };
 
 export const staffAtom = atom({

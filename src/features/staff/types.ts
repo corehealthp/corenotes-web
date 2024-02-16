@@ -236,14 +236,32 @@ export interface INewStaffPersonalInformation {
 }
 
 export interface INewStaffWorkInformation {
+    password: any|null;
+    username: any|null;
     providerRole:string;
     hiredAt:string;
     jobSchedule:string;
-    username:string;
-    password:string;
+    // username:string;
+    // password:string;
 }
 
 export interface staffStateType extends initStateType {
+  phoneNumber: any;
+  emergencyContact: any;
+  providerRole: any;
+  email: any;
+  nickname: any;
+  initials: any;
+  dob: any;
+  gender: any;
+  address: any;
+  city: any;
+  state: any;
+  zipCode: any;
+  title: any;
+  hiredAt: any;
+  employeeId: any;
+  jobSchedule: any;
 	profileImage: string;
 	firstname: string;
 	lastname(lastname: any): import("react").ReactNode;
