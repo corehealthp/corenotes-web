@@ -54,7 +54,7 @@ export default function StaffWorkInformationForm({
     }));
   }, [setStaffState, staffRolesResponse]);
   const userRole: any = staffRolesResponse?.data?.staffRoles.filter((role) => {
-    return role?.id === userState.providerRole;
+    return role?.id === userState?.providerRole;
   }) || [{ title: "MD" }];
   const [providerRoleModel, setProviderRoleModel] = useState<DropDownFormData>({
     name: "provider-role",
