@@ -383,33 +383,10 @@ const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
             }
           />
         </div>
+        
         <div className={styles.row}>
-          <DropDownField
-            placeholder={maritalStatusModel.placeholder}
-            options={maritalStatusModel.options}
-            error={maritalStatusModel.error}
-            selected={maritalStatusModel.selected}
-            selectedOptionIndex={maritalStatusModel.selectedOptionIndex}
-            onSelect={(optionIndex: number) =>
-              selectOption(
-                optionIndex,
-                maritalStatusModel,
-                setMaritalStatusModel
-              )
-            }
-          />
 
-          <InputField
-            type={religionModel.type}
-            placeholder={religionModel.placeholder}
-            value={religionModel.value}
-            error={religionModel.error}
-            onInput={(inputValue: string) =>
-              setInput(inputValue, religionModel, setReligionModel)
-            }
-          />
-
-          <InputField
+        <InputField
             type={ssnModel.type}
             placeholder={ssnModel.placeholder}
             value={ssnModel.value}
@@ -418,8 +395,6 @@ const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
               setInput(inputValue, ssnModel, setssnModel)
             }
           />
-        </div>
-        <div className={styles.row}>
           <MultiSelectDropDownField
             placeholder={codeAlertsModel.placeholder}
             options={codeAlertsModel.options}
@@ -456,15 +431,7 @@ const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
           <div className={styles.text}>Insurance</div>
         </div>
         <div className={styles.row}>
-          {/* <InputField
-            type={medicareModel.type}
-            placeholder="Medicare"
-            value={medicareModel.value}
-            error={medicareModel.error}
-            // onInput={(inputValue: string) =>
-            //   setInput(inputValue, medicareModel, setMedicareModel)
-            // }
-          /> */}
+        
 
           <InputField
             type={medicareNumberModel.type}
@@ -476,15 +443,7 @@ const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
             }
           />
 
-          {/* <InputField
-            type={medicaidModel.type}
-            placeholder="Medicaid"
-            value={medicaidModel.value}
-            error={medicareModel.error}
-            // onInput={(inputValue: string) =>
-            //   setInput(inputValue, medicaidModel, setMedicaidModel)
-            // }
-          /> */}
+         
 
           <InputField
             type={medicareNumberModel.type}
@@ -495,20 +454,8 @@ const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
               setInput(inputValue, medicaidNumberModel, setMedicaidNumberModel)
             }
           />
-        </div>
 
-        <div className={styles.row}>
-          {/* <InputField
-            type={othersModel.type}
-            placeholder="Others"
-            value={othersModel.value}
-            error={othersModel.error}
-            // onInput={(inputValue: string) =>
-            //   setInput(inputValue, othersModel, setOthersModel)
-            // }
-          /> */}
-
-          <InputField
+<InputField
             type={othersNumberModel.type}
             placeholder="Others ID Number"
             value={othersNumberModel.value}
@@ -517,11 +464,9 @@ const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
               setInput(inputValue, othersNumberModel, setOthersNumberModel)
             }
           />
-
-         
         </div>
 
-        <br/>
+     
         <div className={styles.row_header}>
           Contact information (a guardian or relative)
         </div>
