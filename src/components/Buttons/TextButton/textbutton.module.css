@@ -12,6 +12,7 @@
 }
 .button:disabled {
   opacity: 0.5;
+  cursor: not-allowed;
 }
 .loader_wrapper {
   width: 100%;

@@ -216,6 +216,7 @@ export default function AddCompartmentModal({ close }:{close:()=> void}) {
                     <PrimaryTextButton
                         width="200px"
                         label="Create service"
+                        backgroundColor={"var(--green-accent-100)"}
                         clickAction={()=> submitService()}
                         disabled={!isFormValidated}
                         backgroundColor="green"
