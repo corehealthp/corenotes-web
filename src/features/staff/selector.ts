@@ -151,8 +151,8 @@ interface IFetchStaffRolesList {
 
 const fetchStaffRolesSelector = selectorFamily({
     key:'fetch_staff_roles_selector',
-    get: (pageNumber:number)=> async ()=> {
-        return await fetchStaffRolesAction(pageNumber)
+    get: ()=> async ()=> {
+        return await fetchStaffRolesAction()
         .then((response)=> {
             return {
                 message: response.message,
@@ -177,7 +177,7 @@ const fetchStaffRolesSelector = selectorFamily({
     }
 })
 
-export const useFetchStaffRoleSelector = (pageNumber:number) => useRecoilValue(fetchStaffRolesSelector(pageNumber))
+export const useFetchStaffRoleSelector = () => useRecoilValue(fetchStaffRolesSelector(1))
 
 interface IFetchStaffShiftsList {
     message:string;

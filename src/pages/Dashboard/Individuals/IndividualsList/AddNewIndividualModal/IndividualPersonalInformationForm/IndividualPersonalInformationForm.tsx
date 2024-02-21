@@ -95,37 +95,37 @@ export default function IndividualPersonalInformationForm({
     name: "gender",
   });
 
-  const [maritalStatusModel, setMaritalStatusModel] =
-    useState<DropDownFormData>({
-      label: "Marital Status",
-      placeholder: "Marital Status",
-      options: [
-        {
-          id: "1",
-          label: "Single",
-          value: "single",
-        },
-        {
-          id: "2",
-          label: "Married",
-          value: "married",
-        },
-      ],
-      error: "",
-      selected: false,
-      selectedOptionIndex: 0,
-      name: "marital-status",
-    });
+  // const [maritalStatusModel, setMaritalStatusModel] =
+  //   useState<DropDownFormData>({
+  //     label: "Marital Status",
+  //     placeholder: "Marital Status",
+  //     options: [
+  //       {
+  //         id: "1",
+  //         label: "Single",
+  //         value: "single",
+  //       },
+  //       {
+  //         id: "2",
+  //         label: "Married",
+  //         value: "married",
+  //       },
+  //     ],
+  //     error: "",
+  //     selected: false,
+  //     selectedOptionIndex: 0,
+  //     name: "marital-status",
+  //   });
 
-  const [religionModel, setReligionModel] = useState<formFieldType>({
-    type: "text",
-    label: "Religion",
-    placeholder: "Religion",
-    optional: true,
-    value: userState.religion,
-    error: "",
-    validated: false,
-  });
+  // const [religionModel, setReligionModel] = useState<formFieldType>({
+  //   type: "text",
+  //   label: "Religion",
+  //   placeholder: "Religion",
+  //   optional: true,
+  //   value: userState.religion,
+  //   error: "",
+  //   validated: false,
+  // });
 
   const [ssnModel, setssnModel] = useState<formFieldType>({
     type: "number",
@@ -294,8 +294,6 @@ const [othersNumberModel, setOthersNumberModel] = useState<formFieldType>(
           nickname: nicknameModel.value,
           dob: dobModel.value,
           gender: genderModel.value?.value ?? "",
-          maritalStatus: maritalStatusModel.value?.value ?? "",
-          religion: religionModel.value,
           ssn: ssnModel.value,
           weight: weightModel.value.toString(),
           medicare_no: medicareNumberModel.value,

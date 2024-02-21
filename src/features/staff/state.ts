@@ -73,7 +73,11 @@ export const staffInitState:staffStateType = {
 		jobSchedule: undefined,
 		employeeId: undefined,
 		username: undefined,
-		providerRole: undefined
+		providerRole: undefined,
+		city: undefined,
+		zipCode: undefined,
+		state: undefined,
+		nickname: undefined
 	},
 	documents: {
 		list: [],

@@ -143,6 +143,10 @@ export interface IStaffDocument {
 }
 
 export interface IStaffDetails {
+  city: any;
+  zipCode: any;
+  state: any;
+  nickname: any;
 	email: any;
 	emergencyContact: any;
 	phoneNumber: any;
@@ -309,6 +313,7 @@ export interface IActivity {
 }
 
 export interface IStaffRole {
+    _id: any;
     id:string;
     title:string;
     staffCount:number;

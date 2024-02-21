@@ -7,7 +7,7 @@ export default function StaffListHeader({
 }:{ showNewStaffModal: ()=> void }){
 
     const staffState = useStaffValue();
-    console.log(staffState)
+  
 
     return (
         <div className={styles.staff_list_header}>
