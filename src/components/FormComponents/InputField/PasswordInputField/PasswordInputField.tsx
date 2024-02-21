@@ -23,6 +23,7 @@ export default function PasswordInputField({
                 
     const [passwordModel, setPasswordModel] = useState<formFieldType>({
         type: "password",
+        autoComplete:"off",
         value: "",
         label: label,
         placeholder: placeholder ?? "Password",

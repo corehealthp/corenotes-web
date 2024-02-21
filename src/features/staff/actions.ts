@@ -279,9 +279,9 @@ export function staffClockOut(payload: any) {
   });
 }
 
-export function fetchStaffRolesAction(pageNumber: number) {
+export function fetchStaffRolesAction() {
   return new Promise<fetchStaffRolesSuccessResponseType>((resolve, reject) => {
-    getFetch(`/staffs/roles/${pageNumber}`)
+    getFetch(`/staffs/roles`)
       .then((response: successResponseType) => {
         resolve({
           ...response,

@@ -3,7 +3,7 @@ import styles from "./stafflisttable.module.css";
 // import ComponentLoader from "src/components/Loaders/ComponentLoader";
 // import UserImage from "src/components/ImageComponent/UserImage";
 
-import { columns } from "./table";
+import { columns } from "./table.tsx";
 import { Table } from "antd";
 
 export default function StaffListTable({ staffs }: any) {

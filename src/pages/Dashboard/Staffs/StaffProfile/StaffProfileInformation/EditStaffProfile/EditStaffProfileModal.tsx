@@ -11,7 +11,7 @@ import { useState } from "react";
 // import { useFetchStaffRoleSelector } from "src/features/staff/selector";
 import { updateStaffProfileAction } from "src/features/staff/actions";
 import { useParams } from "react-router-dom";
-import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
+// import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
 // import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
 import {
   INewStaffPersonalInformation,
@@ -23,6 +23,7 @@ import {
 } from "src/features/staff/types";
 import StaffPersonalInformationForm from "../../../StaffList/AddNewStaffModal/StaffPersonalInformationForm";
 import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
+import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 // import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
 // import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
 // import StaffWorkInformationForm from "../../../StaffList/AddNewStaffModal/StaffWorkInformationForm";
@@ -68,35 +69,34 @@ export default function EditStaffProfileModal({
     setIsButtonEnabled(message ? false : true);
   }
 
-  
   function validateForm(newStaffInfo: NewStaffType) {
     console.log(newStaffInfo);
     if (!newStaffInfo.personal.firstname) {
-    	return "Firstname field cannot be empty";
+      return "Firstname field cannot be empty";
     }
     if (!newStaffInfo.personal.lastname) {
-    	return "Lastname field cannot be empty";
+      return "Lastname field cannot be empty";
     }
     if (!newStaffInfo.personal.dob) {
-    	return "Date of birth field cannot be empty";
+      return "Date of birth field cannot be empty";
     }
     if (!newStaffInfo.personal.gender) {
-    	return "Gender field cannot be empty";
+      return "Gender field cannot be empty";
     }
     if (!newStaffInfo.personal.address) {
-    	return "Address field cannot be empty";
+      return "Address field cannot be empty";
     }
     if (!newStaffInfo.personal.city) {
-    	return "City field cannot be empty";
+      return "City field cannot be empty";
     }
     if (!newStaffInfo.personal.state) {
-    	return "State field cannot be empty";
+      return "State field cannot be empty";
     }
     if (!newStaffInfo.personal.zipCode) {
-    	return "Zip code field cannot be empty";
+      return "Zip code field cannot be empty";
     }
     if (!newStaffInfo.personal.phoneNumber.work) {
-    	return "Work phone field cannot be empty";
+      return "Work phone field cannot be empty";
     }
     // if (!newStaffInfo.personal.phoneNumber.cell) {
     // 	return "Cell phone field cannot be empty";
@@ -186,14 +186,11 @@ export default function EditStaffProfileModal({
 
   // console.log(staffState);
 
-
   function submitStaffProfile() {
     const payload = {
-      ...staffState.newStaff.personal,
-      ...staffState.newStaff.work,
+      ...staff,
     };
-    console.log(staffState,"kkkkkks")
-  
+
     setStaffState((state) => ({
       ...state,
       status: "LOADING",
@@ -209,6 +206,8 @@ export default function EditStaffProfileModal({
           message: response.message,
           error: false,
         }));
+        createGlobalFeedback("success", response.message);
+
       })
       .catch((error) => {
         setStaffState((state) => ({
@@ -218,34 +217,65 @@ export default function EditStaffProfileModal({
           message: error.message,
           error: false,
         }));
+        createGlobalFeedback("error", error.message);
+
       })
       .finally(() => {
+
         setTimeout(() => {
           closeModal();
         }, 1500);
       });
   }
 
-  function resetStaffState() {
-    setStaffState((state) => ({
-      ...state,
-      status: "IDLE",
-      message: "",
-      error: false,
-    }));
-  }
+  // function resetStaffState() {
+  //   setStaffState((state) => ({
+  //     ...state,
+  //     status: "IDLE",
+  //     message: "",
+  //     error: false,
+  //   }));
+  // }
 
   const userState = staffState.details;
+  const [staff, setStaff] = useState({
+    firstname: userState?.firstname,
+    lastname: userState?.lastname,
+    nickname: userState?.nickname,
+    initials: userState?.initials,
+    address: userState?.address,
+    city: userState?.city,
+    state: userState?.state,
+    zipCode: userState?.zipCode,
+    phoneNumber: {
+      work: userState?.phoneNumber?.work,
+      cell: userState?.phoneNumber?.cell,
+    },
+    emergencyContact: {
+      name: userState?.emergencyContact?.name,
+      phoneNumber: userState?.emergencyContact?.phoneNumber,
+      relationship: userState?.emergencyContact?.relationship,
+    },
+    email: userState?.email,
+    dob: userState?.dob,
+    gender: userState?.gender,
+
+    providerRole: userState?.providerRole,
+    jobSchedule: userState?.jobSchedule,
+
+    hiredAt: userState?.hiredAt,
+    // },
+  });
 
   return (
     <ModalContainer>
       <div className={styles.edit_staff_profile}>
-        <FormStateModal
+        {/* <FormStateModal
           status={staffState.status}
           error={staffState.error}
           message={staffState.message}
           reset={() => resetStaffState()}
-        />
+        /> */}
 
         <div className={styles.header}>
           <div className={styles.title}>Edit Profile</div>
@@ -261,12 +291,18 @@ export default function EditStaffProfileModal({
           <StaffPersonalInformationForm
             userState={userState}
             onModified={validatePersonalForm}
+            setStaff={setStaff}
+            staff={staff}
           />
           <StaffWorkInformationForm
             userState={userState}
             onModified={validateWorkForm}
+            setStaff={setStaff}
+            staff={staff}
+            edit={true}
           />
         </div>
+        <br />
 
         {/* <div className={styles.body}>
           <DropDownField

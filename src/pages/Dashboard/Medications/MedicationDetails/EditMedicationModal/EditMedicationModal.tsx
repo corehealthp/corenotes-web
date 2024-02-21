@@ -43,7 +43,7 @@ export default function CreateMedicationModal({
 	const [medicationState, setMedicationState] = useMedicationState();
 
 	const [staffState, setStaffState] = useStaffState();
-	const staffRolesResponse = useFetchStaffRoleSelector(staffState.currentPage);
+	const staffRolesResponse = useFetchStaffRoleSelector();
 
 	useEffect(() => {
 		setStaffState((state) => ({
