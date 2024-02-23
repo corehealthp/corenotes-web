@@ -192,8 +192,8 @@ export default function StaffWorkInformationForm({
     });
   }, []);
 
-  const roleTitle = staffState.roles?.list.filter((role) => {
-    return role._id === staff?.providerRole;
+  const roleTitle = staffState?.roles?.list?.filter((role) => {
+    return role?._id === staff?.providerRole;
   });
   return (
     <FormWrapper extraStyles={styles.staff_personal_information_form}>
@@ -231,8 +231,8 @@ export default function StaffWorkInformationForm({
                 }));
               }}
             >
-              <option value={staff.providerRole}>
-                {roleTitle?.[0]?.title.toUpperCase()}
+              <option value={staff.providerRole||""}>
+                {roleTitle?.[0]?.title.toUpperCase() || "Provider Role"}
               </option>
 
               {staffState.roles?.list?.map((role) => {
