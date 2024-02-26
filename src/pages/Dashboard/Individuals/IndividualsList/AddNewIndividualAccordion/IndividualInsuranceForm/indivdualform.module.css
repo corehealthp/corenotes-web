@@ -1,0 +1,12 @@
+.form_content {
+    margin-left: 5.5%;
+    margin-right: 6%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.row {
+    display: flex;
+    gap: 0.5rem;
+}

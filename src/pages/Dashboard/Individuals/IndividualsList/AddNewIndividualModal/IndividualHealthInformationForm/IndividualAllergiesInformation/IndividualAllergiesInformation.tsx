@@ -73,11 +73,11 @@ export default function IndividualAllergiesInformationForm() {
 
     return (
         <FormWrapper extraStyles={styles.staff_personal_information_form}>
-            <div className={styles.heading}>
+            {/* <div className={styles.heading}>
                 <div className={styles.number_circle}>5</div>
                 <div className={styles.text}>Allergies</div>
                 <div className={styles.info}>(Press enter to add allergy)</div>
-            </div>
+            </div> */}
 
             <div className={styles.form_content}>
                 <div className={styles.row}>

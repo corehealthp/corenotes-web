@@ -144,6 +144,7 @@ export default function Login() {
         // navigate({ pathname: "/dashboard" });
       })
       .catch((error) => {
+        console.log(error, "errrrr")
         createGlobalFeedback("error", error.message)
       })
       .finally(()=> setAuthState((state) => ({ ...state, status:"IDLE" })));

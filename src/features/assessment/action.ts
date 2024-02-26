@@ -14,6 +14,7 @@ export interface ICreateAssessmentPayload {
     title:string;
     category:string;
     questions:Array<{category:string, question:string}>;
+    assign_to: string;
 }
 
 export function createAssessmentAction(payload:ICreateAssessmentPayload) {

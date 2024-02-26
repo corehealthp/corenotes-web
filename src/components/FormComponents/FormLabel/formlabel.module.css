@@ -1,3 +1,5 @@
 .form_label {
     color: var(--black-accent-100);
+    font-size: 20px;
+    margin-bottom: 0.5rem;
 }

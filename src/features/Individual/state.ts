@@ -18,28 +18,53 @@ export const individualInitState: IndividualStateType = {
 		nickname: "",
 		dob: "",
 		gender: "",
-		religion: "",
+		// religion: "",
 		ssn: "",
+		insurance:"",
+		insuranceNo:"",
+		otherInsuranceNo:"",
 		contact: {
 			name: "",
 			email: "",
 			phoneNumber: "",
 		},
 		weight: "",
-		insurance:"",
-		insurance_no:"",
-		maritalStatus: "",
+		// insurance_no:"",
+		medicaidNumber: "",
+		// medicare_no: "",
+		// maritalStatus: "",
 		codeAlert: [],
-		requestedServices: [],
+		compartment: "",
+		// compartmentId: 0,
+		subCompartmentId: "",
 		diet: [],
 		allergies: {
 			food: [],
 			med: [],
 			other: [],
 		},
-		compartment: "",
-		compartmentId: 0,
-		subCompartmentId: ""
+		requestedServices: [],
+		medicallyFrail: {
+			options:[]
+		},
+		specialNeeds: {
+			seizureActivity: '',
+			blindVisionLoss: '',
+			hardHearing: '',
+			incontintentSafety: '',
+			failingProne: '',
+			oxygen: '',
+			weightBearingLimitation: '',
+			activityLimitation: '',
+			shortnessOfBirth: '',
+
+		},
+		serviceFrequency: {
+			daysAndFrequencyOfService: '',
+			dischargePlan: '',
+			frequencyOfService: '',
+			durationOfService: '',				
+		}
 	},
 	profile: {
 		id: "",
@@ -70,6 +95,27 @@ export const individualInitState: IndividualStateType = {
 				meds: [],
 				others: [],
 			},
+			medicallyFrail: {
+				options:[]
+			},
+			specialNeeds: {
+				seizureActivity: '',
+				blindVisionLoss: '',
+				hardHearing: '',
+				incontintentSafety: '',
+				failingProne: '',
+				oxygen: '',
+				weightBearingLimitation: '',
+				activityLimitation: '',
+				shortnessOfBirth: '',
+
+			},
+			serviceFrequency: {
+				dayOfDischarge: '',
+				dischargePlan: '',
+				frequencyOfService: '',
+				durationOfService: '',				
+			}
 		},
 	},
 	assessments: {

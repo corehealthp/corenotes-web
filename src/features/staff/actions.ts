@@ -397,3 +397,21 @@ export function activateStaffProfileAction(staffId:string) {
         .catch((error)=> reject(error))
     })
 }
+
+export interface fetchAssignToStaffResponse extends Omit<successResponseType, 'data'> {
+    data: any
+}
+
+
+export function fetchAssignToStaffs(){
+    return new Promise<fetchAssignToStaffResponse>((resolve, reject) => {
+        getFetch('/staffs/get-all-staff')
+        .then((response: successResponseType) => {
+            // console.log(response.data, "yyty")
+            resolve({
+                ...response,
+                data: response
+            })
+        }).catch((error)=> reject(error))
+    })
+}

@@ -696,6 +696,7 @@ export default function CreateMedicationModal({
 						disabled={!isFormValidated}
 						width={"20%"}
 						label="Submit"
+						backgroundColor={"var(--green-accent-100)"}
 						clickAction={() => submitMedicationModel()}
 					/>
 				</div>

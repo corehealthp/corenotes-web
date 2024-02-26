@@ -254,6 +254,7 @@ export default function AddPRNServiceModal({closeModal}:{closeModal:()=> void}) 
                         isLoading={individualState.status === 'LOADING'}
                         width={"20%"}
                         label="Submit"
+                        backgroundColor={"var(--green-accent-100)"}
                         clickAction={()=> submit()}
                         disabled={!isFormValidated}
                     />

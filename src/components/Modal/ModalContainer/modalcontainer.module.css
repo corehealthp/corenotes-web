@@ -36,7 +36,7 @@
   border-radius: 16px;
   z-index: 99999 !important;
 
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   top: 50%;
   transform: translateY(-50%);
 }

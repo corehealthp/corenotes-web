@@ -30,12 +30,22 @@
 }
 
 .row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.row > div {
+  width: 100%;
+}
+
+/* .row {
   display: flex;
   gap: 0.6rem;
 }
 .row > div {
   width: calc(100% / 3);
-}
+} */
 
 @media screen and (max-width: 414px) {
   .heading {

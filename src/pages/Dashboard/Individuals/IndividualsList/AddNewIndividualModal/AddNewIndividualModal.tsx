@@ -16,6 +16,7 @@ import {
 } from "src/features/Individual/action";
 import SizedBox from "src/components/SizedBox";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
+import AddNewIndividualModalAccordion from "../AddNewIndividualAccordion/AddNewIndividualModalAccordion";
 
 export default function AddNewIndividualModal({
   closeModal,
@@ -38,21 +39,36 @@ export default function AddNewIndividualModal({
       !individualState.newIndividual.dob ||
       !individualState.newIndividual.gender ||
       !individualState.newIndividual.ssn ||
-      !individualState.newIndividual.contact.name ||
+      // !individualState.newIndividual.religion ||
+      // !individualState.newIndividual.contact.name ||
       !individualState.newIndividual.contact.email ||
       !individualState.newIndividual.contact.phoneNumber ||
       !individualState.newIndividual.weight ||
-      !individualState.newIndividual.compartment ||
+      // !individualState.newIndividual.compartment ||
       // !individualState.newIndividual.subCompartmentId ||
-      !individualState.newIndividual.insurance ||
-      !individualState.newIndividual.insurance_no ||
-      !individualState.newIndividual.maritalStatus ||
+      // !individualState.newIndividual.insurance ||
+      // !individualState.newIndividual.insuranceNo ||
+      // !individualState.newIndividual.maritalStatus ||
       !individualState.newIndividual.codeAlert.length ||
       !individualState.newIndividual.requestedServices.length ||
       !individualState.newIndividual.diet.length ||
       !individualState.newIndividual.allergies.food.length ||
       !individualState.newIndividual.allergies.med.length ||
-      !individualState.newIndividual.allergies.other.length
+      !individualState.newIndividual.allergies.other.length || 
+      !individualState.newIndividual.specialNeeds.activityLimitation || 
+      !individualState.newIndividual.specialNeeds.blindVisionLoss || 
+      !individualState.newIndividual.specialNeeds.failingProne || 
+      !individualState.newIndividual.specialNeeds.hardHearing || 
+      !individualState.newIndividual.specialNeeds.incontintentSafety || 
+      !individualState.newIndividual.specialNeeds.oxygen || 
+      !individualState.newIndividual.specialNeeds.seizureActivity || 
+      !individualState.newIndividual.specialNeeds.shortnessOfBirth || 
+      !individualState.newIndividual.specialNeeds.weightBearingLimitation || 
+      !individualState.newIndividual.serviceFrequency.daysAndFrequencyOfService || 
+      !individualState.newIndividual.serviceFrequency.dischargePlan || 
+      !individualState.newIndividual.serviceFrequency.durationOfService || 
+      !individualState.newIndividual.serviceFrequency.frequencyOfService || 
+      !individualState.newIndividual.medicallyFrail.options.length
     ) {
       setIsFormValid(false);
       return false;
@@ -126,9 +142,7 @@ export default function AddNewIndividualModal({
         </div>
 
         <div className={styles.registration_form_section}>
-          <IndividualPersonalInformationForm userState={userState} />
-          <SizedBox height="20px" />
-          <IndividualHealthInformationForm />
+          <AddNewIndividualModalAccordion userState={userState}  />
         </div>
 
         <div className={styles.action_buttons}>

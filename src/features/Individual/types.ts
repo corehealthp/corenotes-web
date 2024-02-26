@@ -128,33 +128,55 @@ export interface NewIndividualType {
     nickname: string,
     dob:string,
     gender: string,
-    maritalStatus: string,
-    religion: string,
+    // religion: string,
     ssn: string,
-    weight: string,
     insurance: string,
-    insurance_no: string,
-    codeAlert: Array<string>,
-    profileImage?:Blob|MediaSource,
+    insuranceNo: string
+    otherInsuranceNo: string
     contact: {
         name: string,
         email: string,
         phoneNumber: string
     },
-    // NEW HEALTH INFORMATION
-    requestedServices: Array<{
-        service:string,
-        startDate:string
-    }>,
+    weight: string,
+    medicaidNumber: string
+    // maritalStatus: string,
+    codeAlert: Array<string>,
+    compartment:string,
+    subCompartmentId:string;
     diet: Array<string>,
     allergies: {
         food: Array<string>,
         med: Array<string>,
         other: Array<string>
     },
-    compartment:string,
-    compartmentId:number;
-    subCompartmentId:string;
+    requestedServices: Array<{
+        service:string,
+        startDate?:string
+    }>,
+    medicallyFrail: {
+        options: any,
+    },
+    specialNeeds: {
+        seizureActivity: string,
+        blindVisionLoss: string,
+        hardHearing: string,
+        incontintentSafety: string,
+        failingProne: string,
+        oxygen: string,
+        weightBearingLimitation: string,
+        activityLimitation: string,
+        shortnessOfBirth: string,
+
+    },
+    serviceFrequency: {
+        daysAndFrequencyOfService: string,
+        dischargePlan: string,
+        frequencyOfService: string,
+        durationOfService: string,				
+    }
+    profileImage?:Blob|MediaSource,
+    // compartmentId:number;
 }
 
 export interface IndividualProfileResponseType {
@@ -232,7 +254,27 @@ export interface IndividualProfileType {
             food: Array<string>,
             meds: Array<string>,
             others: Array<string>
-        }
+        },
+        medicallyFrail: {
+           options: []
+        },
+        specialNeeds: {
+            seizureActivity: string,
+            blindVisionLoss: string,
+            hardHearing: string,
+            incontintentSafety: string,
+            failingProne: string,
+            oxygen: string,
+            weightBearingLimitation: string,
+            activityLimitation: string,
+            shortnessOfBirth: string,
+        },
+        serviceFrequency: {
+            dayOfDischarge: string,
+            dischargePlan: string,
+            frequencyOfService: string,
+            durationOfService: string,
+        },
     }
 }
 

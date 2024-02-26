@@ -256,7 +256,7 @@ export default function EditStaffProfileModal({ staffState, closeModal }:{
 						isLoading={staffState.status === "LOADING"}
 						// disabled={!providerRoleModel.selected}
 						 disabled={!isButtonEnabled}
-						
+						 backgroundColor={"var(--green-accent-100)"}
 						width={"20%"}
 						label="Submit"
 						clickAction={() => submitStaffProfile()}

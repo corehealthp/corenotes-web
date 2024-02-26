@@ -170,6 +170,7 @@ export default function AddCompartmentModal({ close }: { close: () => void }) {
           <PrimaryTextButton
             width="200px"
             label="Create compartment"
+            backgroundColor={"var(--green-accent-100)"}
             clickAction={() => submitAddCompartment()}
             disabled={!compartmentTitle.validated}
             isLoading={compartmentState.status === "LOADING"}

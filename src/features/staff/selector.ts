@@ -1,5 +1,5 @@
-import { selectorFamily, useRecoilValue } from "recoil";
-import {fetchStaffAction, fetchStaffActivitiesAction, fetchStaffActivitiesSuccessResponseType, fetchStaffDocumentsAction, fetchStaffDocumentsSuccessResponseType, fetchStaffListAction, fetchStaffListSuccessResponseType, fetchStaffRolesAction, fetchStaffShiftsAction, fetchStaffSuccessResponseType } from "./actions";
+import { selector, selectorFamily, useRecoilValue } from "recoil";
+import {fetchAssignToStaffs, fetchStaffAction, fetchStaffActivitiesAction, fetchStaffActivitiesSuccessResponseType, fetchStaffDocumentsAction, fetchStaffDocumentsSuccessResponseType, fetchStaffListAction, fetchStaffListSuccessResponseType, fetchStaffRolesAction, fetchStaffShiftsAction, fetchStaffSuccessResponseType } from "./actions";
 import formatStaff from "./utils/formatStaff";
 import { staffInitState } from "./state";
 import formatStaffActivitiesList from "./utils/formatStaffActivities";
@@ -216,3 +216,31 @@ const fetchStaffShiftsSelector = selectorFamily({
 })
 
 export const useFetchStaffShiftsSelector = (staffId:number, pageNumber:number) => useRecoilValue(fetchStaffShiftsSelector({staffId, pageNumber}))
+
+
+const fetchAssignToStaffList = selector({
+    key: 'fetch_assign_to_staff_list',
+    get: async () => {
+        return await fetchAssignToStaffs()
+        .then((response) => {
+            console.log(response, "res")
+            return{
+                message: response.message,
+                code: response.code,
+                error:false,
+                data: response.data
+            } 
+        }).catch((error)=> {
+            console.log(error, "err")
+            return {
+                code: error.statusCode,
+                message: error.message,
+                error: false,
+                data: []
+                
+            } 
+        })
+    }
+})
+
+export const useFetchAssignToStaffListSelector = () => useRecoilValue(fetchAssignToStaffList)

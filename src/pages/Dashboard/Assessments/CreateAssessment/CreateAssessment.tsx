@@ -18,7 +18,11 @@ import { useFetchAssessmentCategories } from "src/features/assessment/selector";
 import AddQuestionCategoryModal from "./AddQuestionCategory/AddQuestionCategory";
 import AddAssessmentCategoryModal from "./AddAssessmentCategory";
 import GoBackButton from "src/components/Buttons/GoBackButton";
-import RowContainer from "src/components/Layout/RowContainer";
+import { useStaffState } from "src/features/staff/state";
+import { useFetchAssignToStaffListSelector } from "src/features/staff/selector";
+// import RowContainer from "src/components/Layout/RowContainer";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export default function CreateAssessment() {
 
@@ -26,9 +30,13 @@ export default function CreateAssessment() {
 
     const [assessmentState, setAssessmentState] = useAssessmentState();
 
+
     const individualListResponse = useFetchIndividualListSelector(individualState.individuals.currentListPage);
 
     const assessmentCategories = useFetchAssessmentCategories();
+
+    const [staffState, setStaffState] = useStaffState();
+    const assignToStaffs = useFetchAssignToStaffListSelector();
 
     const categoryModel:DropDownFormData = {
         name:'question-category',
@@ -53,7 +61,24 @@ export default function CreateAssessment() {
             questionCategories: assessmentCategories.questionCategories.map(category => ({
                 id: category.id,
                 name: category.name
-            }))
+            })),
+            // assignTo: 
+        }))
+
+    }, [assessmentCategories, setAssessmentState])
+
+    useEffect(()=> {
+        setStaffState(state => ({
+            ...state,
+            as: assessmentCategories.assessmentCategories.map(category => ({
+                id: category.id,
+                name: category.name
+            })),
+            questionCategories: assessmentCategories.questionCategories.map(category => ({
+                id: category.id,
+                name: category.name
+            })),
+            // assignTo: 
         }))
 
     }, [assessmentCategories, setAssessmentState])
@@ -92,6 +117,24 @@ export default function CreateAssessment() {
         }))
     }, [assessmentState])
 
+    // useEffect(() => {
+    //     // Assuming assignToStaffs.data is an array
+    //     const staffList = [...staffState.list, ...assignToStaffs.data];
+      
+    //     console.log(staffList, "sl");
+    //     console.log(staffState.list, "asari")
+      
+    //     setAssignTo((state) => ({
+    //       ...state,
+    //       options: staffList.map((staff) => ({
+    //         id: staff.id,
+    //         label: `${staff.firstname} ${staff.lastname}`,
+    //         value: staff.id,
+    //       })),
+    //     }));
+    //   }, [staffState, assignToStaffs.data]);
+      
+
     useEffect(()=> {
         setIndividualState(state => ({
             ...state,
@@ -113,7 +156,20 @@ export default function CreateAssessment() {
         error: '',
         selected: false,
         selectedOptionIndex: 0,
-    })
+    });
+
+    const [assignTo, setAssignTo] = useState<DropDownFormData>({
+        placeholder: 'Assign to',
+        options:[
+            {id: "1", label: "Compartments", value: "compartments"},
+            {id: "2", label: "Individuals", value: "individuals"},
+            {id: "3", label: "Services", value: "services"},
+        ],
+        name:'',
+        error: '',
+        selected: false,
+        selectedOptionIndex: 0,
+    });
 
     // const [assessmentTypeModel, setAssessmentTypeModel] = useState<DropDownFormData>({
     //     placeholder: 'Assessment type',
@@ -159,6 +215,15 @@ export default function CreateAssessment() {
     }
 
     function selectOption(optionIndex:number, model:DropDownFormData, setModel:setDropDownFormData) {
+        model.selectedOptionIndex = optionIndex;
+        model.selected = true;
+        model.value = model.options[optionIndex];
+
+        setModel({...model})
+        enableButton()
+    }
+
+    function selectAssignTo(optionIndex:number, model:DropDownFormData, setModel:setDropDownFormData) {
         model.selectedOptionIndex = optionIndex;
         model.selected = true;
         model.value = model.options[optionIndex];
@@ -224,7 +289,8 @@ export default function CreateAssessment() {
                 .map((question) => ({
                     category: question.category,
                     question: question.question,
-                }))
+                })),
+            assign_to: assignTo.value?.label ?? ""
         };
 
         setAssessmentState((state) => ({
@@ -286,16 +352,16 @@ export default function CreateAssessment() {
                     state={assessmentState} 
                     resetState={()=> setAssessmentState(state => ({...state, status: 'IDLE', message:'', error:false}))}
                 >
-                    <RowContainer>
+                    {/* <RowContainer> */}
                         <InputField 
                             placeholder={assessmentTitle.placeholder}
-                            inputContainer="50%"
+                            // inputContainer="50%"
                             value={assessmentTitle.value} 
                             error={assessmentTitle.error}
                             onInput={(value:string)=> setInput(value, assessmentTitle, setAssessmentTitle)}
                         />
 
-                        <div className={`${styles.category_selection} ${styles.row}`}>
+                        <div className={`${styles.category_selection}`}>
                             <DropDownField
                                 placeholder={category.placeholder}
                                 error={category.error} 
@@ -305,14 +371,14 @@ export default function CreateAssessment() {
                                 onSelect={(optionIndex:number)=> selectOption(optionIndex, category, setCategory)}
                             />
 
-                            <div
+                            {/* <div
                                 className={styles.add_button} 
                                 onClick={()=> openAssessmentCategoryModal()}
                             >
                                 <IconPlusCircle className={styles.plus} /> Add
-                            </div>
+                            </div> */}
                         </div>
-                    </RowContainer>
+                    {/* </RowContainer> */}
 
                     {/* <div>
                         <div className={styles.section_title}>Assessment Type</div>
@@ -326,6 +392,7 @@ export default function CreateAssessment() {
                             onSelect={(optionIndex:number)=> selectOption(optionIndex, assessmentTypeModel, setAssessmentTypeModel)}
                         />
                     </div> */}
+                    
 
                     <div className={styles.section}>
                         <div className={styles.section_title}>Assessment questions</div>
@@ -335,7 +402,7 @@ export default function CreateAssessment() {
                                 questionsModel.questions.map((question, index:number)=> {
                                     return  <div key={index} className={styles.question_frame}>
                                                 <div className={styles.question_box}>
-                                                    <div className={styles.number}>{index+1}</div>
+                                                    {/* <div className={styles.number}>{index+1}</div> */}
                                                     <div className={styles.question_content}>
                                                         <div className={styles.question_category}>
                                                             <DropDownField 
@@ -347,19 +414,29 @@ export default function CreateAssessment() {
                                                                 onSelect={(optionIndex:number)=> selectQuestionOption(index, optionIndex)}
                                                             />
 
-                                                            <div
+                                                            {/* <div
                                                                 className={styles.add_button} 
                                                                 onClick={()=> openQuestionCategoryModal()}
                                                             >
                                                                 <IconPlusCircle className={styles.plus} />
                                                                 Add
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                         <SizedBox height={"10px"} />
-                                                        <TextField 
+                                                        {/* <TextField 
                                                             placeholder={questionsModel.placeholder}
                                                             value={question.question}
                                                             onInput={(textValue:string)=> setQuestion(textValue, index)}
+                                                        /> */}
+                                                        <ReactQuill
+                                                            theme="snow" // You can choose a different theme if you prefer
+                                                            placeholder={questionsModel.placeholder}
+                                                            value={question.question}
+                                                            onChange={(htmlValue) => setQuestion(htmlValue, index)}
+                                                            style={{
+                                                                height: "7rem",
+                                                                marginBottom: "2rem",
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>
@@ -386,6 +463,27 @@ export default function CreateAssessment() {
                         >
                             <IconPlusCircle className={styles.plus} />
                             Add question
+                        </div>
+                        {/* <div>
+                        <DropDownField 
+                            placeholder={question.model.placeholder}
+                            error={question.model.error}
+                            options={question.model.options} 
+                            selected={question.model.selected} 
+                            selectedOptionIndex={question.model.selectedOptionIndex}
+                            onSelect={(optionIndex:number)=> selectQuestionOption(index, optionIndex)}
+                        />
+                        </div> */}
+                        <div>
+                            <DropDownField
+                                placeholder={assignTo.placeholder}
+                                error={assignTo.error} 
+                                options={assignTo.options} 
+                                selected={assignTo.selected} 
+                                selectedOptionIndex={assignTo.selectedOptionIndex}
+                                label="Assign to"
+                                onSelect={(optionIndex:number)=> selectAssignTo(optionIndex, assignTo, setAssignTo)}
+                            />
                         </div>
                     </div>
                 </FormWrapper>
