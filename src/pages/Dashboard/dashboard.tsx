@@ -14,6 +14,7 @@ import ComponentLoader from "src/components/Loaders/ComponentLoader";
 import PageHeader from "./components/PageHeader";
 import MobileSidebar from "src/components/Navigation/MobileSidebar";
 import GlobalFeedback from "src/components/GlobalFeedback";
+// import ClockInOutModal from "../Auth/ClockinOutModal/ClockInOutModal";
 
 export default function Dashboard() {
 
@@ -260,18 +261,25 @@ export default function Dashboard() {
 		setActiveNav(activeNavPosition);
 		
 	}, [activeNavPosition, location]);
+	const [clockIn, setClockIn] = useState(false);
 
 	return (
 		<div className={styles.body}>
 
 			<GlobalFeedback />
 
-			<Sidebar navOptions={NavOptions} navigateTo={setActiveNavPosition} />
+			<Sidebar 
+			clockIn={clockIn}
+			setClockIn={setClockIn}
+			navOptions={NavOptions} 
+			navigateTo={setActiveNavPosition} />
 
 			<MobileSidebar
 				navOptions={NavOptions}
 				navigateTo={setActiveNavPosition}
 			/>
+
+			{/* <ClockInOutModal clockIn={clockIn} setClockIn={setClockIn}/> */}
 
 			<div className={styles.main}>
 				<PageHeader />

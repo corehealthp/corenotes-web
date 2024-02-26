@@ -7,11 +7,12 @@ export default function StaffListHeader({
 }:{ showNewStaffModal: ()=> void }){
 
     const staffState = useStaffValue();
+  
 
     return (
         <div className={styles.staff_list_header}>
             <div className={styles.heading}>
-                { staffState.totalStaffs } Staff{staffState.list.length > 1 ?"s" :""} total
+                { staffState?.list?.length } Staff{staffState?.list?.length > 1 ?"s" :""} total
             </div>
 
             <AddNewNoBackgroundIconButton 

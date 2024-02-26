@@ -290,8 +290,8 @@ export default function IndividualPersonalInformationForm({
           nickname: nicknameModel.value,
           dob: dobModel.value,
           gender: genderModel.value?.value ?? "",
-          // maritalStatus: maritalStatusModel.value?.value ?? "",
-          // religion: religionModel.value,
+          maritalStatus: maritalStatusModel.value?.value ?? "",
+          religion: religionModel.value,
           ssn: ssnModel.value,
           // insurance: insuranceModel.value,
           // insuranceNo: insuranceNoModel.value,
@@ -377,8 +377,9 @@ export default function IndividualPersonalInformationForm({
             }
           />
         </div>
+        
         <div className={styles.row}>
-          {/* <DropDownField
+          <DropDownField
             placeholder={maritalStatusModel.placeholder}
             options={maritalStatusModel.options}
             error={maritalStatusModel.error}
@@ -391,8 +392,8 @@ export default function IndividualPersonalInformationForm({
                 setMaritalStatusModel
               )
             }
-          /> */}
-          {/* 
+          />
+
           <InputField
             type={religionModel.type}
             placeholder={religionModel.placeholder}
@@ -401,9 +402,9 @@ export default function IndividualPersonalInformationForm({
             onInput={(inputValue: string) =>
               setInput(inputValue, religionModel, setReligionModel)
             }
-          /> */}
+          />
 
-          <InputField
+        <InputField
             type={ssnModel.type}
             placeholder={ssnModel.placeholder}
             value={ssnModel.value}
@@ -412,6 +413,8 @@ export default function IndividualPersonalInformationForm({
               setInput(inputValue, ssnModel, setssnModel)
             }
           />
+        </div>
+        <div className={styles.row}>
           <MultiSelectDropDownField
             placeholder={codeAlertsModel.placeholder}
             options={codeAlertsModel.options}
@@ -489,9 +492,9 @@ export default function IndividualPersonalInformationForm({
         >
           <div className={styles.number_circle}>2</div>
           <div className={styles.text}>Insurance</div>
-        </div> */}
-        {/* <div className={styles.row}>
-          <InputField
+        </div>
+        <div className={styles.row}>
+          {/* <InputField
             type={medicareModel.type}
             placeholder="Medicare"
             value={medicareModel.value}
@@ -499,7 +502,7 @@ export default function IndividualPersonalInformationForm({
             // onInput={(inputValue: string) =>
             //   setInput(inputValue, medicareModel, setMedicareModel)
             // }
-          />
+          /> */}
 
           <InputField
             type={medicareNumberModel.type}
@@ -511,7 +514,7 @@ export default function IndividualPersonalInformationForm({
             }
           />
 
-          <InputField
+          {/* <InputField
             type={medicaidModel.type}
             placeholder="Medicaid"
             value={medicaidModel.value}
@@ -519,7 +522,7 @@ export default function IndividualPersonalInformationForm({
             // onInput={(inputValue: string) =>
             //   setInput(inputValue, medicaidModel, setMedicaidModel)
             // }
-          />
+          /> */}
 
           <InputField
             type={medicareNumberModel.type}
@@ -530,10 +533,10 @@ export default function IndividualPersonalInformationForm({
               setInput(inputValue, medicaidNumberModel, setmedicaidNumberModel)
             }
           />
-        </div> */}
+        </div>
 
-        {/* <div className={styles.row}>
-          <InputField
+        <div className={styles.row}>
+          {/* <InputField
             type={othersModel.type}
             placeholder="Others"
             value={othersModel.value}
@@ -541,9 +544,9 @@ export default function IndividualPersonalInformationForm({
             // onInput={(inputValue: string) =>
             //   setInput(inputValue, othersModel, setOthersModel)
             // }
-          /> 
+          /> */}
 
-          <InputField
+<InputField
             type={othersNumberModel.type}
             placeholder="Others ID Number"
             value={othersNumberModel.value}
@@ -554,9 +557,9 @@ export default function IndividualPersonalInformationForm({
           />
 
          
-        </div> */}
+        </div>
 
-        {/* <br/>
+        <br/>
         <div className={styles.row_header}>
           Contact information (a guardian or relative)
         </div> */}

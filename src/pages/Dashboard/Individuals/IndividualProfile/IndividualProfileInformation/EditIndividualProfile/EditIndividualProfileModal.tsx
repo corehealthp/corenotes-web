@@ -88,8 +88,8 @@ export default function EditStaffProfileModal({
 			...state,
 			status: "LOADING",
 		}));
-
-		updateStaffProfileAction(payload)
+//@ts-ignore
+		updateStaffProfileAction(params.staffId!,payload)
 			.then((response) => {
 				setIndividualState((state) => ({
 					...state,
@@ -161,6 +161,8 @@ export default function EditStaffProfileModal({
 						disabled={!providerRoleModel.selected}
 						width={"20%"}
 						label="Submit"
+                        backgroundColor="green"
+
 						clickAction={() => submitStaffProfile()}
 					/>
 				</div>

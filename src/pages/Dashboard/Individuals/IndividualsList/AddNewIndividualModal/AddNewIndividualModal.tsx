@@ -158,6 +158,8 @@ export default function AddNewIndividualModal({
             disabled={!isFormValid}
             isLoading={individualState.status === "LOADING"}
             width={"20%"}
+            backgroundColor="green"
+
             label={"Save"}
             clickAction={() => registerIndividual()}
           />

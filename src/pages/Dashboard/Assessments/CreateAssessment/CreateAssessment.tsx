@@ -342,6 +342,7 @@ export default function CreateAssessment() {
                     isLoading={assessmentState.status === 'LOADING'}
                     width={"20%"}
                     label={"Save"}
+                    backgroundColor="green"
                     clickAction={()=> submitAssessment()}
                 />
             </div>

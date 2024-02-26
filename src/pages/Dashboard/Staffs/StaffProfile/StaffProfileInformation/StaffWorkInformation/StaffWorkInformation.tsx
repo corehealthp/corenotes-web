@@ -1,31 +1,52 @@
 import styles from "./staffworkinformation.module.css";
 import { InfoField } from "../StaffPersonalInformation/StaffPersonalInformation";
-import { useStaffValue } from "src/features/staff/state";
+import { staffInitState, useStaffState } from "src/features/staff/state";
+import { useEffect } from "react";
+import { fetchStaffRoleDetailsAction } from "src/features/staff/actions";
 
 export default function StaffWorkInformation() {
 
-    const staffState = useStaffValue();
+    // const staffState = useStaffValue();
+    const [staffState, setStaffState] = useStaffState();
+    useEffect(()=> {
+        fetchStaffRoleDetailsAction(staffState.details.providerRole!)
+        .then((response)=> {
+            setStaffState((state:any) => ({
+                ...state,
+                roleDetails: response.data.staffRoleDetails,
+            }))
+        })
+        .catch((error)=> {
+            console.log(error)
+            setStaffState((state:any) => ({
+                ...state,
+                roleDetails: staffInitState.roleDetails
+            }))
+        })
 
+    }, [staffState.details.providerRole, setStaffState])
+
+    
     const workInfo = [
         {
             label:'Provider role',
-            value: staffState.details.work.providerRole
+            value: staffState?.roleDetails?.title
         },
         {
             label:'Username',
-            value:staffState.details.work.username
+            value:staffState.details.username
         },
-        {
-            label:'Employee ID',
-            value:staffState.details.work.employeeId
-        },
+        // {
+        //     label:'Employee ID',
+        //     value:staffState.details.employeeId
+        // },
         {
             label:'Schedule type',
-            value:staffState.details.work.jobSchedule
+            value:staffState.details.jobSchedule
         },
         {
             label:'Hire date',
-            value:staffState.details.work.hiredAt
+            value:staffState.details.hiredAt
         }
     ]
 

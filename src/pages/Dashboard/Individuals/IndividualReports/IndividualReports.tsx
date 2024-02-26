@@ -188,6 +188,7 @@ export default function IndividualReports() {
             isLoading={printReportIndividualState.status === "LOADING"}
             width="25%"
             label="Print report"
+            backgroundColor="green"
             clickAction={() => createReport()}
           />
         </div>

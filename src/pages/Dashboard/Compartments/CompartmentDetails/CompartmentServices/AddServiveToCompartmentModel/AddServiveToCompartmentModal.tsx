@@ -133,7 +133,7 @@ export default function AddServiceToCompartmentModal({ closeModal }:{ closeModal
                         disabled={!serviceId}
                         width={"20%"}
                         label="Submit"
-                        backgroundColor={"var(--green-accent-100)"}
+                        backgroundColor="green"
                         clickAction={()=> submitService()}
                     />
                 </div>

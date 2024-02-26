@@ -92,7 +92,8 @@ export default function CreateNewSubCompartmentModal({ closeModal }:{ closeModal
                         disabled={!titleModel.validated}
                         width={"20%"}
                         label="Submit"
-                        backgroundColor={"var(--green-accent-100)"}
+                        backgroundColor="green"
+
                         clickAction={()=> createSubcompartment()}
                     />
                 </div>
