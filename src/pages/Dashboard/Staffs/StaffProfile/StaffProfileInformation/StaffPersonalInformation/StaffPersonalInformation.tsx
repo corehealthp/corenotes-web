@@ -4,60 +4,58 @@ import { useStaffValue } from "src/features/staff/state";
 export default function StaffPersonalInformation() {
 	const staffState = useStaffValue();
 
-	
-
 	const personalInfo = [
 		{
 			label: "First name",
-			value: staffState.details.firstname,
+			value: staffState.details.personal.firstname,
 		},
 		{
 			label: "Last name",
-			value: staffState.details.lastname,
+			value: staffState.details.personal.lastname,
 		},
 		{
 			label: "Username",
-			value: staffState.details.username,
+			value: staffState.details.work.username,
 		},
 		{
 			label: "Initials",
-			value: staffState.details.initials,
+			value: staffState.details.personal.initials,
 		},
 		{
 			label: "Date of Birth",
-			value: staffState.details.dob,
+			value: staffState.details.personal.dob,
 		},
 		{
 			label: "Gender",
-			value: staffState.details.gender,
+			value: staffState.details.personal.gender,
 		},
 		{
 			label: "Home address",
-			value: staffState.details.address,
+			value: staffState.details.personal.address,
 		},
 		{
 			label: "Work phone",
-			value: staffState.details.phoneNumber?.work,
+			value: staffState.details.personal.phoneNumber.work,
 		},
 		{
 			label: "Cell phone",
-			value: staffState.details.phoneNumber?.cell,
+			value: staffState.details.personal.phoneNumber.cell,
 		},
 		{
 			label: "Emergency contact",
-			value: staffState.details.emergencyContact?.name,
+			value: staffState.details.personal.emergencyContact.name,
 		},
 		{
 			label: "Relationship with contact",
-			value: staffState.details.emergencyContact?.relationship,
+			value: staffState.details.personal.emergencyContact.relationship,
 		},
 		{
 			label: "Cell phone",
-			value: staffState.details.emergencyContact?.phoneNumber,
+			value: staffState.details.personal.emergencyContact.phoneNumber,
 		},
 		{
 			label: "Email address",
-			value: staffState.details?.email,
+			value: staffState.details.personal.email,
 		},
 	];
 

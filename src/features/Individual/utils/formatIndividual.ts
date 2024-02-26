@@ -1,6 +1,8 @@
-import { IndividualProfileResponseType, IndividualProfileType } from "../types";
+import { IndividualProfileResponseType, 
+    // IndividualProfileType 
+} from "../types";
 
-export default function formatIndividual(individual:IndividualProfileResponseType):IndividualProfileType {
+export default function formatIndividual(individual:IndividualProfileResponseType) {
     return {
         id: individual._id,
         personalInformation: {
@@ -29,7 +31,8 @@ export default function formatIndividual(individual:IndividualProfileResponseTyp
                 food: individual.allergies.food,
                 meds: individual.allergies.med,
                 others: individual.allergies.other
-            }
+            },            
+
         }
     }
 }

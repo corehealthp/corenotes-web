@@ -497,8 +497,6 @@ export default function SelectMedicationModal({ individualId, individualMedicati
                         disabled={!isFormValidated}
                         width={"20%"}
                         label="Submit"
-                        backgroundColor="green"
-
                         clickAction={()=> submitAddMedicationToIndividual()}
                     />
                 </div>

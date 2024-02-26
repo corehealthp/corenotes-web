@@ -7,7 +7,7 @@ import StaffWorkInformationForm from "./StaffWorkInformationForm";
 import FadedBackgroundButton from "src/components/Buttons/FadedBackgroundButton";
 import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
 import { useStaffState } from "src/features/staff/state";
-// import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
+import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
 import { registerStaffAction } from "src/features/staff/actions";
 import {
   INewStaffPersonalInformation,
@@ -24,40 +24,6 @@ export default function AddNewStaffModal({
 }) {
   const [staffState, setStaffState] = useStaffState();
 
-  const [staff, setStaff] = useState({
-    // personal: {
-      firstname: "",
-      lastname: "",
-      nickname: "",
-      initials: "",
-      address: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      phoneNumber: {
-        work: "",
-        cell: "",
-      },
-      emergencyContact: {
-        name: "",
-        phoneNumber: "",
-        relationship: "",
-      },
-      email: "",
-      dob: "",
-      gender:"",
-    // },
-
-    // work: {
-      providerRole: "",
-      jobSchedule: "",
-      username: "",
-      password: "",
-      hiredAt:"",
-    // },
-  });
-
-  console.log(staffState);
   const [isButtonEnabled, setIsButtonEnabled] = useState(true);
 
   function validatePersonalForm(newStaffInfo: INewStaffPersonalInformation) {
@@ -84,7 +50,7 @@ export default function AddNewStaffModal({
       ...state,
       newStaff: newStaffInfo,
     }));
-    setIsButtonEnabled(message ? true : true);
+    setIsButtonEnabled(message ? false : true);
   }
 
   function validateForm(newStaffInfo: NewStaffType) {
@@ -149,24 +115,25 @@ export default function AddNewStaffModal({
     return "";
   }
 
-  // function resetFormStateModel() {
-  //   setStaffState((state) => {
-  //     return {
-  //       ...state,
-  //       status: "IDLE",
-  //       error: false,
-  //       message: "",
-  //     };
-  //   });
+  function resetFormStateModel() {
+    setStaffState((state) => {
+      return {
+        ...state,
+        status: "IDLE",
+        error: false,
+        message: "",
+      };
+    });
 
-  //   closeModal();
-  // }
+    closeModal();
+  }
 
   function registerStaff() {
     const payload = {
-      ...staff,
+      ...staffState.newStaff.personal,
+      ...staffState.newStaff.work,
     };
-
+ 
     setStaffState((state) => ({
       ...state,
       status: "LOADING",
@@ -197,12 +164,12 @@ export default function AddNewStaffModal({
   return (
     <ModalContainer>
       <div>
-        {/* <FormStateModal
+        <FormStateModal
           status={staffState.status}
           error={staffState.error}
           message={staffState.message}
           reset={() => resetFormStateModel()}
-        /> */}
+        />
 
         <div className={styles.top_section}>
           <div className={styles.heading}>Add new staff</div>
@@ -214,8 +181,8 @@ export default function AddNewStaffModal({
 
         <Suspense fallback={<ComponentLoader />}>
           <div className={styles.registration_form_section}>
-            <StaffPersonalInformationForm onModified={validatePersonalForm} setStaff={setStaff} staff={staff} />
-            <StaffWorkInformationForm onModified={validateWorkForm} setStaff={setStaff} staff={staff} />
+            <StaffPersonalInformationForm onModified={validatePersonalForm} />
+            <StaffWorkInformationForm onModified={validateWorkForm} />
           </div>
         </Suspense>
 
@@ -233,7 +200,6 @@ export default function AddNewStaffModal({
             disabled={!isButtonEnabled}
             width={"20%"}
             label={"Save"}
-            backgroundColor="green"
             clickAction={() => {
               registerStaff();
             }}

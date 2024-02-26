@@ -10,7 +10,7 @@ import ComponentLoader from 'src/components/Loaders/ComponentLoader';
 import MedicallyFrailForm from './MedicallyFrail/MedicallyFrailForm';
 import FunctionalLimitationSpecialNeedsForm from './FunctionalLimitationSpecialNeeds/FunctionalLimitationSpecialNeedsForm';
 import FrequencyDischargePlanForm from './FrequencyDischargePlan/FrequencyDischargePlanForm';
-import IndividualInsuranceForm from './IndividualInsuranceForm/IndividualInsuranceForm';
+// import IndividualInsuranceForm from './IndividualInsuranceForm/IndividualInsuranceForm';
 
 interface AddNewIndividualModalAccordionProps {
     userState: any

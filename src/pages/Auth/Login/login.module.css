@@ -5,8 +5,8 @@
 }
 
 .content_section {
-  width: 45%;
-  max-height: 90%;
+  width: 50%;
+  min-height: 80%;
   padding-bottom: 5%;
   margin: auto;
   border-radius: var(--radius-container-100);
@@ -39,7 +39,7 @@
   display: flex;
   justify-content: space-between;
   color: #13a5f2;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   font-weight: 400;
   margin-top: 10px;
 }

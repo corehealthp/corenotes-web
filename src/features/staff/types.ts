@@ -143,25 +143,6 @@ export interface IStaffDocument {
 }
 
 export interface IStaffDetails {
-  city: any;
-  zipCode: any;
-  state: any;
-  nickname: any;
-	email: any;
-	emergencyContact: any;
-	phoneNumber: any;
-	gender: any;
-	address: any;
-	dob: any;
-	initials: any;
-    hiredAt: any;
-    jobSchedule: any;
-    employeeId: any;
-    username: any;
-    providerRole: any;
-	lastname: string;
-	firstname: string;
-	profileImage: string;
 	id: string;
     _id:string;
 	// ACCOUNT INFO
@@ -175,7 +156,7 @@ export interface IStaffDetails {
 	};
 	active: boolean;
 	lastSeen: string;
-    isClockedIn: boolean;
+
 	// PERSONAL INFORMATION
 	personal: {
 		firstname: string;
@@ -240,36 +221,14 @@ export interface INewStaffPersonalInformation {
 }
 
 export interface INewStaffWorkInformation {
-    password: any|null;
-    username: any|null;
     providerRole:string;
     hiredAt:string;
     jobSchedule:string;
-    // username:string;
-    // password:string;
+    username:string;
+    password:string;
 }
 
 export interface staffStateType extends initStateType {
-  phoneNumber: any;
-  emergencyContact: any;
-  providerRole: any;
-  email: any;
-  nickname: any;
-  initials: any;
-  dob: any;
-  gender: any;
-  address: any;
-  city: any;
-  state: any;
-  zipCode: any;
-  title: any;
-  hiredAt: any;
-  employeeId: any;
-  jobSchedule: any;
-	profileImage: string;
-	firstname: string;
-	lastname(lastname: any): import("react").ReactNode;
-    clockIn:boolean,
     currentPage:number,
     totalPages:number,
     totalStaffs:number;
@@ -313,7 +272,6 @@ export interface IActivity {
 }
 
 export interface IStaffRole {
-    _id: any;
     id:string;
     title:string;
     staffCount:number;
@@ -334,5 +292,4 @@ export interface IStaffShift {
     date:string;
     startTime:string;
     endTime:string;
-    createdAt:string;
 }

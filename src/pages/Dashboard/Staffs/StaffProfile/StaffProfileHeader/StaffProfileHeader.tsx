@@ -6,11 +6,12 @@ import {ReactComponent as IconUploadDoc} from "src/assets/icons/icon-folder-plus
 import capitalize from "src/utils/capitalize";
 import formatDate from "src/utils/formatDate";
 import formatTime from "src/utils/formatTime";
-// import AddNewNoBackgroundIconButton from "src/components/Buttons/AddNewNoBackgroundIconButton";
+import AddNewNoBackgroundIconButton from "src/components/Buttons/AddNewNoBackgroundIconButton";
 import { useStaffValue } from "src/features/staff/state";
 
 export default function StaffProfileHeader({
     actionType, 
+	multipleActions,
     editProfileAction,
     clickAction
 }:{ 
@@ -19,24 +20,20 @@ export default function StaffProfileHeader({
     editProfileAction?: ()=> void;
     clickAction?: (action?:string)=> void;
 }) {
-
-
 	const staffState = useStaffValue();
-	
-	
 
 	return (
 		<div className={styles.section_identity}>
 			<div className={styles.user_info}>
 				<UserImage
-					imageUrl={staffState.details?.profileImage}
-					fullname={staffState?.details?.firstname}
+					imageUrl={staffState.details.personal.profileImage}
+					fullname={staffState.details.personal.firstname}
 					size={"60px"}
 				/>
 				<div className={styles.info}>
 					<div className={styles.fullname}>
-						{capitalize(staffState.details.firstname)},{" "}
-						{capitalize(staffState.details.lastname)}
+						{capitalize(staffState.details.personal.firstname)},{" "}
+						{capitalize(staffState.details.personal.lastname)}
 					</div>
 					<div className={styles.last_update}>Last seen: { formatDate(staffState.details.lastSeen) } {formatTime(staffState.details.lastSeen)}</div>
 				</div>
@@ -65,9 +62,9 @@ export default function StaffProfileHeader({
 					: null
 				}
 
-				{/* {
+				{
 					multipleActions?.includes("set-new-shift")
-					?	staffState?.details?.role.title === "ADMINISTRATOR"
+					?	staffState.details.role.title === "ADMINISTRATOR"
 						?	<div className={styles.actions}>
 								<AddNewNoBackgroundIconButton 
 									label={"Set new shift schedule"} 
@@ -76,7 +73,7 @@ export default function StaffProfileHeader({
 							</div>
 						:	null
 					: null
-				} */}
+				}
 			</div>
 		</div>
 	);

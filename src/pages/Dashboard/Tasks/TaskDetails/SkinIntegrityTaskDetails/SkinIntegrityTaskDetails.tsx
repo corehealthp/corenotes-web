@@ -195,7 +195,6 @@ export default function SkinIntegrityTaskDetails() {
                         clickAction={completeTask}
                         isLoading={completeTaskState.status === 'LOADING'}
                         disabled={!isFormValid}
-                        backgroundColor="green"
                     />
                 </div>
             </FormWrapper>

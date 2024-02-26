@@ -4,8 +4,8 @@ import styles from "./addnewindividualmodal.module.css";
 import { ReactComponent as IconCancel } from "src/assets/icons/icon-cancel-circle.svg";
 import FadedBackgroundButton from "src/components/Buttons/FadedBackgroundButton";
 import PrimaryTextButton from "src/components/Buttons/PrimaryTextButton";
-import IndividualPersonalInformationForm from "./IndividualPersonalInformationForm";
-import IndividualHealthInformationForm from "./IndividualHealthInformationForm";
+// import IndividualPersonalInformationForm from "./IndividualPersonalInformationForm";
+// import IndividualHealthInformationForm from "./IndividualHealthInformationForm";
 import {
   individualInitState,
   useIndividualState,
@@ -14,7 +14,7 @@ import {
   IndividualListResponseType,
   registerIndividualAction,
 } from "src/features/Individual/action";
-import SizedBox from "src/components/SizedBox";
+// import SizedBox from "src/components/SizedBox";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 import AddNewIndividualModalAccordion from "../AddNewIndividualAccordion/AddNewIndividualModalAccordion";
 
@@ -158,8 +158,6 @@ export default function AddNewIndividualModal({
             disabled={!isFormValid}
             isLoading={individualState.status === "LOADING"}
             width={"20%"}
-            backgroundColor="green"
-
             label={"Save"}
             clickAction={() => registerIndividual()}
           />

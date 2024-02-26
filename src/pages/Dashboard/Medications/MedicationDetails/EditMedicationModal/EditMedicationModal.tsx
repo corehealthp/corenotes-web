@@ -43,7 +43,7 @@ export default function CreateMedicationModal({
 	const [medicationState, setMedicationState] = useMedicationState();
 
 	const [staffState, setStaffState] = useStaffState();
-	const staffRolesResponse = useFetchStaffRoleSelector();
+	const staffRolesResponse = useFetchStaffRoleSelector(staffState.currentPage);
 
 	useEffect(() => {
 		setStaffState((state) => ({
@@ -696,8 +696,7 @@ export default function CreateMedicationModal({
 						disabled={!isFormValidated}
 						width={"20%"}
 						label="Submit"
-                        backgroundColor="green"
-
+						backgroundColor={"var(--green-accent-100)"}
 						clickAction={() => submitMedicationModel()}
 					/>
 				</div>

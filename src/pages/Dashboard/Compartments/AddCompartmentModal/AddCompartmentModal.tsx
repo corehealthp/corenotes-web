@@ -172,7 +172,6 @@ export default function AddCompartmentModal({ close }: { close: () => void }) {
             label="Create compartment"
             backgroundColor={"var(--green-accent-100)"}
             clickAction={() => submitAddCompartment()}
-            backgroundColor="green"
             disabled={!compartmentTitle.validated}
             isLoading={compartmentState.status === "LOADING"}
           />

@@ -3,7 +3,6 @@ import { staffListType } from "../actions"
 
 export interface staffsListType {
     id:string;
-    _id:string;
     staffId:number;
     profileImage:string;
     fullname:string;
@@ -17,7 +16,6 @@ export default function formatStaffList(staffs:staffListType[]):staffsListType[]
 
     return staffs.map((staff:staffListType)=> ({
         id: staff.id,
-        _id: staff._id,
         staffId: staff.staffId,
         profileImage:staff.profileImage,
         fullname: `${capitalize(staff.firstname)}, ${staff.lastname.toUpperCase()}`,

@@ -134,7 +134,7 @@ export interface NewIndividualType {
     insuranceNo: string
     otherInsuranceNo: string
     contact: {
-        name: string,
+        // name: string,
         email: string,
         phoneNumber: string
     },
@@ -142,7 +142,7 @@ export interface NewIndividualType {
     medicaidNumber: string
     // maritalStatus: string,
     codeAlert: Array<string>,
-    compartment:string,
+    compartment:number,
     subCompartmentId:string;
     diet: Array<string>,
     allergies: {
@@ -213,7 +213,7 @@ export interface IndividualProfileResponseType {
     medicaidNumber:number,
     maritalStatus:string,
     codeAlert:Array<string>
-    compartment:string,
+    compartment:number,
     requestedServices: Array<{
         service:string,
         startDate:string
@@ -246,7 +246,7 @@ export interface IndividualProfileType {
             phoneNumber: string
         },
         medicaidNumber: number,
-        compartment: string
+        compartment: number,
     },
     healthInformation: {
         diet: Array<string>,
@@ -255,26 +255,26 @@ export interface IndividualProfileType {
             meds: Array<string>,
             others: Array<string>
         },
-        medicallyFrail: {
-           options: []
-        },
-        specialNeeds: {
-            seizureActivity: string,
-            blindVisionLoss: string,
-            hardHearing: string,
-            incontintentSafety: string,
-            failingProne: string,
-            oxygen: string,
-            weightBearingLimitation: string,
-            activityLimitation: string,
-            shortnessOfBirth: string,
-        },
-        serviceFrequency: {
-            dayOfDischarge: string,
-            dischargePlan: string,
-            frequencyOfService: string,
-            durationOfService: string,
-        },
+        // medicallyFrail: {
+        //    options: []
+        // },
+        // specialNeeds: {
+        //     seizureActivity: string,
+        //     blindVisionLoss: string,
+        //     hardHearing: string,
+        //     incontintentSafety: string,
+        //     failingProne: string,
+        //     oxygen: string,
+        //     weightBearingLimitation: string,
+        //     activityLimitation: string,
+        //     shortnessOfBirth: string,
+        // },
+        // serviceFrequency: {
+        //     dayOfDischarge: string,
+        //     dischargePlan: string,
+        //     frequencyOfService: string,
+        //     durationOfService: string,
+        // },
     }
 }
 

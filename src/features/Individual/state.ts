@@ -24,7 +24,7 @@ export const individualInitState: IndividualStateType = {
 		insuranceNo:"",
 		otherInsuranceNo:"",
 		contact: {
-			name: "",
+			// name: "",
 			email: "",
 			phoneNumber: "",
 		},
@@ -34,7 +34,7 @@ export const individualInitState: IndividualStateType = {
 		// medicare_no: "",
 		// maritalStatus: "",
 		codeAlert: [],
-		compartment: "",
+		compartment: 0,
 		// compartmentId: 0,
 		subCompartmentId: "",
 		diet: [],
@@ -86,7 +86,7 @@ export const individualInitState: IndividualStateType = {
 				phoneNumber: "",
 			},
 			medicaidNumber: 0,
-			compartment: "",
+			compartment: 0,
 		},
 		healthInformation: {
 			diet: [],
@@ -95,27 +95,27 @@ export const individualInitState: IndividualStateType = {
 				meds: [],
 				others: [],
 			},
-			medicallyFrail: {
-				options:[]
-			},
-			specialNeeds: {
-				seizureActivity: '',
-				blindVisionLoss: '',
-				hardHearing: '',
-				incontintentSafety: '',
-				failingProne: '',
-				oxygen: '',
-				weightBearingLimitation: '',
-				activityLimitation: '',
-				shortnessOfBirth: '',
+			// medicallyFrail: {
+			// 	options:[]
+			// },
+			// specialNeeds: {
+			// 	seizureActivity: '',
+			// 	blindVisionLoss: '',
+			// 	hardHearing: '',
+			// 	incontintentSafety: '',
+			// 	failingProne: '',
+			// 	oxygen: '',
+			// 	weightBearingLimitation: '',
+			// 	activityLimitation: '',
+			// 	shortnessOfBirth: '',
 
-			},
-			serviceFrequency: {
-				dayOfDischarge: '',
-				dischargePlan: '',
-				frequencyOfService: '',
-				durationOfService: '',				
-			}
+			// },
+			// serviceFrequency: {
+			// 	dayOfDischarge: '',
+			// 	dischargePlan: '',
+			// 	frequencyOfService: '',
+			// 	durationOfService: '',				
+			// }
 		},
 	},
 	assessments: {

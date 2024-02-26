@@ -231,8 +231,8 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
         }
 
         if(serviceTypeModel.value?.value?.toLowerCase() === 'requested-service') {
-            if(individualState.newIndividual.compartmentId) {
-                getCompartmentDetails(individualState.newIndividual.compartmentId)
+            if(individualState.newIndividual.compartment) {
+                getCompartmentDetails(individualState.newIndividual.compartment)
                 .then((response)=> {
                     setCompartmentState(state => ({
                         ...state,
@@ -251,7 +251,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                 .finally(()=> {
                     setIsServicesLoading(true);
 
-                    getCompartmentServices(individualState.newIndividual.compartmentId)
+                    getCompartmentServices(individualState.newIndividual.compartment)
                     .then((compartmentServices)=> {
                         setRequestedServiceModel(state => ({
                             ...state,
@@ -270,7 +270,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
             }
         }
         
-    }, [compartmentState.compartment.services, individualId, individualState.newIndividual.compartmentId, serviceTypeModel.value?.value, servicesPages.currentPage, setCompartmentState, setIndividualState])
+    }, [compartmentState.compartment.services, individualId, individualState.newIndividual.compartment, serviceTypeModel.value?.value, servicesPages.currentPage, setCompartmentState, setIndividualState])
 
     const [isFormValidated, setIsFormValidated] = useState(false);
 
@@ -469,7 +469,6 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                         label="Assign Service"
                         clickAction={()=> submitForm()}
                         disabled={!isFormValidated}
-                        backgroundColor="green"
                         isLoading={individualState.status === 'LOADING'}
                     />
                 </div>

@@ -13,7 +13,7 @@ export default function ImageComponent({src, placeholder, width, height, extraSt
         <LazyLoadImage 
             src={src}
             placeholderSrc={placeholder}
-            // effect="blur"
+            effect="blur"
             alt=""
             width={width}
             height={height}

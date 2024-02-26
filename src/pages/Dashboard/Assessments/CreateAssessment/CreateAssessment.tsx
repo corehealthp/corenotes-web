@@ -4,7 +4,7 @@ import { ReactComponent as IconPlusCircle } from "src/assets/icons/icon-plus-cir
 import { formFieldType, setFormFieldType } from "src/components/FormComponents/FormWrapper/types";
 import { useEffect, useState } from "react";
 import FormWrapper from "src/components/FormComponents/FormWrapper";
-import TextField from "src/components/FormComponents/TextField";
+// import TextField from "src/components/FormComponents/TextField";
 import { FaMinus } from "react-icons/fa";
 import { useIndividualState } from "src/features/Individual/state";
 import { useFetchIndividualListSelector } from "src/features/Individual/selector";
@@ -18,8 +18,8 @@ import { useFetchAssessmentCategories } from "src/features/assessment/selector";
 import AddQuestionCategoryModal from "./AddQuestionCategory/AddQuestionCategory";
 import AddAssessmentCategoryModal from "./AddAssessmentCategory";
 import GoBackButton from "src/components/Buttons/GoBackButton";
-import { useStaffState } from "src/features/staff/state";
-import { useFetchAssignToStaffListSelector } from "src/features/staff/selector";
+// import { useStaffState } from "src/features/staff/state";
+// import { useFetchAssignToStaffListSelector } from "src/features/staff/selector";
 // import RowContainer from "src/components/Layout/RowContainer";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -34,9 +34,6 @@ export default function CreateAssessment() {
     const individualListResponse = useFetchIndividualListSelector(individualState.individuals.currentListPage);
 
     const assessmentCategories = useFetchAssessmentCategories();
-
-    const [staffState, setStaffState] = useStaffState();
-    const assignToStaffs = useFetchAssignToStaffListSelector();
 
     const categoryModel:DropDownFormData = {
         name:'question-category',
@@ -66,22 +63,7 @@ export default function CreateAssessment() {
         }))
 
     }, [assessmentCategories, setAssessmentState])
-
-    useEffect(()=> {
-        setStaffState(state => ({
-            ...state,
-            as: assessmentCategories.assessmentCategories.map(category => ({
-                id: category.id,
-                name: category.name
-            })),
-            questionCategories: assessmentCategories.questionCategories.map(category => ({
-                id: category.id,
-                name: category.name
-            })),
-            // assignTo: 
-        }))
-
-    }, [assessmentCategories, setAssessmentState])
+   
 
     const [questionsModel, setQuestionsModel] = useState<{
         placeholder:string,  
@@ -342,7 +324,6 @@ export default function CreateAssessment() {
                     isLoading={assessmentState.status === 'LOADING'}
                     width={"20%"}
                     label={"Save"}
-                    backgroundColor="green"
                     clickAction={()=> submitAssessment()}
                 />
             </div>

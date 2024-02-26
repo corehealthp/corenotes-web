@@ -4,41 +4,38 @@ import { useAuthStateValue } from "../../../../../features/auth/authAtom";
 import styles from "./passwordresetsuccess.module.css";
 
 export default function PasswordResetSuccess({
-  email,
-  editEmail,
-  resendLink,
+	email,
+	editEmail,
+	resendLink,
 }: {
-  email: string;
-  editEmail: () => void;
-  resendLink: () => void;
+	email: string;
+	editEmail: () => void;
+	resendLink: () => void;
 }) {
-  const authState = useAuthStateValue();
+	const authState = useAuthStateValue();
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.title}>Check your email</div>
-      <div className={styles.sub_title}>
-        We've sent a password reset link to
-      </div>
-      <div className={styles.recovery_email}> {email} </div>
+	return (
+		<div className={styles.container}>
+			<div className={styles.title}>Check your email</div>
+			<div className={styles.sub_title}>
+				We've sent a password reset link to
+			</div>
+			<div className={styles.recovery_email}> {email} </div>
 
-      <div className={styles.recovery_email_set}>
-        <PrimaryTextButton
-          label="Change Email"
-          clickAction={() => editEmail()}
-        />
+			<div className={styles.recovery_email_set}>
+				<PrimaryTextButton label="Change Email" clickAction={() => editEmail()} />
 
-        <p className="text-center">Didn't receive the email?</p>
-        <div className={styles.resend}>
-          <SecondaryTextButton
-            extraStyle={styles.resend_btn}
-            loaderColor={"var(--teal-accent-100)"}
-            label="Click to Resend"
-            isLoading={authState.status === "LOADING"}
-            clickAction={() => resendLink()}
-          />
-        </div>
-      </div>
-    </div>
-  );
+				<div className={styles.resend}>
+					<div className={styles.resend_qtn}>Didn't receive the email?</div>
+					<SecondaryTextButton
+						extraStyle={styles.resend_btn}
+						loaderColor={"var(--teal-accent-100)"}
+						label="Click to Resend"
+						isLoading={authState.status === "LOADING"}
+						clickAction={() => resendLink()}
+					/>
+				</div>
+			</div>
+		</div>
+	);
 }

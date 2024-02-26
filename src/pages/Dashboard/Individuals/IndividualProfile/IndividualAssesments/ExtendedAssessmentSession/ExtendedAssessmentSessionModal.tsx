@@ -217,8 +217,6 @@ export default function ExtendedAssessmentSessionModal({
 						disabled={!isAssessmentComplete}
 						width={"20%"}
 						label="Submit"
-                        backgroundColor="green"
-
 						clickAction={() => completeAssessmentSession()}
 					/>
 				</div>

@@ -1,18 +1,18 @@
 import FormWrapper from "src/components/FormComponents/FormWrapper";
 import styles from "./individualrequestedservicesform.module.css";
 import { useEffect, useState } from "react";
-import { DropDownFormData, DropDownOption } from "src/components/FormComponents/DropDownField/types";
+import { DropDownFormData } from "src/components/FormComponents/DropDownField/types";
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
-import InputField from "src/components/FormComponents/InputField";
-import { formFieldType } from "src/components/FormComponents/FormWrapper/types";
-import { ReactComponent as IconAdd } from "src/assets/icons/icon-plus-circle.svg"
+// import InputField from "src/components/FormComponents/InputField";
+// import { formFieldType } from "src/components/FormComponents/FormWrapper/types";
+// import { ReactComponent as IconAdd } from "src/assets/icons/icon-plus-circle.svg"
 import { ReactComponent as IconCancel } from "src/assets/icons/icon-cancel-circle.svg"
 import { useIndividualState } from "src/features/Individual/state";
 import { useFetchCompartmentList } from "src/features/compartment/selector";
 
 export default function IndividualRequestedServicesForm() {
 
-    const [individualState, setIndividualState] = useIndividualState();
+    const [, setIndividualState] = useIndividualState();
 
     const compartmentServicesResponse = useFetchCompartmentList(1);
 
@@ -139,26 +139,26 @@ export default function IndividualRequestedServicesForm() {
     //     submitRequestedService()
     // }
 
-    function addNewRequestedService() {
-        if(serviceTemplate.service.options.length && requestedServices.length < compartmentServicesResponse.list.compartments.length) {
-            serviceTemplate.id = requestedServices.length + 1;
+    // function addNewRequestedService() {
+    //     if(serviceTemplate.service.options.length && requestedServices.length < compartmentServicesResponse.list.compartments.length) {
+    //         serviceTemplate.id = requestedServices.length + 1;
 
-            // remove option[optionIndex] from serviceTemplate
-            const newOptions:DropDownOption[] = [];
+    //         // remove option[optionIndex] from serviceTemplate
+    //         const newOptions:DropDownOption[] = [];
 
-            serviceTemplate.service.options.forEach(option => {
-                requestedServices.forEach(requestedService => {
-                    if(requestedService.service.value?.value !== option.value) {
-                        newOptions.push(option)
-                    }
-                })
-            })
+    //         serviceTemplate.service.options.forEach(option => {
+    //             requestedServices.forEach(requestedService => {
+    //                 if(requestedService.service.value?.value !== option.value) {
+    //                     newOptions.push(option)
+    //                 }
+    //             })
+    //         })
 
-            // reset all existing service fields that haven't been selected with new options
+    //         // reset all existing service fields that haven't been selected with new options
 
-            setRequestedServices([...requestedServices, serviceTemplate])
-        }
-    }
+    //         setRequestedServices([...requestedServices, serviceTemplate])
+    //     }
+    // }
 
     function removeRequestedService(id:number) {
         const currentRequestedServiceIndex:number = requestedServices.findIndex(requestedService => requestedService.id === id)

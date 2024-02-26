@@ -142,11 +142,9 @@ export default function AccountReset() {
 
                 <PrimaryTextButton 
                     label="Save"
-                    backgroundColor="green"
                     isLoading={updatePasswordState.status === 'LOADING'}
                     disabled={!isFormValid}
                     clickAction={()=> saveNewPassword()}
-                    
                 />
             </FormWrapper>
         </div>

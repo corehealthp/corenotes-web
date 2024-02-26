@@ -28,7 +28,6 @@ export default function DropDownField({
 
     const dynamicStyle = {
         width: width || '100%', // Use the provided width or default to '100%'
-        height:"100%",
         ...customStyles, // Apply custom styles
       };
 

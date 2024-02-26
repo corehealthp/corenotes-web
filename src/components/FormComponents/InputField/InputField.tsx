@@ -8,7 +8,6 @@ interface inputFieldType {
     label?:string,
     placeholder?:string,
     value?:string,
-    autoComplete?:string,
     error:string,
     prefixIcon?:JSX.Element,
     suffixIcon?:JSX.Element,

@@ -95,8 +95,6 @@ export default function UploadAssessmentModal({closeModal}:{closeModal:()=> void
                             disabled={!docFileModel.validated}
                             width={"20%"}
                             label={"Submit"}
-                        backgroundColor="green"
-
                             clickAction={uploadAssessmentCSV}
                         />
                     </div>

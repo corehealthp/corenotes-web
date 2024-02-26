@@ -257,8 +257,6 @@ export default function AddPRNServiceModal({closeModal}:{closeModal:()=> void}) 
                         backgroundColor={"var(--green-accent-100)"}
                         clickAction={()=> submit()}
                         disabled={!isFormValidated}
-                        
-backgroundColor="green"
                     />
                 </div>
             </div>

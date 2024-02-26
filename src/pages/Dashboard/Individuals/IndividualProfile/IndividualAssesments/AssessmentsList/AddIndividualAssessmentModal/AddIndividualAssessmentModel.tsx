@@ -169,8 +169,6 @@ export default function AddIndividualAssessmentModal({ closeModal }:{ closeModal
                         label="Assign Service"
                         clickAction={()=> submitForm()}
                         disabled={!isButtonEnabled}
-                        backgroundColor="green"
-
                         isLoading={assessmentState.status === 'LOADING'}
                     />
                 </div>

@@ -35,7 +35,7 @@ export interface DropDownOption {
 
 export interface DropDownFormData extends DropDownProps {
     name:string,
-    placeholder?:string,
+    placeholder?:string
 }
 
 export interface setDropDownFormData extends React.Dispatch<React.SetStateAction<DropDownFormData>> {

@@ -344,8 +344,6 @@ export default function AddNewBehaviorModal({ closeModal }:{ closeModal:()=> voi
                         disabled={!isFormValid}
                         width={"20%"}
                         label="Submit"
-                        backgroundColor="green"
-
                         clickAction={()=> submitBehaviorService()}
                     />
                 </div>

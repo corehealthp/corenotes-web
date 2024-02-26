@@ -69,8 +69,8 @@ export default function IndividualCompartmentForm({ removeLabel }: { removeLabel
 				...state,
 				newIndividual: {
 					...state.newIndividual,
-					compartment: model.value!.id,
-					compartmentId: parseInt(model.value!.value!),
+					compartment: parseInt(model.value!.value!),
+					// compartmentId: parseInt(model.value!.value!),
 				},
 			}));
 
