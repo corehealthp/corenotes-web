@@ -40,7 +40,7 @@ export default function IndividualReports() {
     });
 
   function setOptionValue(optionIndex: number) {
-    setResultFileFormatModel((state) => {
+    setResultFileFormatModel((state:any) => {
       return {
         ...state,
         value: resultFileFormatModel.options[optionIndex].value,
@@ -113,7 +113,7 @@ export default function IndividualReports() {
         reportTitle: reportTitleModel.value?.value,
       };
 
-      setPrintReportIndividualState((state) => {
+      setPrintReportIndividualState((state:any) => {
         return {
           ...state,
           error: true,

@@ -46,7 +46,7 @@ export default function CreateMedicationModal({
 	const staffRolesResponse = useFetchStaffRoleSelector();
 
 	useEffect(() => {
-		setStaffState((state) => ({
+		setStaffState((state:any) => ({
 			...state,
 			roles: {
 				list: staffRolesResponse.data.staffRoles,
@@ -55,7 +55,7 @@ export default function CreateMedicationModal({
 			},
 		}));
 
-		setMedProvidersModel((state) => ({
+		setMedProvidersModel((state:any) => ({
 			...state,
 			options: staffState.roles.list.map((role) => role.title),
 		}));
@@ -524,7 +524,7 @@ export default function CreateMedicationModal({
 				category: medCategoryModel.value!.value!,
 			};
 
-			setMedicationState((state) => ({
+			setMedicationState((state:any) => ({
 				...state,
 				status: "LOADING",
 				message: "",
@@ -533,7 +533,7 @@ export default function CreateMedicationModal({
 
 			createMedicationAction(payload)
 				.then((response) => {
-					setMedicationState((state) => ({
+					setMedicationState((state:any) => ({
 						...state,
 						status: "SUCCESS",
 						message: response.message,
@@ -543,7 +543,7 @@ export default function CreateMedicationModal({
 					closeModal();
 				})
 				.catch((error) => {
-					setMedicationState((state) => ({
+					setMedicationState((state:any) => ({
 						...state,
 						status: "FAILED",
 						message: error.message,
@@ -556,7 +556,7 @@ export default function CreateMedicationModal({
 	}
 
 	function resetMedicationState() {
-		setMedicationState((state) => ({
+		setMedicationState((state:any) => ({
 			...state,
 			status: "IDLE",
 			message: medicationInitState.message,

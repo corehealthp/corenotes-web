@@ -19,7 +19,7 @@ export default function IndividualServicesList() {
 
     useEffect(()=> {
         if(!individualState.services.length) {
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 message: individualServicesResponse.message,
                 error: individualServicesResponse.error,
@@ -44,7 +44,7 @@ export default function IndividualServicesList() {
                 individualState.services.length
                 ?   <GridList columnCount={2}>
                         {
-                            individualState.services.map((service)=> {
+                            individualState.services.map((service:any)=> {
                                 return  <IndividualServiceCard
                                             key={service.id}
                                             title={service.title}

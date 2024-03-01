@@ -171,7 +171,7 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
                 docFileName: docFileNameModel.value
             }
 
-            setUploadStaffDocState(state => {
+            setUploadStaffDocState((state:any) => {
                 return {
                     ...state,
                     status: 'LOADING'
@@ -182,14 +182,14 @@ export default function UploadDocModal({closeModal}:{closeModal:()=> void}) {
             .then((payloadFormData:FormData)=> {
                 uploadIndividualDocumentAction(params.individualId!, payloadFormData)
                 .then((response)=> {
-                    setUploadStaffDocState(state => ({ ...state, status:"IDLE" }))
-                    setIndividualState(state => ({ ...state, documents: response.data }));
+                    setUploadStaffDocState((state:any) => ({ ...state, status:"IDLE" }))
+                    setIndividualState((state:any) => ({ ...state, documents: response.data }));
 
                     createGlobalFeedback("success", "Individual document saved successfully")
                 })
                 .catch(()=> createGlobalFeedback("error", "There was an error uploading individual document"))
                 .finally(()=> {
-                    setUploadStaffDocState(state => ({ ...state, status:"IDLE" }))
+                    setUploadStaffDocState((state:any) => ({ ...state, status:"IDLE" }))
                     closeModal()
                 })
             })

@@ -61,7 +61,7 @@ export default function AddStaffRoleModal({
       privileges:{},
     };
 
-    setStaffState((state) => ({
+    setStaffState((state:any) => ({
       ...state,
       status: "LOADING",
       error: false,
@@ -72,7 +72,7 @@ export default function AddStaffRoleModal({
     .then((response) => {
       console.log(response)
       createGlobalFeedback("success", response.message);
-      setStaffState((state) => ({
+      setStaffState((state:any) => ({
         ...state,
         roles: {
           list: response.data.staffRoles,

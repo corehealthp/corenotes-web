@@ -4,15 +4,16 @@ import AddNewNoBackgroundIconButton from "src/components/Buttons/AddNewNoBackgro
 import { useIndividualStateValue } from "src/features/Individual/state";
 
 export default function IndividualsListHeader({
-    showNewStaffModal
-}:{ showNewStaffModal: ()=> void}){
+    showNewStaffModal,
+    individualLists
+}:{ showNewStaffModal: ()=> void,individualLists:any}){
 
     const individualState = useIndividualStateValue();
 
     return (
         <div className={styles.staff_list_header}>
             <div className={styles.heading}>
-                { individualState.individuals.total } individual{individualState.individuals.list.length > 1 ?"s" :""} total
+                { individualLists?.length } individual{individualState.individuals.length > 1 ?"s" :""} total
             </div>
 
             <div className={styles.actions}>

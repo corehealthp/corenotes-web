@@ -101,7 +101,7 @@ export default function AddIndividualAssessmentModal({ closeModal }:{ closeModal
 
         addAssessmentToIndividualAction(individualId!, payload)
         .then((response)=> {
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 assessments: {
                     ...state.assessments,
@@ -115,7 +115,7 @@ export default function AddIndividualAssessmentModal({ closeModal }:{ closeModal
             createGlobalFeedback("error", error.message ?? "There was an error adding assessment to user")
         })
         .finally(()=> {
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 status: "IDLE",
             }))

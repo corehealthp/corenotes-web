@@ -22,7 +22,7 @@ export default function GoalTrackingService() {
     const fetchGoalsTrackingServiceResponse = useFetchIndividualGoalsList(individualId, individualState.goalServices.currentPage);
 
     useEffect(()=> {
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             error: fetchGoalsTrackingServiceResponse.error,
             message: fetchGoalsTrackingServiceResponse.message,
@@ -50,7 +50,7 @@ export default function GoalTrackingService() {
                     individualState.goalServices.list.length
                     ?   <GridList columnCount={3}>
                             {
-                                individualState.goalServices.list?.map((goalService)=> {
+                                individualState.goalServices.list?.map((goalService:any)=> {
                                     return  <GoalServiceCard
                                                 key={goalService.id}
                                                 objective={goalService.objective}

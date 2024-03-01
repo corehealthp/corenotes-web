@@ -20,7 +20,7 @@ export default function EditStaffProfileModal({ closeModal }:{ closeModal: () =>
   const assessmentDetailsResponse = useFetchAssessmentDetailsResponse(params.assessmentId!);
 
   useEffect(() => {
-    setAssessmentState((state) => ({
+    setAssessmentState((state:any) => ({
       ...state,
       error: assessmentDetailsResponse.error,
       assessmentDetails: assessmentDetailsResponse.assessment,

@@ -43,7 +43,7 @@ export default function StaffWorkInformationForm({
   // );
 
   // useEffect(() => {
-  //   setStaffState((state) => ({
+  //   setStaffState((state:any) => ({
   //     ...state,
   //     status: "IDLE",
   //     error: staffRolesResponse.error,
@@ -54,7 +54,7 @@ export default function StaffWorkInformationForm({
   //     },
   //   }));
 
-  //   setProviderRoleModel((state) => ({
+  //   setProviderRoleModel((state:any) => ({
   //     ...state,
   //     options: [
   //       ...staffRolesResponse.data.staffRoles.map((role) => ({
@@ -179,7 +179,7 @@ export default function StaffWorkInformationForm({
     getFetch(`/staffs/roles`).then((response: any) => {
       const staffRolesResponse = response;
       if (staffRolesResponse) {
-        setStaffState((state) => ({
+        setStaffState((state:any) => ({
           ...state,
           status: "SUCCESS",
           // list: staffRolesResponse,
@@ -192,8 +192,8 @@ export default function StaffWorkInformationForm({
     });
   }, []);
 
-  const roleTitle = staffState.roles?.list.filter((role) => {
-    return role._id === staff?.providerRole;
+  const roleTitle = staffState?.roles?.list?.filter((role) => {
+    return role?._id === staff?.providerRole;
   });
   return (
     <FormWrapper extraStyles={styles.staff_personal_information_form}>
@@ -231,8 +231,8 @@ export default function StaffWorkInformationForm({
                 }));
               }}
             >
-              <option value={staff.providerRole}>
-                {roleTitle?.[0]?.title.toUpperCase()}
+              <option value={staff.providerRole||""}>
+                {roleTitle?.[0]?.title.toUpperCase() || "Provider Role"}
               </option>
 
               {staffState.roles?.list?.map((role) => {

@@ -62,7 +62,7 @@ export default function EditStaffProfileModal({
   function enableButton(newStaffInfo: NewStaffType) {
     const message: string = validateForm(newStaffInfo);
 
-    setStaffState((state) => ({
+    setStaffState((state:any) => ({
       ...state,
       newStaff: newStaffInfo,
     }));
@@ -159,7 +159,7 @@ export default function EditStaffProfileModal({
   // 	const currentStaffRole = staffRolesResponse.data.staffRoles.findIndex((role) => role?.title === staffState.details.work.providerRole);
   // 	// console.log(currentStaffRole);
 
-  // 	setStaffState((state) => ({
+  // 	setStaffState((state:any) => ({
   // 		...state,
   // 		status: "IDLE",
   // 		error: staffRolesResponse.error,
@@ -170,7 +170,7 @@ export default function EditStaffProfileModal({
   // 		},
   // 	}));
 
-  // 	setProviderRoleModel((state) => ({
+  // 	setProviderRoleModel((state:any) => ({
   // 		...state,
   // 		options: [
   // 			...staffRolesResponse.data.staffRoles.map((role) => ({
@@ -191,7 +191,7 @@ export default function EditStaffProfileModal({
       ...staff,
     };
 
-    setStaffState((state) => ({
+    setStaffState((state:any) => ({
       ...state,
       status: "LOADING",
     }));
@@ -210,7 +210,7 @@ export default function EditStaffProfileModal({
 
       })
       .catch((error) => {
-        setStaffState((state) => ({
+        setStaffState((state:any) => ({
           ...state,
           status: "FAILED",
           details: staffInitState.details,
@@ -229,7 +229,7 @@ export default function EditStaffProfileModal({
   }
 
   // function resetStaffState() {
-  //   setStaffState((state) => ({
+  //   setStaffState((state:any) => ({
   //     ...state,
   //     status: "IDLE",
   //     message: "",

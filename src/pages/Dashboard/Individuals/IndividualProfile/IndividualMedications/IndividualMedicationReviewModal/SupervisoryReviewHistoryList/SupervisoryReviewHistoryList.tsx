@@ -20,7 +20,7 @@ export default function SupervisoryReviewHistoryList({ closeHistory }:{closeHist
             <SizedBox height="10px" />
             {
                 individualState.supervisoryMedicationReviews.list.length
-                ?   individualState.supervisoryMedicationReviews.list.map(review => {
+                ?   individualState.supervisoryMedicationReviews.list.map((review:any) => {
                         return (
                             <div 
                                 key={review.id}

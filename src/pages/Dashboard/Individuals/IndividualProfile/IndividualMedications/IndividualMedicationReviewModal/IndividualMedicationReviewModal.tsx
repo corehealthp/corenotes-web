@@ -69,7 +69,7 @@ export default function IndividualMedicationReviewModal({
     useEffect(()=> {
         
         if(individualState.supervisoryMedicationReviews.medicationId !== fetchReviewHistoryResponse.supervisoryReviews.medicationId) {
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 error: fetchReviewHistoryResponse.error,
                 message: fetchReviewHistoryResponse.message,
@@ -101,7 +101,7 @@ export default function IndividualMedicationReviewModal({
         setIsReviewComplete(false);
 
         (()=> {
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 supervisoryMedicationReviews:{
                     medicationId: "",
@@ -215,7 +215,7 @@ export default function IndividualMedicationReviewModal({
                 newPharmacy: newPharmacyModel.value!,
             }
 
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 status: "LOADING",
                 message: "",
@@ -224,7 +224,7 @@ export default function IndividualMedicationReviewModal({
 
             submitSupervisoryMedReviewAction(parseInt(params.individualId!), payload)
             .then((response)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "SUCCESS",
                     error: false,
@@ -233,7 +233,7 @@ export default function IndividualMedicationReviewModal({
                 }))
             })
             .catch((error)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "FAILED",
                     error: true,
@@ -244,7 +244,7 @@ export default function IndividualMedicationReviewModal({
     }
 
     function resetIndividualState() {
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             error: false,
             message: ""
@@ -268,7 +268,7 @@ export default function IndividualMedicationReviewModal({
         discontinueIndividualMedicationAction(individualId, payload)
         .then((response)=> {
 
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 status: "SUCCESS",
                 error: false,
@@ -277,7 +277,7 @@ export default function IndividualMedicationReviewModal({
             }))
         })
         .catch(()=> {
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 status: "FAILED",
                 error: true,

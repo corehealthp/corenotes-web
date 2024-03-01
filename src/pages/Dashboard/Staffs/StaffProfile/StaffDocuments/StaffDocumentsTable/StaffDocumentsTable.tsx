@@ -57,14 +57,14 @@ export default function StaffDocumentsTable({
 		// };
 		
 
-		// setStaffState((state) => ({
+		// setStaffState((state:any) => ({
 		// 	...state,
 		// 	status: "LOADING",
 		// }));
 
 		deleteStaffDocumentAction(staffId,documentId)
 			.then((response) => {
-				// setStaffState((state) => ({
+				// setStaffState((state:any) => ({
 				// 	...state,
 				// 	status: "SUCCESS",
 				// 	// details: response.data.staff,
@@ -74,7 +74,7 @@ export default function StaffDocumentsTable({
                 console.log("response",response)
 			})
 			.catch((error) => {
-				// setStaffState((state) => ({
+				// setStaffState((state:any) => ({
 				// 	...state,
 				// 	status: "FAILED",
 				// 	details: staffInitState.details,

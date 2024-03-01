@@ -200,7 +200,7 @@ export default function AddNewChoreModal({ closeModal }:{ closeModal:()=> void }
                 }
             }
 
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 status: "LOADING",
                 message: "",
@@ -209,7 +209,7 @@ export default function AddNewChoreModal({ closeModal }:{ closeModal:()=> void }
 
             addChoreToIndividualAction(params.individualId!, payload)
             .then((response)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "SUCCESS",
                     message: "Chore assigned to individual successfully",
@@ -220,7 +220,7 @@ export default function AddNewChoreModal({ closeModal }:{ closeModal:()=> void }
                 closeModal()
             })
             .catch((error)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "FAILED",
                     message: error.message,

@@ -234,7 +234,7 @@ export default function AddNewGoalModal({ closeModal }:{ closeModal:()=> void })
                 }
             }
 
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 status: "LOADING",
                 message: "",
@@ -243,7 +243,7 @@ export default function AddNewGoalModal({ closeModal }:{ closeModal:()=> void })
 
             addGoalToIndividualAction(params.individualId!, payload)
             .then((response)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "SUCCESS",
                     message: "Service assigned to individual successfully",
@@ -252,7 +252,7 @@ export default function AddNewGoalModal({ closeModal }:{ closeModal:()=> void })
                 }))
             })
             .catch((error)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "FAILED",
                     message: error.message,

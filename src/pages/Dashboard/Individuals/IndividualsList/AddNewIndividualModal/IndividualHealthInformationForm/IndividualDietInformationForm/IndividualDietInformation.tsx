@@ -3,11 +3,10 @@ import styles from "../individualhealthinformation.module.css"
 import { useState } from "react";
 import MultiSelectDropDownField from "src/components/FormComponents/DropDownField/MultiSelectDropDownField/MultiSelectDropDownField";
 import { MultiSelectDropDownFormData } from "src/components/FormComponents/DropDownField/MultiSelectDropDownField/types";
-import { useSetIndividualState } from "src/features/Individual/state";
 
-export default function IndividualDietInformationForm() {
 
-    const setIndividualState = useSetIndividualState()
+export default function IndividualDietInformationForm({userState,setIndividuals}:any) {
+
 
     const [dietSelection, setDietSelection] = useState<MultiSelectDropDownFormData>({
         label: '',
@@ -15,23 +14,19 @@ export default function IndividualDietInformationForm() {
         relative: true,
         error:'',
         options: ['Unspecified', 'Low Sodium', 'Diabetic', 'Pureed', 'Low Cholestrol', 'Regular', 'Low fat', 'Salt-free', 'Low potassium', 'Soft', 'Glutten free', 'Low fiber', 'Sugar free'],
-        value:[],
+        value:userState?.diet,
         validated: false
     })
 
     function storeNewDietSelections(selections:Array<string>) {
         dietSelection.value = selections;
         setDietSelection({...dietSelection})
-
-        setIndividualState((state)=> {
-            return {
-                ...state,
-                newIndividual: {
-                    ...state.newIndividual!,
-                    diet: dietSelection.value
-                }
-            }
-        })
+       
+            setIndividuals((state: any) => ({
+              ...state,
+              diet: dietSelection.value,
+            }));
+         
     }
 
     return (

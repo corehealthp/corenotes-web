@@ -1,5 +1,5 @@
 import GoBackButton from "src/components/Buttons/GoBackButton";
-import styles from "./assessmentslist.module.css"
+import styles from "./assessmentslist.module.css";
 import { useAssessmentState } from "src/features/assessment/state";
 import { useFetchAssessmentsListSelector } from "src/features/assessment/selector";
 import { useEffect, useState } from "react";
@@ -7,78 +7,171 @@ import AddNewNoBackgroundIconButton from "src/components/Buttons/AddNewNoBackgro
 import { useNavigate } from "react-router-dom";
 import AssessmentCard from "../AssessmentCard/AssessmentCard";
 import DataLoadingError from "src/components/DataLoadingError";
-import GridList from "src/components/GridList/GridList";
 import UploadAssessmentModal from "../UploadAssessmentModal";
 
 export default function AssessmentsList() {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const [showUploadAssessmentModal, setShowUploadAssessmentModal] =
+    useState(false);
 
-    const [showUploadAssessmentModal, setShowUploadAssessmentModal] = useState(false);
+  const [assessmentState, setAssessmentState] = useAssessmentState();
 
-    const [assessmentState, setAssessmentState] = useAssessmentState();
-    
-    const fetchAssessmentsListResponse = useFetchAssessmentsListSelector(assessmentState.assessments.currentPage);
+  const fetchAssessmentsListResponse = useFetchAssessmentsListSelector(
+    assessmentState.assessments.currentPage
+  );
 
-    useEffect(()=> {
-        console.log(fetchAssessmentsListResponse)
-        setAssessmentState(state => ({
-            ...state,
-            error: fetchAssessmentsListResponse.error,
-            message: fetchAssessmentsListResponse.message,
-            assessments: fetchAssessmentsListResponse.assessments
-        }))
+  useEffect(() => {
+    console.log(fetchAssessmentsListResponse);
+    setAssessmentState((state:any) => ({
+      ...state,
+      error: fetchAssessmentsListResponse.error,
+      message: fetchAssessmentsListResponse.message,
+      assessments: fetchAssessmentsListResponse.assessments,
+    }));
+  }, [fetchAssessmentsListResponse, setAssessmentState]);
 
-    }, [fetchAssessmentsListResponse, setAssessmentState])
+  const assessments = [
+    {
+      id: 1,
+      title: "Health & Safety",
+      tag: "assessment",
+    },
+    {
+      id: 2,
+      title: "DDP Oversight Review",
+      tag: "assessment",
+    },
 
-    return (
-        <div className={styles.assessemts_list_page}>
-            <GoBackButton path={"/dashboard/individuals"} />
+    {
+      id: 3,
+      title: "RN Oversight - Monthly",
+      tag: "assessment",
+    },
+    {
+      id: 4,
+      title: "Nurse Notes",
+      tag: "assessment",
+    },
+    {
+      id: 5,
+      title: "Monthly Education for all medications prescribed",
+      tag: "assessment",
+    },
+    {
+      id: 6,
+      title: "Modification Review - Monthly",
+      tag: "assessment",
+    },
+    {
+      id: 7,
+      title:"Abnormal Involuntary Movement Scale (AIMS) - Frequency Of Documentation: Every 4 months ",
+      tag: "assessment",
+    },
+    {
+        id: 8,
+        title:"HRST Log – monthly documentation",
+        tag: "assessment",
+      },
+      {
+        id: 9,
+        title:"Informed Choice",
+        tag: "assessment",
+      },
+      {
+        id: 11,
+        title:"Documents",
+        tag: "assessment",
+      },
+      {
+        id: 12,
+        title:"Monthly Supply Notes",
+        tag: "assessment",
+      },
+      {
+        id: 13,
+        title:"PRN Provided Services",
+        tag: "assessment",
+      },
+      {
+        id: 14,
+        title:"Incident Report",
+        tag: "assessment",
+      },
+      {
+        id: 15,
+        title:"Quality Improvement Audit",
+        tag: "assessment",
+      },
+      {
+        id: 16,
+        title:"Patient Satisfactory Survey",
+        tag: "assessment",
+      },
+      {
+        id: 17,
+        title:"Annual Guardanship Review",
+        tag: "assessment",
+      },
+      {
+        id: 18,
+        title:"Complaints and Grieviances Logs",
+        tag: "assessment",
+      },
+      {
+        id: 19,
+        title:"Informed Choice /Annual Rights Review",
+        tag: "assessment",
+      },
+  ];
+  return (
+    <div className={styles.assessemts_list_page}>
+      <GoBackButton path={"/dashboard/individuals"} />
 
-            <div className={styles.header}>
-                <div className={styles.title}>All Assessments</div>
+      <div className={styles.header}>
+        <div className={styles.title}>All Assessments</div>
 
-                <div>
-                    <AddNewNoBackgroundIconButton 
-                        label="Upload assessment"
-                        action={()=> setShowUploadAssessmentModal(true)} 
-                    />
+        <div>
+          <AddNewNoBackgroundIconButton
+            label="Upload assessment"
+            action={() => setShowUploadAssessmentModal(true)}
+          />
 
-                    <AddNewNoBackgroundIconButton 
-                        label="Create assessment"
-                        action={()=> navigate({pathname: 'create'})} 
-                    />
-                </div>
-
-            </div>
-
-            <div className={styles.assessments_list}>
-                <GridList columnCount={2}>
-                    {
-                        assessmentState.assessments.list.length
-                        ?   assessmentState.assessments.list.map( (assessment) => {
-                                return  <AssessmentCard
-                                            key={assessment.id}
-                                            title={assessment.title}
-                                            category={assessment.category} 
-                                            questionsCount={assessment.questionsCount}
-                                            assessmentType={assessment.assessmentType}
-                                            path={assessment.assessmentId}                     
-                                        />
-                                    
-                            })
-                        :   <DataLoadingError message="There are no assessments to show" />
-                    }
-                </GridList>
-            </div>
-
-            {
-                showUploadAssessmentModal
-                ?   <UploadAssessmentModal 
-                        closeModal={()=> setShowUploadAssessmentModal(false)}
-                    />
-                :   null
-            }
+          <AddNewNoBackgroundIconButton
+            label="Create assessment"
+            action={() => navigate({ pathname: "create" })}
+          />
         </div>
-    );
+      </div>
+
+      <div className={styles.assessments_list}>
+       <div className="grid grid-cols-2 gap-10">
+          {assessments ? (
+            assessments.map((assessment, i: any) => {
+              return (
+                <>
+                  <AssessmentCard
+                    title={assessment.title}
+                    key={i}
+                    // category={assessment.category}
+                    // questionsCount={assessment.questionsCount}
+                    // assessmentType={assessment.assessmentType}
+                    // path={assessment.assessmentId}
+                  />
+                </>
+              );
+            })
+          ) : (
+            <DataLoadingError message="There are no assessments to show" />
+          )}
+        </div>
+      </div>
+
+      {showUploadAssessmentModal ? (
+        <UploadAssessmentModal
+          closeModal={() => setShowUploadAssessmentModal(false)}
+        />
+      ) : null}
+    </div>
+  );
 }

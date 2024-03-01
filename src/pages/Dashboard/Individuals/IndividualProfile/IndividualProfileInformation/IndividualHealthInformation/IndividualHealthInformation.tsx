@@ -14,7 +14,7 @@ export default function IndividualHealthInformationForm() {
                     <div className={styles.sub_heading}>Diet</div>
                     <div className={styles.list}>
                         {
-                            IndividualState.profile.healthInformation.diet.map(dietItem => (
+                            IndividualState?.profile?.healthInformation?.diet?.map((dietItem:any) => (
                                 <div key={dietItem} className={styles.diet_item}>{ dietItem  }</div>
                             ))
                         }
@@ -28,7 +28,7 @@ export default function IndividualHealthInformationForm() {
                             <div className={styles.allergy_type}>Food</div>
                             <div>
                                 {
-                                    IndividualState.profile.healthInformation.allergies.food.map(dietItem => (
+                                    IndividualState?.profile?.healthInformation?.allergies?.food.map((dietItem:any) => (
                                         <div key={dietItem} className={styles.diet_item}>{ dietItem  }</div>
                                     ))
                                 }
@@ -39,7 +39,7 @@ export default function IndividualHealthInformationForm() {
                             <div className={styles.allergy_type}>Meds</div>
                             <div>
                                 {
-                                    IndividualState.profile.healthInformation.allergies.meds.map(dietItem => (
+                                    IndividualState?.profile?.healthInformation?.allergies?.meds.map((dietItem:any) => (
                                         <div key={dietItem} className={styles.diet_item}>{ dietItem  }</div>
                                     ))
                                 }
@@ -50,7 +50,7 @@ export default function IndividualHealthInformationForm() {
                             <div className={styles.allergy_type}>Others</div>
                             <div>
                                 {
-                                    IndividualState.profile.healthInformation.allergies.others.map(allergies => (
+                                    IndividualState?.profile?.healthInformation?.allergies?.others.map((allergies:any) => (
                                         <div key={allergies} className={styles.diet_item}>{ allergies  }</div>
                                     ))
                                 }

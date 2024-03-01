@@ -80,7 +80,7 @@ export default function StaffProfile() {
 
 //   useEffect(() => {
 //     if (!staffDetailsResponse.error) {
-//       setStaffState((state) => {
+//       setStaffState((state:any) => {
 //         return {
 //           ...state,
 //           status: "SUCCESS",
@@ -88,7 +88,7 @@ export default function StaffProfile() {
 //         };
 //       });
 //     } else {
-//       setStaffState((state) => {
+//       setStaffState((state:any) => {
 //         return {
 //           ...state,
 //           status: "FAILED",
@@ -102,7 +102,7 @@ export default function StaffProfile() {
     getFetch(`/staffs/profile/${params.staffId}`).then((response: any) => {
         const staffDetailsResponse = response?.data;
         if (staffDetailsResponse) {
-          setStaffState((state) => ({
+          setStaffState((state:any) => ({
             ...state,
             status: "SUCCESS",
             details: staffDetailsResponse.staff,

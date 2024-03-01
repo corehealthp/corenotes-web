@@ -13,7 +13,7 @@ export default function MedicationsList() {
 	const medicationListResponse = useFetchMedicationsListSelector("", medicationState.medications.currentPage);
 
 	useEffect(() => {
-		setMedicationState((state) => ({
+		setMedicationState((state:any) => ({
 			...state,
 			message: medicationListResponse.message,
 			error: medicationListResponse.error,
@@ -24,7 +24,7 @@ export default function MedicationsList() {
 	const [showCreateMedicationModal, setShowCreateMedicationModal] = useState(false);
 
 	function goToSelectedPageNumber(pageNumber: number) {
-		setMedicationState((state) => ({
+		setMedicationState((state:any) => ({
 			...state,
 			medications: {
 				...state.medications,

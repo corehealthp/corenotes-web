@@ -19,7 +19,7 @@ export default function StaffList() {
     getFetch(`/staffs/get-all-staff`).then((response: any) => {
       const staffDetailsResponse = response?.data;
       if (staffDetailsResponse) {
-        setStaffState((state) => ({
+        setStaffState((state:any) => ({
           ...state,
           status: "SUCCESS",
           list: staffDetailsResponse,

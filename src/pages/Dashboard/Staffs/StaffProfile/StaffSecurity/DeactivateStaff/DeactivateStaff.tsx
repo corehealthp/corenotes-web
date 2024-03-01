@@ -130,7 +130,7 @@ export default function DeactivateStaff() {
          const payload = {
           password: userPassword.value!
       }
-    setActivateStaffState((state) => {
+    setActivateStaffState((state:any) => {
       return {
         ...state,
         error: false,
@@ -141,7 +141,7 @@ export default function DeactivateStaff() {
 
     deactivateStaffProfileAction(params.staffId!,payload)
       .then((response) => {
-        setActivateStaffState((state) => {
+        setActivateStaffState((state:any) => {
           return {
             ...state,
             error: false,
@@ -153,7 +153,7 @@ export default function DeactivateStaff() {
         createGlobalFeedback("success", response.message);
         
         
-        setStaffState((state) => {
+        setStaffState((state:any) => {
           return {
             ...state,
             details: formatStaff(response.data.staff),
@@ -165,7 +165,7 @@ export default function DeactivateStaff() {
         setIsStaffActive(response.data.staff.active);
       })
       .catch((error) => {
-        setActivateStaffState((state) => {
+        setActivateStaffState((state:any) => {
           return {
             ...state,
             error: true,
@@ -179,7 +179,7 @@ export default function DeactivateStaff() {
     const payload = {
               password: userPassword.value!
           }
-    setActivateStaffState((state) => {
+    setActivateStaffState((state:any) => {
       return {
         ...state,
         error: false,
@@ -190,7 +190,7 @@ export default function DeactivateStaff() {
 
     activateStaffProfileAction(params.staffId!,payload)
       .then((response) => {
-        setActivateStaffState((state) => {
+        setActivateStaffState((state:any) => {
           return {
             ...state,
             error: false,
@@ -201,7 +201,7 @@ export default function DeactivateStaff() {
         
         )
         createGlobalFeedback("success", response.message);
-        setStaffState((state) => {
+        setStaffState((state:any) => {
           return {
             ...state,
             details: formatStaff(response.data.staff),
@@ -214,7 +214,7 @@ export default function DeactivateStaff() {
         console.log('inactive',response.data.staff.active)
       })
       .catch((error) => {
-        setActivateStaffState((state) => {
+        setActivateStaffState((state:any) => {
           return {
             ...state,
             error: true,
@@ -230,7 +230,7 @@ export default function DeactivateStaff() {
 //       password: userPassword.value!,
 //     };
 
-//     setActivateStaffState((state) => {
+//     setActivateStaffState((state:any) => {
 //       return {
 //         ...state,
 //         error: false,
@@ -241,7 +241,7 @@ export default function DeactivateStaff() {
 
 //     activateStaffPasswordAction(params.staffId!, payload)
 //       .then((response: fetchStaffSuccessResponseType) => {
-//         setActivateStaffState((state) => {
+//         setActivateStaffState((state:any) => {
 //           return {
 //             ...state,
 //             error: false,
@@ -250,7 +250,7 @@ export default function DeactivateStaff() {
 //           };
 //         });
 
-//         setStaffState((state) => {
+//         setStaffState((state:any) => {
 //           return {
 //             ...state,
 //             details: {
@@ -263,7 +263,7 @@ export default function DeactivateStaff() {
 //         setIsStaffActive(response.data.staff.active);
 //       })
 //       .catch((error) => {
-//         setActivateStaffState((state) => {
+//         setActivateStaffState((state:any) => {
 //           return {
 //             ...state,
 //             error: true,
