@@ -10,9 +10,6 @@ export default function StaffRolesList() {
 
     const [staffState, setStaffState] = useStaffState();
 
-    // const staffRolesResponse = useFetchStaffRoleSelector()
-
- 
 
 useEffect(() => {
     getFetch(`/staffs/roles`).then((response: any) => {
