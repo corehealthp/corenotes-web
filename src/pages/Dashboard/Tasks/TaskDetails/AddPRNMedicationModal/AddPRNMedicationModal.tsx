@@ -18,7 +18,7 @@ export default function AddPRNMedicationModal({closeModal}:{closeModal:()=> void
     useEffect(()=> {
         setIndividualModel(state => ({
             ...state,
-            options: individualList.individuals.list.map((individual, index) => ({
+            options: individualList.individuals.list.map(({individual, index}:any) => ({
                 id: index.toString(),
                 label: `${individual.firstname}, ${individual.lastname}`,
                 value: individual.id

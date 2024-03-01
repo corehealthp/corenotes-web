@@ -8,8 +8,8 @@ import { useIndividualState } from "src/features/Individual/state";
 import { useEffect, useState } from "react";
 import { DropDownFormData, setDropDownFormData } from "src/components/FormComponents/DropDownField/types";
 import DropDownField from "src/components/FormComponents/DropDownField/dropdownfield";
-import { compartmentInitState, useCompartmentState } from "src/features/compartment/state";
-import { getCompartmentDetails, getCompartmentServices } from "src/features/compartment/action";
+import { useCompartmentState } from "src/features/compartment/state";
+// import { getCompartmentDetails, getCompartmentServices } from "src/features/compartment/action";
 import { IAddServiceToIndividualPayload, addServiceToIndividualAction } from "src/features/Individual/action";
 import { useParams } from "react-router-dom";
 import FormStateModal from "src/components/FormComponents/FormStateModal/FormStateModal";
@@ -203,7 +203,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                     totalPages: data.totalPages
                 })
 
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status:'IDLE',
                     error: false,
@@ -220,7 +220,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                 }))
             })
             .catch(()=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status:'FAILED',
                     error: true,
@@ -230,45 +230,45 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
             .finally(()=> setIsServicesLoading(false))
         }
 
-        if(serviceTypeModel.value?.value?.toLowerCase() === 'requested-service') {
-            if(individualState.newIndividual.compartmentId) {
-                getCompartmentDetails(individualState.newIndividual.compartmentId)
-                .then((response)=> {
-                    setCompartmentState(state => ({
-                        ...state,
-                        error: false,
-                        message: '',
-                        compartment: response.data.compartment
-                    }))
-                })
-                .catch(()=> {
-                    setCompartmentState(state => ({
-                        ...state,
-                        error: true,
-                        compartment: compartmentInitState.compartment
-                    }))
-                })
-                .finally(()=> {
-                    setIsServicesLoading(true);
+        // if(serviceTypeModel.value?.value?.toLowerCase() === 'requested-service') {
+        //     if(individualState.newIndividual.compartmentId) {
+        //         getCompartmentDetails(Number(individualState.newIndividual.compartmentId))
+        //         .then((response)=> {
+        //             setCompartmentState(state => ({
+        //                 ...state,
+        //                 error: false,
+        //                 message: '',
+        //                 compartment: response.data.compartment
+        //             }))
+        //         })
+        //         .catch(()=> {
+        //             setCompartmentState(state => ({
+        //                 ...state,
+        //                 error: true,
+        //                 compartment: compartmentInitState.compartment
+        //             }))
+        //         })
+        //         .finally(()=> {
+        //             setIsServicesLoading(true);
 
-                    getCompartmentServices(individualState.newIndividual.compartmentId)
-                    .then((compartmentServices)=> {
-                        setRequestedServiceModel(state => ({
-                            ...state,
-                            options: compartmentServices.data.compartmentServices.map(service => ({
-                                id: service.id,
-                                label: service.title,
-                                value: service.refName
-                            }))
-                        }))
-                    })
-                    .catch(()=> {
-                        setRequestedServiceModel(state => ({ ...state, error:"There was an error fetching compartment services" }))
-                    })
-                    .finally(()=> setIsServicesLoading(false))
-                })
-            }
-        }
+        //             getCompartmentServices(individualState.newIndividual.compartmentId)
+        //             .then((compartmentServices)=> {
+        //                 setRequestedServiceModel(state => ({
+        //                     ...state,
+        //                     options: compartmentServices.data.compartmentServices.map(service => ({
+        //                         id: service.id,
+        //                         label: service.title,
+        //                         value: service.refName
+        //                     }))
+        //                 }))
+        //             })
+        //             .catch(()=> {
+        //                 setRequestedServiceModel(state => ({ ...state, error:"There was an error fetching compartment services" }))
+        //             })
+        //             .finally(()=> setIsServicesLoading(false))
+        //         })
+        //     }
+        // }
         
     }, [compartmentState.compartment.services, individualId, individualState.newIndividual.compartmentId, serviceTypeModel.value?.value, servicesPages.currentPage, setCompartmentState, setIndividualState])
 
@@ -324,7 +324,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
                 frequencyAttr: parseInt(serviceFrequencyAttrModel.value ?? "")
             }
 
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 status: "LOADING",
                 message: "",
@@ -333,7 +333,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
 
             addServiceToIndividualAction(individualId!, payload)
             .then((response)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     services: response.data.individualServices
                 }))
@@ -342,7 +342,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
             })
             .catch((error)=> createGlobalFeedback("error", error.message))
             .finally(()=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "IDLE",
                 }))
@@ -352,7 +352,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
     }
 
     function resetFormStateModal() {
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             status: "IDLE",
             message: "",
@@ -388,7 +388,7 @@ export default function AddIndividualServiceModal({ closeModal }:{ closeModal:()
 
                     {
                         serviceTypeModel.value?.value?.toLowerCase() === 'requested-service'
-                        ?   <IndividualCompartmentForm removeLabel={true} />
+                        ?   <IndividualCompartmentForm  removeLabel={true} />
                         :   null
                     }
                     

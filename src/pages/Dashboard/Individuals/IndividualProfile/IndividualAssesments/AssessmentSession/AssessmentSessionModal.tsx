@@ -21,7 +21,7 @@ export default function AssessmentSessionModal({ assessmentSessionId, closeModal
 
     useEffect(()=> {
         
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             assessments: {
                 ...state.assessments,
@@ -35,7 +35,7 @@ export default function AssessmentSessionModal({ assessmentSessionId, closeModal
         const questionIndex = assessmentQuestions.findIndex(question => question.id === questionId);
         assessmentQuestions[questionIndex] =  { ...assessmentQuestions[questionIndex], answer: value  };
 
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             assessments: {
                 ...state.assessments,
@@ -54,7 +54,7 @@ export default function AssessmentSessionModal({ assessmentSessionId, closeModal
         const questionIndex = assessmentQuestions.findIndex(question => question.id === questionId);
         assessmentQuestions[questionIndex] =  { ...assessmentQuestions[questionIndex], comment: value  };
 
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             assessments: {
                 ...state.assessments,
@@ -71,7 +71,7 @@ export default function AssessmentSessionModal({ assessmentSessionId, closeModal
     const [isAssessmentComplete, setIsAssessmentComplete] = useState(false)
 
     function checkAssessmentCompletion() {
-        const answeredQuestions = individualState.assessments.session?.questions.filter(question => question.answer).length;
+        const answeredQuestions = individualState.assessments.session?.questions.filter((question:any) => question.answer).length;
 
         if(answeredQuestions === individualState.assessments.session?.questions.length) {
             setIsAssessmentComplete(true)
@@ -86,7 +86,7 @@ export default function AssessmentSessionModal({ assessmentSessionId, closeModal
                 questions: individualState.assessments.session!.questions
             }
 
-            setCompleteAssessmentState(state => ({
+            setCompleteAssessmentState((state:any) => ({
                 ...state,
                 status: "LOADING",
                 message: "",
@@ -95,14 +95,14 @@ export default function AssessmentSessionModal({ assessmentSessionId, closeModal
 
             completeAssessmentSessionAction(parseInt(params.individualId!), assessmentSessionId, payload)
             .then((response)=> {
-                setCompleteAssessmentState(state => ({
+                setCompleteAssessmentState((state:any) => ({
                     ...state,
                     status: "SUCCESS",
                     message: "",
                     error: false
                 }))
 
-                setIndividualState(state => {
+                setIndividualState((state:any) => {
                     return {
                         ...state,
                         status:'SUCCESS',
@@ -119,14 +119,14 @@ export default function AssessmentSessionModal({ assessmentSessionId, closeModal
                 })
             })
             .catch((error)=> {
-                setCompleteAssessmentState(state => ({
+                setCompleteAssessmentState((state:any) => ({
                     ...state,
                     status: "SUCCESS",
                     message: "",
                     error: false
                 }))
 
-                setIndividualState(state => {
+                setIndividualState((state:any) => {
                     return {
                         ...state,
                         status:'FAILED',
@@ -152,7 +152,7 @@ export default function AssessmentSessionModal({ assessmentSessionId, closeModal
                 <div className={styles.body}>
                     <GridList columnCount={2}>
                         {
-                            individualState.assessments.session.questions.map((sessionQuestion, index)=> {
+                            individualState.assessments.session.questions.map(({sessionQuestion, index}:any)=> {
                                 return (
                                     <QuestionCard 
                                         key={sessionQuestion.id}

@@ -175,7 +175,7 @@ export default function SelectMedicationModal({ individualId, individualMedicati
         model.validated = true;
 
         if(model.name === 'selected-medication') {
-            const match = individualState.medications.list.filter(medication => medication.id === model.value?.value)
+            const match = individualState.medications.list.filter((medication:any) => medication.id === model.value?.value)
             const medicationMatch = medicationState.medications.list.filter(medication => medication.id === model.value?.value)
 
             setSelectedMedDets(medicationMatch[0])
@@ -310,7 +310,7 @@ export default function SelectMedicationModal({ individualId, individualMedicati
 
             administerPRNMedicationToIndividualAction(individualId!, payload)
             .then(()=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "SUCCESS",
                     error: false,
@@ -318,7 +318,7 @@ export default function SelectMedicationModal({ individualId, individualMedicati
                 }))
             })
             .catch(()=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "FAILED",
                     error: true,
@@ -341,7 +341,7 @@ export default function SelectMedicationModal({ individualId, individualMedicati
 
                 addMedicationToIndividualAction(parseInt(params.individualId!), payload)
                 .then((response)=> {
-                    setIndividualState(state => ({
+                    setIndividualState((state:any) => ({
                         ...state,
                         status: "SUCCESS",
                         error: false,
@@ -353,7 +353,7 @@ export default function SelectMedicationModal({ individualId, individualMedicati
                     }))
                 })
                 .catch((error)=> {
-                    setIndividualState(state => ({
+                    setIndividualState((state:any) => ({
                         ...state,
                         status: "FAILED",
                         error: true,
@@ -365,7 +365,7 @@ export default function SelectMedicationModal({ individualId, individualMedicati
     }
 
     function resetInidividualState() {
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             status: 'IDLE',
             message: "",

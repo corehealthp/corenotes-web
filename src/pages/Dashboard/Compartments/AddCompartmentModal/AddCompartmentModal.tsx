@@ -45,7 +45,7 @@ export default function AddCompartmentModal({ close }: { close: () => void }) {
   }
 
   function setImage(imageFile: Blob | MediaSource) {
-    setCompartmentImage((state) => {
+    setCompartmentImage((state:any) => {
       return {
         ...state!,
         image: imageFile,
@@ -81,7 +81,7 @@ export default function AddCompartmentModal({ close }: { close: () => void }) {
       compartmentImage: compartmentImage?.image,
     };
 
-    setCompartmentState((state) => ({
+    setCompartmentState((state:any) => ({
       ...state,
       status: "LOADING",
       error: false,
@@ -91,7 +91,7 @@ export default function AddCompartmentModal({ close }: { close: () => void }) {
     JSONToFormData(payload).then((payloadInFormData) => {
       postCompartment(payloadInFormData)
         .then((response) => {
-          setCompartmentState((state) => ({
+          setCompartmentState((state:any) => ({
             ...state,
             status: "SUCCESS",
             error: false,
@@ -106,7 +106,7 @@ export default function AddCompartmentModal({ close }: { close: () => void }) {
           }, 1000);
         })
         .catch((error) => {
-          setCompartmentState((state) => ({
+          setCompartmentState((state:any) => ({
             ...state,
             status: "FAILED",
             error: true,
@@ -124,7 +124,7 @@ export default function AddCompartmentModal({ close }: { close: () => void }) {
           error={compartmentState.error}
           message={compartmentState.message}
           reset={() =>
-            setCompartmentState((state) => ({ ...state, status: "IDLE" }))
+            setCompartmentState((state:any) => ({ ...state, status: "IDLE" }))
           }
         />
 

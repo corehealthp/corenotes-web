@@ -17,7 +17,7 @@ export default function ChoreService() {
     const fetchChoreServicesResponse = useFetchIndividualChoreServicesSelector(parseInt(params.individualId!), individualState.choreServices.currentPage);
 
     useEffect(()=> {
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             choreServices: fetchChoreServicesResponse.choreServices
         }))
@@ -41,7 +41,7 @@ export default function ChoreService() {
             <div className={styles.chore_management_service}>
                 <GridList columnCount={3}>
                     {
-                        individualState.choreServices.list.map((choreService)=> (
+                        individualState.choreServices.list.map((choreService:any)=> (
                             <ChoreServiceCard
                                 key={choreService.id}
                                 description={choreService.description}

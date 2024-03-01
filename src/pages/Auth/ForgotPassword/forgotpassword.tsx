@@ -55,7 +55,7 @@ export default function ForgotPassword() {
       email: RecoverEmailModel.value,
     };
 
-    setAuthState((state) => {
+    setAuthState((state:any) => {
       return {
         ...state,
         status: "LOADING",
@@ -66,7 +66,7 @@ export default function ForgotPassword() {
 
     SendOtpAction(payload)
       .then(() => {
-        setAuthState((state) => {
+        setAuthState((state:any) => {
           return {
             ...state,
             status: "SUCCESS",
@@ -77,7 +77,7 @@ export default function ForgotPassword() {
         setIsResetSent(true);
       })
       .catch((error) => {
-        setAuthState((state) => {
+        setAuthState((state:any) => {
           return {
             ...state,
             status: "FAILED",

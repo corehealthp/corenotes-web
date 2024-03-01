@@ -17,7 +17,7 @@ export default function IndividualMedicationsList() {
     const fetchMedicationsListResponse = useFetchIndividualMedicationsList(parseInt(param.individualId!), individualState.medications.currentPage)
 
     useEffect(()=> {
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             medications: fetchMedicationsListResponse.medications
         }))
@@ -40,7 +40,7 @@ export default function IndividualMedicationsList() {
             <GridList columnCount={2}>
                 {
                     individualState.medications.list.length
-                    ?   individualState.medications.list.map(( medication, index ) => {
+                    ?   individualState.medications.list.map(( {medication, index}:any ) => {
                             return  <IndividualMedicationCard
                                         key={medication.id}
                                         name={medication.name}

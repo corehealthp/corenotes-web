@@ -9,12 +9,15 @@ import { ReactComponent as IconAdd } from "src/assets/icons/icon-plus-circle.svg
 import { ReactComponent as IconCancel } from "src/assets/icons/icon-cancel-circle.svg"
 import { useIndividualState } from "src/features/Individual/state";
 import { useFetchCompartmentServices } from "src/features/compartment/selector";
+// import { useCompartmentState } from "src/features/compartment/state";
 
 export default function IndividualRequestedServicesForm() {
 
     const [individualState, setIndividualState] = useIndividualState();
 
-    const compartmentServicesResponse = useFetchCompartmentServices(individualState.newIndividual.compartmentId);
+    const compartmentServicesResponse = useFetchCompartmentServices(Number(individualState.newIndividual.compartmentId));
+
+
 
     const [serviceTemplate, setServiceTemplate] = useState<{id:number, service:DropDownFormData, startDate:formFieldType}>({
         id: 1,
@@ -182,7 +185,7 @@ export default function IndividualRequestedServicesForm() {
             }
         })
 
-        setIndividualState(state => {
+        setIndividualState((state:any) => {
             return {
                 ...state,
                 newIndividual: {

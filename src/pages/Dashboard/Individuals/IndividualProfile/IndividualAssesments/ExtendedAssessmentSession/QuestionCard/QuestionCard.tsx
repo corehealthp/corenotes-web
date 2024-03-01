@@ -83,7 +83,7 @@ export default function QuestionCard({
 	}
 
 	useEffect(() => {
-		setAnswerOptions((state) => ({
+		setAnswerOptions((state:any) => ({
 			...state,
 			selectedIndex: answerOptions.options.findIndex(
 				(option) => option.value === answer
@@ -92,7 +92,7 @@ export default function QuestionCard({
 			value: answer,
 		}));
 
-		setCommentModel((state) => ({
+		setCommentModel((state:any) => ({
 			...state,
 			value: comment,
 			validated: answer ? true : false,

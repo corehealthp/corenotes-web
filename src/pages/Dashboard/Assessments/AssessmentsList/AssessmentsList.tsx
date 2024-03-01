@@ -7,7 +7,6 @@ import AddNewNoBackgroundIconButton from "src/components/Buttons/AddNewNoBackgro
 import { useNavigate } from "react-router-dom";
 import AssessmentCard from "../AssessmentCard/AssessmentCard";
 import DataLoadingError from "src/components/DataLoadingError";
-import GridList from "src/components/GridList/GridList";
 import UploadAssessmentModal from "../UploadAssessmentModal";
 
 export default function AssessmentsList() {
@@ -24,7 +23,7 @@ export default function AssessmentsList() {
 
   useEffect(() => {
     console.log(fetchAssessmentsListResponse);
-    setAssessmentState((state) => ({
+    setAssessmentState((state:any) => ({
       ...state,
       error: fetchAssessmentsListResponse.error,
       message: fetchAssessmentsListResponse.message,

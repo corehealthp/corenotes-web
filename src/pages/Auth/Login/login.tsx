@@ -90,14 +90,14 @@ export default function Login() {
 
   function isFormStateValid() {
     if (!usernameModel.validated || !passwordModel.validated) {
-      setFormStateModel((state) => {
+      setFormStateModel((state:any) => {
         return {
           ...state,
           validated: false,
         };
       });
     } else {
-      setFormStateModel((state) => {
+      setFormStateModel((state:any) => {
         return {
           ...state,
           validated: true,
@@ -107,7 +107,7 @@ export default function Login() {
   }
 
   function resetFormState() {
-    setAuthState((state) => {
+    setAuthState((state:any) => {
       return {
         ...state,
         status: "IDLE",
@@ -124,14 +124,14 @@ export default function Login() {
         password: passwordModel.value ?? "",
       };
 
-      setAuthState((state) => ({
+      setAuthState((state:any) => ({
         ...state,
         status: "LOADING",
       }));
 
       LoginAction(payload)
         .then(() => {
-          setAuthState((state) => {
+          setAuthState((state:any) => {
             return {
               ...state,
               isSignedIn: true,
@@ -151,7 +151,7 @@ export default function Login() {
         .catch((error) => {
           createGlobalFeedback("error", error.message);
         })
-        .finally(() => setAuthState((state) => ({ ...state, status: "IDLE" })));
+        .finally(() => setAuthState((state:any) => ({ ...state, status: "IDLE" })));
     }
   }
 

@@ -93,7 +93,7 @@ export default function CreateAssessment() {
     }, [assessmentState])
 
     useEffect(()=> {
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             list: individualListResponse.individuals
         }))
@@ -227,7 +227,7 @@ export default function CreateAssessment() {
                 }))
         };
 
-        setAssessmentState((state) => ({
+        setAssessmentState((state:any) => ({
             ...state,
             status: "LOADING",
             error: false,
@@ -236,7 +236,7 @@ export default function CreateAssessment() {
 
         createAssessmentAction(payload)
         .then((response:AssessmentListResponseType) => {
-            setAssessmentState((state) => ({
+            setAssessmentState((state:any) => ({
                 ...state,
                 status: "SUCCESS",
                 error: false,
@@ -246,7 +246,7 @@ export default function CreateAssessment() {
             }));
         })
         .catch((error) => {
-            setAssessmentState((state) => ({
+            setAssessmentState((state:any) => ({
                 ...state,
                 status: "FAILED",
                 error: true,

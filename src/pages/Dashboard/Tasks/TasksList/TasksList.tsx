@@ -17,7 +17,7 @@ export default function TasksList() {
   );
 
   useEffect(() => {
-    setTaskState((state) => ({
+    setTaskState((state:any) => ({
       ...state,
       message: fetchTasksListResponse.message,
       error: fetchTasksListResponse.error,

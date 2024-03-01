@@ -80,7 +80,7 @@ export default function AddNewStaffModal({
 
   function enableButton(newStaffInfo: NewStaffType) {
     const message: string = validateForm(newStaffInfo);
-    setStaffState((state) => ({
+    setStaffState((state:any) => ({
       ...state,
       newStaff: newStaffInfo,
     }));
@@ -150,7 +150,7 @@ export default function AddNewStaffModal({
   }
 
   // function resetFormStateModel() {
-  //   setStaffState((state) => {
+  //   setStaffState((state:any) => {
   //     return {
   //       ...state,
   //       status: "IDLE",
@@ -167,7 +167,7 @@ export default function AddNewStaffModal({
       ...staff,
     };
 
-    setStaffState((state) => ({
+    setStaffState((state:any) => ({
       ...state,
       status: "LOADING",
     }));
@@ -177,7 +177,7 @@ export default function AddNewStaffModal({
         console.log(data);
         createGlobalFeedback("success", data.message);
 
-        setStaffState((state) => ({
+        setStaffState((state:any) => ({
           ...state,
           list: data.data.staffs,
           currentPage: data.data.currentPage,
@@ -187,7 +187,7 @@ export default function AddNewStaffModal({
       })
 
       .catch((error) => createGlobalFeedback("error", error.message))
-      .finally(() => setStaffState((state) => ({ ...state, status: "IDLE" })));
+      .finally(() => setStaffState((state:any) => ({ ...state, status: "IDLE" })));
   }
 
   function _closeModal() {

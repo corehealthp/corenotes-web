@@ -47,14 +47,14 @@ export default function CreateNewSubCompartmentModal({ closeModal }:{ closeModal
             title: titleModel.value
         }
 
-        setCompartmentState((state)=> ({
+        setCompartmentState((state:any)=> ({
             ...state,
             status: "LOADING"
         }))
         
         postNewSubcompartment(parseInt(params.compartmentId!) , payload)
         .then((response)=> {
-            setCompartmentState((state)=> ({
+            setCompartmentState((state:any)=> ({
                 ...state,
                 compartment: response.data.compartment
             }))
@@ -62,7 +62,7 @@ export default function CreateNewSubCompartmentModal({ closeModal }:{ closeModal
         })
         .catch((error) => createGlobalFeedback("error", error.message))
         .finally(()=> {  
-            setCompartmentState((state)=> ({
+            setCompartmentState((state:any)=> ({
                 ...state,
                 status: "IDLE"
             }))

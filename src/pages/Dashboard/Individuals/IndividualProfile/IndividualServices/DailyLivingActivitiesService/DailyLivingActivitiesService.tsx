@@ -22,7 +22,7 @@ export default function DailyLivingActivitiesService() {
     const fetchDailyLivingActivityServiceResponse = useFetchIndividualDailyLivingActivitiesList(individualId, individualState.dailyLivingActivities.currentPage);
 
     useEffect(()=> {
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             error: fetchDailyLivingActivityServiceResponse.error,
             message: fetchDailyLivingActivityServiceResponse.message,
@@ -50,7 +50,7 @@ export default function DailyLivingActivitiesService() {
                     individualState.dailyLivingActivities.list?.length
                     ?   <GridList columnCount={3}>
                             {
-                                individualState.dailyLivingActivities.list?.map((dailyActivity)=> {
+                                individualState.dailyLivingActivities.list?.map((dailyActivity:any)=> {
                                     return  <DailyLivingActivityServiceCard
                                                 key={dailyActivity.id}
                                                 title={dailyActivity.title}

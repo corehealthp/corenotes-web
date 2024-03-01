@@ -19,7 +19,7 @@ export default function MedicationDetails() {
 	);
 
 	useEffect(() => {
-		setMedicationState((state) => ({
+		setMedicationState((state:any) => ({
 			...state,
 			error: medicationDetailsResponse.error,
 			message: medicationDetailsResponse.error

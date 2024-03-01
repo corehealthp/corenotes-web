@@ -2,6 +2,7 @@ import { getFetch, patchFetch, postFetch } from "src/lib/fetch"
 import { successResponseType } from "src/lib/types"
 import { IDailyLivingActivity, IGoalService, IIndividualAssessmentSession, IIndividualAssessmentSessionQuestion, IIndividualAssessmentsList, IIndividualBehaviorService, IIndividualChoreService, IIndividualDocumentsList, IIndividualMedicationsListItem, ISupervisoryMedicationReviews, IndividualListItemType, IndividualProfileResponseType, IndividualServiceListItemType } from "./types"
 import { AssessmentListResponseType } from "../assessment/action"
+import formatIndividual from "./utils/formatIndividual"
 
 export interface IndividualListResponseType extends Omit<successResponseType, 'data'> {
     data: { 
@@ -9,6 +10,7 @@ export interface IndividualListResponseType extends Omit<successResponseType, 'd
         currentListPage:number
         totalListPages:number;
         total:number;
+        length:any;
     }
 }
 
@@ -19,16 +21,14 @@ export interface IndividualProfileSuccessResponseType extends Omit<successRespon
 }
 
 export function registerIndividualAction(payload:any) {
-    return new Promise<IndividualListResponseType>((resolve, reject)=> {
+    return new Promise<any>((resolve, reject)=> {
         postFetch('/individuals', payload)
-        .then((response:successResponseType)=> {
+        .then((response:any)=> {
             resolve({
                 ...response,
                 data: {
-                    list: response.data.individuals,
-                    currentListPage: response.data.currentListPage,
-                    totalListPages: response.data.totalListPages,
-                    total: response.data.total 
+                    list: response.data,
+                    
                 }
             })
         })
@@ -46,7 +46,9 @@ export function fetchIndividualListAction(pageNumber:number) {
                     currentListPage: response.data.currentListPage,
                     totalListPages: response.data.totalListPages,
                     list: response.data.individuals,
-                    total: response.data.total
+                    total: response.data.total,
+                    length:response.data.individuals.length
+
                 }
             })
         })
@@ -271,6 +273,20 @@ export function discontinueIndividualMedicationAction(individualId:number, paylo
         .catch((error)=> reject(error))
     })
 }
+export function updateIndividualProfileAction(individualId:any, payload:any) {
+    return new Promise<any>((resolve, reject) => {
+      patchFetch(`/individuals/profile/${individualId}`, payload)
+        .then((response) => {
+          resolve({
+            ...response,
+            data: {
+              individual: formatIndividual(response.data.individual),
+            },
+          });
+        })
+        .catch((error) => reject(error));
+    });
+  }
 
 interface IAllocateMedicationPillsPayload {
     medicationId:number;

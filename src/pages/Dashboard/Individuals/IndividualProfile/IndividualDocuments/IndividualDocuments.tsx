@@ -19,7 +19,7 @@ export default function IndividualDocuments() {
 
   useEffect(() => {
     if(!individualState.documents.list.length) {
-      setIndividualState((state) => {
+      setIndividualState((state:any) => {
         return {
           ...state,
           status: "IDLE",

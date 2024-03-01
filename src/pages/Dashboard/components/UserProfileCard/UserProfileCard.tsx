@@ -52,7 +52,7 @@ export default function UserProfileCard({
         // navigate({pathname: "/"})
       })
       .catch((error: { message: string }) => {
-        setAuthState((state) => {
+        setAuthState((state:any) => {
           return {
             ...state,
             error: true,

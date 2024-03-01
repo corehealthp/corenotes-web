@@ -24,7 +24,7 @@ export default function AssessmentsList() {
 	useEffect(() => {
 		if (!assessmentsResponse.error) {
 			if(!individualState.assessments.list.length) {
-				setIndividualState((state) => ({
+				setIndividualState((state:any) => ({
 					...state,
 					assessments: {
 						...state.assessments,
@@ -35,7 +35,7 @@ export default function AssessmentsList() {
 		}
 
 		return () => {
-			setIndividualState((state) => {
+			setIndividualState((state:any) => {
 				return {
 					...state,
 					status: "IDLE",
@@ -70,7 +70,7 @@ export default function AssessmentsList() {
 			}
 			
 			<GridList columnCount={3}>
-				{individualState.assessments.list.map((assessment) => {
+				{individualState.assessments.list.map((assessment:any) => {
 					return (
 						<AssessmentCard
 							key={assessment.id}

@@ -208,7 +208,7 @@ export default function AddNewActivityModal({ closeModal }:{ closeModal:()=> voi
                 }
             }
 
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 status: "LOADING",
                 message: "",
@@ -217,7 +217,7 @@ export default function AddNewActivityModal({ closeModal }:{ closeModal:()=> voi
 
             addDailyLivingActivityToIndividualAction(params.individualId!, payload)
             .then((response)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "SUCCESS",
                     message: "Service assigned to individual successfully",
@@ -226,7 +226,7 @@ export default function AddNewActivityModal({ closeModal }:{ closeModal:()=> voi
                 }))
             })
             .catch((error)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "FAILED",
                     message: error.message,

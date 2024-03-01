@@ -17,7 +17,7 @@ export default function BehaviorManagementService() {
     const fetchBehaviorManagementServicesResponse = useFetchIndividualBehaviorManangementServicesSelector(parseInt(params.individualId!), individualState.behaviorsServices.currentPage);
 
     useEffect(()=> {
-        setIndividualState(state => ({
+        setIndividualState((state:any) => ({
             ...state,
             behaviorsServices: fetchBehaviorManagementServicesResponse.behaviorManagementServices
         }))
@@ -41,7 +41,7 @@ export default function BehaviorManagementService() {
             <div className={styles.behavior_management_service}>
                 <GridList columnCount={3}>
                     {
-                        individualState.behaviorsServices.list.map((behaviorService)=> (
+                        individualState.behaviorsServices.list.map((behaviorService:any)=> (
                             <BehaviorManagementServiceCard
                                 key={behaviorService.id}
                                 description={behaviorService.description}

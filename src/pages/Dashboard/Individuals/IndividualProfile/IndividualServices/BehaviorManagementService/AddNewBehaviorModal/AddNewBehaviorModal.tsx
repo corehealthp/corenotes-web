@@ -223,7 +223,7 @@ export default function AddNewBehaviorModal({ closeModal }:{ closeModal:()=> voi
                 }
             }
 
-            setIndividualState(state => ({
+            setIndividualState((state:any) => ({
                 ...state,
                 status: "LOADING",
                 message: "",
@@ -232,7 +232,7 @@ export default function AddNewBehaviorModal({ closeModal }:{ closeModal:()=> voi
 
             addBehaviorToIndividualAction(params.individualId!, payload)
             .then((response)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "SUCCESS",
                     message: "Behavior assigned to individual successfully",
@@ -243,7 +243,7 @@ export default function AddNewBehaviorModal({ closeModal }:{ closeModal:()=> voi
                 closeModal()
             })
             .catch((error)=> {
-                setIndividualState(state => ({
+                setIndividualState((state:any) => ({
                     ...state,
                     status: "FAILED",
                     message: error.message,

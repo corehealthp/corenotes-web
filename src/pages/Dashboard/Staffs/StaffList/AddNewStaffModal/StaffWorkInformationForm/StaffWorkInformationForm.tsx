@@ -43,7 +43,7 @@ export default function StaffWorkInformationForm({
   // );
 
   // useEffect(() => {
-  //   setStaffState((state) => ({
+  //   setStaffState((state:any) => ({
   //     ...state,
   //     status: "IDLE",
   //     error: staffRolesResponse.error,
@@ -54,7 +54,7 @@ export default function StaffWorkInformationForm({
   //     },
   //   }));
 
-  //   setProviderRoleModel((state) => ({
+  //   setProviderRoleModel((state:any) => ({
   //     ...state,
   //     options: [
   //       ...staffRolesResponse.data.staffRoles.map((role) => ({
@@ -179,7 +179,7 @@ export default function StaffWorkInformationForm({
     getFetch(`/staffs/roles`).then((response: any) => {
       const staffRolesResponse = response;
       if (staffRolesResponse) {
-        setStaffState((state) => ({
+        setStaffState((state:any) => ({
           ...state,
           status: "SUCCESS",
           // list: staffRolesResponse,

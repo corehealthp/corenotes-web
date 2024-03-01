@@ -29,7 +29,7 @@ export default function ExtendedAssessmentSessionModal({
 	);
 
 	useEffect(() => {
-		setIndividualState((state) => ({
+		setIndividualState((state:any) => ({
 			...state,
 			assessments: {
 				...state.assessments,
@@ -50,7 +50,7 @@ export default function ExtendedAssessmentSessionModal({
 			answer: value,
 		};
 
-		setIndividualState((state) => ({
+		setIndividualState((state:any) => ({
 			...state,
 			assessments: {
 				...state.assessments,
@@ -76,7 +76,7 @@ export default function ExtendedAssessmentSessionModal({
 			comment: value,
 		};
 
-		setIndividualState((state) => ({
+		setIndividualState((state:any) => ({
 			...state,
 			assessments: {
 				...state.assessments,
@@ -95,7 +95,7 @@ export default function ExtendedAssessmentSessionModal({
 	function checkAssessmentCompletion() {
 		const answeredQuestions =
 			individualState.assessments.session?.questions.filter(
-				(question) => question.answer
+				(question:any) => question.answer
 			).length;
 
 		if (
@@ -114,7 +114,7 @@ export default function ExtendedAssessmentSessionModal({
 				questions: individualState.assessments.session!.questions,
 			};
 
-			setCompleteAssessmentState((state) => ({
+			setCompleteAssessmentState((state:any) => ({
 				...state,
 				status: "LOADING",
 				message: "",
@@ -127,14 +127,14 @@ export default function ExtendedAssessmentSessionModal({
 				payload
 			)
 				.then((response) => {
-					setCompleteAssessmentState((state) => ({
+					setCompleteAssessmentState((state:any) => ({
 						...state,
 						status: "SUCCESS",
 						message: "",
 						error: false,
 					}));
 
-					setIndividualState((state) => {
+					setIndividualState((state:any) => {
 						return {
 							...state,
 							status: "SUCCESS",
@@ -151,14 +151,14 @@ export default function ExtendedAssessmentSessionModal({
 					});
 				})
 				.catch((error) => {
-					setCompleteAssessmentState((state) => ({
+					setCompleteAssessmentState((state:any) => ({
 						...state,
 						status: "SUCCESS",
 						message: "",
 						error: false,
 					}));
 
-					setIndividualState((state) => {
+					setIndividualState((state:any) => {
 						return {
 							...state,
 							status: "FAILED",
@@ -193,7 +193,7 @@ export default function ExtendedAssessmentSessionModal({
 				<div className={styles.body}>
 					<GridList columnCount={1}>
 						{individualState.assessments.session.questions.map(
-							(sessionQuestion, index) => {
+							({sessionQuestion, index}:any) => {
 								return (
 									<QuestionCard
 										key={sessionQuestion.id}

@@ -65,7 +65,7 @@ export default function ResetPassword() {
       newPassword: RecoverPasswordModel.value,
     };
 
-    setAuthState((state) => {
+    setAuthState((state:any) => {
       return {
         ...state,
         status: "LOADING",
@@ -77,7 +77,7 @@ export default function ResetPassword() {
     SetNewPasswordAction(payload)
       .then((data) => {
         console.log(data)
-        setAuthState((state) => {
+        setAuthState((state:any) => {
           return {
             ...state,
             status: "SUCCESS",
@@ -88,7 +88,7 @@ export default function ResetPassword() {
         navigate("/")
       })
       .catch((error) => {
-        setAuthState((state) => {
+        setAuthState((state:any) => {
           return {
             ...state,
             status: "FAILED",

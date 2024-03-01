@@ -71,7 +71,7 @@ export default function IndividualProfile() {
     const individualProfileResponse = useFetchIndividualSelector(individualId!)
  
     useEffect(()=> {
-        setIndividualState((state)=> {
+        setIndividualState((state:any)=> {
             return {
                 ...state,
                 error: individualProfileResponse.error,
@@ -81,7 +81,7 @@ export default function IndividualProfile() {
         })
 
         return ()=> {
-            setIndividualState((state)=> {
+            setIndividualState((state:any)=> {
                 return {
                     ...state,
                     status: 'IDLE',

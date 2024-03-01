@@ -114,7 +114,7 @@ export default function UserClockInModal({
     getFetch(`/staffs/profile/${staffId}`).then((response: any) => {
         const staffDetailsResponse = response?.data;
         if (staffDetailsResponse) {
-          setStaffState((state) => ({
+          setStaffState((state:any) => ({
             ...state,
             status: "SUCCESS",
             details: staffDetailsResponse.staff,
@@ -125,7 +125,7 @@ export default function UserClockInModal({
   }, [setStaffState]);
 //   useEffect(()=> {
 //     if(!staffDetailsResponse.error) {
-//         setStaffState((state)=> {
+//         setStaffState((state:any)=> {
 //             return {
 //                 ...state,
 //                 status: 'SUCCESS',
@@ -133,7 +133,7 @@ export default function UserClockInModal({
 //             }
 //         })
 //     } else {
-//         setStaffState((state)=> {
+//         setStaffState((state:any)=> {
 //             return {
 //                 ...state,
 //                 status: 'FAILED',
