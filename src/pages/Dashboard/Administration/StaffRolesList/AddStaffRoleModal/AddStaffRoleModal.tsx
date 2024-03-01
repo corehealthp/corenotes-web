@@ -17,8 +17,10 @@ import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function AddStaffRoleModal({
   closeModal,
+  setStaffRoles
 }: {
   closeModal: () => void;
+  setStaffRoles:any;
 }) {
   const [staffState, setStaffState] = useStaffState();
 
@@ -80,6 +82,7 @@ export default function AddStaffRoleModal({
           totalPages: response.data.totalPages,
         },
       }));
+      setStaffRoles(response.data.staffRoles)
     })
     .catch((error) => {
       console.log(error)
