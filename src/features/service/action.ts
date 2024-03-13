@@ -18,7 +18,8 @@ export function getServicesList(pageNumber:number) {
             resolve({
                 ...response,
                 data: { 
-                    services: response.data.services,
+                    //@ts-ignore
+                    services: response.data,
                     currentPage: response.data.currentListPage,
                     totalPages: response.data.totalListPages
                 }

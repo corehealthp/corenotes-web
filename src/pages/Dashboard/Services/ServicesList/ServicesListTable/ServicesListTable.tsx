@@ -15,7 +15,7 @@ export default function ServicesListTable({
     goToPage,
     services,
     errorMessage
-}:{services:ServicesListItemType[] ,currentPage:number, totalPages:number, errorMessage:string, goToPage:(pageNumber:number)=> void}) {
+}:{services:any ,currentPage?:number, totalPages?:number, errorMessage:string, goToPage:(pageNumber:number)=> void}) {
 
     const [isLoading, setIsLoading] = useState(false);
 

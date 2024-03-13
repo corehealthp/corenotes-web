@@ -22,7 +22,7 @@ export default function AssessmentCard({
 }: AssessmentCardProps) {
   return (
     <Link
-      to=""
+      to={`assessment/${title}`}
       className="bg-white py-[25px] px-[16px] cursor-pointer rounded-md border-blue-200  border-l-4 shadow-md "
       onClick={openAction}
     >

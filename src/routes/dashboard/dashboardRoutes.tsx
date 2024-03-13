@@ -150,7 +150,7 @@ const DashboardRoutes:routerType[] = [
                                 element: <AssessmentsList />
                             },
                             {
-                                path:':assessmentId',
+                                path:':assessment/:title',
                                 title: 'Assessment Details',
                                 element: <AssessmentDetails />,
                             },
