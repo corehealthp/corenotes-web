@@ -27,7 +27,7 @@
   position: absolute !important;
   top: 0;
   background: white !important;
-  width: 50% !important;
+  width: 50% ;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: min-content;
@@ -43,7 +43,7 @@ overflow-y: scroll;
 
 /* Define the styles for the scrollbar */
 .content_container::-webkit-scrollbar {
-  width: 10px; /* Adjust the width as needed */
+  width: 5px; /* Adjust the width as needed */
 }
 
 .content_container::-webkit-scrollbar-thumb {

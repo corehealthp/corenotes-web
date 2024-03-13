@@ -166,6 +166,7 @@ export function fetchIndividualServicesAction(individualId:string) {
 
 export interface IAddServiceToIndividualPayload {
     serviceId:string;
+    staffRole:string;
     schedule: {
         startDate:string;
         time:string;
