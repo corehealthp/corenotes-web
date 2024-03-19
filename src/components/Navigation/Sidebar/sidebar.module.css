@@ -21,9 +21,8 @@
 
 .navigation_section {
   width: 80%;
-  margin: 10% auto 0;
+  margin: 12% auto 0;
   padding: 0 5%;
-  overflow-y: scroll;
   height: 100vh;
 }
 .staff_navigation_section {
@@ -31,13 +30,14 @@
   margin: 10% auto 0;
   padding: 0 5%;
   height: 100vh;
+  
 }
 
 .navigation_bar {
-    margin-top: 5rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .navigation_item {

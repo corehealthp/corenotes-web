@@ -1,87 +1,48 @@
-import styles from "./taskslistheader.module.css"
-import { useTaskStateValue } from "src/features/task/state";
-import { ReactComponent as IconBarcodeScanner } from "src/assets/icons/icon-barcode-scanner.svg";
-import { useState } from "react";
-import SizedBox from "src/components/SizedBox";
-import { FaList, FaPills, FaPlus } from "react-icons/fa";
+// import styles from "./taskslistheader.module.css";
+// import { useTaskStateValue } from "src/features/task/state";
+// import { ReactComponent as IconBarcodeScanner } from "src/assets/icons/icon-barcode-scanner.svg";
+// import { useState } from "react";
+// import SizedBox from "src/components/SizedBox";
+// import { FaList, FaPills, FaPlus } from "react-icons/fa";
+import { FiUsers } from "react-icons/fi";
+import { BsClock } from "react-icons/bs";
+import { BiTaskX } from "react-icons/bi";
+export default function TasksListHeader() {
+  return (
+    <div className="">
+        <h2 className="mb-4 font-semibold text-lg">Overview</h2>
+      <div className="grid grid-cols-3 gap-6">
+        <div className="flex items-center gap-2 bg-[#FFF7F1] p-5 rounded-md shadow-md">
+          <div className="bg-[#e8a557] p-2 rounded">
+            <FiUsers className="text-3xl text-white" />
+          </div>
 
-export default function TasksListHeader({ 
-    openBarcodeScanner, addPRNmed, addPRNService
-}: { openBarcodeScanner: () => void, addPRNmed:()=>void, addPRNService: ()=> void }) {
-
-    const taskStateValue = useTaskStateValue();
-
-    const [taskCategories, setTaskCategories] = useState([
-        {
-            id: 'all',
-            label: "All",
-            icon: <FaList />,
-            active: true
-        },
-        {
-            id: 'medication',
-            label: "medication",
-            icon: <FaPills />,
-            active: false
-        }
-    ])
-
-    function changeActiveCategory(taskCategoryId:string) {
-        
-        taskCategories.forEach(category => category.active = false);
-        const selectedCategoryIndex = taskCategories.findIndex(category => category.id === taskCategoryId);
-        taskCategories[selectedCategoryIndex].active = true;
-
-        setTaskCategories([...taskCategories])
-    }
-
-
-    return (
-        <div className={styles.tasks_list_header}>
-
-            <div className={styles.task_categories}>
-                {
-                    taskCategories.map(category => {
-                        return  <div
-                                    key={category.id}
-                                    className={`${styles.task_category} ${category.active ? styles.active_category :null}`}
-                                    onClick={()=> changeActiveCategory(category.id)}
-                                >
-                                    { category.icon }
-                                    <div className={styles.cat_label}>{ category.label }</div>
-                                </div>
-                    })
-                }
-            </div>
-
-            <SizedBox height="30px" />
-
-            <div className={styles.task_list_sub_header}>
-                <div className={styles.heading}>
-                    <div className={styles.number_of_tasks}>{taskStateValue.tasks.list?.length}</div>
-                    <div className={styles.title}>tasks</div>
-                </div>
-
-                <div className={styles.actions}>
-                    <div
-                        className={styles.open_barcode_scanner_btn}
-                        onClick={() => openBarcodeScanner()}
-                    >
-                        <IconBarcodeScanner />
-                        <div className={styles.label}>Scan Med QR</div>
-                    </div>
-
-                    <div className={styles.administer_prn} onClick={addPRNmed}>
-                        <FaPlus className={styles.btn_icon} />
-                        <div className={styles.label}>  Administer PRN Med  </div>
-                    </div>
-
-                    <div className={styles.administer_prn_service} onClick={addPRNService}>
-                        <FaPlus className={styles.btn_icon} />
-                        <div className={styles.label}>  New PRN Service  </div>
-                    </div>
-                </div>
-            </div>
+          <div className="flex flex-col gap-0">
+            <h2 className="m-0 text-2xl font-semibold">80</h2>
+            <p className="m-0">Total Patients</p>
+          </div>
         </div>
-    )
+        <div className="flex items-center gap-2 bg-[#ecf4e7] p-5 rounded-md shadow-md">
+          <div className="bg-[#69aa3d] p-2 rounded">
+            <BsClock className="text-3xl text-white" />
+          </div>
+
+          <div className="flex flex-col gap-0">
+            <h2 className="m-0 text-2xl font-semibold">69</h2>
+            <p className="m-0">Completed Tasks</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 bg-[#dbf0ff] p-5 rounded-md shadow-md">
+          <div className="bg-[#0f87e3] p-2 rounded">
+            <BiTaskX className="text-3xl text-white" />
+          </div>
+
+          <div className="flex flex-col gap-0">
+            <h2 className="m-0 text-2xl font-semibold">36</h2>
+            <p className="m-0">Uncompleted Tasks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
