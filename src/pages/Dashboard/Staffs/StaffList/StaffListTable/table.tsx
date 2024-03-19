@@ -1,17 +1,18 @@
 import type { TableProps } from "antd";
 import moment from "moment";
 import StaffViewProfileButton from "./StaffViewProfileButton";
+import CapitalizeSentence from "src/utils/capitalizeSentence";
 export const columns: TableProps<any>["columns"] = [
   {
     title: "Full Name",
     dataIndex: "firstname",
     key: "firstname",
     render: (text, record) => (
-      <div className="text-xs  font-semibold flex items-center gap-3">
-        <div className="bg-green-700 p-4 flex items-center justify-center h-10 w-10 rounded-full text-white">
-          <h1 className="text-xl">{`${text.toUpperCase().charAt(0)}`}</h1>
+      <div className="text-xs  font-semibold flex items-center gap-3 w-[180px]">
+        <div className="bg-green-700 p-3 flex items-center justify-center h-8 w-8 rounded-full text-white">
+          <h1 className="text-lg">{`${text.toUpperCase().charAt(0)}`}</h1>
         </div>
-        <p>{`${record.firstname.toUpperCase()} ${record.lastname.toUpperCase()}`}</p>
+        <p>{`${CapitalizeSentence(record.firstname)} ${CapitalizeSentence(record.lastname)}`}</p>
       </div>
     ),
   },
@@ -28,7 +29,10 @@ export const columns: TableProps<any>["columns"] = [
     align: "left",
 
     render: (text, _record) => (
-      <span className="text-xs font-semibold">{text?.work}</span>
+      <div className="w-[180px]">
+
+        <span className="text-xs font-semibold">{text?.work}</span>
+      </div>
     ),
   },
   {
@@ -36,7 +40,7 @@ export const columns: TableProps<any>["columns"] = [
     dataIndex: "lastSeen",
     key: "lastSeen",
     render: (text, _record) => (
-      <span className="text-xs font-semibold">
+      <span className="text-xs font-semibold w-[200px]">
         {moment(text).format("YYYY-MM-DD HH:mm:ss")}
       </span>
     ),
@@ -46,7 +50,7 @@ export const columns: TableProps<any>["columns"] = [
     dataIndex: "active",
     key: "active",
     render: (active) => (
-      <span className={`text-xs font-semibold ${active ? 'text-green-500' : 'text-red-500'}`}>
+      <span className={`w-[140px] text-xs font-semibold ${active ? 'text-green-500' : 'text-red-500'}`}>
         {active ? 'Active' : 'Inactive'}
       </span>
     ),
@@ -56,7 +60,10 @@ export const columns: TableProps<any>["columns"] = [
     dataIndex: "_id",
     key: "_id",
     render: (text, _record) => (
-      <StaffViewProfileButton id={text} />
+      <div className="w-[150px]">
+
+        <StaffViewProfileButton id={text} />
+      </div>
     )
     
   },

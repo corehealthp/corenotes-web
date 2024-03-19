@@ -440,8 +440,7 @@ export default function AddIndividualServiceModal({
     return service.category === "requested";
   });
 
-  console.log("individualService", individualService);
-  console.log("requestedService", requestedService);
+
 
   return (
     <ModalContainer contentContainerWidth="500px">
