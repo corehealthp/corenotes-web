@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import NoBackgroundButton from "src/components/Buttons/NoBackgroundButton/NoBackgroundButton";
+// import NoBackgroundButton from "src/components/Buttons/NoBackgroundButton/NoBackgroundButton";
 
 export default function IndividualViewProfileButton({
   individualId,

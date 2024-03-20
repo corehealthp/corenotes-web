@@ -1,13 +1,13 @@
-import { useFetchTasksListSelector } from "src/features/task/selector";
+// import { useFetchTasksListSelector } from "src/features/task/selector";
 import styles from "./taskslist.module.css";
-import { useTaskState } from "src/features/task/state";
-import { useEffect, useState } from "react";
+// import { useTaskState } from "src/features/task/state";
+import {  useState } from "react";
 import TasksListHeader from "./TasksListHeader";
-import TaskCard from "./TaskCard";
+// import TaskCard from "./TaskCard";
 import SizedBox from "src/components/SizedBox";
-import MedicationCodeScannerModal from "src/components/Scanner/MedicationCodeScannerModal";
-import AddPRNMedicationModal from "../TaskDetails/AddPRNMedicationModal";
-import AddPRNServiceModal from "../TaskDetails/AddPRNServiceModal";
+// import MedicationCodeScannerModal from "src/components/Scanner/MedicationCodeScannerModal";
+// import AddPRNMedicationModal from "../TaskDetails/AddPRNMedicationModal";
+// import AddPRNServiceModal from "../TaskDetails/AddPRNServiceModal";
 import { Table } from "antd";
 import TaskModal from "src/components/TaskModal/taskModal";
 import type { TableProps } from "antd";
@@ -86,7 +86,7 @@ export default function TasksList() {
           title: "Action",
           dataIndex: "individualId",
           key: "individualId",
-          render: (text, _record) => (
+          render: (_text, _record) => (
             <span className="w-[80px] cursor-pointer" onClick={()=>setIsTaskOpen(true)}><IoEllipsisVertical/></span>
           ),
         },
