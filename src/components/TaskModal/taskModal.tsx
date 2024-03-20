@@ -1,14 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import Clock from "../../assets/images/clock.png";
-import { useStaffValue } from "src/features/staff/state";
+// import { useStaffValue } from "src/features/staff/state";
 
 export default function TaskModal({
   isTaskOpen,
   setIsTaskOpen,
 }: // isUserClockInOpen,
 any) {
-  let staffState = useStaffValue();
+  // let staffState = useStaffValue();
 
   function closeModal() {
     setIsTaskOpen(false);

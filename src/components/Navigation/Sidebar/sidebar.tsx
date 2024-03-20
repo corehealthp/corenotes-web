@@ -2,7 +2,7 @@ import logo from "src/assets/images/logo-with-name.png";
 import { Link } from "react-router-dom";
 import styles from "./sidebar.module.css";
 import { sideBarNavOptionsType } from "./types";
-import ImageComponent from "src/components/ImageComponent";
+// import ImageComponent from "src/components/ImageComponent";
 import {  useUserStateValue } from "src/features/user/state";
 
 import { useState } from "react";
