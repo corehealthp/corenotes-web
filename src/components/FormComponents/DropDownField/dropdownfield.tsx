@@ -44,7 +44,7 @@ export default function DropDownField({
 
     const [isOpen, setIsOpen] = useState(false);
     const dropOptions = ()=> {
-        if(options.length) setIsOpen(true)
+        if(options?.length) setIsOpen(true)
     }
     
     const [searchKeyword, setSearchKeyword] = useState<string>('')
@@ -70,7 +70,7 @@ export default function DropDownField({
                     ${styles.display}
                     ${isOpen ?styles.is_open :null}
                     ${error ?styles.field_error :null}
-                    ${!options.length ?styles.disable_dropdown :null}
+                    ${!options?.length ?styles.disable_dropdown :null}
                 `}
             >
                 {
@@ -107,9 +107,9 @@ export default function DropDownField({
                     ?   
                         <div className={styles.options_container}>
                             {
-                                (filteredOptions.length)
+                                (filteredOptions?.length)
                                 ?   filteredOptions.map((option, index:number)=> {
-                                        if(option.type === 'action-option' && options.length === 1) {
+                                        if(option.type === 'action-option' && options?.length === 1) {
                                             return  <div 
                                                         key={index} 
                                                         className={styles.action_option} 

@@ -8,9 +8,9 @@ export const columns: TableProps<any>["columns"] = [
     render: (text, record) => (
       <div className="text-xs font-semibold flex items-center gap-3">
         <div className="bg-green-700 p-4 flex items-center justify-center h-10 w-10 rounded-full text-white">
-          <h1 className={`text-xl `+ text}>{`${record?.firstname.toUpperCase().charAt(0)}`}</h1>
+          <h1 className={`text-xl `+ text}>{`${record?.firstname?.toUpperCase().charAt(0)}`}</h1>
         </div>
-        <p>{`${record?.firstname.toUpperCase()} ${record?.lastname ? record?.lastname.toUpperCase() : ''}`}</p>
+        <p>{`${record?.firstname?.toUpperCase()} ${record?.lastname ? record?.lastname?.toUpperCase() : ''}`}</p>
       </div>
     ),
   },

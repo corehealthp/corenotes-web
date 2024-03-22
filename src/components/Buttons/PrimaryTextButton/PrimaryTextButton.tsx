@@ -29,7 +29,7 @@ export default function PrimaryTextButton({
 }:PrimaryTextButtonType) {
     return (
         <TextButton
-            extraStyles={styles.primary_text_button}
+            extraStyles={"h-[50%] text-white bg-green-700 mt-5"}
             type={type}
             width={width}
             label={label}
