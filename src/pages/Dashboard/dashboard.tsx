@@ -28,133 +28,9 @@ export default function Dashboard() {
 		else return false;
 	};
 
-	// const [NavOptions, setNavOptions] = useState<NavOptionsType[]>([
-	// 	{
-	// 		label: "overview",
-	// 		pageTitle: "overview",
-	// 		pageSubtitle: "",
-	// 		path: "/dashboard",
-	// 		icon: iconOverview,
-	// 		activeIcon: iconOverview,
-	// 		active: isCurrentNav(["/dashboard", "/dashboard/"]),
-	// 		roles: [
-	// 			"HR",
-	// 			"DSP",
-	// 			"CNA",
-	// 			"RN",
-	// 			"DDP",
-	// 			"SUPRT_COR",
-	// 			"TEAM_LEAD_CNA",
-	// 			"HOME_MAN",
-	// 			"ADMIN_ASS",
-	// 			"ADMIN",
-	// 		],
-	// 	},
-	// 	{
-	// 		label: "tasks",
-	// 		pageTitle: "tasks",
-	// 		pageSubtitle: "",
-	// 		path: "/dashboard/tasks",
-	// 		icon: iconOverview,
-	// 		activeIcon: iconOverview,
-	// 		active: isCurrentNav(["/dashboard/tasks"]),
-	// 		roles: [
-	// 			"HR",
-	// 			"DSP",
-	// 			"CNA",
-	// 			"RN",
-	// 			"DDP",
-	// 			"SUPRT_COR",
-	// 			"TEAM_LEAD_CNA",
-	// 			"HOME_MAN",
-	// 			"ADMIN_ASS",
-	// 			"ADMIN",
-	// 		],
-	// 	},
-	// 	{
-	// 		label: "staffs",
-	// 		pageTitle: "staffs",
-	// 		pageSubtitle: "",
-	// 		path: "/dashboard/staffs",
-	// 		icon: iconBriefcase,
-	// 		activeIcon: iconBriefcase,
-	// 		active: isCurrentNav(["/dashboard/staffs"]),
-	// 		roles: ["HR", "DDP"],
-	// 	},
-	// 	{
-	// 		label: "individuals",
-	// 		pageTitle: "individuals",
-	// 		pageSubtitle: "",
-	// 		path: "/dashboard/individuals",
-	// 		icon: iconUsers,
-	// 		activeIcon: iconUsers,
-	// 		active: isCurrentNav(["/dashboard/individuals"]),
-	// 		roles: ["DDP", "ADMIN"],
-	// 	},
-	// 	{
-	// 		label: "Compartments",
-	// 		pageTitle: "Compartments",
-	// 		pageSubtitle: "",
-	// 		path: "/dashboard/compartments",
-	// 		icon: iconFlag,
-	// 		activeIcon: iconFlag,
-	// 		active: isCurrentNav(["/dashboard/compartments"]),
-	// 		roles: ["HR", "DDP", "ADMIN"],
-	// 	},
-	// 	{
-	// 		label: "Medications",
-	// 		pageTitle: "Medications",
-	// 		pageSubtitle: "",
-	// 		path: "/dashboard/medications",
-	// 		icon: iconFlag,
-	// 		activeIcon: iconFlag,
-	// 		active: isCurrentNav(["/dashboard/medications"]),
-	// 		roles: ["HR", "DDP", "ADMIN"],
-	// 	},
-	// 	{
-	// 		label: "Administration",
-	// 		pageTitle: "Administration",
-	// 		pageSubtitle: "",
-	// 		path: "/dashboard/administration",
-	// 		icon: iconAdminUser,
-	// 		activeIcon: iconAdminUser,
-	// 		active: isCurrentNav(["/dashboard/administration"]),
-	// 		roles: ["HR", "DDP", "ADMIN"],
-	// 	},
-	// 	{
-	// 		label: "Settings",
-	// 		pageTitle: "settings",
-	// 		pageSubtitle: "",
-	// 		path: "/dashboard/settings",
-	// 		icon: iconSettings,
-	// 		activeIcon: iconSettings,
-	// 		active: isCurrentNav(["/dashboard/settings"]),
-	// 		roles: ["ADMIN"],
-	// 	},
-	// ]);
-
+	
 	const [NavOptions, setNavOptions] = useState<NavOptionsType[]>([
-		// {
-		// 	label: "overview",
-		// 	pageTitle: "overview",
-		// 	pageSubtitle: "",
-		// 	path: "/dashboard",
-		// 	icon: iconOverview,
-		// 	activeIcon: iconOverview,
-		// 	active: isCurrentNav(["/dashboard", "/dashboard/"]),
-		// 	roles: [
-		// 		"HR",
-		// 		"DSP",
-		// 		"CNA",
-		// 		"RN",
-		// 		"DDP",
-		// 		"SUPRT_COR",
-		// 		"TEAM_LEAD_CNA",
-		// 		"HOME_MAN",
-		// 		"ADMIN_ASS",
-		// 		"ADMIN",
-		// 	],
-		// },
+		
 		{
 			label: "tasks",
 			pageTitle: "tasks",
@@ -225,17 +101,7 @@ export default function Dashboard() {
 			activeIcon: iconAdminUser,
 			active: isCurrentNav(['/dashboard/administration']),
 			roles: ['HR', 'DDP', 'ADMINISTRATOR']
-		},
-		// {
-		//     label: "Settings",
-		//     pageTitle: "settings",
-		//     pageSubtitle: "",
-		//     path: "/dashboard/settings",
-		//     icon: iconSettings,
-		//     activeIcon: iconSettings,
-		//     active: isCurrentNav(['/dashboard/settings']),
-		//     roles: ['ADMIN']
-		// }
+		}
 	]);
 
 	const [activeNavPosition, setActiveNavPosition] = useState(0);

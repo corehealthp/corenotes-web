@@ -33,7 +33,7 @@ export default function PageHeader() {
     }
 
     return (
-        <div className={styles.page_header}>
+        <div className="flex p-8 items-center -mb-12">
             <div className={styles.search_bar}>
                 <InputField
                     extraInputContainerStyle={styles.input_container}

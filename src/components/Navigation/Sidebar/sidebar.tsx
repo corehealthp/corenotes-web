@@ -2,7 +2,7 @@ import logo from "src/assets/images/logo-with-name.png";
 import { Link } from "react-router-dom";
 import styles from "./sidebar.module.css";
 import { sideBarNavOptionsType } from "./types";
-import ImageComponent from "src/components/ImageComponent";
+// import ImageComponent from "src/components/ImageComponent";
 import {  useUserStateValue } from "src/features/user/state";
 
 import { useState } from "react";
@@ -49,11 +49,16 @@ export default function Sidebar({
         isUserClockInOpen={isUserClockInOpen}
         setIsUserClockInOpen={setIsUserClockInOpen}
       />
-      <ImageComponent
+
+      <div className=" flex items-center justify-center pt-8 mb-0" >
+
+        <img src={logo} className="w-[80px]" alt="" />
+      </div>
+      {/* <ImageComponent
         src={logo}
-        width={"100px"}
+        width={"80px"}
         extraStyles={styles.logo_image}
-      />
+      /> */}
 
       <div className={userState.details.role.title === "ADMINISTRATOR" ? styles.navigation_section:styles.staff_navigation_section}>
         <div className={styles.navigation_bar}>
@@ -82,7 +87,7 @@ export default function Sidebar({
                   <Link
                     key={index}
                     to={navOption.path}
-                    className={`${styles.navigation_item} ${
+                    className={`text-sm ${styles.navigation_item} ${
                       navOption.active ? styles.active : null
                     }`}
                     onClick={() => navigateTo(index)}
@@ -94,7 +99,7 @@ export default function Sidebar({
                     )}
                     <div className={styles.nav_label}>
                       {" "}
-                      <span>{navOption.label}</span>{" "}
+                      <span className="text-sm">{navOption.label}</span>{" "}
                     </div>
                   </Link>
                 )
@@ -118,7 +123,7 @@ export default function Sidebar({
                     )}
                     <div className={styles.nav_label}>
                       {" "}
-                      <span>{navOption.label}</span>{" "}
+                      <span className="text-sm">{navOption.label}</span>{" "}
                     </div>
                   </Link>
                 )
