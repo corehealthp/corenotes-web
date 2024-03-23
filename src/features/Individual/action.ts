@@ -626,6 +626,41 @@ export function addAssessmentToIndividualAction(individualId:string, payload:{ a
     })
 }
 
+export enum REPLYTYPE {
+    YES_NO = 'YES_NO',
+    STRING = 'STRING',
+    NUMBER = 'NUMBER',
+    INCIDENT_REPORT = 'INCIDENT_REPORT',
+    MULTIPLE_ANSWERS = 'MULTIPLE_ANSWERS',
+}
+
+export interface AssessmentItem {
+    question: string[];
+    category?: string;
+    replyType: string;
+    answer: string[];
+}
+
+export type addAssessmentToIndividualPayload = {
+    category: string;
+    questions: {
+      
+    }
+};
+
+export function addAssessmentsToIndividualAction(individualId:string, payload: addAssessmentToIndividualPayload) {
+    return new Promise<IFetchIndividualAssessmentsResponse>((resolve, reject)=> {
+        postFetch(`/individuals/${individualId}/assessments`, payload)
+        .then((response:successResponseType)=> {
+            resolve({
+                ...response,
+                data: { individualAssessments: response.data.individualAssessments }
+            })
+        })
+        .catch((error)=> reject(error))
+    })
+}
+
 export function fetchAssessmentsToAssignAction(individualId:number, pageNumber:number) {
     return new Promise<AssessmentListResponseType>((resolve, reject)=> {
         getFetch(`/individuals/${individualId}/unassigned-assessments/${pageNumber}`)

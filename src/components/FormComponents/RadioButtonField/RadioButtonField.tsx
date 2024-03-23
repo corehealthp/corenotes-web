@@ -32,7 +32,7 @@ export default function RadioButtonField ({
             
             <div className={`${styles.options} ${optionDirection === 'vertical' ?styles.vertical :styles.horizontal }`}>
                 {
-                    options.map((option, index) => {
+                    options?.map((option, index) => {
                         return  <div 
                                     key={option.label}
                                     className={styles.date_filter_option}

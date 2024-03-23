@@ -1,0 +1,679 @@
+{"assessmentQuestions": [
+    {
+        "id": 1,
+        "questions": [],
+        "title": "Health & Safety"
+    },
+    {
+        "id": 2,
+        "questions": [
+            {
+                "questionType": "input",
+                "label": "Beginning Time",
+                "inputState": "beginingTime",
+                "setInputState": "setBeginningTime"
+            },
+            {
+                "questionType": "input",
+                "label": "End Time",
+                "inputState": "endTime",
+                "setInputState": "setEndTime"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is this a face-to-face visit",
+                "inputState": "faceToFaceOptions",
+                "setInputState": "setFaceToFaceOption"
+            },
+            {
+                "questionType": "input",
+                "label": "Date of visit",
+                "inputState": "dateOfVisit",
+                "setInputState": "setDateOfVisit"
+            },
+            {
+                "questionType": "input",
+                "label": "Location of service delivery",
+                "inputState": "serviceLocationDelivery",
+                "setInputState": "setServiceLocationDelivery"
+            },
+            {
+                "questionType": "dropdown",
+                "label": "Purpose of visit",
+                "inputState": "visitPurpose",
+                "setInputState": "setVisitPurpose",
+                "options": [
+                    {
+                      "id": "1",
+                      "label": "Assessment or Evaluation",
+                      "value": "assessment_evaluation"
+                    },
+                    {
+                      "id": "2",
+                      "label": "Training",
+                      "value": "training"
+                    },
+                    {
+                      "id": "3",
+                      "label": "Plan for intervention and any changes in service delivery",
+                      "value": "intervention_or_changes_in_service_delivery"
+                    }
+                  ]
+            },
+            {
+                "questionType": "radio",
+                "label": "Is there a current ISP on-site?",
+                "inputState": "onsiteIspOptions",
+                "setInputState": "setOnsiteIspOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are goals documented?",
+                "inputState": "goalsDocumentationOptions",
+                "setInputState": "setGoalsDocumentationOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are the ISP goals appropiate and measurable?(if not, appropiately state what action has been taken)?",
+                "inputState": "measurableIspQuestions",
+                "setInputState": "setMeasurableIspQuestions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are there appropiate community activities?",
+                "inputState": "communityActivitiesOptions",
+                "setInputState": "setCommunitiesActivitiesOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are there appropiate community activities?",
+                "inputState": "individualCommunityChoiceOptions",
+                "setInputState": "setIndividualCommunityChoiceOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are identified risk factor addressed?",
+                "inputState": "addressedRisksOptions",
+                "setInputState": "setAddressedRisksOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is there a behaviour support plan in place, and if so is it being followed?",
+                "inputState": "behaviourSupportPlanOptions",
+                "setInputState": "setBehaviourSupportPlanOptions"
+            },            
+            {
+                "questionType": "radio",
+                "label": "Is the individual satisfied with the service they are receiving?",
+                "inputState": "individualServiceSatificationOptions",
+                "setInputState": "setIndividualServiceSatificationOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is the individual's personal appearance appropiate?",
+                "inputState": "individualPersonalAppearanceOptions",
+                "setInputState": "setIndividualPersonalAppearanceOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is the individual's weight, skin integrity etc... appropiate?",
+                "inputState": "individualWeightSkinIntegrityOptions",
+                "setInputState": "setIndividualWeightSkinIntegrityOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "If health tracking is needed, is it being done?",
+                "inputState": "healthTrackingOptions",
+                "setInputState": "setHealthTrackingOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Does MAR and presciptions match: Allergies, diagnoses, staff, initials, signatures, and title on MAR",
+                "inputState": "marPrescriptionOptions",
+                "setInputState": "setMarPrescriptionOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Has the individual been educated on each medication?",
+                "inputState": "individualMedicationEducationOptions",
+                "setInputState": "setIndividualMedicationEducationOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are medications stored safely (No expired or discontinued meds on site, meds are locked, meds needing refrigerations are refrigerated?",
+                "inputState": "medicationStorageOptions",
+                "setInputState": "setMedicationStorageOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is there adequate staaff for the needs of the individual?",
+                "inputState": "adequateStaffsForIndividualOptions",
+                "setInputState": "setAdequateStaffsForIndividualOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is the HRST Data Tracking Log documented?",
+                "inputState": "hrstDataTrackingLogOptions",
+                "setInputState": "setHrstDataTrackingLogOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is the environment safe? Are there safety concerns such as falls or poisoning?",
+                "inputState": "safetyOfEnvironmentOptions",
+                "setInputState": "setSafetyOfEnvironment"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are fire drills being completed?",
+                "inputState": "fireDrillsCompletionOptions",
+                "setInputState": "setFireDrillsCompletionOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Has the individual had any infections?",
+                "inputState": "individualInfectionQuestionOptions",
+                "setInputState": "setIndividualInfectionQuestionOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is there any evidence of abuse, neglect, exploitation, or other right violations?",
+                "inputState": "abuseNeglectEvidenceOptions",
+                "setInputState": "setAbuseNeglectEvidenceOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are there any accessibility or barrier issues?",
+                "inputState": "accessibiltyBarrierIssuesOptions",
+                "setInputState": "setAccessibiltyBarrierIssuesOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Have there been any accidents/incidences since last visit?",
+                "inputState": "accidentOrIncidenceOptions",
+                "setInputState": "setAccidentOrIncidenceOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Have there been any serious or unusual issue since last visit?",
+                "inputState": "seriousOrUnusualIssuesOptions",
+                "setInputState": "setSeriousOrUnusualIssuesOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Does the individual feel safe?",
+                "inputState": "individualFeelSafeOptions",
+                "setInputState": "setIndividualFeelSafeOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is any equipment (wheelchair or other equipment) in good working condition?",
+                "inputState": "equipmentWorkingConditionOptions",
+                "setInputState": "setEquipmentWorkingConditionOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is any equipment (wheelchair or other equipment) in good working condition?",
+                "inputState": "individualCommunicationWithOthersOptions",
+                "setInputState": "setIndividualCommunicationWithOthersOptions"
+            },
+            {
+                "questionType": "input",
+                "label": "What is the individual doing during the time of your last visit? What was their response?",
+                "inputState": "individualResponseQuestion",
+                "setInputState": "setIndividualResponseQuestion"
+            },
+            {
+                "questionType": "radio",
+                "label": "PBSP- Is there a positive behaviour support plan? If none (enter N/A)",
+                "inputState": "positiveBehaviourSupportPlanOptions",
+                "setInputState": "setPositiveBehaviourSupportPlanOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "PBSP- Has the staff been educated on individual's plan? If none (enter N/A)",
+                "inputState": "staffEducationOnPlanOptions",
+                "setInputState": "setStaffEducationOnPlanOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "PBSP- Has the staff been educated on individual's crisis plan? If the individual does not have a PBSP (enter N/A)",
+                "inputState": "staffEducationOnCrisisPlanOptions",
+                "setInputState": "setStaffEducationOnCrisisPlanOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "PBSP- Is the PBSP adequate for the intensity of targeted behaviour? (If the behaviour does not have a PBSP mark N/A)",
+                "inputState": "pbspInstensityOptions",
+                "setInputState": "setPbspOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are medical adequate to prevent unplanned doctor or ER visits (enter N/A)",
+                "inputState": "medicalServicesAdequacyOptions",
+                "setInputState": "setMedicalServicesAdequacyOptions"
+            },
+            {
+                "questionType": "input",
+                "label": "What follow-up is needed: Describe any immediate action taken",
+                "inputState": "followUpType",
+                "setInputState": "setFollowUpType"
+            },
+            {
+                "questionType": "input",
+                "label": "Medical or Behavioural concerns",
+                "inputState": "medicalBehaviourConcerns",
+                "setInputState": "setMedicalBehaviourConcerns"
+            },
+            {
+                "questionType": "input",
+                "label": "Additional Items discussed with staff or individual?",
+                "inputState": "additionalItemsDiscussed",
+                "setInputState": "setAdditionalItemsDiscussed"
+            },
+            {
+                "questionType": "input",
+                "label": "Name of staff or person on Duty?",
+                "inputState": "staffNameOnDuty",
+                "setInputState": "setStaffNameOnDuty"
+            }
+        ],
+        "title": "DDP Oversight Review"
+       
+    }, 
+    {
+        "id": 3,
+        "questions": [           
+            {
+                "questionType": "radio",
+                "label": "Did a telehealth or face-to-face visit occur this month?",
+                "inputState": "faceToFaceOptions",
+                "setInputState": "setFaceToFaceOptions"
+            },
+            {
+                "questionType": "input",
+                "label": "Name of staff person on duty",
+                "inputState": "staffNameOnDuty",
+                "setInputState": "setStaffNameOnDuty"
+            },
+            {
+                "questionType": "radio",
+                "label": "Did an emergency or Urgent care visit occur?",
+                "inputState": "monthlyEmergencyVisitOrCare",
+                "setInputState": "setMonthlyEmergencyVisitOrCare"
+            },
+            {
+                "questionType": "dropdown",
+                "label": "Did an emergency or Urgent care visit occur?",
+                "inputState": "visitPurpose",
+                "setInputState": "setVisitPurpose"
+            },
+            {
+                "questionType": "radio",
+                "label": "Did any seizure occur?",
+                "inputState": "seizureOccurenceQuestion",
+                "setInputState": "setSeizureOccurenceQuestion"
+            },
+            {
+                "questionType": "radio",
+                "label": "Was clinical review completed?",
+                "inputState": "clinicalReviewCompletionOptions",
+                "setInputState": "setClinicalReviewCompletionOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Is any ISP scheduled?",
+                "inputState": "ispSchedulingQuestion",
+                "setInputState": "setIspSchedulingQuestion"
+            }, 
+            {
+                "questionType": "radio",
+                "label": "Are reviews needed?",
+                "inputState": "neededRevisionQuestion",
+                "setInputState": "setNeededRevisionQuestion"
+            }, 
+            {
+                "questionType": "radio",
+                "label": "Any vital signs not within the normal range?",
+                "inputState": "normalRangeVitalSignsOptions",
+                "setInputState": "setNormalRangeVitalSignsOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Any weight changes?",
+                "inputState": "weightChangeOptions",
+                "setInputState": "setWeightChangeOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Any change in condition or follow-up needed?",
+                "inputState": "changeInConditionsOptions",
+                "setInputState": "setChangeInConditionsOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Any individual concern or need to be reported?",
+                "inputState": "individualConcernOrNeedOptions",
+                "setInputState": "setIndividualConcernOrNeedOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Any reports of pain?",
+                "inputState": "reportOfPains",
+                "setInputState": "setReportOfPains"
+            },
+            {
+                "questionType": "radio",
+                "label": "Any medical changes?",
+                "inputState": "medicalChangesQuestion",
+                "setInputState": "setMedicalChangesQuestion"
+            },
+            {
+                "questionType": "radio",
+                "label": "Adverse Reactions?",
+                "inputState": "adverseReactionQuestion",
+                "setInputState": "setAdverseReactionQuestion"
+            },
+            {
+                "questionType": "radio",
+                "label": "Any incidence reported?",
+                "inputState": "incidenceReportedOptions",
+                "setInputState": "setIncidenceReportedOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Any open wounds?",
+                "inputState": "openWoundQuestion",
+                "setInputState": "setOpenWoundQuestion"
+            },
+            {
+                "questionType": "radio",
+                "label": "Any falls reported?",
+                "inputState": "reportedFallsOptions",
+                "setInputState": "setReportedFallsOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Did in-service or training occur this month?",
+                "inputState": "inserviceOrTrainingOptions",
+                "setInputState": "setInserviceOrTrainingOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Did meetings or telephone calls occur this month?",
+                "inputState": "meetingsOrTelephoneCallsOptions",
+                "setInputState": "setMeetingsOrTelephoneCallsOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Were all appointment documentation submitted?",
+                "inputState": "appointmentDocumentSubmissionOptions",
+                "setInputState": "setAppointmentDocumentSubmissionOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Are new health care plans needed?",
+                "inputState": "newNeededHealthCarePlanOptions",
+                "setInputState": "setNewNeededHealthCarePlanOptions"
+            }            
+        ],
+        "subCategory": [
+            {
+                "name": "Physical Assessment",
+                "questions": [
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "General Appearance",
+                        "inputState": "generalAppearance",
+                        "setInputState": "setGeneralAppearance",
+                        "options": [
+                            {
+
+                            }
+                        ]
+                    },
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "Skin",
+                        "inputState": "skinOptions",
+                        "setInputState": "setSkinOptions"
+                    },
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "Eye",
+                        "inputState": "eyeOptions",
+                        "setInputState": "setEyeOptions"
+                    },
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "Respiratory",
+                        "inputState": "respiratoryOptions",
+                        "setInputState": "setRespiratoryOptions"
+                    },
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "Heart",
+                        "inputState": "heartOptions",
+                        "setInputState": "setHeartOptions"
+                    },
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "GI",
+                        "inputState": "giOptions",
+                        "setInputState": "setGiOptions"
+                    },
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "Neuro",
+                        "inputState": "neuroOptions",
+                        "setInputState": "setNeuroOptions"
+                    },
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "Musculoskeletal",
+                        "inputState": "musculoskeletalOptions",
+                        "setInputState": "setMusculoskeletalOptions"
+                    },
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "Mental & Emotional",
+                        "inputState": "MentalEmotionalOptions",
+                        "setInputState": "setMentalEmotionalOptions"
+                    },
+                    {
+                        "questionType": "dropdown-checkbox",
+                        "label": "Medication Side-effect",
+                        "inputState": "MedicationSideEffectOptions",
+                        "setInputState": "setMedicationSideEffectOptions"
+                    },
+                    {
+                        "questionType": "textarea",
+                        "label": "Additional Comment",
+                        "inputState": "additionalCommentArea",
+                        "setInputState": "setAdditionalCommentArea"
+                    }
+
+                ]
+            }
+        ],
+        "title": "RN Oversight Review"
+    },
+    {
+        "id": 4,
+        "questions": [
+            {
+                "questionType": "radio",
+                "label": "Individualized assessments-Nursing, Fall Risk, Pain Assessment, Skin Assessment etc. Completed?",
+                "inputState": "individualizedAssessmentNursingOptions",
+                "setInputState": "individualizedAssessmentNursingOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Observe for choking and aspiration and observe the consistency of meals and liquids as prescribed",
+                "inputState": "observeChockingAspirationOptions",
+                "setInputState": "setObserveChockingAspirationOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Observe for choking and aspiration and observe the consistency of meals and liquids as prescribed",
+                "inputState": "observeChockingAspirationOptions",
+                "setInputState": "setObserveChockingAspirationOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Ensure the individual is sitting upright for 1hr after each meal",
+                "inputState": "individualSittingPositionOptions",
+                "setInputState": "setIndividualSittingPositionOptions"
+            },
+            {
+                "questionType": "input",
+                "label": "How did you include the individual in preventative care, such as with phone calls, appts made and medication changes, etc?",
+                "inputState": "preventativeCareOptions",
+                "setInputState": "setPreventativeCareOptions"
+            },
+            {
+                "questionType": "input",
+                "label": "Follow-up medication and what intervention was used.",
+                "inputState": "followUpMedIntervention",
+                "setInputState": "setFollowUpMedInterventions"
+            },
+            {
+                "questionType": "input",
+                "label": "Follow-up medication and what intervention was used.",
+                "inputState": "followUpMedIntervention",
+                "setInputState": "setFollowUpMedInterventions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Follow -Up on labs, expired prescriptions, appts, HRST Tracking, Phone calls from doctors, ER visits, Urgent Care visit",
+                "inputState": "followUpLabsOptions",
+                "setInputState": "setFollowUpLabsOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Follow up on a change on condition and follow -up on pending orders, annual preventative care and Health care Plans",
+                "inputState": "followUpChangeConditionOptions",
+                "setInputState": "setFollowUpChangeConditionOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Follow up on a change on condition and follow -up on pending orders, annual preventative care and Health care Plans",
+                "inputState": "medicationAdministrationOptions",
+                "setInputState": "setMedicationAdministrationOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Complaints from Individuals, guardian, or next of kin ",
+                "inputState": "individualComplaintOptions",
+                "setInputState": "setIndividualComplaintOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Interventions- injections, shots, catheterizations, Respiration treatment, oxygen, G-tube Feeding, etc",
+                "inputState": "interventionsInjectionsOptions",
+                "setInputState": "setInterventionsInjectionsOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "Any Appointments pertaining to the individual ",
+                "inputState": "appointmentPertainingToIndividualOptions",
+                "setInputState": "setAppointmentPertainingToIndividualOptions"
+            },
+            {
+                "questionType": "radio",
+                "label": "New Prescriptions, Vital Signs, Expired Medications, Body Checks, Weights, Health Care Plans, MED Review, etc.",
+                "inputState": "newPresciptionsVitalSignsOptions",
+                "setInputState": "setNewPresciptionsVitalSignsOptions"
+            },
+            {
+                "questionType": "input",
+                "label": "Document each bowel movement as occurs throughout each shift. (In comments, document if it was a small, medium, large, or x-large amount and the time of day in which she had the BM)",
+                "inputState": "bowelMovementDocumentation",
+                "setInputState": "setBowelMovementDocumentation"
+            },
+            {
+                "questionType": "input",
+                "label": "Document total intake and output",
+                "inputState": "totalIntakeDocumentation",
+                "setInputState": "setTotalIntakeDocumentation"
+            },
+            {
+                "questionType": "textarea",
+                "label": "Additional Comment",
+                "inputState": "nurseNoteAdditionalComment",
+                "setInputState": "setNurseNoteAdditionalComment"
+            }
+        ],
+        "title": "Nurse Notes"
+    },
+    {
+        "id": 5,
+        "questions": [],
+        "title": "Monthly Education for all medications prescribed"
+    },
+    {
+        "id": 6,
+        "questions": [],
+        "title": "Modification Review - Monthly"
+    },
+    {
+        "id": 7,
+        "questions": [],
+        "title":"Abnormal Involuntary Movement Scale (AIMS) - Frequency Of Documentation: Every 4 months "
+    },
+    {
+        "id": 8,
+        "questions": [],
+        "title":"HRST Log – monthly documentation"
+    },
+    {
+        "id": 9,
+        "questions": [],
+        "title":"Informed Choice"
+    },
+    {
+        "id": 11,
+        "questions": [],
+        "title":"Documents"
+    },
+    {
+        "id": 12,
+        "questions": [],
+        "title":"Monthly Supply Notes"
+    },
+    {
+        "id": 13,
+        "questions": [],
+        "title":"PRN Provided Services"
+    },
+    {
+        "id": 14,
+        "questions": [],
+        "title":"Incident Report"
+    },
+    {
+        "id": 15,
+        "questions": [],
+        "title":"Quality Improvement Audit"
+    },
+    {
+        "id": 16,
+        "questions": [],
+        "title":"Patient Satisfactory Survey"
+    },
+    {
+        "id": 17,
+        "questions": [],
+        "title":"Annual Guardanship Review"
+    },
+    {
+        "id": 18,
+        "questions": [],
+        "title":"Complaints and Grieviances Logs"
+    },
+    {
+        "id": 19,
+        "questions": [],
+        "title":"Informed Choice /Annual Rights Review"
+    }
+
+]}

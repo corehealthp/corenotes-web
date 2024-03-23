@@ -17,12 +17,12 @@ export default function AssessmentCard({
   // status,
   // questionsCount,
   // assessmentType,
-  // path,
+  path,
   openAction,
 }: AssessmentCardProps) {
   return (
     <Link
-      to={`assessment/${title}`}
+      to={`assessment/${path}`}
       className="bg-white py-[25px] px-[16px] cursor-pointer rounded-md border-blue-200  border-l-4 shadow-md "
       onClick={openAction}
     >
