@@ -59,7 +59,7 @@ export default function AssessmentDetails() {
 
   const setIndividualState = useSetIndividualState();
   const [assessmentState, setAssessmentState] = useAssessmentState();
-  const [isFormValid, setIsFormValid] = useState(false)
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const [formFields, setFormFields] = useState<any>({});
 
@@ -71,7 +71,7 @@ export default function AssessmentDetails() {
 //   );
 
   useEffect(() => {
-    console.log("here")
+    console.log(isFormValid);
     axios.get("/question.json").then((res) => {
 
       console.log(res.data, "jsd");

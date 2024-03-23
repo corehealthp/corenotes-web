@@ -17,7 +17,7 @@ export default function AssessmentsList() {
     useState(false);
 
   // const [assessmentState, setAssessmentState] = useAssessmentState();
-  const [assessmentState, setAssessmentState] = useState<any>();
+  // const [assessmentState, setAssessmentState] = useState<any>();
 
   useEffect(() => {
     getFetch(`/assessments`).then((response: any) => {

@@ -1,4 +1,4 @@
-import styles from "./primarytextbutton.module.css";
+// import styles from "./primarytextbutton.module.css";
 import TextButton from "../TextButton";
 import { CSSProperties } from "react";
 
