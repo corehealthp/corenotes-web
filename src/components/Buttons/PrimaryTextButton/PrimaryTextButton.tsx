@@ -1,4 +1,4 @@
-import styles from "./primarytextbutton.module.css";
+// import styles from "./primarytextbutton.module.css";
 import TextButton from "../TextButton";
 import { CSSProperties } from "react";
 
@@ -29,7 +29,7 @@ export default function PrimaryTextButton({
 }:PrimaryTextButtonType) {
     return (
         <TextButton
-            extraStyles={styles.primary_text_button}
+            extraStyles={"h-[50%] text-white bg-green-700 mt-5"}
             type={type}
             width={width}
             label={label}
