@@ -2,13 +2,12 @@ import GoBackButton from "src/components/Buttons/GoBackButton";
 import styles from "./assessmentslist.module.css";
 // import { useAssessmentState } from "src/features/assessment/state";
 // import { useFetchAssessmentsListSelector } from "src/features/assessment/selector";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import AddNewNoBackgroundIconButton from "src/components/Buttons/AddNewNoBackgroundIconButton";
 import { useNavigate } from "react-router-dom";
 import AssessmentCard from "../AssessmentCard/AssessmentCard";
 import DataLoadingError from "src/components/DataLoadingError";
 import UploadAssessmentModal from "../UploadAssessmentModal";
-import { getFetch } from "src/lib/apiCalls";
 
 export default function AssessmentsList() {
   const navigate = useNavigate();
@@ -19,13 +18,13 @@ export default function AssessmentsList() {
   // const [assessmentState, setAssessmentState] = useAssessmentState();
   // const [assessmentState, setAssessmentState] = useState<any>();
 
-  useEffect(() => {
-    getFetch(`/assessments`).then((response: any) => {
-      const fetchAssessmentsListResponse = response?.data;
-      if (fetchAssessmentsListResponse) {
-        setAssessmentState(fetchAssessmentsListResponse)
-  }})
-  }, []);
+  // useEffect(() => {
+  //   getFetch(`/assessments`).then((response: any) => {
+  //     const fetchAssessmentsListResponse = response?.data;
+  //     if (fetchAssessmentsListResponse) {
+  //       setAssessmentState(fetchAssessmentsListResponse)
+  // }})
+  // }, []);
 
   const assessments = [
     {
