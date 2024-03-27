@@ -7,7 +7,9 @@
 import { FiUsers } from "react-icons/fi";
 import { BsClock } from "react-icons/bs";
 import { BiTaskX } from "react-icons/bi";
-export default function TasksListHeader() {
+export default function TasksListHeader({tasks}:any) {
+  const completed=tasks?.filter(((task:any)=>task.status==="completed"))
+  const uncompleted=tasks?.filter(((task:any)=>task.status==="pending"))
   return (
     <div className="">
         <h2 className="mb-4 font-semibold text-lg">Overview</h2>
@@ -18,7 +20,7 @@ export default function TasksListHeader() {
           </div>
 
           <div className="flex flex-col gap-0">
-            <h2 className="m-0 text-2xl font-semibold">80</h2>
+            <h2 className="m-0 text-2xl font-semibold">{tasks?.length}</h2>
             <p className="m-0">Total Patients</p>
           </div>
         </div>
@@ -28,7 +30,7 @@ export default function TasksListHeader() {
           </div>
 
           <div className="flex flex-col gap-0">
-            <h2 className="m-0 text-2xl font-semibold">69</h2>
+            <h2 className="m-0 text-2xl font-semibold">{completed?.length}</h2>
             <p className="m-0">Completed Tasks</p>
           </div>
         </div>
@@ -38,7 +40,7 @@ export default function TasksListHeader() {
           </div>
 
           <div className="flex flex-col gap-0">
-            <h2 className="m-0 text-2xl font-semibold">36</h2>
+            <h2 className="m-0 text-2xl font-semibold">{uncompleted?.length}</h2>
             <p className="m-0">Uncompleted Tasks</p>
           </div>
         </div>
