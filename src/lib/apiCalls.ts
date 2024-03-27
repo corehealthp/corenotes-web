@@ -26,3 +26,11 @@ export const putFetch = async (url:any, body:any) => {
     return error;
   }
 };
+export const patchFetch = async (url:any, body:any) => {
+  try {
+    const response = await apiInstance.patch(url, body);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};

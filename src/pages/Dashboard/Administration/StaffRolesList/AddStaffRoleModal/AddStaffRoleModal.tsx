@@ -16,11 +16,12 @@ import ModalContainer from "src/components/Modal/ModalContainer";
 import { createGlobalFeedback } from "src/features/globalFeedback/atom";
 
 export default function AddStaffRoleModal({
-  closeModal,
-  setStaffRoles
+  
+  setShowCreateStaffRolesModal,
+  setStaffRoles,
 }: {
-  closeModal: () => void;
-  setStaffRoles:any;
+  setShowCreateStaffRolesModal:any
+  setStaffRoles: any;
 }) {
   const [staffState, setStaffState] = useStaffState();
 
@@ -35,6 +36,9 @@ export default function AddStaffRoleModal({
 
   // const [selectedPrivileges, setSelectedPrivileges] = useState<any>({});
 
+  const closeModal=()=>{
+    setShowCreateStaffRolesModal(false)
+  }
   function setInput(
     value: string,
     model: formFieldType,
@@ -60,10 +64,10 @@ export default function AddStaffRoleModal({
   function submitRole() {
     const payload = {
       title: roleTitle.value!,
-      privileges:{},
+      privileges: {},
     };
 
-    setStaffState((state:any) => ({
+    setStaffState((state: any) => ({
       ...state,
       status: "LOADING",
       error: false,
@@ -71,31 +75,39 @@ export default function AddStaffRoleModal({
     }));
 
     addStaffRoleAction(payload)
-    .then((response) => {
-      console.log(response)
-      createGlobalFeedback("success", response.message);
-      setStaffState((state:any) => ({
-        ...state,
-        roles: {
-          list: response.data.staffRoles,
-          currentPage: response.data.currentPage,
-          totalPages: response.data.totalPages,
-        },
-      }));
-      setStaffRoles(response.data.staffRoles)
-    })
-    .catch((error) => {
-      console.log(error)
-      createGlobalFeedback("error", error.message)
-    })
-    .finally(()=> setStaffState(state => ({ ...state, status:"IDLE" })))
+      .then((response) => {
+        createGlobalFeedback("success", response.message);
+        setStaffState((state: any) => ({
+          ...state,
+          roles: {
+            list: response.data.staffRoles,
+            currentPage: response.data.currentPage,
+            totalPages: response.data.totalPages,
+          },
+        }));
+        setStaffRoles(response.data.staffRoles);
+        setShowCreateStaffRolesModal(false)
+
+      })
+      .catch((error) => {
+        console.log(error);
+        createGlobalFeedback("error", error.message);
+        setShowCreateStaffRolesModal(false)
+
+      })
+      .finally(() => {
+        setStaffState((state) => ({ ...state, status: "IDLE" }));
+      setShowCreateStaffRolesModal(false)
+
+
+      });
   }
 
   return (
     <ModalContainer>
       <div className={styles.add_staff_role_modal}>
         <div className={styles.header}>
-          <div className={styles.titiel}>Add assessment category</div>
+          <div className={styles.titiel}>Administration Management</div>
           <IconCancelCircle
             onClick={() =>
               staffState.status === "LOADING" ? () => ({}) : closeModal()

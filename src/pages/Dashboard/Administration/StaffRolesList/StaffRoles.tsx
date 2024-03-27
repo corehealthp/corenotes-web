@@ -35,7 +35,7 @@ export default function StaffRoles() {
 
             {
                 showCreateStaffRolesModal
-                ?   <AddStaffRoleModal setStaffRoles={setStaffRoles} closeModal={()=> setShowCreateStaffRolesModal(false) } />
+                ?   <AddStaffRoleModal setStaffRoles={setStaffRoles} setShowCreateStaffRolesModal={setShowCreateStaffRolesModal} />
                 :   null
             }
         </div>

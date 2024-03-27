@@ -40,330 +40,15 @@ export default function AddIndividualServiceModal({
   const { individualId } = useParams();
 
   const [individualState, setIndividualState] = useIndividualState();
+  const [loading, setLoading] = useState(false);
 
-  console.log(individualState)
-  // const [compartmentState, setCompartmentState] = useCompartmentState();
+  console.log(individualState);
 
-  // const [serviceTypeModel, setServiceTypeModel] = useState<DropDownFormData>({
-  //   name: "service-type",
-  //   placeholder: "Service category",
-  //   options: [
-  //     {
-  //       id: "1",
-  //       label: "Requested service",
-  //       value: "requested-service",
-  //     },
-  //     {
-  //       id: "2",
-  //       label: "Provided service",
-  //       value: "provided-service",
-  //     },
-  //   ],
-  //   error: "",
-  //   selected: false,
-  //   selectedOptionIndex: 0,
-  // });
-
-  // const [requestedServiceModel, setRequestedServiceModel] =
-  //   useState<DropDownFormData>({
-  //     name: "requested-service",
-  //     placeholder: "Service",
-  //     options: [],
-  //     error: "",
-  //     selected: false,
-  //     selectedOptionIndex: 0,
-  //   });
-
-  // const [serviceStartDateModel, setServiceStartDateModel] =
-  //   useState<formFieldType>({
-  //     type: "date",
-  //     placeholder: "Start date",
-  //     value: "",
-  //     error: "",
-  //     validated: false,
-  //   });
-
-  // const [serviceTimeModel, setServiceTimeModel] = useState<formFieldType>({
-  //   type: "time",
-  //   placeholder: "Time",
-  //   value: "",
-  //   error: "",
-  //   validated: false,
-  // });
-
-  // const [serviceFrequencyModel, setServiceFrequencyModel] =
-  //   useState<DropDownFormData>({
-  //     name: "service-freq",
-  //     placeholder: "How often?",
-  //     options: [
-  //       {
-  //         id: "1",
-  //         label: "Daily",
-  //         value: "daily",
-  //       },
-  //       {
-  //         id: "2",
-  //         label: "Every X Days",
-  //         value: "every-x-days",
-  //       },
-  //       {
-  //         id: "3",
-  //         label: "Weekly",
-  //         value: "weekly",
-  //       },
-  //       {
-  //         id: "4",
-  //         label: "Every X Weeks",
-  //         value: "every-x-weeks",
-  //       },
-  //       {
-  //         id: "5",
-  //         label: "Monthly",
-  //         value: "monthly",
-  //       },
-  //     ],
-  //     selected: false,
-  //     selectedOptionIndex: 0,
-  //     error: "",
-  //   });
-
-  // const [serviceFrequencyAttrModel, setServiceFrequencyAttrModel] =
-  //   useState<formFieldType>({
-  //     readonly: true,
-  //     type: "number",
-  //     label: "",
-  //     placeholder: "",
-  //     prefixIcon: <div children={"Every"} />,
-  //     value: "",
-  //     error: "",
-  //     validated: false,
-  //   });
-
-  // function setInput(
-  //   value: string,
-  //   model: formFieldType,
-  //   setModel: setFormFieldType
-  // ) {
-  //   model.value = value;
-  //   model.validated = true;
-  //   setModel({ ...model });
-  //   validateForm();
-  // }
-
-  // function selectOption(
-  //   optionIndex: number,
-  //   model: DropDownFormData,
-  //   setModel: setDropDownFormData
-  // ) {
-  //   model.value = model.options[optionIndex];
-  //   model.selected = true;
-  //   model.selectedOptionIndex = optionIndex;
-
-  //   // if(model.name === 'requested-service') {
-  //   //     if(model.value?.label.toLowerCase().split(' ').join('-') === 'medication-administration') {
-  //   //         serviceFrequencyModel.selected = true;
-  //   //         setServiceFrequencyModel({...serviceFrequencyModel})
-
-  //   //         serviceFrequencyAttrModel.validated = true;
-  //   //         setServiceFrequencyAttrModel({...serviceFrequencyAttrModel})
-
-  //   //         serviceTimeModel.validated = true;
-  //   //         setServiceTimeModel({...serviceTimeModel})
-
-  //   //         serviceStartDateModel.validated = true;
-  //   //         setServiceStartDateModel({...serviceStartDateModel})
-
-  //   //     } else {
-  //   //         serviceFrequencyModel.selected = false;
-  //   //         setServiceFrequencyModel({...serviceFrequencyModel})
-
-  //   //         serviceFrequencyAttrModel.validated = false;
-  //   //         setServiceFrequencyAttrModel({...serviceFrequencyAttrModel})
-
-  //   //         serviceTimeModel.validated = false;
-  //   //         setServiceTimeModel({...serviceTimeModel})
-
-  //   //         serviceStartDateModel.validated = false;
-  //   //         setServiceStartDateModel({...serviceStartDateModel})
-  //   //     }
-  //   // }
-
-  //   // if(model.name === 'service-freq') {
-  //   //     if(model.value.value === 'every-x-days') {
-  //   //         serviceFrequencyAttrModel.readonly = false;
-  //   //         serviceFrequencyAttrModel.suffixIcon = <div className={styles.prefix_label} children={"days"} />
-  //   //     }
-  //   //     if(model.value.value === 'every-x-weeks') {
-  //   //         serviceFrequencyAttrModel.readonly = false;
-  //   //         serviceFrequencyAttrModel.suffixIcon = <div className={styles.prefix_label} children={"weeks"} />
-  //   //     }
-  //   //     if(!['every-x-weeks', 'every-x-days'].includes(model.value.value!)) {
-  //   //         serviceFrequencyAttrModel.readonly = true;
-  //   //         serviceFrequencyAttrModel.suffixIcon = undefined
-  //   //         serviceFrequencyAttrModel.error = "";
-  //   //     }
-
-  //   //     setServiceFrequencyAttrModel(serviceFrequencyAttrModel);
-  //   // }
-
-  //   setModel({ ...model });
-  //   validateForm();
-  // }
-
-  // const [servicesPages, setServicesPages] = useState({
-  //   currentPage: 1,
-  //   totalPages: 1,
-  // });
-
-  // const [isServicesLoading, setIsServicesLoading] = useState(false);
-
-  // useEffect(() => {
-  //   if (serviceTypeModel.value?.value?.toLowerCase() === "provided-service") {
-  //     setIsServicesLoading(true);
-
-  //     getAllProvidedServiceAction(servicesPages.currentPage)
-  //       .then(({ data }) => {
-  //         setServicesPages({
-  //           currentPage: data.currentPage,
-  //           totalPages: data.totalPages,
-  //         });
-
-  //         setIndividualState((state: any) => ({
-  //           ...state,
-  //           status: "IDLE",
-  //           error: false,
-  //           message: "",
-  //         }));
-
-  //         setRequestedServiceModel((state) => ({
-  //           ...state,
-  //           options: data.services?.map((service) => ({
-  //             id: service.id,
-  //             label: service.title,
-  //             value: service.refName,
-  //           })),
-  //         }));
-  //       })
-  //       .catch(() => {
-  //         setIndividualState((state: any) => ({
-  //           ...state,
-  //           status: "FAILED",
-  //           error: true,
-  //           message: "There was an error fetching provided services list",
-  //         }));
-  //       })
-  //       .finally(() => setIsServicesLoading(false));
-  //   }
-
-  //   // if(serviceTypeModel.value?.value?.toLowerCase() === 'requested-service') {
-  //   //     if(individualState.newIndividual.compartmentId) {
-  //   //         getCompartmentDetails(Number(individualState.newIndividual.compartmentId))
-  //   //         .then((response)=> {
-  //   //             setCompartmentState(state => ({
-  //   //                 ...state,
-  //   //                 error: false,
-  //   //                 message: '',
-  //   //                 compartment: response.data.compartment
-  //   //             }))
-  //   //         })
-  //   //         .catch(()=> {
-  //   //             setCompartmentState(state => ({
-  //   //                 ...state,
-  //   //                 error: true,
-  //   //                 compartment: compartmentInitState.compartment
-  //   //             }))
-  //   //         })
-  //   //         .finally(()=> {
-  //   //             setIsServicesLoading(true);
-
-  //   //             getCompartmentServices(individualState.newIndividual.compartmentId)
-  //   //             .then((compartmentServices)=> {
-  //   //                 setRequestedServiceModel(state => ({
-  //   //                     ...state,
-  //   //                     options: compartmentServices.data.compartmentServices.map(service => ({
-  //   //                         id: service.id,
-  //   //                         label: service.title,
-  //   //                         value: service.refName
-  //   //                     }))
-  //   //                 }))
-  //   //             })
-  //   //             .catch(()=> {
-  //   //                 setRequestedServiceModel(state => ({ ...state, error:"There was an error fetching compartment services" }))
-  //   //             })
-  //   //             .finally(()=> setIsServicesLoading(false))
-  //   //         })
-  //   //     }
-  //   // }
-  // }, [
-  //   compartmentState.compartment.services,
-  //   individualId,
-  //   individualState.newIndividual.compartmentId,
-  //   serviceTypeModel.value?.value,
-  //   servicesPages.currentPage,
-  //   setCompartmentState,
-  //   setIndividualState,
-  // ]);
-
-  // const [isFormValidated, setIsFormValidated] = useState(false);
-
-  // function validateForm() {
-  //   if (!serviceTypeModel.selected) {
-  //     setIsFormValidated(false);
-  //     return false;
-  //   }
-
-  //   if (!requestedServiceModel.selected) {
-  //     setIsFormValidated(false);
-  //     // console.log(requestedServiceModel.value!.value!)
-  //     return false;
-  //   }
-  //   if (
-  //     individualState.servicesWithTemplate.includes(
-  //       requestedServiceModel.value!.value!
-  //     )
-  //   ) {
-  //     if (!serviceFrequencyModel.selected) {
-  //       setIsFormValidated(false);
-  //       return false;
-  //     }
-
-  //     if (
-  //       ["every-x-days", "every-x-weeks", "every-x-days"].includes(
-  //         serviceFrequencyModel.value?.value ?? ""
-  //       )
-  //     ) {
-  //       if (!serviceFrequencyAttrModel.validated) {
-  //         setIsFormValidated(false);
-  //         return false;
-  //       }
-  //     }
-
-  //     if (!serviceStartDateModel.validated) {
-  //       console.log("HERE");
-  //       setIsFormValidated(false);
-  //       return false;
-  //     }
-  //   }
-
-  //   setIsFormValidated(true);
-  //   return true;
-  // }
-
-
-
-  // function resetFormStateModal() {
-  //   setIndividualState((state: any) => ({
-  //     ...state,
-  //     status: "IDLE",
-  //     message: "",
-  //     error: false,
-  //   }));
-  // }
   const [roles, setRoles] = useState<any>();
   const [services, setServices] = useState<any>();
   const [individualService, setIndividualService] = useState<any>({
     category: "",
-    service:"",
+    service: "",
     serviceId: "",
     frequency: "",
     startDate: "",
@@ -373,10 +58,10 @@ export default function AddIndividualServiceModal({
 
   function submitForm() {
     // if(validateForm()) {
-
+    setLoading(true);
     const payload: IAddServiceToIndividualPayload = {
       serviceId: individualService.serviceId,
-      staffRole:individualService.staffId,
+      staffRole: individualService.staffId,
       schedule: null,
     };
 
@@ -402,18 +87,22 @@ export default function AddIndividualServiceModal({
         }));
 
         createGlobalFeedback("success", response.message);
+        setLoading(false);
       })
-      .catch((error) => createGlobalFeedback("error", error.message))
+      .catch((error) => {
+        createGlobalFeedback("error", error.message);
+        setLoading(false);
+      })
       .finally(() => {
         setIndividualState((state: any) => ({
           ...state,
           status: "IDLE",
         }));
         closeModal();
+        setLoading(false);
       });
     // }
   }
-
 
   useEffect(() => {
     getFetch(`/staffs/roles`).then((response: any) => {
@@ -436,11 +125,9 @@ export default function AddIndividualServiceModal({
   const providedService = services?.filter((service: any) => {
     return service.category === "provided";
   });
-  const requestedService = services?.filter((service: any) => {
-    return service.category === "requested";
-  });
-
-
+  // const requestedService = services?.filter((service: any) => {
+  //   return service.category === "requested";
+  // });
 
   return (
     <ModalContainer contentContainerWidth="500px">
@@ -463,8 +150,8 @@ export default function AddIndividualServiceModal({
                 }));
               }}
             >
-              <option value="">Select Category</option>
-              <option value="requested">Requested Service</option>
+              <option value="">Provided service</option>
+              {/* <option value="requested">Requested Service</option> */}
               <option value="provided">Provided service</option>
             </select>
           </div>
@@ -478,29 +165,17 @@ export default function AddIndividualServiceModal({
                 setIndividualService((state: any) => ({
                   ...state,
                   serviceId: e.target.value,
-                  
                 }));
               }}
             >
               <option value="">Select Service</option>
-
-              {individualService?.category === "requested" &&
-                requestedService?.map((service: any) => {
-                  return (
-                    <option value={service._id}>
-                      {service?.title.toUpperCase()}
-                    </option>
-                  );
-                })}
-
-              {individualService?.category === "provided" &&
-                providedService?.map((service: any) => {
-                  return (
-                    <option value={service._id}>
-                      {service?.title.toUpperCase()}
-                    </option>
-                  );
-                })}
+              {providedService?.map((service: any) => {
+                return (
+                  <option value={service._id}>
+                    {service?.title.toUpperCase()}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </div>
@@ -580,12 +255,23 @@ export default function AddIndividualServiceModal({
         </div>
 
         <div className="flex  justify-end w-full gap-4 mt-6">
-          <button className=" p-2   w-[200px] text-[#16ADF5] bg-gray-200]">
+          <button
+          onClick={()=>closeModal()}
+           className=" p-2   w-[200px] text-[#16ADF5] bg-black]">
             Cancel
           </button>
-          <button onClick={()=>submitForm()} className="bg-[#388909] p-2  text-white  w-[200px]">
-            Create Service
-          </button>
+          {loading ? (
+            <button className="text-white bg-[#0f87e3] p-3 shadow-md rounded-lg w-full">
+              Please Wait...
+            </button>
+          ) : (
+            <button
+              onClick={() => submitForm()}
+              className="bg-[#388909] p-2  text-white  w-[200px]"
+            >
+              Create Service
+            </button>
+          )}
         </div>
       </div>
     </ModalContainer>
